@@ -15,12 +15,23 @@ import {
 } from "@/components/ui/sidebar";
 import { ChevronRight, Dot } from "lucide-react";
 import Image from "next/image";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { DatePicker } from "@/components/DatePicker";
+import { Button } from "@/components/ui/button";
 export function Dashboard() {
   return (
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset className="">
-        <header className="flex  h-28 shrink-0 items-center gap-2 px-4">
+        <header className="flex justify-between  h-28 shrink-0 items-center gap-2 px-4">
+          <div className="flex justify-start items-center">
+
           <SidebarTrigger className="-ml-1" />
           <Separator orientation="vertical" className="mr-2 h-4" />
           <Breadcrumb>
@@ -32,6 +43,24 @@ export function Dashboard() {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
+          </div>
+          <section className="flex justify-start items-center gap-x-[14px]">
+
+          <div>
+           <Select>
+              <SelectTrigger className="w-[60px] border border-[#303033]">
+                <SelectValue placeholder="All" />
+              </SelectTrigger>
+              <SelectContent className="bg-dark">
+                <SelectItem value="light">1 M</SelectItem>
+                <SelectItem value="dark">1 W</SelectItem>
+              </SelectContent>
+          </Select>
+
+          </div>
+          <DatePicker/>
+          <Button>Upload Music</Button>
+          </section>
         </header>
         <section className="flex border-b p-4">
           <h2 className="flex-1">Releases</h2>
