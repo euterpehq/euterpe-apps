@@ -5,7 +5,16 @@ import img4 from "@/assets/images/img4.png"
 import img5 from "@/assets/images/img5.png"
 import img6 from "@/assets/images/img6.png"
 import img7 from "@/assets/images/img7.png"
+import aylo from "@/assets/images/aylo.jpg"
+import bloody from "@/assets/images/bloody.jpg"
+import saba from "@/assets/images/saba.jpg"
+import popi from "@/assets/images/popi.jpg"
+import moliy from "@/assets/images/moliy.jpg"
+import ella from "@/assets/images/ella.jpg"
+import ward from "@/assets/images/ward.jpg"
 import trophy from "@/assets/icons/trophy.png"
+import star from "@/assets/icons/star.png"
+import mic from "@/assets/icons/mic.png"
 
 import { StaticImageData } from "next/image"
 
@@ -122,7 +131,7 @@ export const topPicks: TopPick[] = [
       id: 2,
       title: "Hesitate",
       artist: "Golden Vessel",
-      image: img2,
+      image: img7,
       icon: trophy,
       eut: 1.3,
     },
@@ -130,7 +139,7 @@ export const topPicks: TopPick[] = [
       id: 3,
       title: "Do You Really Need Me",
       artist: "Charlie",
-      image: img3,
+      image: img6,
       icon: trophy,
       eut: 1.3,
     },
@@ -138,7 +147,7 @@ export const topPicks: TopPick[] = [
       id: 4,
       title: "Small",
       artist: "Siv Jakobsen",
-      image: img4,
+      image: img5,
       icon: trophy,
       eut: 1.3,
     },
@@ -146,7 +155,7 @@ export const topPicks: TopPick[] = [
       id: 5,
       title: "In Love with a Ghost",
       artist: "Bash the Piper",
-      image: img5,
+      image: img4,
       icon: trophy,
       eut: 1.3,
     },
@@ -154,7 +163,7 @@ export const topPicks: TopPick[] = [
       id: 6,
       title: "Eleyele",
       artist: "taves",
-      image: img6,
+      image: img3,
       icon: trophy,
       eut: 1.3,
     },
@@ -162,10 +171,123 @@ export const topPicks: TopPick[] = [
       id: 7,
       title: "Clicquot Shower",
       artist: "Caleborate",
-      image: img7,
+      image: img2,
       icon: trophy,
       eut: 1.3,
     },
+]
+
+export const genres = [
+  {
+    id: 1,
+    name: "Pop",
+    icon: star,
+  },
+  {
+    id: 2,
+    name: "Hip-Hop/Rap",
+    icon: mic,
+  },
+  {
+    id: 3,
+    name: "Electronic/EDM",
+    icon: mic,
+  },
+  {
+    id: 4,
+    name: "Electronic/EDM",
+    icon: mic,
+  },
+  {
+    id: 5,
+    name: "Electronic/EDM",
+    icon: mic,
+  },
+  {
+    id: 6,
+    name: "Electronic/EDM",
+    icon: mic,
+  },
+  {
+    id: 7,
+    name: "Electronic/EDM",
+    icon: mic,
+  },
+  {
+    id: 8,
+    name: "Electronic/EDM",
+    icon: mic,
+  },
+  {
+    id: 9,
+    name: "Electronic/EDM",
+    icon: mic,
+  },
+  {
+    id: 10,
+    name: "Electronic/EDM",
+    icon: mic,
+  },
+  {
+    id: 11,
+    name: "Electronic/EDM",
+    icon: mic,
+  },
+  {
+    id: 12,
+    name: "Electronic/EDM",
+    icon: mic,
+  },
+  {
+    id: 13,
+    name: "Electronic/EDM",
+    icon: mic,
+  },
+]
+
+export const artists = [
+  {
+    id: 1,
+    name: "AYLØ",
+    img: aylo,
+    title: "Artist"
+  },
+  {
+    id: 2,
+    name: "Bloody Civilian",
+    img: bloody,
+    title: "Artist"
+  },
+  {
+    id: 3,
+    name: "Saba",
+    img: saba,
+    title: "Artist"
+  },
+  {
+    id: 4,
+    name: "Shallipopi",
+    img: popi,
+    title: "Artist"
+  },
+  {
+    id: 5,
+    name: "Moliy",
+    img: moliy,
+    title: "Artist"
+  },
+  {
+    id: 6,
+    name: "Ella Mai",
+    img: ella,
+    title: "Artist"
+  },
+  {
+    id: 7,
+    name: "Jordan Ward",
+    img: ward,
+    title: "Artist"
+  },
 ]
 
 
