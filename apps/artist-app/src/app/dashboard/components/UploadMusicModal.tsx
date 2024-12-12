@@ -5,13 +5,19 @@ import StreamingLinks from './StreamingLinks';
 import CoverImage from './CoverImage';
 import AudioFile from './AudioFile';
 import { X } from 'lucide-react';
+interface UploadMusicModalProps {
+  isModalOpen: boolean;
+  closeModal: () => void;
+}
+export default function UploadMusicModal({
+  isModalOpen,
+  closeModal,
+}: UploadMusicModalProps) {
+  if (!isModalOpen) return null;
 
-export default function UploadMusicModal() {
-   const [isModalOpen, setIsModalOpen] = useState(true);
-     const closeModal = () => setIsModalOpen(false);
-     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault()
-     }
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+  }
   return (
     <>
     {isModalOpen &&

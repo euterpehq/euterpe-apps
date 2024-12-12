@@ -12,14 +12,6 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { DatePicker } from "@/components/DatePicker";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import UploadMusicModal from "./components/UploadMusicModal";
@@ -28,18 +20,23 @@ import Singles from "./components/Singles";
 export function Dashboard() {
   
    const [isModalOpen, setIsModalOpen] = useState(false);
-useEffect(() => {
-  if (isModalOpen) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = 'auto';
-  }
-}, [isModalOpen]);
+  // Prevent scrolling while modal is open
+   useEffect(() => {
+      if (isModalOpen) {
+         document.body.style.overflow = 'hidden';
+      } else {
+         document.body.style.overflow = 'auto';
+      }
+
+      // Clean up on unmount
+      return () => {
+         document.body.style.overflow = 'auto';
+      };
+   }, [isModalOpen]);
   const openModal = () => setIsModalOpen(true);
  
   return (
     <>
-    
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset className="">
@@ -58,20 +55,19 @@ useEffect(() => {
           </Breadcrumb>
           </div>
           <section className="flex justify-start items-center gap-x-[14px]">
-           <Select>
-              <SelectTrigger className="w-[60px] border border-[#303033]">
-                <SelectValue placeholder="All" />
-              </SelectTrigger>
-              <SelectContent className="bg-dark">
-                <SelectItem value="light">1 M</SelectItem>
-                <SelectItem value="dark">1 W</SelectItem>
-              </SelectContent>
-          </Select> 
-          <DatePicker/>
+          <Button>Week</Button>
+          <Button className="bg-transperent text-white">Month</Button>
+          <Button className="bg-transperent text-white">Year</Button>
           <Button onClick={openModal}>Upload Music</Button>
-        {isModalOpen && (
+        {/* {isModalOpen && (
          <UploadMusicModal/>
-        )}
+        )} */}
+        {isModalOpen && (
+  <UploadMusicModal
+    isModalOpen={isModalOpen}
+    closeModal={() => setIsModalOpen(false)}
+  />
+)}
           </section>
         </header>
         <section className="flex border-b p-4">
