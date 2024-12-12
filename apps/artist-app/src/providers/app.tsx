@@ -10,10 +10,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-     
-        <div>hello</div>
-          <Toaster />
-     
+      {children}
+      <Toaster />
     </ThemeProvider>
   );
 }

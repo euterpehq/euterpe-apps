@@ -3,7 +3,7 @@ import { Urbanist, Figtree, Inter, Azeret_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-// import { AppProvider } from "@/providers/app";
+import { AppProvider } from "@/providers/app";
 
 const urbanist = Urbanist({ subsets: ["latin"], variable: "--font-urbanist" });
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
@@ -59,7 +59,7 @@ export default function RootLayout({
           azeret.variable
         )}
       >
-        <div>test</div>
+        <AppProvider>{children}</AppProvider>
       </body>
     </html>
   );
