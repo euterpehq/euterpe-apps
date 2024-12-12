@@ -9,7 +9,7 @@ import AudioFile from './AudioFile';
 export default function UploadMusicModal() {
    const [isModalOpen, setIsModalOpen] = useState(true);
      const closeModal = () => setIsModalOpen(false);
-     function handleSubmit(e:any) {
+     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
      }
   return (
