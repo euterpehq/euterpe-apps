@@ -14,7 +14,7 @@ const HorizontalSlider: React.FC = () => {
     const items = Array.from({ length: 50 }, (_, i) => i + 1);
     //const items = [1, 2, 3, 4,5,6,7,8,9,10,11,12]
   return (
-    <div className='relative w-[1683px] mx-auto h-[48px] overflow-hidden'>
+    <div className='relative w-full  mx-auto h-[48px] overflow-hidden'>
     <Swiper
         spaceBetween={20}
         slidesPerView={6}
@@ -34,6 +34,7 @@ const HorizontalSlider: React.FC = () => {
             padding: "16px 20px",
             gap: "10px",
             width: "140px",
+            height: "48px",
             //cursor: "pointer",
             background: "#181818",
             borderRadius: "120px",

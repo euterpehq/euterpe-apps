@@ -14,14 +14,14 @@ const HorizontalSlider: React.FC = () => {
     const items = Array.from({ length: 50 }, (_, i) => i + 1);
     //const items = [1, 2, 3, 4,5,6,7,8,9,10,11,12]
   return (
-    <div className='relative w-[1526px] mx-auto h-full overflow-hidden'>
+    <div className='relative w-full mx-auto h-full overflow-hidden'>
     <Swiper
         spaceBetween={20}
         slidesPerView={6}
         freeMode={true}
         modules={[FreeMode, Pagination]}
         style={{}}
-        className="w-full h-[264px] cursor-grab "
+        className="w-full h-full cursor-grab "
     >
         
         {artists.map((item) => (
@@ -34,6 +34,7 @@ const HorizontalSlider: React.FC = () => {
             padding: "24px",
             gap: "10px",
             width: "188px",
+            height: "h-[266px]",
             //cursor: "pointer",
             background: "#121310",
             borderRadius: "8px",

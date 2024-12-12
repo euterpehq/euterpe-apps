@@ -5,7 +5,7 @@ import SliderPage from './SliderPage'
 
 const Main: React.FC = () => {
   return (
-    <div className='w-[1394px] mx-auto flex flex-col gap-5 pl-6 my-3 overflow-hidden'>
+    <div className='w-full h-[350px]   mx-auto flex flex-col gap-5 pl-6 my-3 overflow-hidden'>
       <div className=''>
         <h1 className='font-semibold text-[25px]'>Top Picks</h1>
       </div>
