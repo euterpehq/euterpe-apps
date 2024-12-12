@@ -1,3 +1,14 @@
+import img1 from "@/assets/images/img1.png"
+import img2 from "@/assets/images/img2.png"
+import img3 from "@/assets/images/img3.png"
+import img4 from "@/assets/images/img4.png"
+import img5 from "@/assets/images/img5.png"
+import img6 from "@/assets/images/img6.png"
+import img7 from "@/assets/images/img7.png"
+import trophy from "@/assets/icons/trophy.png"
+
+import { StaticImageData } from "next/image"
+
 export type Song = {
   id: number;
   title: string;
@@ -8,6 +19,15 @@ export type Song = {
   spotify: string;
   youtube: string;
 };
+
+export type TopPick = {
+  id: number;
+  title: string;
+  artist: string;
+  image: string | StaticImageData;
+  icon: string | StaticImageData;
+  eut: number;
+}
 
 export const songs: Song[] = [
   {
@@ -88,3 +108,64 @@ export const songs: Song[] = [
     youtube: "https://www.youtube.com/channel/UC5T1_1lzm1M-uWbnJlyUJkg",
   },
 ];
+
+export const topPicks: TopPick[] = [
+    {
+      id: 1,
+      title: "Endorphins",
+      artist: "tobi lou",
+      image: img1,
+      icon: trophy,
+      eut: 1.3,
+    },
+    {
+      id: 2,
+      title: "Hesitate",
+      artist: "Golden Vessel",
+      image: img2,
+      icon: trophy,
+      eut: 1.3,
+    },
+    {
+      id: 3,
+      title: "Do You Really Need Me",
+      artist: "Charlie",
+      image: img3,
+      icon: trophy,
+      eut: 1.3,
+    },
+    {
+      id: 4,
+      title: "Small",
+      artist: "Siv Jakobsen",
+      image: img4,
+      icon: trophy,
+      eut: 1.3,
+    },
+    {
+      id: 5,
+      title: "In Love with a Ghost",
+      artist: "Bash the Piper",
+      image: img5,
+      icon: trophy,
+      eut: 1.3,
+    },
+    {
+      id: 6,
+      title: "Eleyele",
+      artist: "taves",
+      image: img6,
+      icon: trophy,
+      eut: 1.3,
+    },
+    {
+      id: 7,
+      title: "Clicquot Shower",
+      artist: "Caleborate",
+      image: img7,
+      icon: trophy,
+      eut: 1.3,
+    },
+]
+
+
