@@ -1,10 +1,10 @@
 "use client"
 import { Button } from '@/components/ui/button'
-import { X } from 'lucide-react'
 import React, { useState } from 'react'
 import StreamingLinks from './StreamingLinks';
 import CoverImage from './CoverImage';
 import AudioFile from './AudioFile';
+import { X } from 'lucide-react';
 
 export default function UploadMusicModal() {
    const [isModalOpen, setIsModalOpen] = useState(true);

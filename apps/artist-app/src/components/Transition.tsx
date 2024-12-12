@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable  @typescript-eslint/no-unused-expressions */
 // @ts-nocheck
 // TODO: Migrate file to TypeScript
 import React, { useRef, useEffect, useContext } from "react";

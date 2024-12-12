@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { type Song } from "@/data/songs";
+import { Song } from "@/data/song";
 
 function StreamingLinks({ song }: { song: Song }) {
   const platforms = [

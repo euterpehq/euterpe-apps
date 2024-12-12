@@ -38,6 +38,8 @@ useEffect(() => {
   const openModal = () => setIsModalOpen(true);
  
   return (
+    <>
+    
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset className="">
@@ -85,5 +87,6 @@ useEffect(() => {
        <Album/>
       </SidebarInset>
     </SidebarProvider>
+    </>
   );
 }
