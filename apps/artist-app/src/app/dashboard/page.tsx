@@ -59,15 +59,12 @@ export function Dashboard() {
           <Button className="bg-transperent text-white">Month</Button>
           <Button className="bg-transperent text-white">Year</Button>
           <Button onClick={openModal}>Upload Music</Button>
-        {/* {isModalOpen && (
-         <UploadMusicModal/>
-        )} */}
-        {isModalOpen && (
-  <UploadMusicModal
-    isModalOpen={isModalOpen}
-    closeModal={() => setIsModalOpen(false)}
-  />
-)}
+          {isModalOpen && (
+            <UploadMusicModal
+              isModalOpen={isModalOpen}
+              closeModal={() => setIsModalOpen(false)}
+            />
+          )}
           </section>
         </header>
         <section className="flex border-b p-4">
