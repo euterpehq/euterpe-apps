@@ -5,6 +5,8 @@ import StreamingLinks from './StreamingLinks';
 import { X } from 'lucide-react';
 import UpdateProfilePic from './UpdateProfilePic';
 import BannerImage from './BannerImage';
+import { Toaster, toast } from 'sonner'
+
 interface EditProfileProps {
   isModalOpen: boolean;
   closeModal: () => void;
@@ -17,11 +19,16 @@ export default function EditProfile({
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setTimeout(() => {
+        closeModal()
+    },2000)
+        toast.success("Profile updated successfully!")
   }
   return (
     <>
+         <Toaster position="bottom-right" richColors />
     {isModalOpen &&
-     <div className="overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm">
+     <div className="overflow-y-auto fixed inset-0 z-0 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm">
               <button
                 className="flex rounded-full justidfy-center items-center bg-[#1E1E1E] w-[44px] h-[44px] absolute top-14 left-4 text-gray-500 hover:text-gray-700"
                 onClick={closeModal}
@@ -40,7 +47,7 @@ export default function EditProfile({
             <textarea className="bg-[#1E1E1E] mt-4 rounded-[6px] p-[14px] w-full text-[#797979]" name="" id="" cols={20} rows={4} placeholder='Share your artist story with us!'></textarea>
               <StreamingLinks/>
                 <p className="mt-16"><input type="checkbox"  /> <span className="ms-1.5">I have read and agree to the terms of the </span> <span className="text-primary"> Euterpe Agreement</span></p>
-            <Button onClick={closeModal} className="mt-10 p-[14px] h-[44px] w-full">Update</Button>
+            <Button className="mt-10 p-[14px] h-[44px] w-full">Update</Button>
             </div>
         </form>
       </div>
