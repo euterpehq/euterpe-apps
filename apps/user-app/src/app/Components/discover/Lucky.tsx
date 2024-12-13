@@ -5,7 +5,7 @@ import icon from "@/assets/icons/star-ring.png"
 import { useModalStore } from '@/store/modal.store'
 
 const Lucky: React.FC = () => {
-  const {isOpen, openModal, closeModal} = useModalStore()
+  const { openModal } = useModalStore()
   return (
     <div className='  w-full h-[400px] mx-auto flex flex-col gap-5 pl-6 my-10  overflow-hidden'>
       <div className='w-full flex items-center justify-between'>

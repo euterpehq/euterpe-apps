@@ -12,7 +12,7 @@ export const useModalStore = create<ModalState>((set) => ({
     isOpen: false,
     openModal: () => {
         set({ isOpen: true })
-        useMiniPlayerStore.getState().hideMiniPlayer()
+        useMiniPlayerStore.getState().showMiniPlayer()
     },
     closeModal: () => {
         set({ isOpen: false })
