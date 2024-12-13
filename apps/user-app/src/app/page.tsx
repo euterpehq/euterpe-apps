@@ -31,9 +31,9 @@ export default function Home() {
           animate={{ y: "0%" }} 
           exit={{ y: "100%" }} 
           transition={{ duration: 0.5, ease: "easeInOut" }} 
-        className="w-screen h-screen fixed top-0 left-0 right-0 bottom-0 bg-black/70 z-40"
+        className="w-screen h-screen fixed top-0 left-0 right-0 bottom-0 bg-black z-40"
         >
-          <div onClick={closeModal} className="absolute text-black  z-50 top-20 left-20 cursor-pointer">X</div>
+          <div onClick={closeModal} className="absolute text-gray-500  z-50 top-20 left-20 cursor-pointer">X</div>
          <Player {...audioPlayer}/>
         </motion.div>
       )}
