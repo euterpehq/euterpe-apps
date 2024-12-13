@@ -12,11 +12,10 @@ export default function Page() {
         <h1 className="m-auto text-center text-[100px] leading-[80px]">Get your music <br />
             discovered on Euterpe.
         </h1>
-          <p className="my-4 font-light m-auto w-[70%] text-center text-[#BDBDBD] text-[20px]">Euterpe helps you get discovered, connect with your fans, grow your audience
+          <p className="leading-[24px] my-4 font-light m-auto w-[70%] text-center text-[#BDBDBD] text-[20px]">Euterpe helps you get discovered, connect with your fans, grow your audience
             and share your music with the world
           </p>
           <section className="flex jusitfy-center items-center w-full">
-
            <Button className="m-auto rounded-full" size="sm" asChild>
             <Link
               href="/sign-up"
