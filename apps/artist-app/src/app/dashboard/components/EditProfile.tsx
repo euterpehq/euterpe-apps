@@ -26,7 +26,7 @@ export default function EditProfile({
   }
   return (
     <>
-         <Toaster position="bottom-right" richColors />
+    <Toaster position="bottom-right" richColors />
     {isModalOpen &&
      <div className="overflow-y-auto fixed inset-0 z-0 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm">
               <button

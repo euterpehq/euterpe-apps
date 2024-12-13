@@ -1,10 +1,12 @@
 "use client"
 import { Button } from '@/components/ui/button'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import StreamingLinks from './StreamingLinks';
 import CoverImage from './CoverImage';
 import AudioFile from './AudioFile';
 import { X } from 'lucide-react';
+import { useRouter } from 'next/navigation'
+ 
 interface UploadMusicModalProps {
   isModalOpen: boolean;
   closeModal: () => void;
@@ -14,13 +16,29 @@ export default function UploadMusicModal({
   closeModal,
 }: UploadMusicModalProps) {
   if (!isModalOpen) return null;
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  useEffect(() => {
+if (isModalOpen) {
+   document.body.style.overflow = 'hidden';
+} else {
+   document.body.style.overflow = 'auto';
+}
+// Clean up on unmount
+return () => {
+   document.body.style.overflow = 'auto';
+};
+}, [isModalOpen]);
+  const router = useRouter()
+ 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  }
+    closeModal();
+    router.push("/upload")
+  };
+
+ 
   return (
     <>
-    {isModalOpen &&
+    {isModalOpen  &&
      <div className="overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm">
               <button
                 className="flex rounded-full justidfy-center items-center bg-[#1E1E1E] w-[44px] h-[44px] absolute top-10 left-4 text-gray-500 hover:text-gray-700"
