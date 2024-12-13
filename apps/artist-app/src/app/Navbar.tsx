@@ -44,7 +44,7 @@ export default function Navbar() {
             <Link
               href="/sign-up"
               rel="noreferrer"
-              target="_blank"
+              // target="_blank"
             >
               Get started
             </Link>
