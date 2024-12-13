@@ -1,5 +1,5 @@
-"use client";
-import React, { useState, useEffect } from "react";
+"use client"
+import React, { useEffect, useState } from 'react'
 import { getBackgroundColor, type RGB } from "@/lib/colors";
 import { songs } from "@/data/songs";
 import PlayerControls from "@/partials/feed/PlayerControls";
@@ -13,9 +13,8 @@ import { url } from "inspector";
 
 const DEFAULT_BACKGROUND_FALLBACK_COLOR = "transparent";
 const CLAIM_THRESHOLD = 30;
-
-const Player: React.FC = () => {
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+const MiniPlayer: React.FC = () => {
+    const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState<string>(
     DEFAULT_BACKGROUND_FALLBACK_COLOR,
@@ -31,7 +30,7 @@ const Player: React.FC = () => {
 
   const song = songs[currentSongIndex];
 
-  /*useEffect(() => {
+  useEffect(() => {
     const audioInstance = new Audio(song.url);
     setAudio(audioInstance);
     function handleLoadedMetadata() {
@@ -151,68 +150,38 @@ const Player: React.FC = () => {
   function handleDiscover() {
     setDiscovered(true);
     setShowStreamingLinks(true);
-  }*/
+  }
 
   return (
-    <div
-      className="fixed left-0 top-0 z-30 flex h-full w-full flex-col overflow-x-hidden overflow-y-scroll pt-[3.25rem] text-white transition-all duration-300 ease-in-out">
+    <div className='bg-[#181818]  w-full fixed bottom-0 left-0 right-0 z-30 px-6 py-4'>
+      <div className='w-full  flex items-center justify-between'>
+            <div className='flex items-center gap-3'>
+                {!discovered ? (
+                    song.albumArt && (
+                    <img
+                        src={song.albumArt}
+                        alt="Album Art"
+                        className="h-[60px] w-[60px] rounded-[4px]"
+                        crossOrigin="anonymous"
+                        width={60}
+                        height={60}
+                    />
+                    )
+                ) : (
+                    <HiddenCoverArt />
+                )}
+                <div className="flex flex-col items-start font-inter">
+                    <h2 className="text-[18px] font-semibold tracking-[0.04em]">
+                    {!discovered ? song.title : "*************"}
+                    </h2>
 
-  <div
-    className={`absolute inset-0 transition-transform duration-300 ${
-      discovered ? 'bg-gradient-to-b' : ''
-    }`}
-    style={
-      discovered
-        ?  {
-            backgroundImage: `url(${song.albumArt})`,
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            filter: 'blur(50px)',
-            transform: 'scale(2)',
-            zIndex: -1,
-        }:{
-            background: `linear-gradient(
-              to bottom, 
-              ${backgroundColor.replace('rgb', 'rgba').replace(')', ', 0.1)')} 0%, 
-              ${backgroundColor.replace('rgb', 'rgba').replace(')', ', 0)')} 100%
-            )`,
-          }
-    }
-  ></div>
-    {/*<div className="relative z-10">
-      <div className="mr-6 mt-6 flex justify-end">
-        <div className="invisible md:visible">
-          <NextSongButton playNext={playNext} />
-        </div>
-      </div>
-      <div className="flex flex-col items-center gap-6 px-6">
-        <div className="flex flex-col items-center gap-6">
-          {discovered ? (
-            song.albumArt && (
-              <img
-                src={song.albumArt}
-                alt="Album Art"
-                className="h-[360px] w-[360px] rounded-[16px]"
-                crossOrigin="anonymous"
-                width={360}
-                height={360}
-              />
-            )
-          ) : (
-            <HiddenCoverArt />
-          )}
-          <div className="flex flex-col items-center gap-2 font-inter">
-            <h2 className="text-xl font-semibold tracking-[0.04em]">
-              {discovered ? song.title : "*************"}
-            </h2>
-
-            <p className="text-base font-medium tracking-[0.04em] text-[#BDBDBD]">
-              {discovered ? song.artist : "********"}
-            </p>
-          </div>
-        </div>
-        <PlayerControls
+                    <p className="text-[16px] font-medium tracking-[0.04em] text-[#BDBDBD]">
+                    {!discovered ? song.artist : "********"}
+                    </p>
+                </div>
+            </div>
+            <div>
+            <PlayerControls
           isPlaying={isPlaying}
           togglePlayPause={togglePlayPause}
           playPrevious={playPrevious}
@@ -221,7 +190,9 @@ const Player: React.FC = () => {
           duration={duration}
           handleSeek={handleSeek}
         />
-        {showStreamingLinks ? (
+            </div>
+            <div>
+            {showStreamingLinks ? (
           <div className="flex items-center gap-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -248,60 +219,10 @@ const Player: React.FC = () => {
             canClaimReward={canClaimReward && !isClaimed}
           />
         )}
-        <div className="md:hidden">
-          <NextSongButton playNext={playNext} />
-        </div>
+            </div>
       </div>
-      </div>*/}
     </div>
-  );
-};
+  )
+}
 
-export default Player;
-
-
-/*export default function MusicPlayer({ albumCover }) {
-    return (
-      <div className="relative h-screen w-screen">
-        {/* Background with blur /}
-        <div className="absolute inset-0">
-          <Image
-            src={albumCover}
-            alt="Album Cover"
-            layout="fill"
-            objectFit="cover"
-            className="blur-xl scale-110"
-          />
-        </div>
-  
-        {/* Overlay to darken the background /}
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-  
-        {/* Music Player Content /}
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
-          <Image
-            src={albumCover}
-            alt="Album Cover"
-            width={200}
-            height={200}
-            className="rounded-lg shadow-lg"
-          />
-          <h1 className="mt-4 text-2xl font-bold">Song Title</h1>
-          <p className="text-sm text-gray-300">Artist Name</p>
-  
-          {/* Music Controls /}
-          <div className="flex items-center mt-6 space-x-4">
-            <button className="p-3 bg-gray-800 rounded-full hover:bg-gray-700">
-              ⏮️
-            </button>
-            <button className="p-3 bg-blue-600 rounded-full hover:bg-blue-500">
-              ⏯️
-            </button>
-            <button className="p-3 bg-gray-800 rounded-full hover:bg-gray-700">
-              ⏭️
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }*/
+export default MiniPlayer
