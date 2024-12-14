@@ -23,7 +23,7 @@ export default function Page() {
       //console.log("submitted>>",formData)
       setIsSubmitted(true)
     } catch (error) {
-      console.error("Submission failed:", error);
+      //console.error("Submission failed:", error);
       //alert("Something went wrong. Please try again later.");
       setIsSubmitted(false);
     }

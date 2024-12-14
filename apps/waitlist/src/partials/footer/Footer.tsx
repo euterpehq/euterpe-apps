@@ -3,6 +3,7 @@ import logo from "@/assets/icons/Euterpe..png"
 import instagram from "@/assets/icons/instagram.png"
 import linkedin from "@/assets/icons/linkedin.png"
 import X from "@/assets/icons/X.png"
+import Link from "next/link";
 
 export default function Footer(){
     return(
@@ -23,8 +24,8 @@ export default function Footer(){
 
            </div>
            <div className="flex flex-col gap-5 sm:mt-5 md:mt-0">
-            <p>Euterpe for Listeners</p>
-            <p>Euterpe for Artists</p>
+            <Link href="/">Euterpe for Listeners</Link>
+            <Link href="/artists">Euterpe for Artists</Link>
            </div>
            </div>
            <div className="">

@@ -19,12 +19,12 @@ function Waitlist({ onSubmit }: WaitListProp ) {
   return (
     <div
       id="waitlist"
-      className="flex h-[646px] flex-col items-center px-[60px] py-[180px] text-center"
+      className="flex h-[646px] flex-col items-center md:px-[60px] sm:px-[24px] py-[180px] text-center"
     >
       <CoinIcon />
       <div className="mb-12 mt-6 flex flex-col gap-3">
-        <h1 className="text-[48px] font-semibold">The waitlist is open</h1>
-        <p className="text-xl text-[#B1B5C6]">
+        <h1 className="md:text-[48px] sm:text-[40px] font-semibold">The waitlist is open</h1>
+        <p className="md:text-xl text-[#B1B5C6] sm:text-[20px] text-center">
           Don’t miss out, join our artist waitlist and expand your reach
         </p>
       </div>
@@ -87,7 +87,7 @@ function SubscribeForm({ onSubmit }: WaitListProp) {
   // const [submit, submitting] = useFormspark({
   //   formId: process.env.NEXT_PUBLIC_FORMSPARK_FORM_ID ?? "",
   // });
- // const [isSubmitting, setIsSubmitting] = useState(false);
+  //const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { errors } = form.formState;
 
@@ -122,7 +122,7 @@ function SubscribeForm({ onSubmit }: WaitListProp) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex items-center gap-3"
+        className="flex items-center sm:flex-col md:flex-row gap-3"
       >
         <FormField
           control={form.control}
@@ -145,7 +145,7 @@ function SubscribeForm({ onSubmit }: WaitListProp) {
             </FormItem>
           )}
         />
-        <Button size="sm" className="h-[56px] w-[129px] rounded-[8px]">
+        <Button size="sm" className="h-[56px] md:w-[129px] sm:w-full rounded-[8px]">
           Join the waitlist
         </Button>
       </form>

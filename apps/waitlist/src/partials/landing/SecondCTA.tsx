@@ -8,7 +8,7 @@ import Image from "next/image";
 
 function SecondCTA() {
   return (
-    <div className="md:grid md:grid-cols-2 justify-items-stretch px-[60px] py-10 sm:flex sm:flex-col-reverse">
+    <div className="md:grid md:grid-cols-2 justify-items-stretch md:px-[60px] sm:px-[24px] bg-[#0C0C0C] py-10 sm:flex sm:flex-col-reverse">
       <div className="mt-[72px] flex flex-col gap-6">
         <div className="flex flex-col gap-5">
           <h1 className="text-[48px] font-semibold leading-tight">

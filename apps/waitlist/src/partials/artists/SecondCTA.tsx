@@ -6,11 +6,13 @@ import { scrollToHref } from "@/lib/utils";
 
 function SecondCTA() {
   return (
-    <div className="grid sm:grid-cols-1 md:grid-cols-2 justify-items-stretch px-[60px] py-10">
-      <SVGImage />
+    <div className="grid sm:grid-cols-1 md:grid-cols-2 justify-items-stretch md:px-[60px] sm:px-[24px] py-10">
+     <div className="flex md:justify-start sm:justify-center">
+     <SVGImage />
+     </div>
       <div className="mt-[72px] flex flex-col gap-6">
         <div className="flex flex-col gap-5">
-          <h1 className="text-[48px] font-semibold leading-tight">
+          <h1 className="md:text-[48px] sm:text-[32px] font-semibold leading-tight">
             Engaged listeners
           </h1>
           <p className="max-w-[277px] text-[#B1B5C6]">
@@ -31,6 +33,8 @@ function SecondCTA() {
     </div>
   );
 }
+
+
 
 function SVGImage() {
   return (

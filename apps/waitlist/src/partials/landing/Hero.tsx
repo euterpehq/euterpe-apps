@@ -6,15 +6,15 @@ import { Button } from "@/components/ui/button";
   return (
     <div
       
-      className="w-full md:h-[847px] sm:h-[896px] relative"
+      className="w-full md:h-[847px] sm:h-full relative"
     >
       <div
         className="w-full h-full flex sm:flex-col lg:flex-row sm:gap-5 md:gap-0"
         
       >
-        <div className="gap-6 flex-1 z-20 flex flex-col items-start justify-center pl-[60px]">
+        <div className="gap-6 flex-1 z-20 flex flex-col items-start justify-center md:pl-[60px] sm:pl-[24px]">
           <div className="gap-9">
-            <h1 className="font-bold text-[120px] leading-[100px] tracking-[-7.2px] py-5">Listen. <br /> <span className="grad">Discover.</span> <br /> Earn.</h1>
+            <h1 className="font-bold md:text-[120px] sm:text-[80px] md:leading-[100px] md:tracking-[-7.2px] sm:leading-[72px] py-5 sm:tracking-[-4.8px]">Listen. <br /> <span className="grad md:text-[120px] sm:text-[80px]">Discover.</span> <br /> Earn.</h1>
             <p className="text-[24px] tracking-[-0.9px] w-[332px]">Share your music, get discovered and expand your fanbase</p>
           </div>
           <Button size="sm" asChild className="p-[12px]">
@@ -22,13 +22,11 @@ import { Button } from "@/components/ui/button";
           </Button>
         </div>
         <div
-        className="flex-1"
-        style={{
-          background: "url(/hero2.png) lightgray 50% / cover no-repeat",
-          width: "100%",
-        }}
-        ></div>
-       <div className="absolute left-[48%] top-[40%] sm:hidden md:block">
+        className="flex-1 w-full flex justify-center"
+        >
+          <img src="/hero2.png" alt="" className="w-full object-cover"/>
+        </div>
+       <div className="absolute md:left-[48%] md:top-[40%] sm:right-10 sm:top-[35%]">
        <SVGImage/>
        </div>
       </div> 
