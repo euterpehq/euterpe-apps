@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 import UploadMusicModal from "./components/UploadMusicModal";
 import Album from "./components/Album";
 import Singles from "./components/Singles";
-export function Dashboard() {
+ function Dashboard() {
   
    const [isModalOpen, setIsModalOpen] = useState(false);
   // Prevent scrolling while modal is open
@@ -83,3 +83,4 @@ export function Dashboard() {
     </>
   );
 }
+export default Dashboard;
