@@ -6,7 +6,7 @@ import { scrollToHref } from "@/lib/utils";
 
 function SecondCTA() {
   return (
-    <div className="grid grid-cols-2 justify-items-stretch px-[60px] py-10">
+    <div className="grid sm:grid-cols-1 md:grid-cols-2 justify-items-stretch px-[60px] py-10">
       <SVGImage />
       <div className="mt-[72px] flex flex-col gap-6">
         <div className="flex flex-col gap-5">

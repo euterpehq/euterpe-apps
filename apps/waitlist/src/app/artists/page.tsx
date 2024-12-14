@@ -7,6 +7,8 @@ import Waitlist from "@/partials/Waitlist";
 import SuccessfulWaitlist from "@/partials/SuccessfulWaitlist";
 import { useFormspark } from "@formspark/use-formspark";
 import { motion } from "motion/react";
+import ThirdCTA from "@/partials/artists/ThirdCTA";
+
 
 export default function Page() {
   const [submit, submitting] = useFormspark({
@@ -14,15 +16,25 @@ export default function Page() {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  function handleSubmit() {
-    setIsSubmitted(true);
-  }
+  
+  const handleSubmit = async (formData: any) => {
+    try {
+      await submit(formData);
+      //console.log("submitted>>",formData)
+      setIsSubmitted(true)
+    } catch (error) {
+      console.error("Submission failed:", error);
+      //alert("Something went wrong. Please try again later.");
+      setIsSubmitted(false);
+    }
+  };
 
   return (
     <>
       <Hero />
       <FirstCTA />
       <SecondCTA />
+      <ThirdCTA />
       {!isSubmitted ? (
         <Waitlist onSubmit={handleSubmit} />
       ) : (
@@ -35,6 +47,7 @@ export default function Page() {
           <SuccessfulWaitlist />
         </motion.div>
       )}
+      
     </>
   );
 }

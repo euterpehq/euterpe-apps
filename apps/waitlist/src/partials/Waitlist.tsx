@@ -10,7 +10,12 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import SuccessfulWaitlist from "@/partials/SuccessfulWaitlist";
 
-function Waitlist({ onSubmit }: { onSubmit: () => void }) {
+type WaitListProp = {
+  onSubmit:  (formData: any) => Promise<void>
+}
+
+
+function Waitlist({ onSubmit }: WaitListProp ) {
   return (
     <div
       id="waitlist"
@@ -66,7 +71,9 @@ function CoinIcon() {
   );
 }
 
-function SubscribeForm({ onSubmit }: { onSubmit: () => void }) {
+
+
+function SubscribeForm({ onSubmit }: WaitListProp) {
   const FormSchema = z.object({
     email: z.string().email(),
   });
@@ -80,7 +87,7 @@ function SubscribeForm({ onSubmit }: { onSubmit: () => void }) {
   // const [submit, submitting] = useFormspark({
   //   formId: process.env.NEXT_PUBLIC_FORMSPARK_FORM_ID ?? "",
   // });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+ // const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { errors } = form.formState;
 
@@ -94,11 +101,11 @@ function SubscribeForm({ onSubmit }: { onSubmit: () => void }) {
     setTimeout(() => setIsShaking(false), 200);
   }
 
-  function handleSubmit() {
+  /*function handleSubmit() {
     setIsSubmitting(true);
     onSubmit();
     setIsSubmitting(false);
-  }
+  }*/
 
   // async function onSubmit(data: z.infer<typeof FormSchema>) {
   //   // if (errors.email) {

@@ -5,6 +5,7 @@ import "./globals.css";
 import { AppProvider } from "@/providers/app";
 import Navbar from "@/partials/Navbar";
 import { cn } from "@/lib/utils";
+import Footer from "@/partials/footer/Footer";
 
 const urbanist = Urbanist({ subsets: ["latin"], variable: "--font-urbanist" });
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
@@ -64,6 +65,7 @@ export default function RootLayout({
           <div className="flex min-h-screen flex-col">
             <Navbar />
             {children}
+            <Footer />
           </div>
         </AppProvider>
       </body>

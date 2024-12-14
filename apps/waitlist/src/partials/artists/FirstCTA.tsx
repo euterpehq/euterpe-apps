@@ -6,13 +6,13 @@ import { scrollToHref } from "@/lib/utils";
 
 function FirstCTA() {
   return (
-    <div className="grid grid-cols-2 justify-items-stretch px-[60px] py-10">
+    <div className="md:grid  md:grid-cols-2 justify-items-stretch px-[60px] py-10 sm:flex sm:flex-col-reverse">
       <div className="mt-[72px] flex flex-col gap-6">
         <div className="flex flex-col gap-5">
           <h1 className="text-[48px] font-semibold leading-tight">
             Expand your audience
           </h1>
-          <p className="max-w-[277px] text-[#B1B5C6]">
+          <p className="max-w-[277px] text-[#B1B5C6] text-[18px]">
             Share your music, get discovered and expand your fanbase
           </p>
         </div>
@@ -22,7 +22,7 @@ function FirstCTA() {
           </Link>
         </Button>
       </div>
-      <div className="flex justify-end">
+      <div className="flex sm:justify-center md:justify-end">
         <SVGImage />
       </div>
     </div>
