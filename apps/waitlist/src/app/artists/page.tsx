@@ -1,0 +1,40 @@
+"use client";
+import React, { useState } from "react";
+import Hero from "@/partials/artists/Hero";
+import FirstCTA from "@/partials/artists/FirstCTA";
+import SecondCTA from "@/partials/artists/SecondCTA";
+import Waitlist from "@/partials/Waitlist";
+import SuccessfulWaitlist from "@/partials/SuccessfulWaitlist";
+import { useFormspark } from "@formspark/use-formspark";
+import { motion } from "motion/react";
+
+export default function Page() {
+  const [submit, submitting] = useFormspark({
+    formId: process.env.NEXT_PUBLIC_FORMSPARK_FORM_ID ?? "",
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  function handleSubmit() {
+    setIsSubmitted(true);
+  }
+
+  return (
+    <>
+      <Hero />
+      <FirstCTA />
+      <SecondCTA />
+      {!isSubmitted ? (
+        <Waitlist onSubmit={handleSubmit} />
+      ) : (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+        >
+          <SuccessfulWaitlist />
+        </motion.div>
+      )}
+    </>
+  );
+}
