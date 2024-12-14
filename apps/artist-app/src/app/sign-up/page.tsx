@@ -6,10 +6,10 @@ import { Wallet } from 'lucide-react'
 import Nav from './Nav'
 import { useRouter } from 'next/navigation'
  
-export default function page() {
+export default function Page() {
   const router = useRouter()
  
-  function hanldeAuth(e:any) {
+  function hanldeAuth(e:React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     router.push("/home")
   }
@@ -17,9 +17,9 @@ export default function page() {
     <>
     <Nav/>
     <section className='w-[90%] m-auto md:m-none md:w-full min-h-screen flex justify-center items-center'>
-        <form action="" className='space-y-8 w-[500px] h-[311px]'>
+        <form  onSubmit={hanldeAuth}action="" className='space-y-8 w-[500px] h-[311px]'>
             <h1 className='text-[28px] text-center'>Setup your account</h1>
-            <Button onClick={hanldeAuth} className='hover:text-black rounded-[8px] p-[15px] w-full h-[40px] bg-[#313131] flex jusitfy-start items-center text-white gap-x-[8px]'>
+            <Button className='hover:text-black rounded-[8px] p-[15px] w-full h-[40px] bg-[#313131] flex jusitfy-start items-center text-white gap-x-[8px]'>
                 <span className='w-[16px] h-[16px]'><Image src="/images/spotify2.png" alt="spotify" width={100} height={100}></Image></span>
                 Sign in with Spotify
             </Button>

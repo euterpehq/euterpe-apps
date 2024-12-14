@@ -6,29 +6,33 @@ import CoverImage from './CoverImage';
 import AudioFile from './AudioFile';
 import { X } from 'lucide-react';
 import { useRouter } from 'next/navigation'
- 
+
 interface UploadMusicModalProps {
   isModalOpen: boolean;
   closeModal: () => void;
 }
+
 export default function UploadMusicModal({
   isModalOpen,
   closeModal,
 }: UploadMusicModalProps) {
-  if (!isModalOpen) return null;
+  const router = useRouter(); // Move useRouter outside condition
+
+  // UseEffect is always called
   useEffect(() => {
-if (isModalOpen) {
-   document.body.style.overflow = 'hidden';
-} else {
-   document.body.style.overflow = 'auto';
-}
-// Clean up on unmount
-return () => {
-   document.body.style.overflow = 'auto';
-};
-}, [isModalOpen]);
-  const router = useRouter()
- 
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    // Clean up on unmount
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isModalOpen]);
+
+  if (!isModalOpen) return null; // Conditional rendering only affects the JSX
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     closeModal();
