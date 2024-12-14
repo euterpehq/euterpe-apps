@@ -95,3 +95,16 @@
     @apply bg-background text-foreground;
   }
 }
+
+.grad{
+  background: linear-gradient(265deg, #A5FF2F 21.1%, #EFBBAA 85.11%);
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+font-family: Figtree;
+font-size: 120px;
+font-style: normal;
+font-weight: 700;
+line-height: 100px;
+letter-spacing: -7.2px;
+}
