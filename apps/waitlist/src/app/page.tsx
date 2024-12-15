@@ -7,10 +7,16 @@ import { useFormspark } from "@formspark/use-formspark";
 import { motion } from "motion/react";
 import Waitlist from "@/partials/Waitlist";
 import SuccessfulWaitlist from "@/partials/SuccessfulWaitlist";
+import { usePathname } from "next/navigation";
 
 export default function Home() {
+  const pathname = usePathname();
+  const formId =
+    pathname === "/artists"
+      ? process.env.NEXT_PUBLIC_FORMSPARK_FORM_ID_ARTISTS
+      : process.env.NEXT_PUBLIC_FORMSPARK_FORM_ID_USERS;
   const [submit, submitting] = useFormspark({
-    formId: process.env.NEXT_PUBLIC_FORMSPARK_FORM_ID ?? "",
+    formId: formId ?? "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
