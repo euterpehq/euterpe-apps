@@ -7,7 +7,7 @@ function Hero() {
   return (
     <div className="h-full w-full">
       <div className="flex h-full w-full flex-col gap-6 md:flex-row md:gap-0">
-        <div className="flex flex-col items-start justify-center gap-6 pl-[24px] md:flex-1 md:pl-[60px]">
+        <div className="z-20 flex flex-1 flex-col items-start justify-center gap-6 pl-[24px] md:flex-1 md:pl-[60px]">
           <div className="gap-9">
             <h1 className="py-5 text-[80px] font-bold leading-[72px] tracking-[-0.055em] md:text-[120px] md:leading-[100px]">
               Listen. <br />
