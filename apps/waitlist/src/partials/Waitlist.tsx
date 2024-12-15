@@ -9,22 +9,24 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import SuccessfulWaitlist from "@/partials/SuccessfulWaitlist";
+import { IoHourglassOutline } from "react-icons/io5";
 
 type WaitListProp = {
-  onSubmit:  (formData: any) => Promise<void>
-}
+  onSubmit: (formData: any) => Promise<void>;
+};
 
-
-function Waitlist({ onSubmit }: WaitListProp ) {
+function Waitlist({ onSubmit }: WaitListProp) {
   return (
     <div
       id="waitlist"
-      className="flex h-[646px] flex-col items-center md:px-[60px] sm:px-[24px] py-[180px] text-center"
+      className="flex h-[646px] flex-col items-center py-[180px] text-center sm:px-[24px] md:px-[60px]"
     >
       <CoinIcon />
       <div className="mb-12 mt-6 flex flex-col gap-3">
-        <h1 className="md:text-[48px] sm:text-[40px] font-semibold">The waitlist is open</h1>
-        <p className="md:text-xl text-[#B1B5C6] sm:text-[20px] text-center">
+        <h1 className="font-semibold tracking-[-0.06em] sm:text-[40px] md:text-[48px]">
+          The waitlist is open
+        </h1>
+        <p className="text-center text-[#B1B5C6] sm:text-[20px] md:text-xl">
           Don’t miss out, join our artist waitlist and expand your reach
         </p>
       </div>
@@ -71,8 +73,6 @@ function CoinIcon() {
   );
 }
 
-
-
 function SubscribeForm({ onSubmit }: WaitListProp) {
   const FormSchema = z.object({
     email: z.string().email(),
@@ -84,10 +84,8 @@ function SubscribeForm({ onSubmit }: WaitListProp) {
       email: "",
     },
   });
-  // const [submit, submitting] = useFormspark({
-  //   formId: process.env.NEXT_PUBLIC_FORMSPARK_FORM_ID ?? "",
-  // });
-  //const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const { errors } = form.formState;
 
@@ -101,28 +99,23 @@ function SubscribeForm({ onSubmit }: WaitListProp) {
     setTimeout(() => setIsShaking(false), 200);
   }
 
-  /*function handleSubmit() {
+  async function handleSubmit(formData: any) {
+    setIsSubmitted(false);
     setIsSubmitting(true);
-    onSubmit();
-    setIsSubmitting(false);
-  }*/
-
-  // async function onSubmit(data: z.infer<typeof FormSchema>) {
-  //   // if (errors.email) {
-  //   //   setIsShaking(true);
-  //   // } else {
-  //   //   setIsSubmitted(false);
-  //   //   await submit({ email: data.email });
-  //   //   setIsSubmitted(true);
-  //   // }
-  //   setIsSubmitted(true);
-  // }
+    try {
+      await onSubmit(formData);
+      setIsSubmitted(true);
+    } catch (error) {
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex items-center sm:flex-col md:flex-row gap-3"
+        onSubmit={form.handleSubmit(handleSubmit)}
+        className="flex items-center gap-3 sm:flex-col md:flex-row"
       >
         <FormField
           control={form.control}
@@ -132,11 +125,12 @@ function SubscribeForm({ onSubmit }: WaitListProp) {
               <FormControl>
                 <Input
                   className={cn(
-                    "text-cream/90 h-[56px] w-[425px] bg-transparent placeholder:text-[#B1B5C6] focus-visible:ring-transparent",
+                    "text-cream/90 h-[56px] w-[425px] rounded-[8px] border-[0.5px] border-[#757575] bg-transparent placeholder:text-[#B1B5C6] focus-visible:ring-transparent",
                     {
                       "animate-shake": isShaking,
                     },
                   )}
+                  type="email"
                   placeholder="Email address"
                   {...field}
                   onAnimationEnd={handleAnimationEnd}
@@ -145,8 +139,28 @@ function SubscribeForm({ onSubmit }: WaitListProp) {
             </FormItem>
           )}
         />
-        <Button size="sm" className="h-[56px] md:w-[129px] sm:w-full rounded-[8px]">
-          Join the waitlist
+        <Button
+          size="sm"
+          className="h-[56px] rounded-[8px] sm:w-full md:w-[129px]"
+        >
+          {isSubmitting ? (
+            <IoHourglassOutline
+              className={cn(
+                "animate-ease-linear size-6",
+                "animation-delay-500 animate-ease-out animate-spin",
+              )}
+            />
+          ) : (
+            <>
+              <IoHourglassOutline
+                className={cn(
+                  "animate-sparkle -translate-y-0.5",
+                  isSubmitted ? "animate-none" : "",
+                )}
+              />
+              Join the waitlist
+            </>
+          )}
         </Button>
       </form>
     </Form>

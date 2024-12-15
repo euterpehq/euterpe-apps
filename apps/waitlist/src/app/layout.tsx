@@ -5,10 +5,14 @@ import "./globals.css";
 import { AppProvider } from "@/providers/app";
 import Navbar from "@/partials/Navbar";
 import { cn } from "@/lib/utils";
-import Footer from "@/partials/footer/Footer";
+import Footer from "@/partials/Footer";
 
 const urbanist = Urbanist({ subsets: ["latin"], variable: "--font-urbanist" });
-const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
+const figtree = Figtree({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-figtree",
+});
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const azeret = Azeret_Mono({ subsets: ["latin"], variable: "--font-azeret" });
 
@@ -40,7 +44,7 @@ const aeonik = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Euterpe",
+  title: "Euterpe Waitlist",
   description: `"making space for a million overlooked artists."`,
 };
 
@@ -58,7 +62,7 @@ export default function RootLayout({
           aeonik.variable,
           figtree.variable,
           inter.variable,
-          azeret.variable
+          azeret.variable,
         )}
       >
         <AppProvider>
