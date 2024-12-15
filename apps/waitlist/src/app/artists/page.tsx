@@ -9,22 +9,17 @@ import { useFormspark } from "@formspark/use-formspark";
 import { motion } from "motion/react";
 import ThirdCTA from "@/partials/artists/ThirdCTA";
 
-
 export default function Page() {
   const [submit, submitting] = useFormspark({
     formId: process.env.NEXT_PUBLIC_FORMSPARK_FORM_ID ?? "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  
   const handleSubmit = async (formData: any) => {
     try {
       await submit(formData);
-      //console.log("submitted>>",formData)
-      setIsSubmitted(true)
+      setIsSubmitted(true);
     } catch (error) {
-      //console.error("Submission failed:", error);
-      //alert("Something went wrong. Please try again later.");
       setIsSubmitted(false);
     }
   };
@@ -47,7 +42,6 @@ export default function Page() {
           <SuccessfulWaitlist />
         </motion.div>
       )}
-      
     </>
   );
 }

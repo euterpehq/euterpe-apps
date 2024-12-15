@@ -4,11 +4,11 @@ function SuccessfulWaitlist() {
   return (
     <div className="flex h-[646px] flex-col items-center gap-6 px-[60px] py-[180px] text-center">
       <CheckIcon />
-      <div className="gap-3">
-        <h2 className="semibold text-[40px]">
+      <div className="flex flex-col gap-3">
+        <h2 className="w-[532px] text-[40px] font-semibold leading-tight tracking-[-0.06em]">
           You’re in! Welcome to the future of music streaming!
         </h2>
-        <p className="text-[#B1B5C6]">
+        <p className="font-thin text-[#B1B5C6]">
           Thanks for joining the waitlist. We’re thrilled to have you on board!
         </p>
       </div>
