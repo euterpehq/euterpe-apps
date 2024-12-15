@@ -19,15 +19,15 @@ function Waitlist({ onSubmit }: WaitListProp) {
   return (
     <div
       id="waitlist"
-      className="flex h-[646px] flex-col items-center py-[180px] text-center sm:px-[24px] md:px-[60px]"
+      className="flex flex-col items-center px-[20px] pb-[100px] pt-[40px] text-center md:px-[60px] md:pb-[180px] md:pt-[180px]"
     >
       <CoinIcon />
       <div className="mb-12 mt-6 flex flex-col gap-3">
-        <h1 className="font-semibold tracking-[-0.06em] sm:text-[40px] md:text-[48px]">
+        <h1 className="text-[40px] font-semibold tracking-[-0.06em] md:text-[48px]">
           The waitlist is open
         </h1>
-        <p className="text-center text-[#B1B5C6] sm:text-[20px] md:text-xl">
-          Don’t miss out, join our artist waitlist and expand your reach
+        <p className="w-[304px] text-center text-[20px] text-[#B1B5C6] md:w-full md:text-xl">
+          Be the first to experience music that pays you
         </p>
       </div>
       <SubscribeForm onSubmit={onSubmit} />
@@ -115,17 +115,17 @@ function SubscribeForm({ onSubmit }: WaitListProp) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
-        className="flex items-center gap-3 sm:flex-col md:flex-row"
+        className="flex w-full flex-col items-center justify-center gap-3 md:flex-row"
       >
         <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="w-full">
               <FormControl>
                 <Input
                   className={cn(
-                    "text-cream/90 h-[56px] w-[425px] rounded-[8px] border-[0.5px] border-[#757575] bg-transparent placeholder:text-[#B1B5C6] focus-visible:ring-transparent",
+                    "text-cream/90 h-[56px] w-full rounded-[8px] border-[0.5px] border-[#757575] bg-transparent placeholder:text-[#B1B5C6] focus-visible:ring-transparent md:w-[425px]",
                     {
                       "animate-shake": isShaking,
                     },
@@ -141,7 +141,7 @@ function SubscribeForm({ onSubmit }: WaitListProp) {
         />
         <Button
           size="sm"
-          className="h-[56px] rounded-[8px] sm:w-full md:w-[129px]"
+          className="h-[56px] w-full rounded-[8px] md:w-[129px]"
         >
           {isSubmitting ? (
             <IoHourglassOutline
