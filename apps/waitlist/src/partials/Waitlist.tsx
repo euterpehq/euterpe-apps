@@ -8,14 +8,20 @@ import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import SuccessfulWaitlist from "@/partials/SuccessfulWaitlist";
 import { IoHourglassOutline } from "react-icons/io5";
+import { usePathname } from "next/navigation";
 
 type WaitListProp = {
   onSubmit: (formData: any) => Promise<void>;
 };
 
 function Waitlist({ onSubmit }: WaitListProp) {
+  const pathname = usePathname();
+  const subtext =
+    pathname === "/artists"
+      ? "We understand the need for visibility, join our waitlist to expand your reach"
+      : "Be the first to experience music that pays you";
+
   return (
     <div
       id="waitlist"
@@ -27,7 +33,7 @@ function Waitlist({ onSubmit }: WaitListProp) {
           The waitlist is open
         </h1>
         <p className="w-[304px] text-center text-[20px] text-[#B1B5C6] md:w-full md:text-xl">
-          Be the first to experience music that pays you
+          {subtext}
         </p>
       </div>
       <SubscribeForm onSubmit={onSubmit} />
@@ -121,7 +127,7 @@ function SubscribeForm({ onSubmit }: WaitListProp) {
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem className="w-full">
+            <FormItem className="w-full md:w-fit">
               <FormControl>
                 <Input
                   className={cn(
@@ -151,15 +157,7 @@ function SubscribeForm({ onSubmit }: WaitListProp) {
               )}
             />
           ) : (
-            <>
-              <IoHourglassOutline
-                className={cn(
-                  "animate-sparkle -translate-y-0.5",
-                  isSubmitted ? "animate-none" : "",
-                )}
-              />
-              Join the waitlist
-            </>
+            <>Join the waitlist</>
           )}
         </Button>
       </form>

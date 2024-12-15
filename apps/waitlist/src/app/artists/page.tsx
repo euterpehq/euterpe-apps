@@ -29,7 +29,7 @@ export default function Page() {
       <Hero />
       <FirstCTA />
       <SecondCTA />
-      <ThirdCTA />
+      {/* <ThirdCTA /> */}
       {!isSubmitted ? (
         <Waitlist onSubmit={handleSubmit} />
       ) : (

@@ -2,10 +2,13 @@ import React from "react";
 
 function SuccessfulWaitlist() {
   return (
-    <div className="flex h-[646px] flex-col items-center gap-6 px-[60px] py-[180px] text-center">
+    <div
+      id="waitlist"
+      className="pmd:px-[60px] flex flex-col items-center gap-6 px-[20px] pb-[100px] pt-[40px] text-center md:pb-[180px] md:pt-[180px]"
+    >
       <CheckIcon />
       <div className="flex flex-col gap-3">
-        <h2 className="w-[532px] text-[40px] font-semibold leading-tight tracking-[-0.06em]">
+        <h2 className="w-full text-[40px] font-semibold leading-tight tracking-[-0.06em] md:w-[532px]">
           You’re in! Welcome to the future of music streaming!
         </h2>
         <p className="font-thin text-[#B1B5C6]">
@@ -19,8 +22,8 @@ function SuccessfulWaitlist() {
 function CheckIcon() {
   return (
     <svg
-      width="100"
-      height="100"
+      width="64"
+      height="64"
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
