@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Urbanist, Figtree, Inter, Azeret_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -46,6 +46,13 @@ const aeonik = localFont({
 export const metadata: Metadata = {
   title: "Euterpe Waitlist",
   description: `"making space for a million overlooked artists."`,
+};
+
+export const viewport: Viewport = {
+  initialScale: 1,
+  width: "device-width",
+  maximumScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
