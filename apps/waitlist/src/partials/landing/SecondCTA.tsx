@@ -8,7 +8,7 @@ import Image from "next/image";
 
 function SecondCTA() {
   return (
-    <div className="justify-items-stretch bg-[#0C0C0C] py-[120px] sm:flex sm:flex-col-reverse sm:px-[24px] md:grid md:grid-cols-2 md:px-[60px]">
+    <div className="flex flex-col-reverse justify-items-stretch bg-[#0C0C0C] px-[20px] py-[24px] pb-[64px] md:grid md:grid-cols-2 md:px-[60px] md:py-[120px] md:pb-[120px]">
       <div className="mt-[72px] flex flex-col gap-6">
         <div className="flex flex-col gap-5">
           <h1 className="text-[48px] font-semibold leading-tight">
@@ -24,7 +24,7 @@ function SecondCTA() {
           </Link>
         </Button>
       </div>
-      <div className="relative flex h-[560px] w-[560px] justify-end">
+      <div className="relative flex h-[372px] w-[372px] justify-end md:h-[560px] md:w-[560px]">
         <Image src={SingerImage} alt="Singer image" className="h-full w-full" />
         <svg
           className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"

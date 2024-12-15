@@ -5,18 +5,16 @@ import { scrollToHref } from "@/lib/utils";
 
 function Hero() {
   return (
-    <div className="relative w-full sm:h-full md:h-[847px]">
-      <div className="flex h-full w-full sm:flex-col sm:gap-5 md:gap-0 lg:flex-row">
-        <div className="z-20 flex flex-1 flex-col items-start justify-center gap-6 sm:pl-[24px] md:pl-[60px]">
+    <div className="h-full w-full">
+      <div className="flex h-full w-full flex-col gap-6 md:flex-row md:gap-0">
+        <div className="flex flex-col items-start justify-center gap-6 pl-[24px] md:flex-1 md:pl-[60px]">
           <div className="gap-9">
-            <h1 className="py-5 font-bold sm:text-[80px] sm:leading-[72px] sm:tracking-[-4.8px] md:text-[120px] md:leading-[100px] md:tracking-[-7.2px]">
-              Listen. <br />{" "}
-              <span className="grad sm:text-[80px] md:text-[120px]">
-                Discover.
-              </span>{" "}
+            <h1 className="py-5 text-[80px] font-bold leading-[72px] tracking-[-0.055em] md:text-[120px] md:leading-[100px]">
+              Listen. <br />
+              <span className="grad">Discover.</span>
               <br /> Earn.
             </h1>
-            <p className="w-[474px] text-[24px] leading-snug tracking-[-0.9px]">
+            <p className="w-full text-[24px] leading-snug tracking-[-0.9px] md:w-[474px]">
               Find incredible music, support emerging artists, and get rewarded
               for every track you play
             </p>
@@ -27,11 +25,14 @@ function Hero() {
             </Link>
           </Button>
         </div>
-        <div className="flex w-full flex-1 justify-center">
+        <div className="relative flex w-full justify-center md:flex-1">
           <img src="/hero2.png" alt="" className="w-full object-cover" />
-        </div>
-        <div className="absolute sm:right-10 sm:top-[35%] md:left-[48%] md:top-[40%]">
-          <SVGImage />
+          {/* <div className="absolute right-10 top-[35%] md:hidden">
+            <SVGImage />
+          </div> */}
+          <div className="absolute right-[10%] top-[-10%] md:-left-[7%] md:top-[40%]">
+            <SVGImage />
+          </div>
         </div>
       </div>
       {/*<div
