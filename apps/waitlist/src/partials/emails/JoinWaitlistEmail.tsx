@@ -24,8 +24,8 @@ export default function JoinWaitlistEmail() {
       <Html>
         <Head />
         <Preview>
-          Your spot on the waitlist is confirmed. We're approaching pre-alpha
-          and excited to share our progress with you very soon.
+          Your spot on the waitlist is confirmed. We&apos;re approaching
+          pre-alpha and excited to share our progress with you very soon.
         </Preview>
         <Body className="m-auto max-w-lg bg-[#020303]">
           <Container className="p-10">
@@ -35,10 +35,10 @@ export default function JoinWaitlistEmail() {
               className="w-2/3"
             />
             <Text className="text-2xl font-semibold text-white">
-              You're on the waitlist🤭
+              You&apos;re on the waitlist🤭
             </Text>
             <Text className="text-base font-light tracking-[-0.04rem] text-[#A5A5A5] sm:text-sm">
-              Your spot on the waitlist is confirmed. We're approaching
+              Your spot on the waitlist is confirmed. We&apos;re approaching
               pre-alpha and excited to share our progress with you very soon.
             </Text>
             <Spacer size={6} />
