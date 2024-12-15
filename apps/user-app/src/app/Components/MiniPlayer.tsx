@@ -9,28 +9,44 @@ import HiddenCoverArt from "@/components/HiddenCoverArt";
 import StreamingLinks from "@/partials/feed/StreamingLinks";
 import { useEarningsStore } from "@/providers/store/earnings.store";
 import { url } from "inspector";
-import { PlayerProps } from './Player';
 import MiniHiddenCoverArt from '@/components/MiniHiddenCoverArt';
+import { useAudioPlayerStore } from '@/store/audioplayer.store';
+import { useModalStore } from '@/store/modal.store';
 
 
+const MiniPlayer: React.FC = () => {
+ const updateEarnings = useEarningsStore((state) => state.updateEarnings);
+ 
+  const {openModal}= useModalStore()
+  const {
+    currentSongIndex,
+    isPlaying,
+    currentTime,
+    duration,
+    discovered,
+    showStreamingLinks,
+    setShowStreamingLinks,
+    canClaimReward,
+    isClaimed,
+    togglePlayPause,
+    setIsClaimed,
+    setCanClaimReward,
+    playNext,
+    playPrevious,
+    handleSeek,
+    handleDiscover,
+  } = useAudioPlayerStore();
 
-const MiniPlayer: React.FC<PlayerProps> = ({
-  song,
-  currentTime,
-  duration,
-  discovered,
-  isPlaying,
-  showStreamingLinks,
-  canClaimReward,
-  isClaimed,
-  setShowStreamingLinks,
-  togglePlayPause,
-  playNext,
-  playPrevious,
-  handleSeek,
-  handleClaim,
-  handleDiscover
-}) => {
+  const song = songs[currentSongIndex]
+
+  function handleClaim() {
+    if (!isClaimed && canClaimReward) {
+      updateEarnings(0.2);
+      setIsClaimed(true);
+      setCanClaimReward(false);
+    }
+  }
+
    
   return (
     <div className='bg-[#181818]  w-full fixed bottom-0 left-0 right-0 z-30 px-6 py-4'>
@@ -71,7 +87,7 @@ const MiniPlayer: React.FC<PlayerProps> = ({
           handleSeek={handleSeek}
         />
             </div>
-            <div>
+            <div className='flex items-center gap-5'>
             {showStreamingLinks ? (
           <div className="flex items-center gap-3">
             <svg
@@ -99,6 +115,11 @@ const MiniPlayer: React.FC<PlayerProps> = ({
             canClaimReward={canClaimReward && !isClaimed}
           />
         )}
+        <div className='cursor-pointer' onClick={openModal}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+<path d="M11.6667 8.33333L17.5 2.5M17.5 2.5H13.75M17.5 2.5V6.25M8.33333 11.6667L2.5 17.5M2.5 17.5H6.25M2.5 17.5V13.75" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        </div>
             </div>
       </div>
     </div>

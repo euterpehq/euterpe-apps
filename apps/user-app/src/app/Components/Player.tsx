@@ -10,6 +10,7 @@ import StreamingLinks from "@/partials/feed/StreamingLinks";
 import { useEarningsStore } from "@/providers/store/earnings.store";
 import { url } from "inspector";
 import {AnimatePresence,motion} from "framer-motion"
+import { useAudioPlayerStore } from '@/store/audioplayer.store';
 
 
 export type PlayerProps = {
@@ -33,27 +34,37 @@ export type PlayerProps = {
 
 
 
-const Player: React.FC<PlayerProps> = ({
-  song,
-  currentTime,
-  duration,
-  discovered,
-  isPlaying,
-  backgroundColor,
-  showStreamingLinks,
-  canClaimReward,
-  isClaimed,
-  setShowStreamingLinks,
-  togglePlayPause,
-  playNext,
-  playPrevious,
-  handleSeek,
-  handleClaim,
-  handleDiscover
-}) => {
+const Player: React.FC = () => {
+  const updateEarnings = useEarningsStore((state) => state.updateEarnings);
+  const {
+    currentSongIndex,
+    isPlaying,
+    currentTime,
+    duration,
+    discovered,
+    backgroundColor,
+    showStreamingLinks,
+    setShowStreamingLinks,
+    canClaimReward,
+    isClaimed,
+    togglePlayPause,
+    playNext,
+    playPrevious,
+    handleSeek,
+    setIsClaimed,
+    setCanClaimReward,
+    handleDiscover,
+  } = useAudioPlayerStore();
 
+  const song = songs[currentSongIndex]
 
-
+  function handleClaim() {
+    if (!isClaimed && canClaimReward) {
+      updateEarnings(0.2);
+      setIsClaimed(true);
+      setCanClaimReward(false);
+    }
+  }
   return (
 
       <div

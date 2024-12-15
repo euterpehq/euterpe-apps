@@ -95,3 +95,16 @@
     @apply bg-background overflow-x-hidden text-foreground;
   }
 }
+
+
+.tp{
+  border-radius: 240px;
+background: #ffffff08;
+
+backdrop-filter: blur(40px);
+}
+
+.tp2{
+background: #ffffff08;
+backdrop-filter: blur(40px);
+}

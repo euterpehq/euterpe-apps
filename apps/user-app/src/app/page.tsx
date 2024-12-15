@@ -10,18 +10,19 @@ import { useModalStore } from "@/store/modal.store";
 import MiniPlayer from "./Components/MiniPlayer";
 import {AnimatePresence, motion} from "framer-motion"
 import { useMiniPlayerStore } from "@/store/miniplayer.store";
+import { AudioInitializer } from "@/partials/AudioInitializer";
 
-import { useAudioPlayer } from "./Components/hooks/useAudioPlayer";
 
 
 export default function Home() {
   const {isOpen, closeModal} = useModalStore();
   const { isVisible } = useMiniPlayerStore();
   
-  const audioPlayer = useAudioPlayer()
+  
 
   return (
     <>
+    <AudioInitializer />
       <Header />
 {<AnimatePresence>
 {isOpen && 
@@ -33,8 +34,8 @@ export default function Home() {
           transition={{ duration: 0.5, ease: "easeInOut" }} 
         className="w-screen h-screen fixed top-0 left-0 right-0 bottom-0 bg-black z-40"
         >
-          <div onClick={closeModal} className="absolute text-gray-500  z-50 top-20 left-20 cursor-pointer">X</div>
-         <Player {...audioPlayer}/>
+          <button onClick={closeModal} className="absolute text-white py-[8px] px-[12px] bg-[#ffffff14] z-50 top-20 left-20 cursor-pointer rounded-[8px]">X close</button>
+         <Player />
         </motion.div>
       )}
 </AnimatePresence>}
@@ -47,7 +48,7 @@ export default function Home() {
       <Lucky />
       <Genre />
       <Artists />
-      {isVisible && <MiniPlayer {...audioPlayer}/>}
+      {isVisible && <MiniPlayer />}
     </>
   );
 }

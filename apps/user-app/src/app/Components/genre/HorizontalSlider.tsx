@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Swiper, SwiperSlide} from "swiper/react"
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -13,6 +13,30 @@ import { genres } from '@/data/songs';
 const HorizontalSlider: React.FC = () => {
     const items = Array.from({ length: 50 }, (_, i) => i + 1);
     //const items = [1, 2, 3, 4,5,6,7,8,9,10,11,12]
+    const [loading, setLoading] = useState(true);
+    const slidesPerView = 6;
+  
+    useEffect(() => {
+      const timer = setTimeout(() => setLoading(false), 2000); // Simulating a loading delay
+      return () => clearTimeout(timer);
+    }, []);
+  
+    if (loading) {
+      return (
+        <div className="w-full h-[72px] flex justify-between gap-5">
+          {Array.from({ length: slidesPerView }).map((_, index) => (
+            <div
+              key={index}
+              className="animate-pulse tp2 bg-gray-800 h-[48px] flex-1 min-w-[120px] rounded-[120px] flex items-center gap-4 p-4 transition-opacity  ease-in-out"
+              style={{ opacity: 0.8 }}
+            >
+              <div className="tp2 h-8 w-8 rounded-full"></div>
+              <div className="tp2 h-6 w-2/3 rounded"></div>
+            </div>
+          ))}
+        </div>
+      );
+    }
   return (
     <div className='relative w-full  mx-auto h-[48px] overflow-hidden'>
     <Swiper

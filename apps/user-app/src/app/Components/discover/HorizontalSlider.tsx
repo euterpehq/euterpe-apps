@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Swiper, SwiperSlide} from "swiper/react"
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -8,10 +8,55 @@ import Image from 'next/image';
 import note from "@/assets/icons/music-note.png";
 import trophy from "@/assets/icons/trophy.png";
 import question from "@/assets/icons/question.png";
+import { songs } from '@/data/songs';
+import { useAudioPlayerStore } from '@/store/audioplayer.store';
+import { useMiniPlayerStore } from '@/store/miniplayer.store';
 
 const HorizontalSlider: React.FC = () => {
+    const { setCurrentSongIndex, currentSongIndex } = useAudioPlayerStore(); 
+  const { showMiniPlayer } = useMiniPlayerStore();
     const items = Array.from({ length: 100 }, (_, i) => i + 1);
-    //const items = [1, 2, 3, 4,5,6,7,8,9,10,11,12]
+    const [loading, setLoading] = useState(true); 
+    const slidesPerView = 6; 
+  
+    useEffect(() => {
+      const timer = setTimeout(() => setLoading(false), 2000); 
+      return () => clearTimeout(timer);
+    }, []);
+   
+
+    const playRandomSong = () => {
+        let randomIndex = Math.floor(Math.random() * songs.length);
+      
+        while (randomIndex === currentSongIndex) {
+          randomIndex = Math.floor(Math.random() * songs.length);
+        }
+      
+        setCurrentSongIndex(randomIndex); 
+      showMiniPlayer()
+    };
+
+  
+    // Render the skeleton loader if loading
+  if (loading) {
+    return (
+      <div className="w-full h-[500px]  flex justify-between gap-5">
+        {Array.from({ length: slidesPerView }).map((_, index) => (
+          <div
+            key={index}
+            className="animate-pulse tp2 h-[400px] w-[300px] rounded-lg flex flex-col gap-4 p-4 rounded-[8px] transition-opacity  ease-in-out"
+            style={{ opacity: 0.8 }}
+          >
+            {/*<div className="bg-gray-700 h-6 w-3/4 rounded"></div>
+            <div className="bg-gray-700 h-16 w-full rounded"></div>
+            <div className="bg-gray-700 h-6 w-1/2 rounded"></div>*/}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+ 
   return (
     <div className='relative w-full mx-auto h-full  overflow-hidden'>
     <Swiper
@@ -40,6 +85,7 @@ const HorizontalSlider: React.FC = () => {
             //border: "1px solid white",
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         }}
+        onClick={playRandomSong} 
         >
                 <div className='w-full flex items-center justify-between'>
                     <div className=''>
