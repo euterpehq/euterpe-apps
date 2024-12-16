@@ -1,10 +1,23 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { scrollToHref } from "@/lib/utils";
+import { sendGAEvent } from "@next/third-parties/google";
 
 function SecondCTA() {
+  const pathname = usePathname();
+  function handleClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    sendGAEvent(
+      "click",
+      "Waitlist Button",
+      "Second CTA",
+      pathname,
+      e.currentTarget.href,
+    );
+    scrollToHref(e);
+  }
   return (
     <div className="grid grid-cols-1 justify-items-stretch gap-12 px-[24px] py-[64px] md:grid-cols-2 md:px-[60px] md:py-10">
       <div className="flex justify-center md:justify-start">
@@ -25,7 +38,7 @@ function SecondCTA() {
           className="w-fit bg-[#F2D73D] hover:bg-[#F2D73D]/90"
           asChild
         >
-          <Link href="#waitlist" onClick={scrollToHref}>
+          <Link href="#waitlist" onClick={handleClick}>
             Join the waitlist
           </Link>
         </Button>

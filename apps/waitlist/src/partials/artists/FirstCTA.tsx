@@ -2,9 +2,22 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
 import { scrollToHref } from "@/lib/utils";
+import { sendGAEvent } from "@next/third-parties/google";
 
 function FirstCTA() {
+  const pathname = usePathname();
+  function handleClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    sendGAEvent(
+      "click",
+      "Waitlist Button",
+      "First CTA",
+      pathname,
+      e.currentTarget.href,
+    );
+    scrollToHref(e);
+  }
   return (
     <div className="flex flex-col-reverse justify-items-stretch gap-12 bg-[#070707] px-[24px] py-[64px] md:grid md:grid-cols-2 md:px-[60px] md:py-10">
       <div className="mt-0 flex flex-col gap-6 md:mt-[72px]">
@@ -17,7 +30,7 @@ function FirstCTA() {
           </p>
         </div>
         <Button size="sm" className="w-fit" asChild>
-          <Link href="#waitlist" onClick={scrollToHref}>
+          <Link href="#waitlist" onClick={handleClick}>
             Join the waitlist
           </Link>
         </Button>
