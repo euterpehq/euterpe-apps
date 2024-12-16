@@ -6,6 +6,7 @@ import { AppProvider } from "@/providers/app";
 import Navbar from "@/partials/Navbar";
 import { cn } from "@/lib/utils";
 import Footer from "@/partials/Footer";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const urbanist = Urbanist({ subsets: ["latin"], variable: "--font-urbanist" });
 const figtree = Figtree({
@@ -80,6 +81,7 @@ export default function RootLayout({
           </div>
         </AppProvider>
       </body>
+      <GoogleAnalytics gaId="G-KZGFJRDFMX" />
     </html>
   );
 }
