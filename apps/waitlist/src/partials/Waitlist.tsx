@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { IoHourglassOutline } from "react-icons/io5";
 import { usePathname } from "next/navigation";
+import { sendGAEvent } from "@next/third-parties/google";
 
 type WaitListProp = {
   onSubmit: (formData: any) => Promise<void>;
@@ -92,7 +93,8 @@ function SubscribeForm({ onSubmit }: WaitListProp) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
+  const pathname = usePathname();
+  const user = pathname.includes("artists") ? "Artist" : "User";
   const { errors } = form.formState;
 
   useEffect(() => {
@@ -111,7 +113,23 @@ function SubscribeForm({ onSubmit }: WaitListProp) {
     try {
       await onSubmit(formData);
       setIsSubmitted(true);
+      sendGAEvent(
+        "submit",
+        "Waitlist Form",
+        "Waitlist Form Submission",
+        user,
+        pathname,
+        window.location.href,
+      );
     } catch (error) {
+      sendGAEvent(
+        "submit",
+        "Waitlist Form",
+        "Waitlist Form Error",
+        user,
+        pathname,
+        window.location.href,
+      );
     } finally {
       setIsSubmitting(false);
     }
