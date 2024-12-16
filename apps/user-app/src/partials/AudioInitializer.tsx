@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { useAudioPlayerStore } from '@/store/audioplayer.store';
-import { songs } from '@/data/songs';
+import { useEffect } from "react";
+import { useAudioPlayerStore } from "@/store/audioplayer.store";
+import { songs } from "@/data/songs";
 const CLAIM_THRESHOLD = 30;
 
 export const AudioInitializer: React.FC = () => {
@@ -22,7 +22,8 @@ export const AudioInitializer: React.FC = () => {
     const song = songs[currentSongIndex];
 
     // Define the event handlers first
-    const handleLoadedMetadata = (audioInstance: HTMLAudioElement) => {
+    const handleLoadedMetadata = (event: Event) => {
+      const audioInstance = event.target as HTMLAudioElement;
       setDuration(audioInstance.duration);
 
       // Play the audio immediately after loading metadata
@@ -33,7 +34,8 @@ export const AudioInitializer: React.FC = () => {
       }
     };
 
-    const handleTimeUpdate = (audioInstance: HTMLAudioElement) => {
+    const handleTimeUpdate = (event: Event) => {
+      const audioInstance = event.target as HTMLAudioElement;
       setCurrentTime(audioInstance.currentTime);
       if (
         audioInstance.currentTime >= CLAIM_THRESHOLD &&
@@ -49,9 +51,9 @@ export const AudioInitializer: React.FC = () => {
       // If there's already an audio instance, pause and clean it up
       if (audio) {
         audio.pause();
-        audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
-        audio.removeEventListener('timeupdate', handleTimeUpdate);
-        audio.removeEventListener('ended', playNext);
+        audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+        audio.removeEventListener("timeupdate", handleTimeUpdate);
+        audio.removeEventListener("ended", playNext);
       }
 
       // Create new audio instance and set it
@@ -59,9 +61,9 @@ export const AudioInitializer: React.FC = () => {
       setAudio(audioInstance);
 
       // Add necessary event listeners
-      audioInstance.addEventListener('loadedmetadata', () => handleLoadedMetadata(audioInstance));
-      audioInstance.addEventListener('timeupdate', () => handleTimeUpdate(audioInstance));
-      audioInstance.addEventListener('ended', playNext);
+      audioInstance.addEventListener("loadedmetadata", handleLoadedMetadata);
+      audioInstance.addEventListener("timeupdate", handleTimeUpdate);
+      audioInstance.addEventListener("ended", playNext);
 
       // Ensure audio plays immediately
       if (isPlaying) {
@@ -76,16 +78,27 @@ export const AudioInitializer: React.FC = () => {
       // Cleanup function to remove event listeners and pause audio
       return () => {
         audioInstance.pause();
-        audioInstance.removeEventListener('loadedmetadata', () => handleLoadedMetadata(audioInstance));
-        audioInstance.removeEventListener('timeupdate', () => handleTimeUpdate(audioInstance));
-        audioInstance.removeEventListener('ended', playNext);
+        audioInstance.removeEventListener(
+          "loadedmetadata",
+          handleLoadedMetadata,
+        );
+        audioInstance.removeEventListener("timeupdate", handleTimeUpdate);
+        audioInstance.removeEventListener("ended", playNext);
       };
     }
 
     // If audio is already available, no new audio instance is created
     // and no unnecessary cleanup occurs.
-
-  }, [currentSongIndex, setAudio, setDuration, setCurrentTime, playNext, audio, isPlaying, setIsPlaying]);
+  }, [
+    currentSongIndex,
+    setAudio,
+    setDuration,
+    setCurrentTime,
+    playNext,
+    audio,
+    isPlaying,
+    setIsPlaying,
+  ]);
 
   return null;
 };
