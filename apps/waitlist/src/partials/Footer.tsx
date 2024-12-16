@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { sendGAEvent } from "@next/third-parties/google";
