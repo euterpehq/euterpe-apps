@@ -16,12 +16,16 @@ export const AudioInitializer: React.FC = () => {
     setCanClaimReward,
     isPlaying, // Bring in isPlaying from the store
     setIsPlaying, // Action to set the isPlaying state
+    hasUserInteraction,
   } = useAudioPlayerStore();
 
   useEffect(() => {
+    // Early return if no user interaction or if audio shouldn't play
+    if (!hasUserInteraction || !isPlaying) return;
+
     const song = songs[currentSongIndex];
 
-    // Define the event handlers first
+    // Handle loaded metadata to set up duration
     const handleLoadedMetadata = (event: Event) => {
       const audioInstance = event.target as HTMLAudioElement;
       setDuration(audioInstance.duration);
@@ -34,6 +38,7 @@ export const AudioInitializer: React.FC = () => {
       }
     };
 
+    // Handle time updates, update currentTime, and manage reward logic
     const handleTimeUpdate = (event: Event) => {
       const audioInstance = event.target as HTMLAudioElement;
       setCurrentTime(audioInstance.currentTime);
@@ -46,49 +51,45 @@ export const AudioInitializer: React.FC = () => {
       }
     };
 
-    // Create new audio instance if necessary
+    // If audio is not initialized or the song is different, create a new audio instance
     if (!audio || audio.src !== song.url) {
-      // If there's already an audio instance, pause and clean it up
       if (audio) {
+        // Pause and clean up the old audio instance if it exists
         audio.pause();
         audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
         audio.removeEventListener("timeupdate", handleTimeUpdate);
         audio.removeEventListener("ended", playNext);
       }
 
-      // Create new audio instance and set it
-      const audioInstance = new Audio(song.url);
-      setAudio(audioInstance);
+      // Create and set the new audio instance
+      const newAudio = new Audio(song.url);
+      setAudio(newAudio);
 
-      // Add necessary event listeners
-      audioInstance.addEventListener("loadedmetadata", handleLoadedMetadata);
-      audioInstance.addEventListener("timeupdate", handleTimeUpdate);
-      audioInstance.addEventListener("ended", playNext);
+      // Set up event listeners
+      newAudio.addEventListener("loadedmetadata", handleLoadedMetadata);
+      newAudio.addEventListener("timeupdate", handleTimeUpdate);
+      newAudio.addEventListener("ended", playNext);
 
-      // Ensure audio plays immediately
-      if (isPlaying) {
-        audioInstance.play().catch((error) => {
-          console.error("Playback failed:", error);
-        });
-      } else {
-        // If we are not in the `isPlaying` state, make sure play is triggered on next render
+      // Immediately play the audio if it's in the `isPlaying` state
+      newAudio.play().catch((error) => {
+        console.error("Playback error:", error);
+      });
+
+      // If the `isPlaying` state is false, ensure play is triggered on the next render
+      if (!isPlaying) {
         setIsPlaying(true);
       }
 
-      // Cleanup function to remove event listeners and pause audio
+      // Cleanup: remove event listeners and pause audio when the component unmounts
       return () => {
-        audioInstance.pause();
-        audioInstance.removeEventListener(
-          "loadedmetadata",
-          handleLoadedMetadata,
-        );
-        audioInstance.removeEventListener("timeupdate", handleTimeUpdate);
-        audioInstance.removeEventListener("ended", playNext);
+        newAudio.pause();
+        newAudio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+        newAudio.removeEventListener("timeupdate", handleTimeUpdate);
+        newAudio.removeEventListener("ended", playNext);
       };
     }
 
-    // If audio is already available, no new audio instance is created
-    // and no unnecessary cleanup occurs.
+    // If audio is already initialized and matches the current song, no need to recreate it
   }, [
     currentSongIndex,
     setAudio,
@@ -98,6 +99,9 @@ export const AudioInitializer: React.FC = () => {
     audio,
     isPlaying,
     setIsPlaying,
+    hasUserInteraction,
+    canClaimReward,
+    isClaimed,
   ]);
 
   return null;

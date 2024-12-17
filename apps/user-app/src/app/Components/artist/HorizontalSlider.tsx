@@ -4,12 +4,15 @@ import {Swiper, SwiperSlide} from "swiper/react"
 import "swiper/css";
 import "swiper/css/free-mode";
 import {FreeMode, Pagination} from "swiper/modules"
+import { Skeleton } from "@/components/ui/skeleton"
 import Image from 'next/image';
 import note from "@/assets/icons/music-note.png";
 import trophy from "@/assets/icons/trophy.png";
 import question from "@/assets/icons/question.png";
 import { artists } from '@/data/songs';
 import Link from 'next/link';
+
+
 
 const HorizontalSlider: React.FC = () => {
     const items = Array.from({ length: 50 }, (_, i) => i + 1);
@@ -18,27 +21,28 @@ const HorizontalSlider: React.FC = () => {
     const slidesPerView = 6; // Number of visible items
   
     useEffect(() => {
-      const timer = setTimeout(() => setLoading(false), 2000); // Simulate loading time
+      const timer = setTimeout(() => setLoading(false), 200); // Simulate loading time
       return () => clearTimeout(timer);
     }, []);
+
   
     if (loading) {
       return (
         <div className="w-full h-[300px] flex justify-between gap-5">
           {Array.from({ length: slidesPerView }).map((_, index) => (
-            <div
-              key={index}
-              className="animate-pulse tp2 h-[300px] w-[300px] rounded-lg flex flex-col items-center gap-5 p-6  transition-opacity  ease-in-out "
-              style={{ opacity: 0.8 }}
-            >
-              {/*<div className="bg-gray-700 h-[120px] w-[120px] rounded-full"></div>
-              <div className="bg-gray-700 h-6 w-3/4 rounded"></div>
-              <div className="bg-gray-700 h-4 w-1/2 rounded"></div>*/}
-            </div>
+            <div key={index} className="flex flex-col space-y-3">
+            <Skeleton className="h-[200px] w-[250px] rounded-xl" />
+            {/*<div className="space-y-2">
+              <Skeleton className="h-4 w-[250px]" />
+              <Skeleton className="h-4 w-[200px]" />
+            </div>*/}
+          </div>
           ))}
         </div>
       );
     }
+
+
     
   return (
     <div className='relative w-full mx-auto h-full overflow-hidden'>

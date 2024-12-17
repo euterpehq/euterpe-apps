@@ -3,7 +3,11 @@ import Image from "next/image";
 
 const topSongs: number[] = [1, 2,3,4,5,6];
 
-export default function TopSongs({artist}) {
+type Prop = {
+    artist: any;
+  };
+
+export default function TopSongs({artist}: Prop) {
 
    const detailedTopSongs = songs.filter((song) => song.isTopSong)
     return(

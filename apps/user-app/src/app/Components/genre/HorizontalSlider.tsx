@@ -17,7 +17,7 @@ const HorizontalSlider: React.FC = () => {
     const slidesPerView = 6;
   
     useEffect(() => {
-      const timer = setTimeout(() => setLoading(false), 2000); // Simulating a loading delay
+      const timer = setTimeout(() => setLoading(false), 200); // Simulating a loading delay
       return () => clearTimeout(timer);
     }, []);
   
@@ -28,7 +28,7 @@ const HorizontalSlider: React.FC = () => {
             <div
               key={index}
               className="animate-pulse tp2 bg-gray-800 h-[48px] flex-1 min-w-[120px] rounded-[120px] flex items-center gap-4 p-4 transition-opacity  ease-in-out"
-              style={{ opacity: 0.8 }}
+              style={{ opacity: 0.5}}
             >
               <div className="tp2 h-8 w-8 rounded-full"></div>
               <div className="tp2 h-6 w-2/3 rounded"></div>

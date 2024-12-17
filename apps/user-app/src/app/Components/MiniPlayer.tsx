@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import { getBackgroundColor, type RGB } from "@/lib/colors";
-import { songs } from "@/data/songs";
+import { artists, songs } from "@/data/songs";
 import PlayerControls from "@/partials/feed/PlayerControls";
 import NextSongButton from "@/components/NextSongButton";
 import UserActions from "@/partials/feed/UserActions";
@@ -47,6 +47,11 @@ const MiniPlayer: React.FC = () => {
     }
   }
 
+  
+  //const artist = songs.find((s) => s.id)
+
+ const artist = artists.find((a) => a.id === song.artistId)
+
    
   return (
     <div className='bg-[#181818]  w-full fixed bottom-0 left-0 right-0 z-30 px-6 py-4'>
@@ -72,7 +77,7 @@ const MiniPlayer: React.FC = () => {
                     </h2>
 
                     <p className="text-[16px] font-medium tracking-[0.04em] text-[#BDBDBD]">
-                    {discovered ? song.artist : "********"}
+                    {discovered ? artist?.name : "********"}
                     </p>
                 </div>
             </div>

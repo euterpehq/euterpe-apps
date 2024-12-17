@@ -1,10 +1,4 @@
-import img1 from "@/assets/images/img1.png"
-import img2 from "@/assets/images/img2.png"
-import img3 from "@/assets/images/img3.png"
-import img4 from "@/assets/images/img4.png"
-import img5 from "@/assets/images/img5.png"
-import img6 from "@/assets/images/img6.png"
-import img7 from "@/assets/images/img7.png"
+
 import aylo from "@/assets/images/aylo.jpg"
 import bloody from "@/assets/images/bloody.jpg"
 import saba from "@/assets/images/saba.jpg"
@@ -29,7 +23,8 @@ import { StaticImageData } from "next/image"
 export type Song = {
   id: number;
   title: string;
-  artist: number;
+  artistId: number; // Links to Artist
+  albumId: number; // Links to Album
   albumArt: string;
   url: string;
   apple: string;
@@ -38,7 +33,36 @@ export type Song = {
   isTopSong: boolean
 };
 
+export type Artist = {
+  id: number;
+  name: string;
+  img: string | StaticImageData;
+  title: string; // e.g., a tagline or key description
+  desc: string; // Short bio or description
+};
+
+export type Album = {
+  id: number;
+  title: string;
+  artistId: number; // Links to Artist
+  albumArt: string;
+  releaseType: "Single" | "EP" | "Album"; // Defines the type of release
+  songs: number[]; // Array of Song IDs
+  releaseDate: string; // Date of release
+};
+
+
+
 export type TopPick = {
+  id: number;
+  title: string;
+  artist: string;
+  image: string ;
+  icon: string | StaticImageData;
+  eut: number;
+}
+
+export type Disco = {
   id: number;
   title: string;
   artist: string;
@@ -51,7 +75,8 @@ export const songs: Song[] = [
   {
     id: 1,
     title: "Starfield",
-    artist: 5,
+    artistId: 5,
+    albumId: 5,
     isTopSong: true,
     albumArt:
       "https://i.scdn.co/image/ab67616d0000b27371d2fc7860fb53a382a7bb88",
@@ -63,7 +88,8 @@ export const songs: Song[] = [
   {
     id: 2,
     title: "Abeg",
-    artist: 7,
+    artistId: 7,
+    albumId: 7,
     isTopSong: true,
     albumArt:
       "https://i.scdn.co/image/ab67616d0000b273514e92e8ef2361ad12f08a0e",
@@ -75,7 +101,8 @@ export const songs: Song[] = [
   {
     id: 3,
     title: "love is like Lagos traffic",
-    artist: 2,
+    artistId: 2,
+    albumId: 2,
     isTopSong: true,
     albumArt:
       "https://i.scdn.co/image/ab67616d0000b273aa621853807a728c8e23fd20",
@@ -87,7 +114,8 @@ export const songs: Song[] = [
   {
     id: 4,
     title: "New to Me",
-    artist: 6,
+    artistId: 6,
+    albumId: 6,
     isTopSong: true,
     albumArt:
       "https://i.scdn.co/image/ab67616d0000b2732f32bbc80b869a2e58556be3",
@@ -99,7 +127,8 @@ export const songs: Song[] = [
   {
     id: 5,
     title: "Sugarcane",
-    artist: 1,
+    artistId: 1,
+    albumId: 1,
     isTopSong: true,
     albumArt:
       "https://i.scdn.co/image/ab67616d0000b273676e212f1dd862ca14d40a0e",
@@ -111,7 +140,8 @@ export const songs: Song[] = [
   {
     id: 6,
     title: "Paradise",
-    artist: 3,
+    artistId: 3,
+    albumId: 3,
     isTopSong: true,
     albumArt:
       "https://i.scdn.co/image/ab67616d0000b2738fb7d77d029169c9e47ba644",
@@ -123,7 +153,8 @@ export const songs: Song[] = [
   {
     id: 7,
     title: "I Think We Danced (But I Can't Be Sure)",
-    artist: 4,
+    artistId: 4,
+    albumId: 4,
     isTopSong: true,
     albumArt:
       "https://i.scdn.co/image/ab67616d0000b273961da7b10704a2b6efe45593",
@@ -139,7 +170,7 @@ export const topPicks: TopPick[] = [
       id: 1,
       title: "Endorphins",
       artist: "tobi lou",
-      image: img1,
+      image: "https://i.scdn.co/image/ab67616d0000b273676e212f1dd862ca14d40a0e",
       icon: trophy,
       eut: 1.3,
     },
@@ -147,7 +178,7 @@ export const topPicks: TopPick[] = [
       id: 2,
       title: "Hesitate",
       artist: "Golden Vessel",
-      image: img7,
+      image: "https://i.scdn.co/image/ab67616d0000b273aa621853807a728c8e23fd20",
       icon: trophy,
       eut: 1.3,
     },
@@ -155,7 +186,7 @@ export const topPicks: TopPick[] = [
       id: 3,
       title: "Do You Really Need Me",
       artist: "Charlie",
-      image: img6,
+      image:"https://i.scdn.co/image/ab67616d0000b2738fb7d77d029169c9e47ba644",
       icon: trophy,
       eut: 1.3,
     },
@@ -163,7 +194,7 @@ export const topPicks: TopPick[] = [
       id: 4,
       title: "Small",
       artist: "Siv Jakobsen",
-      image: img5,
+      image: "https://i.scdn.co/image/ab67616d0000b273961da7b10704a2b6efe45593",
       icon: trophy,
       eut: 1.3,
     },
@@ -171,7 +202,7 @@ export const topPicks: TopPick[] = [
       id: 5,
       title: "In Love with a Ghost",
       artist: "Bash the Piper",
-      image: img4,
+      image: "https://i.scdn.co/image/ab67616d0000b27371d2fc7860fb53a382a7bb88",
       icon: trophy,
       eut: 1.3,
     },
@@ -179,7 +210,7 @@ export const topPicks: TopPick[] = [
       id: 6,
       title: "Eleyele",
       artist: "taves",
-      image: img3,
+      image: "https://i.scdn.co/image/ab67616d0000b2732f32bbc80b869a2e58556be3",
       icon: trophy,
       eut: 1.3,
     },
@@ -187,29 +218,13 @@ export const topPicks: TopPick[] = [
       id: 7,
       title: "Clicquot Shower",
       artist: "Caleborate",
-      image: img2,
-      icon: trophy,
-      eut: 1.3,
-    },
-    {
-      id: 3,
-      title: "Do You Really Need Me",
-      artist: "Charlie",
-      image: img6,
-      icon: trophy,
-      eut: 1.3,
-    },
-    {
-      id: 5,
-      title: "In Love with a Ghost",
-      artist: "Bash the Piper",
-      image: img4,
+      image: "https://i.scdn.co/image/ab67616d0000b273514e92e8ef2361ad12f08a0e",
       icon: trophy,
       eut: 1.3,
     },
 ]
 
-export const Discography: TopPick[] = [
+export const Discography: Disco[] = [
   {
     id: 1,
     title: "Endorphins",
@@ -352,7 +367,7 @@ export const genres = [
   },
 ]
 
-export const artists = [
+export const artists: Artist[] = [
   {
     id: 1,
     name: "Xpacegirl",
@@ -403,5 +418,73 @@ export const artists = [
     desc: 'At 22 years of age, Grammy nominated Luc Bradford aka ford. has surfaced as a standout producer in the flourishing lo-fi indie / electronic scene. Since signing with ODESZA’s imprint Foreign Family Collective in 2018, ford. has released two full length albums "(The) Evening" & "The Color of Nothing" which have amassed over 70 million+ streams. Over the last two years ford.’s music has been praised by tastemaker outlets such as BIllboard, COMPLEX, NUDE, found airtime on acclaimed stations such as BBC Radio 1, KCRW, Sirius XM HMU & Sirius XM Chill, landed major sy... Read more'
   },
 ]
+
+
+export const albums: Album[] = [
+  {
+    id: 1,
+    title: "Sugarcane ",
+    artistId: 1,
+    albumArt: "https://i.scdn.co/image/ab67616d0000b273676e212f1dd862ca14d40a0e",
+    releaseType: "Single",
+    songs: [1],
+    releaseDate: "2024-12-17",
+  },
+  {
+    id: 2,
+    title: "love is like Lagos traffic ",
+    artistId: 2,
+    albumArt: "https://i.scdn.co/image/ab67616d0000b273aa621853807a728c8e23fd20",
+    releaseType: "Single",
+    songs: [2],
+    releaseDate: "2024-12-17",
+  },
+  {
+    id: 3,
+    title: "Paradise ",
+    artistId: 3,
+    albumArt: "https://i.scdn.co/image/ab67616d0000b2738fb7d77d029169c9e47ba644",
+    releaseType: "Single",
+    songs: [3],
+    releaseDate: "2024-12-17",
+  },
+  {
+    id: 4,
+    title: "I Think We Danced (But I Can't Be Sure) ",
+    artistId: 4,
+    albumArt: "https://i.scdn.co/image/ab67616d0000b273961da7b10704a2b6efe45593",
+    releaseType: "Single",
+    songs: [4],
+    releaseDate: "2024-12-17",
+  },
+  {
+    id: 5,
+    title: "Starfield ",
+    artistId: 5,
+    albumArt: "https://i.scdn.co/image/ab67616d0000b27371d2fc7860fb53a382a7bb88",
+    releaseType: "Single",
+    songs: [5],
+    releaseDate: "2024-12-17",
+  },
+  {
+    id: 6,
+    title: "New to Me ",
+    artistId: 6,
+    albumArt: "https://i.scdn.co/image/ab67616d0000b2732f32bbc80b869a2e58556be3",
+    releaseType: "Single",
+    songs: [6],
+    releaseDate: "2024-12-17",
+  },
+  {
+    id: 7,
+    title: "Abeg ",
+    artistId: 7,
+    albumArt:  "https://i.scdn.co/image/ab67616d0000b273514e92e8ef2361ad12f08a0e",
+    releaseType: "Single",
+    songs: [7],
+    releaseDate: "2024-12-17",
+  },
+];
+
 
 

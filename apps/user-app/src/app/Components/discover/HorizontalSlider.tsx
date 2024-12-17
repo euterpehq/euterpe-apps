@@ -12,30 +12,56 @@ import { songs } from '@/data/songs';
 import { useAudioPlayerStore } from '@/store/audioplayer.store';
 import { useMiniPlayerStore } from '@/store/miniplayer.store';
 
+
+
 const HorizontalSlider: React.FC = () => {
-    const { setCurrentSongIndex, currentSongIndex } = useAudioPlayerStore(); 
+  const { setCurrentSongIndex, currentSongIndex, setIsPlaying, audio, setAudio, setDuration, setCurrentTime, playNext, setShowStreamingLinks, setDiscovered } = useAudioPlayerStore(); 
   const { showMiniPlayer } = useMiniPlayerStore();
     const items = Array.from({ length: 100 }, (_, i) => i + 1);
     const [loading, setLoading] = useState(true); 
     const slidesPerView = 6; 
   
     useEffect(() => {
-      const timer = setTimeout(() => setLoading(false), 2000); 
+      const timer = setTimeout(() => setLoading(false), 200); 
       return () => clearTimeout(timer);
     }, []);
    
 
     const playRandomSong = () => {
-        let randomIndex = Math.floor(Math.random() * songs.length);
-      
-        while (randomIndex === currentSongIndex) {
-          randomIndex = Math.floor(Math.random() * songs.length);
-        }
-      
-        setCurrentSongIndex(randomIndex); 
+      let randomIndex = Math.floor(Math.random() * songs.length);
+    
+      while (randomIndex === currentSongIndex) {
+        randomIndex = Math.floor(Math.random() * songs.length);
+      }
+    
+      setCurrentSongIndex(randomIndex);  // Update the current song index
+      setDiscovered(false);  // Reset discovered state to false
+      setShowStreamingLinks(false);  // Reset showStreamingLinks state to false
+      setIsPlaying(true);                // Set isPlaying to true to trigger playback
+    
+      const song = songs[randomIndex];
+      if (!audio || audio.src !== song.url) {
+        // If the audio is not initialized or the song is different, create a new audio instance
+        const newAudio = new Audio(song.url);
+        setAudio(newAudio);
+    
+        // Play immediately after setting up the new audio
+        newAudio.play().catch((error) => {
+          console.error("Playback error:", error);
+        });
+    
+        // Set up event listeners for the new audio
+        newAudio.addEventListener("loadedmetadata", () => {
+          setDuration(newAudio.duration);
+        });
+        newAudio.addEventListener("timeupdate", () => {
+          setCurrentTime(newAudio.currentTime);
+        });
+        newAudio.addEventListener("ended", playNext);
+      }
+
       showMiniPlayer()
     };
-
   
     // Render the skeleton loader if loading
   if (loading) {
@@ -45,7 +71,7 @@ const HorizontalSlider: React.FC = () => {
           <div
             key={index}
             className="animate-pulse tp2 h-[400px] w-[300px] rounded-lg flex flex-col gap-4 p-4 rounded-[8px] transition-opacity  ease-in-out"
-            style={{ opacity: 0.8 }}
+            style={{ opacity: 0.5 }}
           >
             {/*<div className="bg-gray-700 h-6 w-3/4 rounded"></div>
             <div className="bg-gray-700 h-16 w-full rounded"></div>

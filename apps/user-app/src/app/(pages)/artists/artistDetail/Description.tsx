@@ -8,7 +8,11 @@ import { useState } from "react"
 import Link from "next/link"
 import { songs } from "@/data/songs"
 
-export default function Description({artist}){
+type Prop = {
+    artist: any;
+  };
+
+export default function Description({artist}:Prop){
     const [isExpanded, setIsExpanded] = useState(false);
 
     const spotifyLink = songs.filter((song) => song.spotify)
@@ -18,7 +22,7 @@ export default function Description({artist}){
         <div className="w-full h-full px-[24px]">
         <div className="w-full flex flex-col py-[24px] pr-[100px] gap-[24px]">
             <div>
-                <h1 className="text-[80px] font-figtree tracking-[-4.8px]">{artist.name}</h1>
+                <Link href="/"><h1 className="text-[80px] font-figtree tracking-[-4.8px]">{artist.name}</h1></Link>
             </div>
             <div>
                 <p className="font-figtree text-[14px] tracking-[-0.28px]">

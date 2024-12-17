@@ -11,6 +11,7 @@ import MiniPlayer from "./Components/MiniPlayer";
 import {AnimatePresence, motion} from "framer-motion"
 import { useMiniPlayerStore } from "@/store/miniplayer.store";
 import { AudioInitializer } from "@/partials/AudioInitializer";
+import { UserInteractionTracker } from "@/partials/UserInteractionTracker";
 
 
 
@@ -22,6 +23,7 @@ export default function Home() {
 
   return (
     <>
+    <UserInteractionTracker />
     <AudioInitializer />
       <Header />
 {<AnimatePresence>
@@ -48,7 +50,8 @@ export default function Home() {
       <Lucky />
       <Genre />
       <Artists />
-      {isVisible && <MiniPlayer />}
+      <div className="w-full h-[20vh]"></div>
+      <MiniPlayer />
     </>
   );
 }

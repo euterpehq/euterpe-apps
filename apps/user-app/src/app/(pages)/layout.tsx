@@ -5,6 +5,8 @@ import "../globals.css";
 import { AppProvider } from "@/providers/app";
 import { cn } from "@/lib/utils";
 import Header from "@/partials/Header";
+import MiniPlayer from "../Components/MiniPlayer";
+import { UserInteractionTracker } from "@/partials/UserInteractionTracker";
 
 const urbanist = Urbanist({ subsets: ["latin"], variable: "--font-urbanist" });
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
@@ -61,8 +63,11 @@ export default function RootLayout({
         )}
       >
         <AppProvider>
+          <UserInteractionTracker />
             <Header />
-            {children}</AppProvider>
+            {children}
+            <MiniPlayer />
+            </AppProvider>
       </body>
     </html>
   );

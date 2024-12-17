@@ -9,6 +9,7 @@ import note from "@/assets/icons/music-note.png";
 import trophy from "@/assets/icons/trophy.png";
 import question from "@/assets/icons/question.png";
 import { TopPick, topPicks } from '@/data/songs';
+import Link from 'next/link';
 
 interface MyComponentProps {
   Items: TopPick[];
@@ -19,7 +20,7 @@ const [loading, setLoading] = useState(true);
     const slidesPerView = 7; // Number of visible items
   
     useEffect(() => {
-      const timer = setTimeout(() => setLoading(false), 2000); // Simulate loading time
+      const timer = setTimeout(() => setLoading(false), 200); // Simulate loading time
       return () => clearTimeout(timer);
     }, []);
   
@@ -30,7 +31,7 @@ const [loading, setLoading] = useState(true);
             <div
               key={index}
               className="animate-pulse tp2 h-[300px] w-[300px] rounded-lg flex flex-col items-center gap-5 p-6  transition-opacity  ease-in-out "
-              style={{ opacity: 0.8 }}
+              style={{ opacity: 0.5 }}
             >
               {/*<div className="bg-gray-700 h-[120px] w-[120px] rounded-full"></div>
               <div className="bg-gray-700 h-6 w-3/4 rounded"></div>
@@ -69,13 +70,14 @@ const [loading, setLoading] = useState(true);
                   //border: "1px solid white"
                 }}
               >
-                <div className="w-full  gap-[12px]">
+              
+                <Link href={`/album/${item.id}`} className="w-full  gap-[12px]">
                   <div className="w-full h-[70%]">
-                    <Image
+                    <img
                       src={item.image}
                       alt=""
                       className="w-full h-full object-cover rounded-[8px]"
-                      quality={100}
+                      
                     />
                   </div>
                   <div className="flex flex-col gap-1 my-3">
@@ -106,7 +108,9 @@ const [loading, setLoading] = useState(true);
                   </svg>
                   <p className='text-[#C1FF70] text-[11px] tracking-[-0.44px]'>0.5 EUT</p>
                   </div>
-                </div>
+                </Link>
+                
+               
               </SwiperSlide>
             ))}
       
