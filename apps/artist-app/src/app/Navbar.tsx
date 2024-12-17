@@ -32,7 +32,7 @@ export default function Navbar() {
               href={item.href}
               aria-current={item.current ? "page" : undefined}
               className={cn(
-                item.href === pathname ? "text-primary" : "hover:text-primary",
+                item.href === pathname ? "text-primary" : "hover:text-primary"
               )}
             >
               {item.name}
@@ -59,9 +59,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu */}
-      <div
-        className="fixed inset-y-0 right-0 z-50 flex h-screen w-full items-center justify-center bg-background/90 transition duration-200 ease-out data-[closed]:opacity-0 sm:hidden"
-      >
+      <div className="fixed hidden inset-y-0 right-0 z-50 flex h-screen w-full items-center justify-center bg-background/90 transition duration-200 ease-out data-[closed]:opacity-0 sm:hidden">
         <div className="absolute right-0 top-0 flex items-center sm:hidden">
           <div className="group relative inline-flex items-center justify-center rounded-md p-2 pt-11 text-muted-foreground focus:outline-none">
             <span className="absolute -inset-0.5" />
@@ -77,7 +75,7 @@ export default function Navbar() {
                 item.current
                   ? "bg-primary"
                   : "hover:bg-primary/5 hover:text-primary",
-                "block rounded-md px-3 py-2 text-center",
+                "block rounded-md px-3 py-2 text-center"
               )}
             >
               {item.name}

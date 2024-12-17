@@ -4,6 +4,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { AppProvider } from "@/providers/app";
+import DesktopOnlyNotice from "@/components/DesktopOnlyNotice";
+import { Suspense } from "react";
 
 const urbanist = Urbanist({ subsets: ["latin"], variable: "--font-urbanist" });
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
@@ -59,7 +61,15 @@ export default function RootLayout({
           azeret.variable
         )}
       >
-        <AppProvider>{children}</AppProvider>
+        <AppProvider>
+          {/* TODO: figure out a better suspense strategy */}
+          <Suspense fallback={<div></div>}>
+            <div className="md:hidden">
+              <DesktopOnlyNotice />
+            </div>
+            <div className="md:block hidden">{children}</div>
+          </Suspense>
+        </AppProvider>
       </body>
     </html>
   );
