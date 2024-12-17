@@ -40,7 +40,7 @@ export default function AlbumHead({ album }: Prop) {
       <div className="w-[240px] h-[240px]">
         <img src={album?.albumArt} alt="" className="w-full h-full object-cover" />
       </div>
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-5 pt-3 ">
         <div className="flex flex-col gap-3">
           <div className="bg-[#c1ff701a] w-[49px] h-[22px] flex items-center justify-center rounded-[4px] text-[#C1FF70]">
             <p>Single</p>
