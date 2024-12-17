@@ -13,10 +13,13 @@ export async function GET(request: Request) {
       const forwardedHost = request.headers.get("x-forwarded-host");
       const isLocalEnv = process.env.NODE_ENV === "development";
       if (isLocalEnv) {
+        console.log("redirecting to", `${origin}${next}`);
         return NextResponse.redirect(`${origin}${next}`);
       } else if (forwardedHost) {
+        console.log("redirecting to", `https://${forwardedHost}${next}`);
         return NextResponse.redirect(`https://${forwardedHost}${next}`);
       } else {
+        console.log("redirecting to", `${origin}${next}`);
         return NextResponse.redirect(`${origin}${next}`);
       }
     }

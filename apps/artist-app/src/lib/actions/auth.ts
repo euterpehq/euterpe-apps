@@ -8,7 +8,8 @@ export async function signInWithSpotify() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "spotify",
     options: {
-      redirectTo: "http://localhost:3000/auth/callback?next=/home",
+      redirectTo:
+        process.env.NEXT_PUBLIC_BASE_URL + "/auth/callback?next=/home",
     },
   });
 
