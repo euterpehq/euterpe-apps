@@ -44,7 +44,7 @@ const HorizontalSlider: React.FC = () => {
     <div className='relative w-full mx-auto h-full overflow-hidden'>
     <Swiper
         spaceBetween={20}
-        slidesPerView={6}
+        slidesPerView={6.8}
         freeMode={true}
         modules={[FreeMode, Pagination]}
         style={{}}
@@ -61,15 +61,15 @@ const HorizontalSlider: React.FC = () => {
             padding: "24px",
             gap: "10px",
             width: "188px",
-            height: "h-[266px]",
+            height: "h-[400px]",
             //cursor: "pointer",
-            background: "#121310",
+            background: "#181818",
             borderRadius: "8px",
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         }}
         >
-              
-              <div className='flex flex-col items-center gap-[20px]'>
+              <Link href={`/artists/${item.id}`}>
+              <div className='flex flex-col items-center gap-[20px] h-full'>
                    <div className='w-[120px] h-[120px]'>
                    <Image src={item.img} alt="" className="w-full h-full object-cover rounded-full"/>
                    </div>
@@ -77,7 +77,9 @@ const HorizontalSlider: React.FC = () => {
                         <p className='text-[18px]'>{item.name}</p>
                         <p className='text-[15px] text-[#868B9F]'>{item.title}</p>
                    </div>
-                </div>
+              </div>
+              </Link>
+             
               
                 
         </SwiperSlide>

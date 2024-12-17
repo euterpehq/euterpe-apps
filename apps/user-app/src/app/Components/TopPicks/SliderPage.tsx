@@ -8,11 +8,13 @@ import Image from 'next/image';
 import note from "@/assets/icons/music-note.png";
 import trophy from "@/assets/icons/trophy.png";
 import question from "@/assets/icons/question.png";
-import { topPicks } from '@/data/songs';
+import { TopPick, topPicks } from '@/data/songs';
 
+interface MyComponentProps {
+  Items: TopPick[];
+}
 
-
-const SliderPage: React.FC = () => {
+const SliderPage: React.FC<MyComponentProps> = ({Items}) => {
 const [loading, setLoading] = useState(true);
     const slidesPerView = 7; // Number of visible items
   
@@ -44,29 +46,31 @@ const [loading, setLoading] = useState(true);
     <div className='relative w-full  h-full'>
     <Swiper
         spaceBetween={15}
-        slidesPerView={7}
+        slidesPerView={6.8}
         freeMode={true}
         modules={[FreeMode, Pagination]}
         style={{}}
         className="w-full h-full cursor-grab"
     >
         
-        {topPicks.map((item) => (
+        {Items.map((item) => (
               <SwiperSlide
                 key={item.id}
                 style={{
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  padding: "0px 24px",
+                  //padding: "0px 24px",
                   gap: "24px",
-                  width: "200px",
-                  height: "350px",
+                  width: "20%",
+                 
                   borderRadius: "8px",
+                  //background: "#181818",
+                  //border: "1px solid white"
                 }}
               >
-                <div className="w-[200px] h-full gap-[12px]">
-                  <div className="w-[200px] h-[200px]">
+                <div className="w-full  gap-[12px]">
+                  <div className="w-full h-[70%]">
                     <Image
                       src={item.image}
                       alt=""
@@ -82,7 +86,7 @@ const [loading, setLoading] = useState(true);
                       {item.artist}
                     </p>
                   </div>
-                  <div className="flex items-center justify-center gap-[4px] tp py-[5px] px-[8px] w-[50%] rounded-full">
+                  <div className="flex items-center justify-center gap-[4px] tp py-[5px] px-[8px] w-[30%] rounded-full">
                   <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
                   <g clip-path="url(#clip0_2913_2102)">
                     <path d="M9.67695 6.06406C9.88508 5.8925 11.087 5.14907 11.7451 4.52281C12.2588 4.03344 12.4576 2.75563 11.6673 2.13406C10.6398 1.32688 9.65351 2.17438 9.65351 2.17438C9.65351 2.17438 9.56726 1.69531 8.96726 1.41406C8.21164 1.05969 7.25445 0.927502 6.37414 0.938752C5.52101 0.949065 4.73539 1.05219 4.03789 1.39438C3.41351 1.70094 3.37601 2.13781 3.37601 2.13781C3.37601 2.13781 2.55664 1.355 1.55257 1.99063C0.54945 2.62719 0.837262 3.90219 1.32007 4.4375C1.94914 5.135 2.70476 5.49032 3.04789 5.74719C3.39007 6.00407 3.7182 6.24875 3.7182 6.46907C3.7182 6.68938 3.6207 6.73813 3.5832 6.72594C3.54664 6.71375 3.48195 6.49907 3.31414 6.59094C3.08539 6.7175 3.15476 7.2275 3.63195 7.27625C4.09414 7.32407 4.18226 6.83563 4.18226 6.83563L4.25539 6.35844L5.01382 6.88438L5.84539 7.56969L5.82101 8.15657C5.82101 8.15657 5.78445 8.60938 5.56414 9.00125C5.34382 9.39313 4.98945 9.78407 4.98945 9.78407L4.9782 10.1384L8.06164 10.0653L7.96414 9.72313C7.96414 9.72313 7.56664 9.28625 7.32757 8.8175C7.15695 8.48188 7.12976 8.14344 7.12976 8.14344L7.12226 7.30157L8.72258 6.32094C8.72258 6.32094 8.89414 6.45594 8.86976 6.50469C8.84539 6.55344 8.83976 7.05313 9.22414 7.23875C9.60382 7.4225 9.90945 7.19 9.87289 6.87125C9.83632 6.55344 9.64039 6.66313 9.57945 6.71188C9.51851 6.76063 9.38351 6.77282 9.34695 6.58907C9.30945 6.40719 9.46883 6.23563 9.67695 6.06406ZM1.79914 4.33344L1.43257 3.21782L1.87601 2.6375L2.37289 2.49219C2.37289 2.49219 3.00757 2.96563 3.03007 3.00407C3.05257 3.0425 3.43508 3.82907 3.43508 3.82907L3.93945 5.65532L1.79914 4.33344ZM9.00476 5.80063C9.01226 5.76219 9.4782 3.84406 9.4782 3.84406C9.4782 3.82156 9.80632 3.66875 9.80632 3.63782C9.80632 3.60688 10.4026 2.63657 10.4026 2.63657L11.3963 2.675L11.6026 3.66032L11.1057 4.47782C11.1066 4.47875 8.99726 5.83813 9.00476 5.80063Z" fill="#FEC417"/>
