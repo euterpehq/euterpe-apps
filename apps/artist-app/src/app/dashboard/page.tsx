@@ -17,6 +17,8 @@ import { useEffect, useState } from "react";
 import UploadMusicModal from "./components/UploadMusicModal";
 import Album from "./components/Album";
 import Singles from "./components/Singles";
+import NoMusic from "@/partials/my-music/NoMusic";
+
  function Dashboard() {
   
    const [isModalOpen, setIsModalOpen] = useState(false);
@@ -74,10 +76,11 @@ import Singles from "./components/Singles";
             <h2 className="justify-end  text-end w-[135px]">Upload date</h2>
           </div>
         </section>
-       <Album/>
+       {/* <Album/>
        <Singles/>
         <div className="mt-[40px]"></div>
-       <Album/>
+       <Album/> */}
+       <NoMusic />
       </SidebarInset>
     </SidebarProvider>
     </>
