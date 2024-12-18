@@ -121,7 +121,7 @@ const Player: React.FC = () => {
             </h2>
 
             <p className="text-base font-medium tracking-[0.04em] text-[#BDBDBD]">
-              {!discovered ? song.artist : "********"}
+              {!discovered ? song.artistId : "********"}
             </p>
           </div>
         </div>
