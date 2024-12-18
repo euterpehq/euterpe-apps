@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useAudioPlayerStore } from "@/store/audioplayer.store";
-import { songs } from "@/data/songs";
+//import { songs } from "@/data/songs";
 const CLAIM_THRESHOLD = 30;
 
 export const AudioInitializer: React.FC = () => {
   const {
+    fetchAndSetSongs,
     currentSongIndex,
+    albumSongs,
     setAudio,
     audio,
     setCurrentTime,
@@ -20,10 +22,19 @@ export const AudioInitializer: React.FC = () => {
   } = useAudioPlayerStore();
 
   useEffect(() => {
+    // Fetch songs from the external API when the component is mounted
+    if (albumSongs.length === 0) {
+      fetchAndSetSongs();
+    }
+  }, [fetchAndSetSongs, albumSongs]);
+
+  useEffect(() => {
+    
     // Early return if no user interaction or if audio shouldn't play
     if (!hasUserInteraction || !isPlaying) return;
 
-    const song = songs[currentSongIndex];
+    const song = albumSongs[currentSongIndex];
+    if (!song) return;
 
     // Handle loaded metadata to set up duration
     const handleLoadedMetadata = (event: Event) => {
@@ -52,7 +63,7 @@ export const AudioInitializer: React.FC = () => {
     };
 
     // If audio is not initialized or the song is different, create a new audio instance
-    if (!audio || audio.src !== song.url) {
+    if (!audio || audio.src !== song.audio_file_url) {
       if (audio) {
         // Pause and clean up the old audio instance if it exists
         audio.pause();
@@ -61,8 +72,12 @@ export const AudioInitializer: React.FC = () => {
         audio.removeEventListener("ended", playNext);
       }
 
+      if(!song.audio_file_url){
+        return;
+      }
+
       // Create and set the new audio instance
-      const newAudio = new Audio(song.url);
+      const newAudio = new Audio(song.audio_file_url);
       setAudio(newAudio);
 
       // Set up event listeners
@@ -92,6 +107,7 @@ export const AudioInitializer: React.FC = () => {
     // If audio is already initialized and matches the current song, no need to recreate it
   }, [
     currentSongIndex,
+    albumSongs,
     setAudio,
     setDuration,
     setCurrentTime,
@@ -102,6 +118,7 @@ export const AudioInitializer: React.FC = () => {
     hasUserInteraction,
     canClaimReward,
     isClaimed,
+    setCanClaimReward,
   ]);
 
   return null;

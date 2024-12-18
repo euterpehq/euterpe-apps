@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { getBackgroundColor, type RGB } from "@/lib/colors";
-import { Song, songs } from "@/data/songs";
+//import { Song, songs } from "@/data/songs";
 import PlayerControls from "@/partials/feed/PlayerControls";
 import NextSongButton from "@/components/NextSongButton";
 import UserActions from "@/partials/feed/UserActions";
@@ -11,6 +11,10 @@ import { useEarningsStore } from "@/providers/store/earnings.store";
 import { url } from "inspector";
 import {AnimatePresence,motion} from "framer-motion"
 import { useAudioPlayerStore } from '@/store/audioplayer.store';
+import { Song } from "@/lib/queries/supabaseQueries";
+import useAlbumStore from "@/store/album.store";
+import Image from "next/image";
+import useArtistStore from "@/store/artist.store";
 
 
 export type PlayerProps = {
@@ -54,9 +58,22 @@ const Player: React.FC = () => {
     setIsClaimed,
     setCanClaimReward,
     handleDiscover,
+    albumSongs,
   } = useAudioPlayerStore();
 
-  const song = songs[currentSongIndex]
+  const {albums, fetchAlbum} = useAlbumStore()
+  const {artists, fetchArtist} = useArtistStore()
+
+  useEffect(() => {
+    fetchAlbum()
+    fetchArtist()
+  },[fetchAlbum, fetchArtist])
+  
+  const song = albumSongs[currentSongIndex]
+
+  const album = albums.find((a) => a.id === song.album_id);
+  const artist = artists.find((f) => f.id === album?.artist_id)
+ 
 
   function handleClaim() {
     if (!isClaimed && canClaimReward) {
@@ -65,6 +82,9 @@ const Player: React.FC = () => {
       setCanClaimReward(false);
     }
   }
+
+ 
+
   return (
 
       <div
@@ -77,7 +97,7 @@ const Player: React.FC = () => {
           style={
             discovered
               ?  {
-                  backgroundImage: `url(${song.albumArt})`,
+                  backgroundImage: `url(${album?.cover_image_url})`,
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'center',
                   backgroundSize: 'cover',
@@ -102,9 +122,9 @@ const Player: React.FC = () => {
       <div className="flex flex-col items-center gap-6 px-6">
         <div className="flex flex-col items-center gap-6">
           {discovered ? (
-            song.albumArt && (
-              <img
-                src={song.albumArt}
+            album?.cover_image_url && (
+              <Image
+                src={album.cover_image_url}
                 alt="Album Art"
                 className="h-[360px] w-[360px] rounded-[16px]"
                 crossOrigin="anonymous"
@@ -117,11 +137,11 @@ const Player: React.FC = () => {
           )}
           <div className="flex flex-col items-center gap-2 font-inter">
             <h2 className="text-xl font-semibold tracking-[0.04em]">
-              {discovered ? song.title : "*************"}
+              {discovered ? song.track_title : "*************"}
             </h2>
 
             <p className="text-base font-medium tracking-[0.04em] text-[#BDBDBD]">
-              {!discovered ? song.artistId : "********"}
+              {!discovered ? artist?.artist_name : "********"}
             </p>
           </div>
         </div>
@@ -152,7 +172,7 @@ const Player: React.FC = () => {
               />
             </svg>
 
-            <StreamingLinks song={song} />
+            <StreamingLinks song={song} artist={artist} />
           </div>
         ) : (
           <UserActions

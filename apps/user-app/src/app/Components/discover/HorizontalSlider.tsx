@@ -8,15 +8,17 @@ import Image from 'next/image';
 import note from "@/assets/icons/music-note.png";
 import trophy from "@/assets/icons/trophy.png";
 import question from "@/assets/icons/question.png";
-import { songs } from '@/data/songs';
+//import { songs } from '@/data/songs';
 import { useAudioPlayerStore } from '@/store/audioplayer.store';
 import { useMiniPlayerStore } from '@/store/miniplayer.store';
 
 
 
 const HorizontalSlider: React.FC = () => {
-  const { setCurrentSongIndex, currentSongIndex, setIsPlaying, audio, setAudio, setDuration, setCurrentTime, playNext, setShowStreamingLinks, setDiscovered } = useAudioPlayerStore(); 
+  const { setCurrentSongIndex, currentSongIndex,albumSongs, setIsPlaying, audio, setAudio, setDuration, setCurrentTime, playNext, setShowStreamingLinks, setDiscovered } = useAudioPlayerStore(); 
+
   const { showMiniPlayer } = useMiniPlayerStore();
+
     const items = Array.from({ length: 100 }, (_, i) => i + 1);
     const [loading, setLoading] = useState(true); 
     const slidesPerView = 6; 
@@ -28,29 +30,35 @@ const HorizontalSlider: React.FC = () => {
    
 
     const playRandomSong = () => {
-      let randomIndex = Math.floor(Math.random() * songs.length);
+      let randomIndex = Math.floor(Math.random() * albumSongs.length);
     
       while (randomIndex === currentSongIndex) {
-        randomIndex = Math.floor(Math.random() * songs.length);
+        randomIndex = Math.floor(Math.random() * albumSongs.length);
       }
     
-      setCurrentSongIndex(randomIndex);  // Update the current song index
-      setDiscovered(false);  // Reset discovered state to false
-      setShowStreamingLinks(false);  // Reset showStreamingLinks state to false
-      setIsPlaying(true);                // Set isPlaying to true to trigger playback
+      setCurrentSongIndex(randomIndex); 
+      setDiscovered(false);  
+      setShowStreamingLinks(false);  
+      setIsPlaying(true);               
     
-      const song = songs[randomIndex];
-      if (!audio || audio.src !== song.url) {
-        // If the audio is not initialized or the song is different, create a new audio instance
-        const newAudio = new Audio(song.url);
+      const song = albumSongs[randomIndex];
+       
+      if(!song.audio_file_url){
+        return;
+      }
+      
+      if (!audio || audio.src !== song.audio_file_url) {
+     
+        
+        const newAudio = new Audio(song.audio_file_url);
         setAudio(newAudio);
     
-        // Play immediately after setting up the new audio
+       
         newAudio.play().catch((error) => {
           console.error("Playback error:", error);
         });
     
-        // Set up event listeners for the new audio
+   
         newAudio.addEventListener("loadedmetadata", () => {
           setDuration(newAudio.duration);
         });
@@ -62,20 +70,18 @@ const HorizontalSlider: React.FC = () => {
 
       showMiniPlayer()
     };
+
   
-    // Render the skeleton loader if loading
+
   if (loading) {
     return (
       <div className="w-full h-[500px]  flex justify-between gap-5">
         {Array.from({ length: slidesPerView }).map((_, index) => (
           <div
             key={index}
-            className="animate-pulse tp2 h-[400px] w-[300px] rounded-lg flex flex-col gap-4 p-4 rounded-[8px] transition-opacity  ease-in-out"
+            className="animate-pulse tp2 h-[400px] w-[300px]  flex flex-col gap-4 p-4 rounded-[8px] transition-opacity  ease-in-out"
             style={{ opacity: 0.5 }}
           >
-            {/*<div className="bg-gray-700 h-6 w-3/4 rounded"></div>
-            <div className="bg-gray-700 h-16 w-full rounded"></div>
-            <div className="bg-gray-700 h-6 w-1/2 rounded"></div>*/}
           </div>
         ))}
       </div>
@@ -104,12 +110,8 @@ const HorizontalSlider: React.FC = () => {
             padding: "12px 12px 93.838px 12px",
             gap: "4rem",
             width: "200px",
-           
-            //cursor: "pointer",
             background: "#121310",
             borderRadius: "8px",
-            //border: "1px solid white",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         }}
         onClick={playRandomSong} 
         >

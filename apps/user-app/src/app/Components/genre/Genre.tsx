@@ -1,6 +1,5 @@
 import React from 'react'
 import HorizontalSlider from './HorizontalSlider'
-//import HorizontalSlider from './HorizontalSlider'
 
 const Genre: React.FC = () => {
   return (

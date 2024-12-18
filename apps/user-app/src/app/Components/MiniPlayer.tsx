@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import { getBackgroundColor, type RGB } from "@/lib/colors";
-import { artists, songs } from "@/data/songs";
+//import { artists } from "@/data/songs";
 import PlayerControls from "@/partials/feed/PlayerControls";
 import NextSongButton from "@/components/NextSongButton";
 import UserActions from "@/partials/feed/UserActions";
@@ -12,6 +12,9 @@ import { url } from "inspector";
 import MiniHiddenCoverArt from '@/components/MiniHiddenCoverArt';
 import { useAudioPlayerStore } from '@/store/audioplayer.store';
 import { useModalStore } from '@/store/modal.store';
+import useAlbumStore from '@/store/album.store';
+import Image from 'next/image';
+import useArtistStore from '@/store/artist.store';
 
 
 const MiniPlayer: React.FC = () => {
@@ -20,6 +23,7 @@ const MiniPlayer: React.FC = () => {
   const {openModal}= useModalStore()
   const {
     currentSongIndex,
+    albumSongs,
     isPlaying,
     currentTime,
     duration,
@@ -37,7 +41,19 @@ const MiniPlayer: React.FC = () => {
     handleDiscover,
   } = useAudioPlayerStore();
 
-  const song = songs[currentSongIndex]
+  const {albums, fetchAlbum} = useAlbumStore()
+  const {artists, fetchArtist} = useArtistStore()
+
+  useEffect(() => {
+    fetchAlbum()
+    fetchArtist()
+  },[fetchAlbum, fetchArtist])
+  
+  const song = albumSongs[currentSongIndex]
+
+  const album = albums.find((a) => a.id === song.album_id);
+  const artist = artists.find((f) => f.id === album?.artist_id)
+
 
   function handleClaim() {
     if (!isClaimed && canClaimReward) {
@@ -47,10 +63,9 @@ const MiniPlayer: React.FC = () => {
     }
   }
 
-  
-  //const artist = songs.find((s) => s.id)
 
- const artist = artists.find((a) => a.id === song.artistId)
+
+
 
    
   return (
@@ -58,9 +73,9 @@ const MiniPlayer: React.FC = () => {
       <div className='w-full  flex items-center justify-between'>
             <div className='flex items-center gap-3'>
                 {discovered ? (
-                    song.albumArt && (
-                    <img
-                        src={song.albumArt}
+                    album?.cover_image_url && (
+                    <Image
+                        src={album.cover_image_url}
                         alt="Album Art"
                         className="h-[60px] w-[60px] rounded-[4px]"
                         crossOrigin="anonymous"
@@ -73,11 +88,11 @@ const MiniPlayer: React.FC = () => {
                 )}
                 <div className="flex flex-col items-start font-inter">
                     <h2 className="text-[18px] font-semibold tracking-[0.04em]">
-                    {discovered ? song.title : "*************"}
+                    {discovered ? song.track_title : "*************"}
                     </h2>
 
                     <p className="text-[16px] font-medium tracking-[0.04em] text-[#BDBDBD]">
-                    {discovered ? artist?.name : "********"}
+                    {discovered ? artist?.artist_name : "********"}
                     </p>
                 </div>
             </div>
@@ -111,7 +126,7 @@ const MiniPlayer: React.FC = () => {
               />
             </svg>
 
-            <StreamingLinks song={song} />
+            <StreamingLinks song={song} artist={artist} />
           </div>
         ) : (
           <UserActions
@@ -122,7 +137,7 @@ const MiniPlayer: React.FC = () => {
         )}
         <div className='cursor-pointer' onClick={openModal}>
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-<path d="M11.6667 8.33333L17.5 2.5M17.5 2.5H13.75M17.5 2.5V6.25M8.33333 11.6667L2.5 17.5M2.5 17.5H6.25M2.5 17.5V13.75" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M11.6667 8.33333L17.5 2.5M17.5 2.5H13.75M17.5 2.5V6.25M8.33333 11.6667L2.5 17.5M2.5 17.5H6.25M2.5 17.5V13.75" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
         </div>
             </div>

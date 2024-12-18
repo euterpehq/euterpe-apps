@@ -1,26 +1,20 @@
-/* eslint-disable @next/next/no-img-element */
+
 "use client"
 import React, { useEffect, useState } from 'react'
 import {Swiper, SwiperSlide} from "swiper/react"
 import "swiper/css";
 import "swiper/css/free-mode";
 import {FreeMode, Pagination} from "swiper/modules"
-import Image from 'next/image';
-import note from "@/assets/icons/music-note.png";
-import trophy from "@/assets/icons/trophy.png";
-import question from "@/assets/icons/question.png";
-import { TopPick, topPicks } from '@/data/songs';
 import Link from 'next/link';
 import { Album, ArtistProfile } from '@/lib/queries/supabaseQueries';
 import useAlbumStore from '@/store/album.store';
 import useArtistStore from '@/store/artist.store';
+import { Disco, Discography } from '@/data/songs';
+import Image from 'next/image';
 
-interface MyComponentProps {
-  albums: Album[];
-  artists: ArtistProfile[];
-}
 
-const SliderPage: React.FC<MyComponentProps> = ({albums, artists}) => {
+
+const SliderPage = () => {
 const [loading, setLoading] = useState(true);
 
     const slidesPerView = 7; // Number of visible items
@@ -32,13 +26,13 @@ const [loading, setLoading] = useState(true);
 
 
    // Filter albums to only include one album per artist (e.g., the first one)
-   const album = artists.map(artist => {
+  /* const album = artists.map(artist => {
     const artistAlbums = albums.filter(album => album.artist_id === artist.id);
     return artistAlbums[0]; // Select the first album for each artist
-  });
+  });*/
   
 
-    if (loading || !artists) {
+    if (loading) {
       return (
         <div className="w-full h-[300px] flex justify-between gap-5">
           {Array.from({ length: slidesPerView }).map((_, index) => (
@@ -68,10 +62,8 @@ const [loading, setLoading] = useState(true);
         className="w-full h-full cursor-grab"
     >
         
-        {album?.map((item) => {
-           if (!item) return null; 
-
-          const artist = artists.find((a) => a.id === item?.artist_id )
+        {Discography?.map((item) => {
+          //const artist = artists.find((a) => a.id === item.artist_id )
           return (
               <SwiperSlide
                 key={item.id}
@@ -87,8 +79,8 @@ const [loading, setLoading] = useState(true);
               
                 <Link href={`/album/${item.id}`} className="w-full  gap-[12px]">
                   <div className="w-full h-[70%]">
-                    <img
-                      src={item?.cover_image_url ?? ""}
+                    <Image
+                      src={item.image ?? ""}
                       alt=""
                       className="w-full h-full object-cover rounded-[8px]"
                       
@@ -99,7 +91,7 @@ const [loading, setLoading] = useState(true);
                       {item.title}
                     </h1>
                     <p className="text-[12px] text-[#B1B5C6] tracking-[-0.24px]">
-                      {artist?.artist_name}
+                      {item.artist}
                     </p>
                   </div>
                   <div className="flex items-center justify-center gap-[4px] tp py-[5px] px-[8px] w-[30%] rounded-full">

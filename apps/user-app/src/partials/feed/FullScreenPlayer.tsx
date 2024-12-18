@@ -1,4 +1,4 @@
-"use client";
+/*"use client";
 import React, { useState, useEffect } from "react";
 import { getBackgroundColor, type RGB } from "@/lib/colors";
 import { songs } from "@/data/songs";
@@ -242,4 +242,4 @@ const FullScreenPlayer: React.FC = () => {
   );
 };
 
-export default FullScreenPlayer;
+export default FullScreenPlayer;*/

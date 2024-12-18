@@ -1,6 +1,5 @@
 import { create } from 'zustand';
-import { Song, songs } from '@/data/songs';
-import { useEarningsStore } from '@/providers/store/earnings.store';
+import { fetchSongs, Song } from '@/lib/queries/supabaseQueries';
 
 const DEFAULT_BACKGROUND_FALLBACK_COLOR = 'transparent';
 const CLAIM_THRESHOLD = 30;
@@ -17,7 +16,7 @@ type AudioPlayerState = {
   showStreamingLinks: boolean;
   backgroundColor: string;
   albumSongs: Song[];
-  setAlbumSongs: (songs: Song[]) => void;
+  fetchAndSetSongs: () => Promise<void>;
   setCurrentSongIndex: (index: number) => void;
   setIsPlaying: (isPlaying: boolean) => void;
   setDiscovered: (discovered: boolean) => void;
@@ -27,7 +26,7 @@ type AudioPlayerState = {
   setCurrentTime: (time: number) => void;
   setDuration: (duration: number) => void;
   togglePlayPause: () => void;
-  playSong: (songId: number) => void;
+  playSong: (songId: string) => void;
   playNext: () => void;
   playPrevious: () => void;
   handleSeek: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -49,9 +48,17 @@ export const useAudioPlayerStore = create<AudioPlayerState>((set, get) => ({
   showStreamingLinks: false,
   backgroundColor: DEFAULT_BACKGROUND_FALLBACK_COLOR,
   hasUserInteraction: false,
-  albumSongs: songs,
+  albumSongs: [],
 
-  setAlbumSongs: (songs) => set({ albumSongs: songs }),
+  fetchAndSetSongs: async () => {
+    try {
+      const songs = await fetchSongs(); // Fetch songs from external API
+      set({ albumSongs: songs });
+    } catch (error) {
+      console.error('Failed to fetch songs:', error);
+    }
+  },
+
   setHasUserInteraction: (value) => set({ hasUserInteraction: value }),
   setCurrentTime: (time) => set({ currentTime: time }),
   setDuration: (duration) => set({ duration }),
@@ -62,161 +69,63 @@ export const useAudioPlayerStore = create<AudioPlayerState>((set, get) => ({
   setIsClaimed: (isClaimed) => set({ isClaimed }),
   setCanClaimReward: (canClaimReward) => set({ canClaimReward }),
 
-  /*togglePlayPause: () => {
-    const { audio, isPlaying, currentSongIndex, setAudio, albumSongs, playNext } = get();
-  
-    // Ensure there are songs in the album and the currentSongIndex is valid
-    if (albumSongs.length === 0 || currentSongIndex < 0 || currentSongIndex >= albumSongs.length) {
-      console.error("Invalid song index. Cannot toggle play/pause.");
-      return;
-    }
-  
-    const song = albumSongs[currentSongIndex];
-  
-    if (!song) {
-      console.error("Song not found at current index.");
-      return;
-    }
-  
-    if (!audio) {
-      const newAudio = new Audio(song.url);
-  
-      // Handle audio events for time updates and end of song
-      newAudio.addEventListener("loadedmetadata", () => set({ duration: newAudio.duration }));
-      newAudio.addEventListener("timeupdate", () => set({ currentTime: newAudio.currentTime }));
-      newAudio.addEventListener("ended", () => playNext());
-  
-      setAudio(newAudio);
-  
-      // Play the audio
-      newAudio.play().catch((err) => {
-        console.error("Playback error:", err);
-      });
-  
-      set({ isPlaying: true });
-    } else {
-      if (isPlaying) {
-        audio.pause();
-      } else {
-        audio.play().catch((err) => {
-          console.error("Playback error:", err);
-        });
-      }
-      set({ isPlaying: !isPlaying });
-    }
-  },*/
-  
-
   togglePlayPause: () => {
-    const { audio, isPlaying, currentSongIndex, setAudio, hasUserInteraction, playNext } = get();
-    const song = songs[currentSongIndex];
+    const {
+      audio,
+      isPlaying,
+      currentSongIndex,
+      setAudio,
+      hasUserInteraction,
+      playNext,
+      albumSongs,
+    } = get();
 
+    if (!albumSongs.length) {
+      console.error('No songs available to play.');
+      return;
+    }
+
+    const song = albumSongs[currentSongIndex];
     if (!song) {
-      console.error("Invalid song index. Cannot toggle play/pause.");
+      console.error('Invalid song index. Cannot toggle play/pause.');
       return;
     }
 
     if (!hasUserInteraction) {
-      console.warn("User interaction required to start playback.");
+      console.warn('User interaction required to start playback.');
+      return;
+    }
+
+    if (!song.audio_file_url) {
+      console.warn('No next song found.');
       return;
     }
 
     let currentAudio = audio;
     if (!currentAudio) {
-      currentAudio = new Audio(song.url);
+      currentAudio = new Audio(song.audio_file_url);
 
       const handleLoadedMetadata = () => set({ duration: currentAudio?.duration });
       const handleTimeUpdate = () => set({ currentTime: currentAudio?.currentTime });
       const handleAudioEnd = () => playNext();
 
-      currentAudio.addEventListener("loadedmetadata", handleLoadedMetadata);
-      currentAudio.addEventListener("timeupdate", handleTimeUpdate);
-      currentAudio.addEventListener("ended", handleAudioEnd);
+      currentAudio.addEventListener('loadedmetadata', handleLoadedMetadata);
+      currentAudio.addEventListener('timeupdate', handleTimeUpdate);
+      currentAudio.addEventListener('ended', handleAudioEnd);
 
       setAudio(currentAudio);
-
-      if (audio) {
-        audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
-        audio.removeEventListener("timeupdate", handleTimeUpdate);
-        audio.removeEventListener("ended", handleAudioEnd);
-      }
     }
 
     if (isPlaying) {
       currentAudio.pause();
     } else {
       currentAudio.play().catch((err) => {
-        console.error("Playback error:", err);
-        if (err.name === "NotAllowedError") {
-          console.warn("Autoplay restrictions prevent playback.");
-        }
+        console.error('Playback error:', err);
       });
     }
 
     set({ isPlaying: !isPlaying });
   },
-
-  /*togglePlayPause: () => {
-    const { audio, isPlaying, currentSongIndex, setAudio, albumSongs, playNext, hasUserInteraction } = get();
-    
-    // Ensure there are songs in the album and the currentSongIndex is valid
-    /*if (albumSongs.length === 0 || currentSongIndex < 0 || currentSongIndex >= albumSongs.length) {
-      console.error("Invalid song index. Cannot toggle play/pause.");
-      return;
-    }
-
-    const song = songs[currentSongIndex];
-
-    if (!song) {
-      console.error("Song not found at current index.");
-      return;
-    }
-
-    // Handle user interaction check
-    if (!hasUserInteraction) {
-      console.warn("User interaction required to start playback.");
-      return;
-    }
-
-    // If there's no existing audio, create a new audio element
-    let currentAudio = audio;
-    if (!currentAudio) {
-      currentAudio = new Audio(song.url);
-
-      // Handle audio events for time updates and end of song
-      const handleLoadedMetadata = () => set({ duration: currentAudio?.duration });
-      const handleTimeUpdate = () => set({ currentTime: currentAudio?.currentTime });
-      const handleAudioEnd = () => playNext();
-
-      currentAudio.addEventListener("loadedmetadata", handleLoadedMetadata);
-      currentAudio.addEventListener("timeupdate", handleTimeUpdate);
-      currentAudio.addEventListener("ended", handleAudioEnd);
-
-      setAudio(currentAudio);
-
-      // Remove previous audio event listeners if there's any active audio
-      if (audio) {
-        audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
-        audio.removeEventListener("timeupdate", handleTimeUpdate);
-        audio.removeEventListener("ended", handleAudioEnd);
-      }
-    }
-
-    // Play or pause the audio based on the current state
-    if (isPlaying) {
-      currentAudio.pause();
-    } else {
-      currentAudio.play().catch((err) => {
-        console.error("Playback error:", err);
-        if (err.name === "NotAllowedError") {
-          console.warn("Autoplay restrictions prevent playback.");
-        }
-      });
-    }
-
-    // Toggle the playing state
-    set({ isPlaying: !isPlaying });
-  },*/
 
   playNext: () => {
     const {
@@ -232,47 +141,39 @@ export const useAudioPlayerStore = create<AudioPlayerState>((set, get) => ({
     } = get();
 
     if (!hasUserInteraction) {
-      console.warn("User interaction required to play the next song.");
+      console.warn('User interaction required to play the next song.');
       return;
     }
 
-    if (!albumSongs || albumSongs.length === 0) {
-      console.warn("No songs available in the album.");
-      return;
-    }
-
-    if (audio) {
-      audio.pause();
-      audio.src = "";
-      audio.removeEventListener("loadedmetadata", () => {});
-      audio.removeEventListener("timeupdate", () => {});
-      audio.removeEventListener("ended", get().playNext);
-    }
+    
 
     const nextSongIndex = (currentSongIndex + 1) % albumSongs.length;
     const nextSong = albumSongs[nextSongIndex];
 
-    if (!nextSong) {
-      console.warn("No next song found.");
+    if (!nextSong.audio_file_url) {
+      console.warn('No next song found.');
       return;
     }
 
-    const newAudio = new Audio(nextSong.url);
+    
 
-    const handleLoadedMetadata = () => {
+    if (audio) {
+      audio.pause();
+      audio.src = '';
+      audio.removeEventListener('ended', get().playNext);
+    }
+
+    const newAudio = new Audio(nextSong.audio_file_url);
+
+    newAudio.addEventListener('loadedmetadata', () => {
       setDuration(newAudio.duration);
       if (isPlaying) {
-        newAudio.play().catch((err) => console.error("Playback failed:", err));
+        newAudio.play().catch((err) => console.error('Playback failed:', err));
       }
-    };
+    });
 
-    const handleTimeUpdate = () => {
-      setCurrentTime(newAudio.currentTime);
-    };
-
-    newAudio.addEventListener("loadedmetadata", handleLoadedMetadata);
-    newAudio.addEventListener("timeupdate", handleTimeUpdate);
-    newAudio.addEventListener("ended", get().playNext);
+    newAudio.addEventListener('timeupdate', () => set({ currentTime: newAudio.currentTime }));
+    newAudio.addEventListener('ended', get().playNext);
 
     setAudio(newAudio);
     setCurrentSongIndex(nextSongIndex);
@@ -287,27 +188,32 @@ export const useAudioPlayerStore = create<AudioPlayerState>((set, get) => ({
     });
   },
 
-  playSong: (songId: number) => {
-    const { setCurrentSongIndex, setAudio, setIsPlaying, setCurrentTime, setDuration } = get();
+  playSong: (songId: string) => {
+    const { setCurrentSongIndex, setAudio, setIsPlaying, setCurrentTime, setDuration, albumSongs } = get();
 
-    const songIndex = songs.findIndex((song) => song.id === songId);
+    const songIndex = albumSongs.findIndex((song) => song.id === songId);
     if (songIndex === -1) return;
 
     setCurrentSongIndex(songIndex);
     setCurrentTime(0);
     setDuration(0);
 
-    const newAudio = new Audio(songs[songIndex].url);
+    const song = albumSongs[songIndex];
+    
+    if (!song.audio_file_url) {
+      console.warn('No next song found.');
+      return;
+    }
+    const newAudio = new Audio(song.audio_file_url);
 
-    // Handle audio events for time updates and end of song
-    newAudio.addEventListener("loadedmetadata", () => setDuration(newAudio.duration));
-    newAudio.addEventListener("timeupdate", () => setCurrentTime(newAudio.currentTime));
-    newAudio.addEventListener("ended", () => get().playNext());
+    newAudio.addEventListener('loadedmetadata', () => setDuration(newAudio.duration));
+    newAudio.addEventListener('timeupdate', () => setCurrentTime(newAudio.currentTime));
+    newAudio.addEventListener('ended', () => get().playNext());
 
     setAudio(newAudio);
     set({ isPlaying: true });
 
-    newAudio.play().catch((err) => console.error("Playback error:", err));
+    newAudio.play().catch((err) => console.error('Playback error:', err));
   },
 
   playPrevious: () => {
@@ -334,16 +240,13 @@ export const useAudioPlayerStore = create<AudioPlayerState>((set, get) => ({
     const { audio: oldAudio } = get();
     if (oldAudio) {
       oldAudio.pause();
-      oldAudio.src = "";
-      oldAudio.removeEventListener("loadedmetadata", () => {});
-      oldAudio.removeEventListener("timeupdate", () => {});
-      oldAudio.removeEventListener("ended", get().playNext);
+      oldAudio.src = '';
     }
 
     set({ audio: newAudio });
 
     if (newAudio) {
-      newAudio.play().catch((err) => console.error("Playback failed:", err));
+      newAudio.play().catch((err) => console.error('Playback failed:', err));
     }
   },
 }));

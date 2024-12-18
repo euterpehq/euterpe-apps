@@ -5,19 +5,14 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import {FreeMode, Pagination} from "swiper/modules"
 import Image from 'next/image';
-import note from "@/assets/icons/music-note.png";
-import trophy from "@/assets/icons/trophy.png";
-import question from "@/assets/icons/question.png";
 import { genres } from '@/data/songs';
 
 const HorizontalSlider: React.FC = () => {
-    const items = Array.from({ length: 50 }, (_, i) => i + 1);
-    //const items = [1, 2, 3, 4,5,6,7,8,9,10,11,12]
     const [loading, setLoading] = useState(true);
     const slidesPerView = 6;
   
     useEffect(() => {
-      const timer = setTimeout(() => setLoading(false), 200); // Simulating a loading delay
+      const timer = setTimeout(() => setLoading(false), 200); 
       return () => clearTimeout(timer);
     }, []);
   
@@ -59,7 +54,6 @@ const HorizontalSlider: React.FC = () => {
             gap: "10px",
             width: "140px",
             height: "48px",
-            //cursor: "pointer",
             background: "#181818",
             borderRadius: "120px",
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
