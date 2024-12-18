@@ -9,12 +9,11 @@ export async function signInWithSpotify() {
     provider: "spotify",
     options: {
       redirectTo:
-        process.env.NEXT_PUBLIC_BASE_URL + "/auth/callback?next=/home",
+        process.env.NEXT_PUBLIC_BASE_URL + "/auth/callback?next=/my-music",
     },
   });
 
   if (data.url) {
-    console.log("data.url redirecting to", data.url);
     redirect(data.url);
   }
 }

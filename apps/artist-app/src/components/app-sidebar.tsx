@@ -19,11 +19,11 @@ export function AppSidebar() {
       <SidebarHeader />
       <SidebarContent>
         <div className="flex pt-16 pb-8 shrink-0 items-center gap-2 border-b px-4">
-          <UserProfile  />
+          <UserProfile />
         </div>
         <div className="flex flex-col pb-2 shrink-0 justify-start gap-2 border-b px-4">
           {/* Home */}
-          <Link
+          {/* <Link
             href="/home"
             className={`cursor-pointer p-[10px] flex justify-start items-center gap-x-[10px] ${
               pathname === "/home" ? "text-[#C1FF70]" : "text-[#C2C6D6]"
@@ -42,7 +42,7 @@ export function AppSidebar() {
                 Home
               </h3>
             </div>
-          </Link>
+          </Link> */}
           {/* My Music */}
           <Link
             href="/my-music"
