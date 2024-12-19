@@ -62,11 +62,11 @@ const [loading, setLoading] = useState(true);
         className="w-full h-full cursor-grab"
     >
         
-        {Discography?.map((item) => {
+        {Discography?.map((item, id) => {
           //const artist = artists.find((a) => a.id === item.artist_id )
           return (
               <SwiperSlide
-                key={item.id}
+                key={id}
                 style={{
                   display: "flex",
                   flexDirection: "column",

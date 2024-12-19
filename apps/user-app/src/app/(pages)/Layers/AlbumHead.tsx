@@ -46,7 +46,7 @@ export default function AlbumHead({ album }: Prop) {
   return (
     <div className="w-full flex gap-10 border">
       <div className="w-[240px] h-[240px]">
-        <Image src={album?.cover_image_url ?? ""} alt="" className="w-full h-full object-cover" />
+        <Image src={album?.cover_image_url ?? ""} alt="" className="w-full h-full object-cover" width="240" height="240"/>
       </div>
       <div className="flex flex-col gap-5 pt-3 ">
         <div className="flex flex-col gap-3">
@@ -56,7 +56,7 @@ export default function AlbumHead({ album }: Prop) {
           <Link href="/"><h1 className="text-[32px] font-figtree tracking-[-0.64px]">{artist?.artist_name}</h1></Link>
           <div className="flex items-center gap-3">
             <div className="w-[16px] h-[16px]">
-              <Image src={img} alt="" className="w-full h-full object-cover rounded-[120px]" />
+              <Image src={img} alt="" className="w-full h-full object-cover rounded-[120px]" width="16" height="16"/>
             </div>
             <h1 className="text-[14px] font-figtree tracking-[-0.28px]">{artist?.artist_name}</h1>
           </div>
@@ -67,7 +67,7 @@ export default function AlbumHead({ album }: Prop) {
           </div>
         </div>
         <div onClick={handlePlay} className="w-[84px] cursor-pointer h-[36px] flex items-center justify-center gap-[4px] bg-[#C1FF70] rounded-[120px]">
-          <Image src={icon} alt="" />
+          <Image src={icon} alt="" width="20" height="20"/>
           <p className="text-[#000000]">{isPlaying ? "Pause" : "Play"}</p>
         </div>
       </div>

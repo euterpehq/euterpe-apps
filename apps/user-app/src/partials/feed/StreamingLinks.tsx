@@ -13,9 +13,9 @@ type Linked = {
 function StreamingLinks({ song, artist }: Linked) {
 
   const platforms = [
-    { name: "Apple Music", url: artist?.apple_music_url },
-    { name: "Spotify", url:  artist?.spotify_url },
-    { name: "YouTube Music", url: artist?.youtube_music_url },
+    { name: "Apple Music", url: artist?.apple_music_url || "" },
+    { name: "Spotify", url:  artist?.spotify_url || "" },
+    { name: "YouTube Music", url: artist?.youtube_music_url || "" },
   ];
   return (
     <div className="flex gap-3">
