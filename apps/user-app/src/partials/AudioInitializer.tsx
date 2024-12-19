@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAudioPlayerStore } from "@/store/audioplayer.store";
-//import { songs } from "@/data/songs";
+
 const CLAIM_THRESHOLD = 30;
 
 export const AudioInitializer: React.FC = () => {
@@ -16,33 +16,72 @@ export const AudioInitializer: React.FC = () => {
     canClaimReward,
     isClaimed,
     setCanClaimReward,
-    isPlaying, // Bring in isPlaying from the store
-    setIsPlaying, // Action to set the isPlaying state
+    isPlaying,
+    setIsPlaying,
     hasUserInteraction,
   } = useAudioPlayerStore();
 
   useEffect(() => {
     // Fetch songs from the external API when the component is mounted
     if (albumSongs.length === 0) {
+      console.log("Fetching songs...");
       fetchAndSetSongs();
     }
   }, [fetchAndSetSongs, albumSongs]);
 
   useEffect(() => {
-    
+
     // Early return if no user interaction or if audio shouldn't play
-    if (!hasUserInteraction || !isPlaying) return;
+    if (!hasUserInteraction || !isPlaying) {
+      return;
+    }
 
     const song = albumSongs[currentSongIndex];
-    if (!song) return;
+
+    if (!song) {
+      console.warn("No song found at current index");
+      return;
+    }
+
+    /*if(song.audio_file_url){
+      const audioInstance = song.audio_file_url ? new Audio(song.audio_file_url) : null;
+      setAudio(audioInstance);
+      function handleLoadedMetadata() {
+        setDuration(audioInstance.duration);
+      }
+      function handleTimeUpdate() {
+        setCurrentTime(audioInstance.currentTime);
+        if (
+          audioInstance.currentTime >= CLAIM_THRESHOLD &&
+          !canClaimReward &&
+          !isClaimed
+        ) {
+          setCanClaimReward(true);
+        }
+      }
+      audioInstance.addEventListener("loadedmetadata", handleLoadedMetadata);
+      audioInstance.addEventListener("timeupdate", handleTimeUpdate);
+      audioInstance.addEventListener("ended", playNext);
+    }
+    
+
+    return () => {
+      audioInstance.pause();
+      audioInstance.src = "";
+      audioInstance.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      audioInstance.removeEventListener("timeupdate", handleTimeUpdate);
+      audioInstance.removeEventListener("ended", playNext);
+    };*/
+  
 
     // Handle loaded metadata to set up duration
     const handleLoadedMetadata = (event: Event) => {
       const audioInstance = event.target as HTMLAudioElement;
+      console.log("Audio metadata loaded, duration:", audioInstance.duration);
       setDuration(audioInstance.duration);
 
-      // Play the audio immediately after loading metadata
       if (isPlaying) {
+        console.log("Starting playback...");
         audioInstance.play().catch((error) => {
           console.error("Failed to start playback:", error);
         });
@@ -52,74 +91,69 @@ export const AudioInitializer: React.FC = () => {
     // Handle time updates, update currentTime, and manage reward logic
     const handleTimeUpdate = (event: Event) => {
       const audioInstance = event.target as HTMLAudioElement;
+      console.log("Time update event triggered, currentTime:", audioInstance.currentTime);
       setCurrentTime(audioInstance.currentTime);
+
       if (
         audioInstance.currentTime >= CLAIM_THRESHOLD &&
         !canClaimReward &&
         !isClaimed
       ) {
+        console.log("Reward claim threshold reached");
         setCanClaimReward(true);
       }
     };
 
+    console.log("Creating new audio instance for song:", song.audio_file_url);
+    console.log("Pre-condition check:", {
+      audio,
+      audioSrc: audio?.src,
+      songAudioFileUrl: song.audio_file_url,
+    });
+
     // If audio is not initialized or the song is different, create a new audio instance
     if (!audio || audio.src !== song.audio_file_url) {
+      
       if (audio) {
-        // Pause and clean up the old audio instance if it exists
+        console.log("Cleaning up old audio instance");
         audio.pause();
         audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
         audio.removeEventListener("timeupdate", handleTimeUpdate);
         audio.removeEventListener("ended", playNext);
       }
-
-      if(!song.audio_file_url){
+    
+      if (!song.audio_file_url) {
+        console.warn("Song audio file URL is missing");
         return;
       }
-
-      // Create and set the new audio instance
+    
       const newAudio = new Audio(song.audio_file_url);
+    
       setAudio(newAudio);
 
-      // Set up event listeners
+      // Adding event listeners with debug logs
       newAudio.addEventListener("loadedmetadata", handleLoadedMetadata);
       newAudio.addEventListener("timeupdate", handleTimeUpdate);
       newAudio.addEventListener("ended", playNext);
-
-      // Immediately play the audio if it's in the `isPlaying` state
-      newAudio.play().catch((error) => {
-        console.error("Playback error:", error);
+      // Attempting playback with debug logs
+      newAudio.play().then(() => {
+        console.log("Audio playback started successfully");
+      }).catch((error) => {
+        console.error("Audio playback failed:", error);
       });
-
-      // If the `isPlaying` state is false, ensure play is triggered on the next render
-      if (!isPlaying) {
-        setIsPlaying(true);
-      }
-
-      // Cleanup: remove event listeners and pause audio when the component unmounts
+    
+      // Cleanup logic
       return () => {
+        console.log("Cleaning up audio on unmount");
         newAudio.pause();
         newAudio.removeEventListener("loadedmetadata", handleLoadedMetadata);
         newAudio.removeEventListener("timeupdate", handleTimeUpdate);
         newAudio.removeEventListener("ended", playNext);
-      };
+      }
     }
 
-    // If audio is already initialized and matches the current song, no need to recreate it
-  }, [
-    currentSongIndex,
-    albumSongs,
-    setAudio,
-    setDuration,
-    setCurrentTime,
-    playNext,
-    audio,
-    isPlaying,
-    setIsPlaying,
-    hasUserInteraction,
-    canClaimReward,
-    isClaimed,
-    setCanClaimReward,
-  ]);
+   
+  }, [currentSongIndex]);
 
   return null;
 };

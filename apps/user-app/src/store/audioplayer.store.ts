@@ -238,7 +238,9 @@ export const useAudioPlayerStore = create<AudioPlayerState>((set, get) => ({
 
   setAudio: (newAudio) => {
     const { audio: oldAudio } = get();
+    console.log("Setting new audio instance:", { oldAudio, newAudio });
     if (oldAudio) {
+      console.log("Cleaning up previous audio instance");
       oldAudio.pause();
       oldAudio.src = '';
     }

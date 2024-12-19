@@ -56,6 +56,7 @@ const MiniPlayer: React.FC = () => {
 
 
   function handleClaim() {
+    
     if (!isClaimed && canClaimReward) {
       updateEarnings(0.2);
       setIsClaimed(true);
@@ -65,7 +66,7 @@ const MiniPlayer: React.FC = () => {
 
 
 
-
+  if(!album && !artist) return null
 
    
   return (
