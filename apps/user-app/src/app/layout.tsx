@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { AppProvider } from "@/providers/app";
 import { cn } from "@/lib/utils";
+import DesktopOnlyNotice from "@/components/DesktopOnlyNotice";
 
 const urbanist = Urbanist({ subsets: ["latin"], variable: "--font-urbanist" });
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
@@ -59,7 +60,12 @@ export default function RootLayout({
           azeret.variable,
         )}
       >
-        <AppProvider>{children}</AppProvider>
+        <AppProvider>
+          <div className="md:hidden">
+            <DesktopOnlyNotice />
+          </div>
+          <div className="hidden md:block">{children}</div>
+        </AppProvider>
       </body>
     </html>
   );
