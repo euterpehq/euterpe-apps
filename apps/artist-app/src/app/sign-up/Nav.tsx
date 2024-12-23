@@ -14,16 +14,12 @@ const navigation = [
 export default function Nav() {
   const pathname = usePathname();
   return (
-    <div className="sticky top-0 z-50 flex flex-col backdrop-blur-md">
-      <div
-        className="relative flex h-[3.25rem] w-full flex-row items-center justify-between border-y-[0.5px] bg-[#313131] p-2 px-4 text-lg sm:px-6 lg:px-10"
-      >
+    <div className="sticky top-0 z-50 flex flex-col backdrop-blur-[40px]">
+      <div className="relative flex h-[3.25rem] w-full flex-row items-center justify-between border-b-[0.5px] border-[#313131] bg-white/[0.05] p-2 px-4 text-lg sm:px-6 lg:px-10">
         <Link href="/">
           <h1 className="font-aeonik font-medium">Euterpe.</h1>
         </Link>
       </div>
-
-  
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Urbanist, Figtree, Inter, Azeret_Mono } from "next/font/google";
 import localFont from "next/font/local";
-import "./globals.css";
 import { cn } from "@/lib/utils";
 import { AppProvider } from "@/providers/app";
+import "./globals.css";
 import DesktopOnlyNotice from "@/components/DesktopOnlyNotice";
 import { Suspense } from "react";
 
@@ -53,12 +53,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          urbanist.className,
+          figtree.className,
           urbanist.variable,
           aeonik.variable,
           figtree.variable,
           inter.variable,
-          azeret.variable
+          azeret.variable,
+          "bg-black",
         )}
       >
         <AppProvider>
@@ -67,7 +68,7 @@ export default function RootLayout({
             <div className="md:hidden">
               <DesktopOnlyNotice />
             </div>
-            <div className="md:block hidden">{children}</div>
+            <div className="hidden md:block">{children}</div>
           </Suspense>
         </AppProvider>
       </body>

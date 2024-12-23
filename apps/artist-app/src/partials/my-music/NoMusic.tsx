@@ -117,17 +117,17 @@ function CoinIcon(props: React.ComponentPropsWithoutRef<"svg">) {
           y2="15.5686"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#D13F05" />
-          <stop offset="0.2926" stop-color="#F67205" />
-          <stop offset="0.3667" stop-color="#F67705" />
-          <stop offset="0.4526" stop-color="#F68505" />
-          <stop offset="0.5441" stop-color="#F69C05" />
-          <stop offset="0.5638" stop-color="#F6A205" />
-          <stop offset="0.5977" stop-color="#F69005" />
-          <stop offset="0.6432" stop-color="#F67F05" />
-          <stop offset="0.6932" stop-color="#F67505" />
-          <stop offset="0.7553" stop-color="#F67205" />
-          <stop offset="1" stop-color="#D13F05" />
+          <stop stopColor="#D13F05" />
+          <stop offset="0.2926" stopColor="#F67205" />
+          <stop offset="0.3667" stopColor="#F67705" />
+          <stop offset="0.4526" stopColor="#F68505" />
+          <stop offset="0.5441" stopColor="#F69C05" />
+          <stop offset="0.5638" stopColor="#F6A205" />
+          <stop offset="0.5977" stopColor="#F69005" />
+          <stop offset="0.6432" stopColor="#F67F05" />
+          <stop offset="0.6932" stopColor="#F67505" />
+          <stop offset="0.7553" stopColor="#F67205" />
+          <stop offset="1" stopColor="#D13F05" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_240_430"
@@ -137,8 +137,8 @@ function CoinIcon(props: React.ComponentPropsWithoutRef<"svg">) {
           y2="10.8108"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFAF02" />
-          <stop offset="1" stop-color="#F56D05" />
+          <stop stopColor="#FFAF02" />
+          <stop offset="1" stopColor="#F56D05" />
         </linearGradient>
         <linearGradient
           id="paint2_linear_240_430"
@@ -148,9 +148,9 @@ function CoinIcon(props: React.ComponentPropsWithoutRef<"svg">) {
           y2="13.2671"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="white" stop-opacity="0" />
-          <stop offset="0.4787" stop-color="white" />
-          <stop offset="1" stop-color="white" stop-opacity="0" />
+          <stop stopColor="white" stopOpacity="0" />
+          <stop offset="0.4787" stopColor="white" />
+          <stop offset="1" stopColor="white" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint3_linear_240_430"
@@ -160,9 +160,9 @@ function CoinIcon(props: React.ComponentPropsWithoutRef<"svg">) {
           y2="7.27845"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="white" stop-opacity="0" />
-          <stop offset="0.4787" stop-color="white" />
-          <stop offset="1" stop-color="white" stop-opacity="0" />
+          <stop stopColor="white" stopOpacity="0" />
+          <stop offset="0.4787" stopColor="white" />
+          <stop offset="1" stopColor="white" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint4_linear_240_430"
@@ -172,8 +172,8 @@ function CoinIcon(props: React.ComponentPropsWithoutRef<"svg">) {
           y2="34.127"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#CF4505" />
-          <stop offset="1" stop-color="#E45905" />
+          <stop stopColor="#CF4505" />
+          <stop offset="1" stopColor="#E45905" />
         </linearGradient>
         <linearGradient
           id="paint5_linear_240_430"
@@ -183,8 +183,8 @@ function CoinIcon(props: React.ComponentPropsWithoutRef<"svg">) {
           y2="19.918"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="white" />
-          <stop offset="1" stop-color="white" stop-opacity="0" />
+          <stop stopColor="white" />
+          <stop offset="1" stopColor="white" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint6_radial_240_430"
@@ -194,8 +194,8 @@ function CoinIcon(props: React.ComponentPropsWithoutRef<"svg">) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(46.8933 46.7873) rotate(45.7799) scale(1.97155 9.8822)"
         >
-          <stop stop-color="white" />
-          <stop offset="1" stop-color="white" stop-opacity="0" />
+          <stop stopColor="white" />
+          <stop offset="1" stopColor="white" stopOpacity="0" />
         </radialGradient>
       </defs>
     </svg>
