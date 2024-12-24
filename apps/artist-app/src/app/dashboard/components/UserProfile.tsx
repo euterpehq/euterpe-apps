@@ -1,41 +1,85 @@
-import Image from 'next/image'
-import { useEffect, useState } from 'react';
-import EditProfile from './EditProfile';
+"use client";
+
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import EditProfile from "./EditProfile";
+import { getCurrentUser, getArtistProfile } from "@/lib/queries/users";
+
+interface UserProfileData {
+  artistName: string;
+  artistImage: string;
+}
 
 export default function UserProfile() {
-   const [isModalOpen, setIsModalOpen] = useState(false);
-     // Prevent scrolling while modal is open
-   useEffect(() => {
-      if (isModalOpen) {
-         document.body.style.overflow = 'hidden';
-      } else {
-         document.body.style.overflow = 'auto';
-      }
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-      // Clean up on unmount
-      return () => {
-         document.body.style.overflow = 'auto';
-      };
-   }, [isModalOpen]);
-    const openModal = () => setIsModalOpen(true);
- 
+  const [userProfile, setUserProfile] = useState<UserProfileData>({
+    artistName: "Loading...",
+    artistImage: "https://api.dicebear.com/9.x/notionists/svg?seed=Felix",
+  });
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const user = await getCurrentUser();
+        if (!user || !user.id) {
+          console.warn("No logged-in user found.");
+          return;
+        }
+
+        const profile = await getArtistProfile(user.id);
+        if (profile) {
+          setUserProfile({
+            artistName: profile.artist_name || "Unknown Artist",
+            artistImage:
+              profile.artist_image_url ||
+              "https://api.dicebear.com/9.x/notionists/svg?seed=Felix",
+          });
+        }
+      } catch (error) {
+        console.error("Error loading profile data:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isModalOpen ? "hidden" : "auto";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isModalOpen]);
+
+  const openModal = () => setIsModalOpen(true);
+
   return (
     <>
-    <div onClick={openModal} className="cursor-pointer p-[10px] flex justify-start items-center gap-x-[10px] w-[240px] rounded-[8px] h-[54px] bg-[#181818]">
-        <div className="w-[32px] h-[32px] rounded-full border">
-          <Image src="/images/artist.png" alt="artist" width={100} height={100}/>
+      <div
+        onClick={openModal}
+        className="flex h-[54px] w-[240px] cursor-pointer items-center justify-start gap-x-[10px] rounded-[8px] bg-[#181818] p-[10px]"
+      >
+        <div className="h-[32px] w-[32px] overflow-hidden rounded-full border">
+          <img
+            src={userProfile.artistImage}
+            alt={userProfile.artistName}
+            width={100}
+            height={100}
+          />
         </div>
         <div>
-          <h3 className="text-[#FFF] text-[14px]">BurnaBoy</h3>
-          <p className="text-[#868B9F] text-[10px]">Artist</p>
+          <h3 className="text-[14px] text-[#FFF]">{userProfile.artistName}</h3>
+          <p className="text-[10px] text-[#868B9F]">Artist</p>
         </div>
       </div>
+
       {isModalOpen && (
-            <EditProfile
-              isModalOpen={isModalOpen}
-              closeModal={() => setIsModalOpen(false)}
-            />
-          )}
-      </>
-  )
+        <EditProfile
+          isModalOpen={isModalOpen}
+          closeModal={() => setIsModalOpen(false)}
+          setUserProfile={setUserProfile}
+        />
+      )}
+    </>
+  );
 }
