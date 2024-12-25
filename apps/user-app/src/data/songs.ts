@@ -1,24 +1,22 @@
+import aylo from "@/assets/images/aylo.jpg";
+import bloody from "@/assets/images/bloody.jpg";
+import saba from "@/assets/images/saba.jpg";
+import popi from "@/assets/images/popi.jpg";
+import moliy from "@/assets/images/moliy.jpg";
+import ella from "@/assets/images/ella.jpg";
+import ward from "@/assets/images/ward.jpg";
+import trophy from "@/assets/icons/trophy.png";
+import star from "@/assets/icons/star.png";
+import mic from "@/assets/icons/mic.png";
+import disco1 from "@/assets/images/disco1.png";
+import disco2 from "@/assets/images/disco2.png";
+import disco3 from "@/assets/images/disco3.png";
+import disco4 from "@/assets/images/disco4.png";
+import disco5 from "@/assets/images/disco5.png";
+import disco6 from "@/assets/images/disco6.png";
+import disco7 from "@/assets/images/disco7.png";
 
-import aylo from "@/assets/images/aylo.jpg"
-import bloody from "@/assets/images/bloody.jpg"
-import saba from "@/assets/images/saba.jpg"
-import popi from "@/assets/images/popi.jpg"
-import moliy from "@/assets/images/moliy.jpg"
-import ella from "@/assets/images/ella.jpg"
-import ward from "@/assets/images/ward.jpg"
-import trophy from "@/assets/icons/trophy.png"
-import star from "@/assets/icons/star.png"
-import mic from "@/assets/icons/mic.png"
-import disco1 from "@/assets/images/disco1.png"
-import disco2 from "@/assets/images/disco2.png"
-import disco3 from "@/assets/images/disco3.png"
-import disco4 from "@/assets/images/disco4.png"
-import disco5 from "@/assets/images/disco5.png"
-import disco6 from "@/assets/images/disco6.png"
-import disco7 from "@/assets/images/disco7.png"
-
-
-import { StaticImageData } from "next/image"
+import { StaticImageData } from "next/image";
 
 export type Song = {
   id: number;
@@ -30,7 +28,7 @@ export type Song = {
   apple: string;
   spotify: string;
   youtube: string;
-  isTopSong: boolean
+  isTopSong: boolean;
 };
 
 export type Artist = {
@@ -51,16 +49,14 @@ export type Album = {
   releaseDate: string; // Date of release
 };
 
-
-
 export type TopPick = {
   id: number;
   title: string;
   artist: string;
-  image: string ;
+  image: string;
   icon: string | StaticImageData;
   eut: number;
-}
+};
 
 export type Disco = {
   id: number;
@@ -69,7 +65,7 @@ export type Disco = {
   image: string | StaticImageData;
   icon: string | StaticImageData;
   eut: number;
-}
+};
 
 export const songs: Song[] = [
   {
@@ -166,63 +162,63 @@ export const songs: Song[] = [
 ];
 
 export const topPicks: TopPick[] = [
-    {
-      id: 1,
-      title: "Endorphins",
-      artist: "tobi lou",
-      image: "https://i.scdn.co/image/ab67616d0000b273676e212f1dd862ca14d40a0e",
-      icon: trophy,
-      eut: 1.3,
-    },
-    {
-      id: 2,
-      title: "Hesitate",
-      artist: "Golden Vessel",
-      image: "https://i.scdn.co/image/ab67616d0000b273aa621853807a728c8e23fd20",
-      icon: trophy,
-      eut: 1.3,
-    },
-    {
-      id: 3,
-      title: "Do You Really Need Me",
-      artist: "Charlie",
-      image:"https://i.scdn.co/image/ab67616d0000b2738fb7d77d029169c9e47ba644",
-      icon: trophy,
-      eut: 1.3,
-    },
-    {
-      id: 4,
-      title: "Small",
-      artist: "Siv Jakobsen",
-      image: "https://i.scdn.co/image/ab67616d0000b273961da7b10704a2b6efe45593",
-      icon: trophy,
-      eut: 1.3,
-    },
-    {
-      id: 5,
-      title: "In Love with a Ghost",
-      artist: "Bash the Piper",
-      image: "https://i.scdn.co/image/ab67616d0000b27371d2fc7860fb53a382a7bb88",
-      icon: trophy,
-      eut: 1.3,
-    },
-    {
-      id: 6,
-      title: "Eleyele",
-      artist: "taves",
-      image: "https://i.scdn.co/image/ab67616d0000b2732f32bbc80b869a2e58556be3",
-      icon: trophy,
-      eut: 1.3,
-    },
-    {
-      id: 7,
-      title: "Clicquot Shower",
-      artist: "Caleborate",
-      image: "https://i.scdn.co/image/ab67616d0000b273514e92e8ef2361ad12f08a0e",
-      icon: trophy,
-      eut: 1.3,
-    },
-]
+  {
+    id: 1,
+    title: "Endorphins",
+    artist: "tobi lou",
+    image: "https://i.scdn.co/image/ab67616d0000b273676e212f1dd862ca14d40a0e",
+    icon: trophy,
+    eut: 1.3,
+  },
+  {
+    id: 2,
+    title: "Hesitate",
+    artist: "Golden Vessel",
+    image: "https://i.scdn.co/image/ab67616d0000b273aa621853807a728c8e23fd20",
+    icon: trophy,
+    eut: 1.3,
+  },
+  {
+    id: 3,
+    title: "Do You Really Need Me",
+    artist: "Charlie",
+    image: "https://i.scdn.co/image/ab67616d0000b2738fb7d77d029169c9e47ba644",
+    icon: trophy,
+    eut: 1.3,
+  },
+  {
+    id: 4,
+    title: "Small",
+    artist: "Siv Jakobsen",
+    image: "https://i.scdn.co/image/ab67616d0000b273961da7b10704a2b6efe45593",
+    icon: trophy,
+    eut: 1.3,
+  },
+  {
+    id: 5,
+    title: "In Love with a Ghost",
+    artist: "Bash the Piper",
+    image: "https://i.scdn.co/image/ab67616d0000b27371d2fc7860fb53a382a7bb88",
+    icon: trophy,
+    eut: 1.3,
+  },
+  {
+    id: 6,
+    title: "Eleyele",
+    artist: "taves",
+    image: "https://i.scdn.co/image/ab67616d0000b2732f32bbc80b869a2e58556be3",
+    icon: trophy,
+    eut: 1.3,
+  },
+  {
+    id: 7,
+    title: "Clicquot Shower",
+    artist: "Caleborate",
+    image: "https://i.scdn.co/image/ab67616d0000b273514e92e8ef2361ad12f08a0e",
+    icon: trophy,
+    eut: 1.3,
+  },
+];
 
 export const Discography: Disco[] = [
   {
@@ -297,75 +293,88 @@ export const Discography: Disco[] = [
     icon: trophy,
     eut: 1.3,
   },
-]
+];
 
 export const genres = [
   {
     id: 1,
-    name: "Pop",
+    emoji: "🎤",
+    label: "Pop",
     icon: star,
   },
   {
     id: 2,
-    name: "Hip-Hop/Rap",
+    emoji: "🎧",
+    label: "Hip-Hop/Rap",
     icon: mic,
   },
   {
     id: 3,
-    name: "Electronic/EDM",
+    emoji: "🎹",
+    label: "Electronic/EDM",
     icon: mic,
   },
   {
     id: 4,
-    name: "Electronic/EDM",
-    icon: mic,
+    emoji: "🎸",
+    label: "Rock",
+    icon: star,
   },
   {
     id: 5,
-    name: "Electronic/EDM",
+    emoji: "🎷",
+    label: "Jazz",
     icon: mic,
   },
   {
     id: 6,
-    name: "Electronic/EDM",
+    emoji: "🎻",
+    label: "Classical",
     icon: mic,
   },
   {
     id: 7,
-    name: "Electronic/EDM",
+    emoji: "🤠",
+    label: "Country",
     icon: mic,
   },
   {
     id: 8,
-    name: "Electronic/EDM",
+    emoji: "🌴",
+    label: "Reggae",
     icon: mic,
   },
   {
     id: 9,
-    name: "Electronic/EDM",
+    emoji: "🎺",
+    label: "Blues",
     icon: mic,
   },
   {
     id: 10,
-    name: "Electronic/EDM",
+    emoji: "🎙️",
+    label: "R&B/Soul",
     icon: mic,
   },
   {
     id: 11,
-    name: "Electronic/EDM",
+    emoji: "🌾",
+    label: "Folk",
     icon: mic,
   },
   {
     id: 12,
-    name: "Electronic/EDM",
+    emoji: "💖",
+    label: "K-Pop",
     icon: mic,
   },
   {
     id: 13,
-    name: "Electronic/EDM",
+    emoji: "🎶",
+    label: "Latin",
     icon: mic,
   },
-]
+];
 
 export const artists: Artist[] = [
   {
@@ -373,59 +382,59 @@ export const artists: Artist[] = [
     name: "Xpacegirl",
     img: aylo,
     title: "Artist",
-    desc: 'At 22 years of age, Grammy nominated Luc Bradford aka ford. has surfaced as a standout producer in the flourishing lo-fi indie / electronic scene. Since signing with ODESZA’s imprint Foreign Family Collective in 2018, ford. has released two full length albums "(The) Evening" & "The Color of Nothing" which have amassed over 70 million+ streams. Over the last two years ford.’s music has been praised by tastemaker outlets such as BIllboard, COMPLEX, NUDE, found airtime on acclaimed stations such as BBC Radio 1, KCRW, Sirius XM HMU & Sirius XM Chill, landed major sy...'
+    desc: 'At 22 years of age, Grammy nominated Luc Bradford aka ford. has surfaced as a standout producer in the flourishing lo-fi indie / electronic scene. Since signing with ODESZA’s imprint Foreign Family Collective in 2018, ford. has released two full length albums "(The) Evening" & "The Color of Nothing" which have amassed over 70 million+ streams. Over the last two years ford.’s music has been praised by tastemaker outlets such as BIllboard, COMPLEX, NUDE, found airtime on acclaimed stations such as BBC Radio 1, KCRW, Sirius XM HMU & Sirius XM Chill, landed major sy...',
   },
   {
     id: 2,
     name: "Tega Ethan",
     img: bloody,
     title: "Artist",
-    desc: 'At 22 years of age, Grammy nominated Luc Bradford aka ford. has surfaced as a standout producer in the flourishing lo-fi indie / electronic scene. Since signing with ODESZA’s imprint Foreign Family Collective in 2018, ford. has released two full length albums "(The) Evening" & "The Color of Nothing" which have amassed over 70 million+ streams. Over the last two years ford.’s music has been praised by tastemaker outlets such as BIllboard, COMPLEX, NUDE, found airtime on acclaimed stations such as BBC Radio 1, KCRW, Sirius XM HMU & Sirius XM Chill, landed major sy...'
+    desc: 'At 22 years of age, Grammy nominated Luc Bradford aka ford. has surfaced as a standout producer in the flourishing lo-fi indie / electronic scene. Since signing with ODESZA’s imprint Foreign Family Collective in 2018, ford. has released two full length albums "(The) Evening" & "The Color of Nothing" which have amassed over 70 million+ streams. Over the last two years ford.’s music has been praised by tastemaker outlets such as BIllboard, COMPLEX, NUDE, found airtime on acclaimed stations such as BBC Radio 1, KCRW, Sirius XM HMU & Sirius XM Chill, landed major sy...',
   },
   {
     id: 3,
     name: "SuperJazzClub",
     img: saba,
     title: "Artist",
-    desc: 'At 22 years of age, Grammy nominated Luc Bradford aka ford. has surfaced as a standout producer in the flourishing lo-fi indie / electronic scene. Since signing with ODESZA’s imprint Foreign Family Collective in 2018, ford. has released two full length albums "(The) Evening" & "The Color of Nothing" which have amassed over 70 million+ streams. Over the last two years ford.’s music has been praised by tastemaker outlets such as BIllboard, COMPLEX, NUDE, found airtime on acclaimed stations such as BBC Radio 1, KCRW, Sirius XM HMU & Sirius XM Chill, landed major sy...'
+    desc: 'At 22 years of age, Grammy nominated Luc Bradford aka ford. has surfaced as a standout producer in the flourishing lo-fi indie / electronic scene. Since signing with ODESZA’s imprint Foreign Family Collective in 2018, ford. has released two full length albums "(The) Evening" & "The Color of Nothing" which have amassed over 70 million+ streams. Over the last two years ford.’s music has been praised by tastemaker outlets such as BIllboard, COMPLEX, NUDE, found airtime on acclaimed stations such as BBC Radio 1, KCRW, Sirius XM HMU & Sirius XM Chill, landed major sy...',
   },
   {
     id: 4,
     name: "itsjustrand",
     img: popi,
     title: "Artist",
-    desc: 'At 22 years of age, Grammy nominated Luc Bradford aka ford. has surfaced as a standout producer in the flourishing lo-fi indie / electronic scene. Since signing with ODESZA’s imprint Foreign Family Collective in 2018, ford. has released two full length albums "(The) Evening" & "The Color of Nothing" which have amassed over 70 million+ streams. Over the last two years ford.’s music has been praised by tastemaker outlets such as BIllboard, COMPLEX, NUDE, found airtime on acclaimed stations such as BBC Radio 1, KCRW, Sirius XM HMU & Sirius XM Chill, landed major sy...'
+    desc: 'At 22 years of age, Grammy nominated Luc Bradford aka ford. has surfaced as a standout producer in the flourishing lo-fi indie / electronic scene. Since signing with ODESZA’s imprint Foreign Family Collective in 2018, ford. has released two full length albums "(The) Evening" & "The Color of Nothing" which have amassed over 70 million+ streams. Over the last two years ford.’s music has been praised by tastemaker outlets such as BIllboard, COMPLEX, NUDE, found airtime on acclaimed stations such as BBC Radio 1, KCRW, Sirius XM HMU & Sirius XM Chill, landed major sy...',
   },
   {
     id: 5,
     name: "Bunmi.",
     img: moliy,
     title: "Artist",
-    desc: 'At 22 years of age, Grammy nominated Luc Bradford aka ford. has surfaced as a standout producer in the flourishing lo-fi indie / electronic scene. Since signing with ODESZA’s imprint Foreign Family Collective in 2018, ford. has released two full length albums "(The) Evening" & "The Color of Nothing" which have amassed over 70 million+ streams. Over the last two years ford.’s music has been praised by tastemaker outlets such as BIllboard, COMPLEX, NUDE, found airtime on acclaimed stations such as BBC Radio 1, KCRW, Sirius XM HMU & Sirius XM Chill, landed major sy...'
+    desc: 'At 22 years of age, Grammy nominated Luc Bradford aka ford. has surfaced as a standout producer in the flourishing lo-fi indie / electronic scene. Since signing with ODESZA’s imprint Foreign Family Collective in 2018, ford. has released two full length albums "(The) Evening" & "The Color of Nothing" which have amassed over 70 million+ streams. Over the last two years ford.’s music has been praised by tastemaker outlets such as BIllboard, COMPLEX, NUDE, found airtime on acclaimed stations such as BBC Radio 1, KCRW, Sirius XM HMU & Sirius XM Chill, landed major sy...',
   },
   {
     id: 6,
     name: "Toriah",
     img: ella,
     title: "Artist",
-    desc: 'At 22 years of age, Grammy nominated Luc Bradford aka ford. has surfaced as a standout producer in the flourishing lo-fi indie / electronic scene. Since signing with ODESZA’s imprint Foreign Family Collective in 2018, ford. has released two full length albums "(The) Evening" & "The Color of Nothing" which have amassed over 70 million+ streams. Over the last two years ford.’s music has been praised by tastemaker outlets such as BIllboard, COMPLEX, NUDE, found airtime on acclaimed stations such as BBC Radio 1, KCRW, Sirius XM HMU & Sirius XM Chill, landed major sy... Read more'
+    desc: 'At 22 years of age, Grammy nominated Luc Bradford aka ford. has surfaced as a standout producer in the flourishing lo-fi indie / electronic scene. Since signing with ODESZA’s imprint Foreign Family Collective in 2018, ford. has released two full length albums "(The) Evening" & "The Color of Nothing" which have amassed over 70 million+ streams. Over the last two years ford.’s music has been praised by tastemaker outlets such as BIllboard, COMPLEX, NUDE, found airtime on acclaimed stations such as BBC Radio 1, KCRW, Sirius XM HMU & Sirius XM Chill, landed major sy... Read more',
   },
   {
     id: 7,
     name: "SOLIS4EVR",
     img: ward,
     title: "Artist",
-    desc: 'At 22 years of age, Grammy nominated Luc Bradford aka ford. has surfaced as a standout producer in the flourishing lo-fi indie / electronic scene. Since signing with ODESZA’s imprint Foreign Family Collective in 2018, ford. has released two full length albums "(The) Evening" & "The Color of Nothing" which have amassed over 70 million+ streams. Over the last two years ford.’s music has been praised by tastemaker outlets such as BIllboard, COMPLEX, NUDE, found airtime on acclaimed stations such as BBC Radio 1, KCRW, Sirius XM HMU & Sirius XM Chill, landed major sy... Read more'
+    desc: 'At 22 years of age, Grammy nominated Luc Bradford aka ford. has surfaced as a standout producer in the flourishing lo-fi indie / electronic scene. Since signing with ODESZA’s imprint Foreign Family Collective in 2018, ford. has released two full length albums "(The) Evening" & "The Color of Nothing" which have amassed over 70 million+ streams. Over the last two years ford.’s music has been praised by tastemaker outlets such as BIllboard, COMPLEX, NUDE, found airtime on acclaimed stations such as BBC Radio 1, KCRW, Sirius XM HMU & Sirius XM Chill, landed major sy... Read more',
   },
-]
-
+];
 
 export const albums: Album[] = [
   {
     id: 1,
     title: "Sugarcane ",
     artistId: 1,
-    albumArt: "https://i.scdn.co/image/ab67616d0000b273676e212f1dd862ca14d40a0e",
+    albumArt:
+      "https://i.scdn.co/image/ab67616d0000b273676e212f1dd862ca14d40a0e",
     releaseType: "Single",
     songs: [1],
     releaseDate: "2024-12-17",
@@ -434,7 +443,8 @@ export const albums: Album[] = [
     id: 2,
     title: "love is like Lagos traffic ",
     artistId: 2,
-    albumArt: "https://i.scdn.co/image/ab67616d0000b273aa621853807a728c8e23fd20",
+    albumArt:
+      "https://i.scdn.co/image/ab67616d0000b273aa621853807a728c8e23fd20",
     releaseType: "Single",
     songs: [2],
     releaseDate: "2024-12-17",
@@ -443,7 +453,8 @@ export const albums: Album[] = [
     id: 3,
     title: "Paradise ",
     artistId: 3,
-    albumArt: "https://i.scdn.co/image/ab67616d0000b2738fb7d77d029169c9e47ba644",
+    albumArt:
+      "https://i.scdn.co/image/ab67616d0000b2738fb7d77d029169c9e47ba644",
     releaseType: "Single",
     songs: [3],
     releaseDate: "2024-12-17",
@@ -452,7 +463,8 @@ export const albums: Album[] = [
     id: 4,
     title: "I Think We Danced (But I Can't Be Sure) ",
     artistId: 4,
-    albumArt: "https://i.scdn.co/image/ab67616d0000b273961da7b10704a2b6efe45593",
+    albumArt:
+      "https://i.scdn.co/image/ab67616d0000b273961da7b10704a2b6efe45593",
     releaseType: "Single",
     songs: [4],
     releaseDate: "2024-12-17",
@@ -461,7 +473,8 @@ export const albums: Album[] = [
     id: 5,
     title: "Starfield ",
     artistId: 5,
-    albumArt: "https://i.scdn.co/image/ab67616d0000b27371d2fc7860fb53a382a7bb88",
+    albumArt:
+      "https://i.scdn.co/image/ab67616d0000b27371d2fc7860fb53a382a7bb88",
     releaseType: "Single",
     songs: [5],
     releaseDate: "2024-12-17",
@@ -470,7 +483,8 @@ export const albums: Album[] = [
     id: 6,
     title: "New to Me ",
     artistId: 6,
-    albumArt: "https://i.scdn.co/image/ab67616d0000b2732f32bbc80b869a2e58556be3",
+    albumArt:
+      "https://i.scdn.co/image/ab67616d0000b2732f32bbc80b869a2e58556be3",
     releaseType: "Single",
     songs: [6],
     releaseDate: "2024-12-17",
@@ -479,12 +493,10 @@ export const albums: Album[] = [
     id: 7,
     title: "Abeg ",
     artistId: 7,
-    albumArt:  "https://i.scdn.co/image/ab67616d0000b273514e92e8ef2361ad12f08a0e",
+    albumArt:
+      "https://i.scdn.co/image/ab67616d0000b273514e92e8ef2361ad12f08a0e",
     releaseType: "Single",
     songs: [7],
     releaseDate: "2024-12-17",
   },
 ];
-
-
-

@@ -50,8 +50,8 @@ const MiniPlayer: React.FC = () => {
 
   const song = albumSongs[currentSongIndex];
 
-  const album = albums.find((a) => a.id === song.album_id);
-  const artist = artists.find((f) => f.id === album?.artist_id);
+  const album = song ? albums.find((a) => a.id === song.album_id) : null;
+  const artist = album ? artists.find((f) => f.id === album?.artist_id) : null;
 
   function handleClaim() {
     if (!isClaimed && canClaimReward) {
@@ -61,7 +61,7 @@ const MiniPlayer: React.FC = () => {
     }
   }
 
-  if (!album && !artist) return null;
+  if (!song || !album || !artist) return null;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-30 w-full bg-[#181818] px-6 py-4">

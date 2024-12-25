@@ -36,11 +36,11 @@ const HorizontalSlider: React.FC = () => {
     <div className="relative mx-auto h-[48px] w-full overflow-hidden">
       <Swiper
         spaceBetween={20}
-        slidesPerView={6}
+        slidesPerView={"auto"}
         freeMode={true}
         modules={[FreeMode, Pagination]}
         style={{}}
-        className="h-full w-full cursor-grab"
+        className="h-full w-full cursor-pointer"
       >
         {genres.map((item) => (
           <SwiperSlide
@@ -51,17 +51,18 @@ const HorizontalSlider: React.FC = () => {
               justifyContent: "center",
               padding: "16px 20px",
               gap: "10px",
-              width: "fit-content",
+              width: "auto",
+              flexShrink: 0,
               height: "48px",
               background: "#181818",
               borderRadius: "120px",
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
             }}
           >
-            <div>
-              <Image src={item.icon} alt="" />
-            </div>
-            <p className="text-[13px] font-semibold text-[#fff]">{item.name}</p>
+            <span>{item.emoji}</span>
+            <p className="text-[13px] font-semibold text-[#fff]">
+              {item.label}
+            </p>
           </SwiperSlide>
         ))}
       </Swiper>
