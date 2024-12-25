@@ -99,6 +99,7 @@ function WithdrawButton({ onSuccess }: { onSuccess: () => void }) {
     >
       {isPending ? (
         <div className="inline-flex items-center gap-2">
+          {/* @ts-ignore Property 'className' does not exist which is a bug in the library  */}
           <LuLoaderCircle className="h-4 w-4 animate-spin" /> Confirm In Your
           Wallet...
         </div>
