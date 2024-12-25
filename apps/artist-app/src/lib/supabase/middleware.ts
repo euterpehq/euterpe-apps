@@ -37,6 +37,10 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  console.log("user", user);
+  console.log("request.url", request.url);
+  console.log("request.nextUrl.pathname", request.nextUrl.pathname);
+
   if (
     !user &&
     !request.nextUrl.pathname.startsWith("/sign-up") &&
