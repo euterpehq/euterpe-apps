@@ -1,35 +1,40 @@
 import { useState } from "react";
 
-export default function CoverImage() {
- const [imagePreview, setImagePreview] = useState<string | null>(null);
+interface CoverImageProps {
+  onFileSelect: (file: File | null) => void;
+}
+
+export default function CoverImage({ onFileSelect }: CoverImageProps) {
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       const previewUrl = URL.createObjectURL(file);
-      setImagePreview(previewUrl); 
+      setImagePreview(previewUrl);
+      onFileSelect(file);
     }
-  }
+  };
 
   return (
     <>
-    <p className="mt-6">Cover Image</p>
-    <div className="flex justify-start gap-x-16 mt-4 w-full ">
-        <div className="w-[400px] h-[200px]">
+      <p className="mt-6">Cover Image</p>
+      <div className="mt-4 flex w-full justify-start gap-x-16">
+        <div className="h-[200px] w-[400px]">
           <label
             htmlFor="dropzone-file"
-            className="flex flex-col items-center justify-center w-[400px] h-[200px] border border-dashed border-[#B8FF5B1A] rounded-lg cursor-pointer bg-[#1E1E1E] hover:bg-muted/25"
+            className="flex h-[200px] w-[400px] cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-[#B8FF5B1A] bg-[#1E1E1E] hover:bg-muted/25"
           >
             {imagePreview ? (
               <img
                 src={imagePreview}
                 alt="Selected preview"
-                className="w-full h-full object-cover rounded-lg"
+                className="h-full w-full rounded-lg object-cover"
               />
             ) : (
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
+              <div className="flex flex-col items-center justify-center pb-6 pt-5">
                 <svg
-                  className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                  className="mb-4 h-8 w-8 text-gray-500 dark:text-gray-400"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -40,10 +45,14 @@ export default function CoverImage() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                    d="M13 13h3a3 3 
+                      0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5A5.5 5.5 
+                      0 0 0 5.207 5.021C5.137 5.017 5.071 5 
+                      5 5a4 4 0 0 0 0 8h2.167M10 
+                      15V6m0 0L8 8m2-2 2 2"
                   />
                 </svg>
-                <p className="text-center mb-2 text-sm text-primary">
+                <p className="mb-2 text-center text-sm text-primary">
                   Select an Image
                 </p>
                 <p className="text-center text-xs text-[#868B9F]">
@@ -60,15 +69,15 @@ export default function CoverImage() {
             />
           </label>
         </div>
-    <div>
-      <p className="text-xl">Optimal Characteristics</p>
-        <ul className="ms-5 text-[#868B9F] list-disc">
-          <li>.jpg, .png, or .gif file extensions</li>
-          <li>Perfect square</li>
-          <li>3000 x 3000 pixels resolution</li>
-        </ul>
-    </div>
-  </div>
+        <div>
+          <p className="text-xl">Optimal Characteristics</p>
+          <ul className="ms-5 list-disc text-[#868B9F]">
+            <li>.jpg, .png, or .gif file extensions</li>
+            <li>Perfect square</li>
+            <li>3000 x 3000 pixels resolution</li>
+          </ul>
+        </div>
+      </div>
     </>
-  )
+  );
 }

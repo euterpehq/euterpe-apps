@@ -1,77 +1,60 @@
-import { Dot } from "lucide-react"
-import Image from "next/image"
-export default function Album() {
+import { Dot } from "lucide-react";
+import Image from "next/image";
+import { getUserReleases } from "@/lib/queries/albums";
+
+type AlbumProps = {
+  album: Awaited<ReturnType<typeof getUserReleases>>[number];
+};
+export default function Album({ album }: AlbumProps) {
   return (
-   <>
-    <section className="flex justify-between items-center border-b p-4">
-          <div className="flex justify items-center gap-x-[9px]">
-            <Image
-              className="w-[64px] h-[64px]"
-              width={50}
-              height={50}
-              src="/images/album.png"
-              alt="album"
-            />
-            <div>
-              <h2 className="flex-1">AMUSIA</h2>
-              <div></div>
-              <h4 className="flex justify-start items-center mt-2 text-[12px] text-[#868B9F]">
-                Album{" "}
-                <span className="flex jutify-center items-center ">
-                  <Dot size={25} color="#C1FF70" />3 tracks
-                </span>
-              </h4>
-            </div>
+    <>
+      <section className="flex items-center justify-between border-b p-4">
+        <div className="flex items-center gap-x-[9px]">
+          <Image
+            className="h-[64px] w-[64px]"
+            width={64}
+            height={64}
+            src={album.cover_image_url ?? "/images/album.png"}
+            alt="album cover"
+          />
+          <div>
+            <h2 className="flex-1">{album.title}</h2>
+            <h4 className="mt-2 flex items-center justify-start text-[12px] text-[#868B9F]">
+              Album{" "}
+              <span className="flex items-center justify-center">
+                <Dot size={25} color="#C1FF70" />
+                {album.tracks ? album.tracks.length : 0} tracks
+              </span>
+            </h4>
           </div>
-          <div className="text-[#868B9F] w-fit flex justify-end items-center">
-            <h2 className="text-[12px] ps-2.5 w-[135px]">100</h2>
-            <h2 className="flex-end text-end text-[12px] flex justify-end items-center gap-x-2 w-[135px]">
-              Januar 27, 2024
-            </h2>
-          </div>
-        </section>
-        <section className="flex justify-between items-center border-b p-4">
-          <div className="flex justifrty items-center gap-x-[9px]">
+        </div>
+        <div className="flex w-fit items-center justify-end text-[#868B9F]">
+          <h2 className="w-[135px] ps-2.5 text-[12px]">{album.plays ?? 0}</h2>
+          <h2 className="flex w-[135px] justify-end gap-x-2 text-end text-[12px]">
+            {album.release_date ?? "N/A"}
+          </h2>
+        </div>
+      </section>
+
+      {album.tracks?.map((track) => (
+        <section
+          key={track.id}
+          className="flex items-center justify-between border-b p-4"
+        >
+          <div className="flex items-center gap-x-[9px]">
             <div className="flex gap-x-[10px]">
-              <h2 className="flex-1">1</h2>
-              <div>Lover’s Quarrel</div>
+              <h2 className="flex-1">{track.track_number}</h2>
+              <div>{track.track_title}</div>
             </div>
           </div>
-          <div className="text-[#868B9F] w-fit flex justify-end items-center">
-            <h2 className="text-[12px] ps-2.5 w-[135px]">50</h2>
-            <h2 className="flex-end text-end text-[12px] flex justify-end items-center gap-x-2 w-[135px]">
-              Januar 27, 2024
+          <div className="flex w-fit items-center justify-end text-[#868B9F]">
+            <h2 className="w-[135px] ps-2.5 text-[12px]">{track.plays ?? 0}</h2>
+            <h2 className="flex w-[135px] justify-end gap-x-2 text-end text-[12px]">
+              {album.release_date ?? album.release_date ?? "N/A"}
             </h2>
           </div>
         </section>
-          <section className="flex justify-between items-center border-b p-4">
-          <div className="flex justifrty items-center gap-x-[9px]">
-            <div className="flex gap-x-[10px]">
-              <h2 className="flex-1">2</h2>
-              <div>Lover’s Quarrel</div>
-            </div>
-          </div>
-          <div className="text-[#868B9F] w-fit flex justify-end items-center">
-            <h2 className="text-[12px] ps-2.5 w-[135px]">50</h2>
-            <h2 className="flex-end text-end text-[12px] flex justify-end items-center gap-x-2 w-[135px]">
-              Januar 27, 2024
-            </h2>
-          </div>
-        </section>
-            <section className="flex justify-between items-center border-b p-4">
-          <div className="flex justifrty items-center gap-x-[9px]">
-            <div className="flex gap-x-[10px]">
-              <h2 className="flex-1">3</h2>
-              <div>Lover’s Quarrel</div>
-            </div>
-          </div>
-          <div className="text-[#868B9F] w-fit flex justify-end items-center">
-            <h2 className="text-[12px] ps-2.5 w-[135px]">50</h2>
-            <h2 className="flex-end text-end text-[12px] flex justify-end items-center gap-x-2 w-[135px]">
-              Januar 27, 2024
-            </h2>
-          </div>
-        </section>
-   </>
-  )
+      ))}
+    </>
+  );
 }

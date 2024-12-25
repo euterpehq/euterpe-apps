@@ -1,4 +1,5 @@
-import { createClient } from "@/lib/supabase/client";
+"use server";
+import { createClient } from "@/lib/supabase/server";
 import { Database } from "@/types/database.types";
 
 type ArtistProfilesTable =
@@ -8,7 +9,7 @@ export async function updateArtistProfile(
   userId: string,
   payload: Partial<ArtistProfilesTable>,
 ) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("artist_profiles")
     .upsert({ id: userId, ...payload }, { onConflict: "id" })

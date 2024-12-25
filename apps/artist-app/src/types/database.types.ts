@@ -17,6 +17,7 @@ export type Database = {
           created_at: string | null
           genre: string
           id: string
+          plays: number
           release_date: string | null
           sub_genres: string[] | null
           title: string
@@ -29,6 +30,7 @@ export type Database = {
           created_at?: string | null
           genre: string
           id?: string
+          plays?: number
           release_date?: string | null
           sub_genres?: string[] | null
           title: string
@@ -41,6 +43,7 @@ export type Database = {
           created_at?: string | null
           genre?: string
           id?: string
+          plays?: number
           release_date?: string | null
           sub_genres?: string[] | null
           title?: string
@@ -108,6 +111,7 @@ export type Database = {
           created_at: string | null
           featured_artists: string[] | null
           id: string
+          plays: number
           track_number: number
           track_title: string
           updated_at: string | null
@@ -118,6 +122,7 @@ export type Database = {
           created_at?: string | null
           featured_artists?: string[] | null
           id?: string
+          plays?: number
           track_number: number
           track_title: string
           updated_at?: string | null
@@ -128,6 +133,7 @@ export type Database = {
           created_at?: string | null
           featured_artists?: string[] | null
           id?: string
+          plays?: number
           track_number?: number
           track_title?: string
           updated_at?: string | null

@@ -1,5 +1,5 @@
-import { createClient } from "@/lib/supabase/client";
-import { Database } from "@/types/database.types";
+"use server";
+import { createClient } from "@/lib/supabase/server";
 
 const BUCKET_NAME = "avatars";
 
@@ -8,7 +8,7 @@ export async function uploadImageToBucket(
   userId: string,
   pathPrefix: string,
 ): Promise<string | null> {
-  const supabase = createClient();
+  const supabase = await createClient();
   try {
     const filePath = `${pathPrefix}/${userId}-${Date.now()}-${file.name}`;
 

@@ -12,7 +12,11 @@ const nextConfig: NextConfig = {
         hostname: "api.dicebear.com",
       },
     ],
-    dangerouslyAllowSVG: true,
+  },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "25mb",
+    },
   },
 };
 

@@ -1,31 +1,34 @@
-import Image from "next/image"
+import Image from "next/image";
+import { getUserReleases } from "@/lib/queries/albums";
 
-export default function Singles() {
+type SingleProps = {
+  single: Awaited<ReturnType<typeof getUserReleases>>[number];
+};
+
+export default function Singles({ single }: SingleProps) {
   return (
-    <>
-     <section className="mt-[40px] flex justify-between items-center border-b p-4">
-          <div className="flex justifrty items-center gap-x-[9px]">
-            <Image
-              className="w-[64px] h-[64px]"
-              width={50}
-              height={50}
-              src="/images/album.png"
-              alt="album"
-            />
-            <div>
-              <h2 className="flex-1">AMUSIA</h2>
-              <h4 className="flex justify-start items-center mt-2 text-[12px] text-[#868B9F]">
-                Single
-              </h4>
-            </div>
-          </div>
-          <div className="text-[#868B9F] w-fit flex justify-end items-center">
-            <h2 className="text-[12px] ps-2.5 w-[135px]">100</h2>
-            <h2 className="flex-end text-end text-[12px] flex justify-end items-center gap-x-2 w-[135px]">
-              Januar 27, 2024
-            </h2>
-          </div>
-        </section>
-    </>
-  )
+    <section className="mt-[40px] flex items-center justify-between border-b p-4">
+      <div className="flex items-center gap-x-[9px]">
+        <Image
+          className="h-[64px] w-[64px]"
+          width={64}
+          height={64}
+          src="/images/album.png"
+          alt="cover"
+        />
+        <div>
+          <h2 className="flex-1">{single.title}</h2>
+          <h4 className="mt-2 flex justify-start text-[12px] text-[#868B9F]">
+            Single
+          </h4>
+        </div>
+      </div>
+      <div className="flex w-fit items-center justify-end text-[#868B9F]">
+        <h2 className="w-[135px] ps-2.5 text-[12px]">{single.plays ?? 0}</h2>
+        <h2 className="flex w-[135px] justify-end gap-x-2 text-end text-[12px]">
+          {single.release_date ?? "N/A"}
+        </h2>
+      </div>
+    </section>
+  );
 }
