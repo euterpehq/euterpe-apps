@@ -1,43 +1,74 @@
-import React, { useState, useRef } from "react";
+// AudioFile.tsx
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { X } from "lucide-react";
 
 interface AudioFileProps {
+  trackIndex: number;
+  file: File | null;
+  previewUrl?: string | null;
   onFileSelect: (file: File | null) => void;
 }
 
-export default function AudioFile({ onFileSelect }: AudioFileProps) {
-  const [audioSrc, setAudioSrc] = useState<string | null>(null);
+export default function AudioFile({
+  trackIndex,
+  file,
+  previewUrl,
+  onFileSelect,
+}: AudioFileProps) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [objectUrl, setObjectUrl] = useState<string | null>(null);
 
   // Allowed audio formats
   const allowedFormats = [
-    "audio/mpeg", // MP3
-    "audio/wav", // WAV
-    "audio/mp4", // MP4 (audio)
-    "audio/x-m4a", // M4A
-    "audio/flac", // FLAC
-    "audio/aiff", // AIFF
-    "audio/x-ms-wma", // WMA
+    "audio/mpeg",
+    "audio/wav",
+    "audio/mp4",
+    "audio/x-m4a",
+    "audio/flac",
+    "audio/aiff",
+    "audio/x-ms-wma",
   ];
 
-  const handleAudioUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
+  /**
+   * We use useMemo here so that we only create the object URL
+   * when `file` actually changes, not on every render.
+   */
+  useEffect(() => {
+    let url: string | null = null;
 
-    if (allowedFormats.includes(file.type)) {
-      const previewUrl = URL.createObjectURL(file);
-      setAudioSrc(previewUrl);
-      onFileSelect(file);
+    if (!previewUrl && file) {
+      url = URL.createObjectURL(file);
+      setObjectUrl(url);
+    }
+
+    // Cleanup when component unmounts or `file` changes
+    return () => {
+      if (url) {
+        URL.revokeObjectURL(url);
+      }
+    };
+  }, [file, previewUrl]);
+
+  const displayPreviewUrl = previewUrl || objectUrl;
+
+  const handleAudioUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newFile = event.target.files?.[0] || null;
+    if (newFile) {
+      if (allowedFormats.includes(newFile.type)) {
+        onFileSelect(newFile);
+      } else {
+        alert(
+          "Unsupported format. Please upload MP3, WAV, M4A, FLAC, AIFF, or WMA.",
+        );
+        event.target.value = "";
+        onFileSelect(null);
+      }
     } else {
-      alert(
-        "Unsupported file format. Please upload a valid audio file (MP3, WAV, M4A, FLAC, AIFF, or WMA).",
-      );
-      event.target.value = "";
+      onFileSelect(null);
     }
   };
 
   const handleRemoveAudio = () => {
-    setAudioSrc(null);
     onFileSelect(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -46,28 +77,28 @@ export default function AudioFile({ onFileSelect }: AudioFileProps) {
 
   return (
     <div>
-      {audioSrc && (
+      {displayPreviewUrl && (
         <button className="float-right my-1.5" onClick={handleRemoveAudio}>
           <X />
         </button>
       )}
+
       <div className="mt-4 flex w-full justify-start gap-x-16">
         <div className="h-[200px] w-full">
           <label
-            htmlFor="audio-upload"
+            htmlFor={`audio-upload-${trackIndex}`} // unique ID
             className="flex h-[200px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-[#B8FF5B1A] bg-[#1E1E1E] hover:bg-muted/25"
           >
-            {audioSrc ? (
+            {displayPreviewUrl ? (
               <audio
                 controls
                 className="h-full w-full rounded-lg"
-                src={audioSrc}
+                src={displayPreviewUrl}
               />
             ) : (
               <div className="flex flex-col items-center justify-center pb-6 pt-5">
                 <svg
                   className="mb-4 h-8 w-8 text-gray-500 dark:text-gray-400"
-                  aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 20 16"
@@ -94,7 +125,7 @@ export default function AudioFile({ onFileSelect }: AudioFileProps) {
               </div>
             )}
             <input
-              id="audio-upload"
+              id={`audio-upload-${trackIndex}`}
               type="file"
               accept={allowedFormats.join(", ")}
               className="hidden"

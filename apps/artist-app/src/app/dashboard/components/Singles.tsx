@@ -13,7 +13,7 @@ export default function Singles({ single }: SingleProps) {
           className="h-[64px] w-[64px]"
           width={64}
           height={64}
-          src="/images/album.png"
+          src={single.cover_image_url ?? "/images/album.png"}
           alt="cover"
         />
         <div>
