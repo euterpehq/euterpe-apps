@@ -84,10 +84,13 @@ const SliderPage: React.FC<MyComponentProps> = ({ albums, artists }) => {
             >
               <Link href={`/album/${item.id}`} className="w-full gap-[12px]">
                 <div className="h-[70%] w-full">
-                  <img
-                    src={item?.cover_image_url ?? ""}
+                  <Image
+                    src={item?.cover_image_url ?? null}
                     alt=""
-                    className="h-full w-full rounded-[8px] object-cover"
+                    className="h-[188px] w-[188px] rounded-[8px] object-cover"
+                    height={188}
+                    width={188}
+                    quality={100}
                   />
                 </div>
                 <div className="my-3 flex flex-col gap-1">

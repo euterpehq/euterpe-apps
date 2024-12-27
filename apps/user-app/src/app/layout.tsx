@@ -52,7 +52,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          urbanist.className,
+          figtree.className,
           urbanist.variable,
           aeonik.variable,
           figtree.variable,
