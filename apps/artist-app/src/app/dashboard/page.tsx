@@ -107,7 +107,10 @@ export default function Dashboard() {
             <NoMusic />
           ) : (
             releases.map((release) => {
-              if (release.category_type === "single") {
+              if (
+                release.category_type === "single" &&
+                release.tracks.length === 1
+              ) {
                 return <Singles key={release.id} single={release} />;
               } else {
                 return <Album key={release.id} album={release} />;

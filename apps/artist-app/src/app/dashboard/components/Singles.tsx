@@ -10,11 +10,12 @@ export default function Singles({ single }: SingleProps) {
     <section className="mt-[40px] flex items-center justify-between border-b p-4">
       <div className="flex items-center gap-x-[9px]">
         <Image
-          className="h-[64px] w-[64px]"
+          className="h-[64px] w-[64px] rounded-[4px] object-cover"
           width={64}
           height={64}
           src={single.cover_image_url ?? "/images/album.png"}
           alt="cover"
+          quality={100}
         />
         <div>
           <h2 className="flex-1">{single.title}</h2>

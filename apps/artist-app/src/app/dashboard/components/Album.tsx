@@ -20,7 +20,11 @@ export default function Album({ album }: AlbumProps) {
           <div>
             <h2 className="flex-1">{album.title}</h2>
             <h4 className="mt-2 flex items-center justify-start text-[12px] text-[#868B9F]">
-              Album{" "}
+              {album.category_type === "album"
+                ? "Album"
+                : album.category_type === "single"
+                  ? "Single"
+                  : "EP"}
               <span className="flex items-center justify-center">
                 <Dot size={25} color="#C1FF70" />
                 {album.tracks ? album.tracks.length : 0} tracks
