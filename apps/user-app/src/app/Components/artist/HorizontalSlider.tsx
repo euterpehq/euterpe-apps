@@ -42,12 +42,12 @@ const HorizontalSlider: React.FC = () => {
   return (
     <div className="relative mx-auto h-full w-full overflow-hidden">
       <Swiper
-        spaceBetween={20}
-        slidesPerView={6.8}
+        spaceBetween={8}
+        slidesPerView={"auto"}
         freeMode={true}
         modules={[FreeMode, Pagination]}
         style={{}}
-        className="h-full w-full cursor-grab"
+        className="h-full w-full cursor-pointer"
       >
         {artists?.map((item) => (
           <SwiperSlide
@@ -57,15 +57,15 @@ const HorizontalSlider: React.FC = () => {
               alignItems: "center",
               justifyContent: "center",
               padding: "24px",
-              gap: "10px",
-              width: "188px",
-              height: "h-[400px]",
+              minWidth: "200px",
+              width: "200px",
               background: "#181818",
-              borderRadius: "8px",
+              borderRadius: "12px",
+              marginRight: "8px",
             }}
           >
             <Link href={`/artists/${item.id}`}>
-              <div className="flex h-full flex-col items-center gap-[20px]">
+              <div className="flex h-full w-[200px] flex-col items-center gap-[20px]">
                 <div className="h-[120px] w-[120px]">
                   <Image
                     src={item.artist_image_url || img}
@@ -76,8 +76,10 @@ const HorizontalSlider: React.FC = () => {
                   />
                 </div>
                 <div className="flex flex-col items-center">
-                  <p className="text-[18px]">{item.artist_name}</p>
-                  <p className="text-[15px] text-[#868B9F]">Artist</p>
+                  <p className="text-[15px] font-semibold">
+                    {item.artist_name}
+                  </p>
+                  <p className="text-[12px] text-[#868B9F]">Artist</p>
                 </div>
               </div>
             </Link>

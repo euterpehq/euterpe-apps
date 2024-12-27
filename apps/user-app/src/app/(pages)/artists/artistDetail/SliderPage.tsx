@@ -53,7 +53,7 @@ const SliderPage = () => {
         freeMode={true}
         modules={[FreeMode, Pagination]}
         style={{}}
-        className="h-full w-full cursor-grab"
+        className="h-full w-full cursor-pointer"
       >
         {Discography?.map((item, id) => {
           //const artist = artists.find((a) => a.id === item.artist_id )
@@ -69,12 +69,15 @@ const SliderPage = () => {
                 borderRadius: "8px",
               }}
             >
-              <Link href={`/album/${item.id}`} className="w-full gap-[12px]">
+              <div className="w-full gap-[12px]">
                 <div className="h-[70%] w-full">
                   <Image
                     src={item.image ?? ""}
                     alt=""
                     className="h-full w-full rounded-[8px] object-cover"
+                    width={188}
+                    height={188}
+                    quality={100}
                   />
                 </div>
                 <div className="my-3 flex flex-col gap-1">
@@ -142,7 +145,7 @@ const SliderPage = () => {
                     0.5 EUT
                   </p>
                 </div>
-              </Link>
+              </div>
             </SwiperSlide>
           );
         })}
