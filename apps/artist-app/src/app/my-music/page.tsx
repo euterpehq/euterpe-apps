@@ -6,7 +6,6 @@ import Dashboard from "../dashboard/page";
 export default function page() {
   return (
     <section>
-      <Header />
       <Dashboard />
     </section>
   );

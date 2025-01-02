@@ -27,6 +27,6 @@ export async function GET(request: Request) {
   because the token is expired by then, everything is fine on the first call */
   // return NextResponse.redirect(`${origin}/auth/auth-code-error`);
   return NextResponse.redirect(
-    `${origin}/sign-up#error=access_denied&error_code=auth-code-error&error_description=An+error+occurred+while+verifying+the+magic+link`,
+    `${origin}/sign-up?error=access_denied&error_code=auth-code-error&error_description=An+error+occurred+while+verifying+the+magic+link`,
   );
 }

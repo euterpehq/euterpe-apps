@@ -5,7 +5,8 @@ import { cn } from "@/lib/utils";
 import { AppProvider } from "@/providers/app";
 import "./globals.css";
 import DesktopOnlyNotice from "@/components/DesktopOnlyNotice";
-import { Suspense } from "react";
+import Navbar from "@/components/navbar";
+import AppHeader from "@/components/app-header";
 
 const urbanist = Urbanist({ subsets: ["latin"], variable: "--font-urbanist" });
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
@@ -41,7 +42,7 @@ const aeonik = localFont({
 
 export const metadata: Metadata = {
   title: "Euterpe",
-  description: "Making space for the artists of tomorrow.",
+  description: "making space for a million overlooked artists.",
 };
 
 export default function RootLayout({
@@ -63,13 +64,14 @@ export default function RootLayout({
         )}
       >
         <AppProvider>
-          {/* TODO: figure out a better suspense strategy */}
-          <Suspense fallback={<div></div>}>
-            <div className="md:hidden">
-              <DesktopOnlyNotice />
-            </div>
-            <div className="hidden md:block">{children}</div>
-          </Suspense>
+          <div className="md:hidden">
+            <DesktopOnlyNotice />
+          </div>
+          <div className="hidden h-screen min-h-screen flex-col bg-black md:flex">
+            <Navbar />
+            <AppHeader />
+            <div className="grow">{children}</div>
+          </div>
         </AppProvider>
       </body>
     </html>
