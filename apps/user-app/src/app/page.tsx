@@ -1,17 +1,14 @@
 "use client"
 import React from "react";
 import Header from "@/partials/Header";
-import Player from "./Components/Player";
-import Main from "./Components/TopPicks/Main";
-import Lucky from "./Components/discover/Lucky";
-import Genre from "./Components/genre/Genre";
-import Artists from "./Components/artist/Artists";
+import Player from "../components/audio-player";
 import { useModalStore } from "@/store/modal.store";
-import MiniPlayer from "./Components/MiniPlayer";
+import MiniPlayer from "../components/audio-mini-player";
 import {AnimatePresence, motion} from "framer-motion"
 import { useMiniPlayerStore } from "@/store/miniplayer.store";
 import { AudioInitializer } from "@/partials/AudioInitializer";
 import { UserInteractionTracker } from "@/partials/UserInteractionTracker";
+import ExplorePage from "./explore/page";
 
 
 
@@ -46,10 +43,7 @@ export default function Home() {
     
       
       {/*<FullScreenPlayer />*/}
-      <Main />
-      <Lucky />
-      <Genre />
-      <Artists />
+      <ExplorePage />
       <div className="w-full h-[20vh]"></div>
       <MiniPlayer />
     </>
