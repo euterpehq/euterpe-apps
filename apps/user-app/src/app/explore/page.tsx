@@ -1,3 +1,4 @@
+"use client";
 import React from 'react'
 import FeaturedAlbum from './components/top-picks/featured-album'
 import Mystery from './components/mystery/mystery'
@@ -6,7 +7,7 @@ import FeaturedArtists from './components/artists/featured-artists'
 
 
 
-export const ExplorePage = () => {
+export default function ExplorePage(){
   return (
     <div>
       <FeaturedAlbum />

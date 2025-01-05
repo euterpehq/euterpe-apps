@@ -8,7 +8,8 @@ import {AnimatePresence, motion} from "framer-motion"
 import { useMiniPlayerStore } from "@/store/miniplayer.store";
 import { AudioInitializer } from "@/partials/AudioInitializer";
 import { UserInteractionTracker } from "@/partials/UserInteractionTracker";
-import  { ExplorePage } from "./explore/page";
+import ExplorePage from "./explore/page";
+
 
 
 
