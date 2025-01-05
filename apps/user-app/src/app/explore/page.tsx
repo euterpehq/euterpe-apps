@@ -4,7 +4,9 @@ import Mystery from './components/mystery/mystery'
 import Genre from './components/genre/genre-card'
 import FeaturedArtists from './components/artists/featured-artists'
 
-const ExplorePage = () => {
+
+
+export const ExplorePage = () => {
   return (
     <div>
       <FeaturedAlbum />
@@ -15,4 +17,4 @@ const ExplorePage = () => {
   )
 }
 
-export default ExplorePage;
+

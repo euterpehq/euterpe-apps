@@ -14,8 +14,8 @@ const FeaturedAlbum: React.FC = () => {
     queryFn: fetchAlbumsAndArtists, 
   });
 
-  if (isLoading) return <div className='mt-5'><LoadingSkeleton slidesPerView={slidesPerView}/></div>;
-  if (isError || !data) return <div>Error occurred while fetching data.</div>;
+  if (isLoading) return <div className='mt-5 pl-6'><LoadingSkeleton slidesPerView={slidesPerView}/></div>;
+  if (isError || !data) return <div className='pl-6'>Error occurred while fetching data.</div>;
 
   const { albums, artists } = data;
 
