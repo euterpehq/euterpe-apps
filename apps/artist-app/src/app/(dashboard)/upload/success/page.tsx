@@ -90,7 +90,7 @@ export default function SuccessPage() {
             )}
             <Link
               href="/my-music"
-              className="m-auto mt-10 block h-[44px] w-full items-center justify-center rounded-[8px] border bg-[#C1FF70] px-[14px] py-[14px] text-center font-semibold text-black"
+              className="m-auto mt-10 block h-[44px] w-full items-center justify-center rounded-[8px] border bg-primary px-[14px] py-[14px] text-center font-semibold text-black"
             >
               Done
             </Link>

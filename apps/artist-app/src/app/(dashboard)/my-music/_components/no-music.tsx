@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import CreateTokenBanner from "@/partials/banners/CreateTokenBanner";
 import Balancer from "react-wrap-balancer";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -33,7 +32,6 @@ function NoMusic() {
         transition={{ duration: 0.25 }}
         className="flex flex-1 flex-col gap-4 p-5"
       >
-        <CreateTokenBanner />
         <div className="flex flex-1 flex-col items-center rounded-[16px] border-[0.5px] bg-white/[0.02] py-[3.75rem]">
           <CoinIcon />
           <h2 className="mt-4 font-azeret font-medium leading-tight">

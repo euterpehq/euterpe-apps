@@ -1,4 +1,4 @@
-import { DatePicker } from "@/components/DatePicker";
+import { DatePicker } from "@/components/date-picker";
 import { AppSidebar } from "@/components/app-sidebar";
 import {
   Breadcrumb,
@@ -14,7 +14,6 @@ import {
 
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import Header from "@/partials/Header";
 import { AreaChartComponent } from "./charts/AreaChart";
 import Statistics from "./components/Statistics";
 import Profile from "./components/Profile";

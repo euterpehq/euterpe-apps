@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import UploadMusicModal from "./components/UploadMusicModal";
 import Album from "./components/Album";
 import Singles from "./components/Singles";
-import NoMusic from "@/partials/my-music/NoMusic";
+import NoMusic from "@/app/(dashboard)/my-music/_components/no-music";
 import { getCurrentUser } from "@/lib/queries/users";
 import { getUserReleases } from "@/lib/queries/albums";
 
