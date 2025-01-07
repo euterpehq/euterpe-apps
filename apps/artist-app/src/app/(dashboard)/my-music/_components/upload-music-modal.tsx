@@ -10,8 +10,8 @@ import { createAlbum } from "@/lib/actions/albums";
 import { createTrack } from "@/lib/actions/tracks";
 import { uploadImageToBucket } from "@/lib/actions/storage";
 
-import CoverImage from "./CoverImage";
-import AudioFile from "./AudioFile";
+import CoverImage from "./cover-image";
+import AudioFile from "./audio-file";
 
 import { LuLoader } from "react-icons/lu";
 // or whichever spinner icon you want (e.g. lucide-react's Loader)

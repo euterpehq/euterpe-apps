@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import EditProfile from "./EditProfile";
+import EditProfile from "./edit-profile";
 import { getCurrentUser, getArtistProfile } from "@/lib/queries/users";
 
 interface UserProfileData {
@@ -10,7 +10,7 @@ interface UserProfileData {
   artistImage: string;
 }
 
-export default function UserProfile() {
+export default function UserProfileCard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [userProfile, setUserProfile] = useState<UserProfileData>({

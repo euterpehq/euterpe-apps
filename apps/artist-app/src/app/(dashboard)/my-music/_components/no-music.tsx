@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Balancer from "react-wrap-balancer";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import UploadMusicModal from "@/app/dashboard/components/UploadMusicModal";
+import UploadMusicModal from "./upload-music-modal";
 import { motion, AnimatePresence } from "framer-motion";
 
 function NoMusic() {

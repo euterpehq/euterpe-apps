@@ -9,9 +9,9 @@ import { getArtistProfile, getCurrentUser } from "@/lib/queries/users";
 import { updateArtistProfile } from "@/lib/actions/users";
 import { uploadImageToBucket } from "@/lib/actions/storage";
 
-import StreamingLinks from "./StreamingLinks";
-import UpdateProfilePic from "./UpdateProfilePic";
-import BannerImage from "./BannerImage";
+import StreamingLinks from "./streaming-links";
+import UpdateProfilePic from "./update-profile-pic";
+import BannerImage from "./banner-image";
 
 interface EditProfileProps {
   isModalOpen: boolean;

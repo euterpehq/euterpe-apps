@@ -1,6 +1,6 @@
 "use client";
 
-import UserProfile from "@/app/dashboard/components/UserProfile";
+import UserProfileCard from "@/components/sidebar/user-profile-card";
 import {
   Sidebar,
   SidebarContent,
@@ -65,7 +65,7 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="flex items-center border-b-[0.5px] border-[#303033] p-4">
-        <UserProfile />
+        <UserProfileCard />
       </SidebarHeader>
 
       <SidebarContent>
