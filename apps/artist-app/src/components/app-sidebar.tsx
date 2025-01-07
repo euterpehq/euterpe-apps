@@ -4,69 +4,97 @@ import UserProfile from "@/app/dashboard/components/UserProfile";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
 } from "@/components/ui/sidebar";
 import { Compass, House } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+
+const menuItems = [
+  // {
+  //   title: "Home",
+  //   href: "/home",
+  //   icon: (props: React.SVGProps<SVGSVGElement>) => (
+  //     <svg
+  //       xmlns="http://www.w3.org/2000/svg"
+  //       width="24"
+  //       height="24"
+  //       viewBox="0 0 24 24"
+  //       fill="none"
+  //       {...props}
+  //     >
+  //       <path
+  //         d="M9.0406 18.72C9.0406 19.1177 9.36296 19.44 9.76062 19.44C10.1583 19.44 10.4806 19.1177 10.4806 18.72H9.0406ZM13.5219 18.72C13.5219 19.1177 13.8443 19.44 14.2419 19.44C14.6395 19.44 14.9619 19.1177 14.9619 18.72H13.5219ZM9.76062 19.44C10.1583 19.44 10.4806 19.1177 10.4806 18.72C10.4806 18.3223 10.1583 18 9.76062 18V19.44ZM7.51996 18.72L7.51263 19.44H7.51996V18.72ZM5.56924 17.0428L4.84974 17.0695C4.85083 17.0992 4.85377 17.1288 4.85852 17.1581L5.56924 17.0428ZM5.311 10.0743L6.03051 10.0476C6.02929 10.0147 6.02581 9.98185 6.02009 9.9494L5.311 10.0743ZM6.37852 7.91233L6.05118 7.27102L6.04655 7.27342L6.37852 7.91233ZM11.1161 5.49409L11.4435 6.13538L11.4449 6.13462L11.1161 5.49409ZM12.8873 5.49409L12.5585 6.13462L12.56 6.13538L12.8873 5.49409ZM17.6249 7.91233L17.9569 7.27341L17.9523 7.27104L17.6249 7.91233ZM18.6925 10.0743L17.9833 9.9494C17.9776 9.98182 17.9742 10.0146 17.9729 10.0475L18.6925 10.0743ZM18.4333 17.0428L19.1439 17.1581C19.1487 17.1289 19.1516 17.0993 19.1528 17.0696L18.4333 17.0428ZM16.4825 18.72V19.4401L16.4898 19.44L16.4825 18.72ZM14.2419 18C13.8443 18 13.5219 18.3223 13.5219 18.72C13.5219 19.1177 13.8443 19.44 14.2419 19.44V18ZM9.76062 18C9.36296 18 9.0406 18.3223 9.0406 18.72C9.0406 19.1177 9.36296 19.44 9.76062 19.44V18ZM14.2419 19.44C14.6395 19.44 14.9619 19.1177 14.9619 18.72C14.9619 18.3223 14.6395 18 14.2419 18V19.44ZM10.4806 18.72V16.4803H9.0406V18.72H10.4806ZM10.4806 16.4803C10.4806 15.6405 11.1615 14.9596 12.0013 14.9596V13.5196C10.3661 13.5196 9.0406 14.8452 9.0406 16.4803H10.4806ZM12.0013 14.9596C12.8411 14.9596 13.5219 15.6405 13.5219 16.4803H14.9619C14.9619 14.8452 13.6363 13.5196 12.0013 13.5196V14.9596ZM13.5219 16.4803V18.72H14.9619V16.4803H13.5219ZM9.76062 18H7.51996V19.44H9.76062V18ZM7.52729 18.0001C6.90596 17.9937 6.37941 17.541 6.27997 16.9276L4.85852 17.1581C5.07013 18.4633 6.19054 19.4265 7.51263 19.44L7.52729 18.0001ZM6.28875 17.0163L6.03051 10.0476L4.5915 10.1009L4.84974 17.0695L6.28875 17.0163ZM6.02009 9.9494C5.9203 9.3826 6.1998 8.81658 6.71049 8.55123L6.04655 7.27342C4.97793 7.82868 4.3931 9.01307 4.6019 10.1991L6.02009 9.9494ZM6.70586 8.55362L11.4435 6.13538L10.7888 4.8528L6.05118 7.27102L6.70586 8.55362ZM11.4449 6.13462C11.7945 5.95521 12.209 5.95521 12.5585 6.13462L13.2161 4.85356C12.4538 4.46223 11.5497 4.46223 10.7873 4.85356L11.4449 6.13462ZM12.56 6.13538L17.2976 8.55362L17.9523 7.27104L13.2147 4.8528L12.56 6.13538ZM17.293 8.55123C17.8037 8.81658 18.0831 9.3826 17.9833 9.9494L19.4015 10.1991C19.6103 9.01307 19.0255 7.82867 17.9569 7.27341L17.293 8.55123ZM17.9729 10.0475L17.7137 17.0162L19.1528 17.0696L19.412 10.101L17.9729 10.0475ZM17.7226 16.9276C17.6231 17.541 17.0966 17.9937 16.4751 18.0001L16.4898 19.44C17.8119 19.4265 18.9324 18.4633 19.1439 17.1581L17.7226 16.9276ZM16.4825 18H14.2419V19.44L16.4825 19.4401V18ZM9.76062 19.44H14.2419V18H9.76062V19.44Z"
+  //         fill="currentColor"
+  //       />
+  //     </svg>
+  //   ),
+  // },
+  {
+    title: "My Music",
+    href: "/my-music",
+    icon: (props: React.SVGProps<SVGSVGElement>) => (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        {...props}
+      >
+        <g clip-path="url(#clip0_3415_2923)">
+          <path
+            d="M12 20C7.5816 20 4 16.4184 4 12C4 7.5816 7.5816 4 12 4C16.4184 4 20 7.5816 20 12C20 16.4184 16.4184 20 12 20ZM12 18.4C13.6974 18.4 15.3253 17.7257 16.5255 16.5255C17.7257 15.3253 18.4 13.6974 18.4 12C18.4 10.3026 17.7257 8.67475 16.5255 7.47452C15.3253 6.27428 13.6974 5.6 12 5.6C10.3026 5.6 8.67475 6.27428 7.47452 7.47452C6.27428 8.67475 5.6 10.3026 5.6 12C5.6 13.6974 6.27428 15.3253 7.47452 16.5255C8.67475 17.7257 10.3026 18.4 12 18.4ZM12 8.04L15.96 12L12 15.96L8.04 12L12 8.04ZM12 10.3032L10.3032 12L12 13.6968L13.6968 12L12 10.3032Z"
+            fill="currentColor"
+          />
+        </g>
+        <defs>
+          <clipPath id="clip0_3415_2923">
+            <rect width="24" height="24" fill="white" />
+          </clipPath>
+        </defs>
+      </svg>
+    ),
+  },
+];
 
 export function AppSidebar() {
   const pathname = usePathname();
 
   return (
     <Sidebar>
-      <SidebarHeader />
+      <SidebarHeader className="flex items-center border-b-[0.5px] border-[#303033] p-4">
+        <UserProfile />
+      </SidebarHeader>
+
       <SidebarContent>
-        <div className="flex pt-16 pb-8 shrink-0 items-center gap-2 border-b px-4">
-          <UserProfile />
-        </div>
-        <div className="flex flex-col pb-2 shrink-0 justify-start gap-2 border-b px-4">
-          {/* Home */}
-          {/* <Link
-            href="/home"
-            className={`cursor-pointer p-[10px] flex justify-start items-center gap-x-[10px] ${
-              pathname === "/home" ? "text-[#C1FF70]" : "text-[#C2C6D6]"
-            }`}
-          >
-            <House
-              size={20}
-              color={pathname === "/home" ? "#C1FF70" : "#C2C6D6"}
-            />
-            <div>
-              <h3
-                className={`text-[14px] font-mono font-semibold ${
-                  pathname === "/home" ? "text-[#C1FF70]" : "text-[#C2C6D6]"
-                }`}
+        <div className="flex flex-col gap-1 border-b-[0.5px] px-4 pb-6 pt-3">
+          {menuItems.map((item) => {
+            return (
+              <Link
+                key={item.title}
+                href={item.href}
+                className={cn(
+                  "flex h-[34px] cursor-pointer items-center justify-start gap-2 py-[11px] text-[#C2C6D6]",
+                  {
+                    "text-primary": pathname === item.href,
+                  },
+                )}
               >
-                Home
-              </h3>
-            </div>
-          </Link> */}
-          {/* My Music */}
-          <Link
-            href="/my-music"
-            className={`cursor-pointer p-[10px] flex justify-start items-center gap-x-[10px] ${
-              pathname === "/my-music" ? "text-[#C1FF70]" : "text-[#C2C6D6]"
-            }`}
-          >
-            <Compass
-              size={20}
-              color={pathname === "/my-music" ? "#C1FF70" : "#C2C6D6"}
-            />
-            <div>
-              <h3
-                className={`text-[14px] font-mono font-semibold ${
-                  pathname === "/my-music" ? "text-[#C1FF70]" : "text-[#C2C6D6]"
-                }`}
-              >
-                My Music
-              </h3>
-            </div>
-          </Link>
+                <div className="h-6 w-6 shrink-0">
+                  <item.icon />
+                </div>
+                <div>
+                  <h3 className="text-[13px] font-semibold tracking-[-0.02em]">
+                    {item.title}
+                  </h3>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </SidebarContent>
-      <SidebarFooter />
     </Sidebar>
   );
 }

@@ -29,7 +29,7 @@ export default function Page() {
             size="sm"
             asChild
           >
-            <Link href="/sign-up">
+            <Link href="/my-music">
               Get started
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -5,8 +5,6 @@ import { cn } from "@/lib/utils";
 import { AppProvider } from "@/providers/app";
 import "./globals.css";
 import DesktopOnlyNotice from "@/components/DesktopOnlyNotice";
-import Navbar from "@/components/navbar";
-import AppHeader from "@/components/app-header";
 
 const urbanist = Urbanist({ subsets: ["latin"], variable: "--font-urbanist" });
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
@@ -67,11 +65,7 @@ export default function RootLayout({
           <div className="md:hidden">
             <DesktopOnlyNotice />
           </div>
-          <div className="hidden h-screen min-h-screen flex-col bg-black md:flex">
-            <Navbar />
-            <AppHeader />
-            <div className="grow">{children}</div>
-          </div>
+          <div className="hidden md:block">{children}</div>
         </AppProvider>
       </body>
     </html>

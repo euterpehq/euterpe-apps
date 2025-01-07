@@ -1,7 +1,7 @@
 "use client";
 import Header from "@/partials/Header";
 import React from "react";
-import Dashboard from "../dashboard/page";
+import Dashboard from "../../dashboard/page";
 
 export default function page() {
   return (

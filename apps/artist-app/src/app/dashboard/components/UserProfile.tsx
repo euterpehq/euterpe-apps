@@ -57,7 +57,7 @@ export default function UserProfile() {
     <>
       <div
         onClick={openModal}
-        className="flex h-[54px] w-[240px] cursor-pointer items-center justify-start gap-x-[10px] rounded-[8px] bg-[#181818] p-[10px]"
+        className="flex h-[54px] w-[208px] cursor-pointer items-center justify-start gap-x-[10px] rounded-[8px] border-[0.5px] border-[#303033] bg-[#181818] p-[11px]"
       >
         <div className="h-[32px] w-[32px] overflow-hidden rounded-full border">
           <img

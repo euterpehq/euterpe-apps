@@ -14,6 +14,7 @@ import { Avatar as AvatarCatalyst } from "@/components/catalyst/avatar";
 import { signOut } from "@/lib/actions/auth";
 import { getCurrentUser } from "@/lib/queries/users";
 import { usePathname } from "next/navigation";
+import { Separator } from "@/components/ui/separator";
 
 function Header() {
   const [email, setEmail] = useState("");
@@ -36,18 +37,15 @@ function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 flex h-[3.25rem] items-center justify-between border-b-[0.2px] border-[#303033]/80 bg-black px-6 py-3">
+    <header className="flex h-[3.25rem] items-center justify-between border-b-[0.2px] border-[#303033]/80 bg-background px-6 py-3">
       <div className="flex">
-        <div className="flex items-center gap-2 lg:flex">
+        <div className="flex items-center gap-10">
           <Link href="/">
-            <h2 className="text-sm font-bold">Euterpe</h2>
+            <h2 className="font-aeonik font-semibold tracking-[-0.04em]">
+              Euterpe.
+            </h2>
           </Link>
-          <Badge
-            variant="outline"
-            className="hidden text-nowrap font-azeret text-[0.563rem] md:inline-flex"
-          >
-            Listen to Earn
-          </Badge>
+          <Separator orientation="vertical" className="mr-2 h-6 bg-[#303033]" />
         </div>
       </div>
 
@@ -55,7 +53,7 @@ function Header() {
         <Dropdown>
           <DropdownButton as="button">
             <AvatarCatalyst
-              className="size-8"
+              className="size-6"
               src="https://api.dicebear.com/9.x/glass/svg?seed=Avery"
             />
           </DropdownButton>
