@@ -1,16 +1,10 @@
+"server only";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
-import { fetchArtistById } from "@/lib/queries/artist/get-artist";
-import { fetchAlbums } from "@/lib/queries/album/get-albums";
-import { fetchArtistProfiles } from "@/lib/queries/artist/get-artists";
-import ArtistPage from "../components/artist-page";
+import { getArtistById } from "@/lib/queries/artist/get-artist-by-id";
+import { getAlbums } from "@/lib/queries/album/get-albums";
+import ArtistPage from "../_components/artist-page";
 
-// Pre-fetch static paths at build time
-export async function generateStaticParams() {
-  const artists = await fetchArtistProfiles();
-  return artists.map((artist) => ({
-    id: artist.id.toString(), 
-  }));
-}
+
 
 export default async function ArtistPageRoute({ params: incomingParam }: { params: Promise<{ id: string }> }){
     const queryClient = new QueryClient();
@@ -20,13 +14,13 @@ export default async function ArtistPageRoute({ params: incomingParam }: { param
   // Prefetch the artist by ID
     await queryClient.prefetchQuery({
       queryKey: ['artist', artistId],
-      queryFn: () => fetchArtistById(artistId)
+      queryFn: () => getArtistById(artistId)
     })
 
     // Prefetch albums
     await queryClient.prefetchQuery({
       queryKey: ["albums"],
-      queryFn: fetchAlbums,
+      queryFn: getAlbums,
     })
 
     return (

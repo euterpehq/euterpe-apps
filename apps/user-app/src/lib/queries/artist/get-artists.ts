@@ -6,7 +6,7 @@ const supabase = createClient();
 export type ArtistProfile = Database["public"]["Tables"]["artist_profiles"]["Row"];
 
 // Fetch all artist profiles
-export const fetchArtistProfiles = async (): Promise<ArtistProfile[]> => {
+export const getArtists = async (): Promise<ArtistProfile[]> => {
     const { data, error } = await supabase.from("artist_profiles").select("*");
     if (error) {
         throw new Error(error.message);

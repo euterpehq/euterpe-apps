@@ -1,11 +1,11 @@
-import { fetchAlbums } from "../album/get-albums";
-import { fetchArtistProfiles } from "../artist/get-artists";
+import { getAlbums } from "../album/get-albums";
+import { getArtists } from "../artist/get-artists";
 
 
-export const fetchAlbumsAndArtists = async () => {
+export const getAlbumsAndArtists = async () => {
     const [albums, artists] = await Promise.all([
-      fetchAlbums(), // Fetch albums data
-      fetchArtistProfiles(), // Fetch artists data
+      getAlbums(), // Fetch albums data
+      getArtists(), // Fetch artists data
     ]);
     return { albums, artists }; // Return both in a single object
   };

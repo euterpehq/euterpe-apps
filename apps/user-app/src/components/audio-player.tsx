@@ -15,6 +15,7 @@ import { Song } from "@/lib/queries/supabaseQueries";
 import useAlbumStore from "@/store/album.store";
 import Image from "next/image";
 import useArtistStore from "@/store/artist.store";
+import { useQuery } from "@tanstack/react-query";
 
 
 export type PlayerProps = {
@@ -68,6 +69,7 @@ const Player: React.FC = () => {
     fetchAlbum()
     fetchArtist()
   },[fetchAlbum, fetchArtist])
+
   
   const song = albumSongs[currentSongIndex]
 
