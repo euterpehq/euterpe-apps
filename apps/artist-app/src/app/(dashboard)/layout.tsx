@@ -1,24 +1,26 @@
 import React from "react";
 import AppHeader from "@/components/app-header";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
+import AppMarqueeBanner from "@/components/app-marquee-banner";
+import { getArtist } from "@/lib/queries/artist/get-artist";
+import DataFetchErrorDisplay from "@/components/data-fetch-error-display";
 
-export default function Layout({
+export default async function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { data: artist } = await getArtist();
+  if (!artist) return <DataFetchErrorDisplay />;
   return (
     <div className="flex h-screen min-h-screen flex-col bg-background">
       <AppHeader />
-      <SidebarProvider className="w-full flex-1">
-        <AppSidebar />
+      <SidebarProvider>
+        <AppSidebar artist={artist} />
         <SidebarInset>
-          <main>{children}</main>
+          <AppMarqueeBanner />
+          <main className="flex-1">{children}</main>
         </SidebarInset>
       </SidebarProvider>
     </div>

@@ -1,15 +1,18 @@
 "use client";
-
 import UserProfileCard from "@/components/sidebar/user-profile-card";
 import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
 } from "@/components/ui/sidebar";
-import { Compass, House } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { getArtist } from "@/lib/queries/artist/get-artist";
+
+export type ArtistProps = NonNullable<
+  Awaited<ReturnType<typeof getArtist>>["data"]
+>;
 
 const menuItems = [
   // {
@@ -59,13 +62,19 @@ const menuItems = [
   },
 ];
 
-export function AppSidebar() {
+export function AppSidebar({ artist }: { artist: ArtistProps }) {
   const pathname = usePathname();
 
   return (
     <Sidebar>
       <SidebarHeader className="flex items-center border-b-[0.5px] border-[#303033] p-4">
-        <UserProfileCard />
+        <UserProfileCard
+          artistName={artist.artist_name || artist.email || "Unknown Artist"}
+          imageUrl={
+            artist.artist_image_url ||
+            "https://api.dicebear.com/9.x/notionists/svg?seed=Felix"
+          }
+        />
       </SidebarHeader>
 
       <SidebarContent>

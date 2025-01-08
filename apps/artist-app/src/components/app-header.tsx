@@ -16,7 +16,7 @@ import { getCurrentUser } from "@/lib/queries/users";
 import { usePathname } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 
-function Header() {
+function AppHeader() {
   const [email, setEmail] = useState("");
   const pathname = usePathname();
 
@@ -97,4 +97,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default AppHeader;
