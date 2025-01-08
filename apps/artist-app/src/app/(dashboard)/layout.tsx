@@ -16,13 +16,15 @@ export default async function Layout({
   return (
     <div className="flex h-screen min-h-screen flex-col bg-background">
       <AppHeader />
-      <SidebarProvider>
-        <AppSidebar artist={artist} />
-        <SidebarInset>
-          <AppMarqueeBanner />
-          <main className="flex-1">{children}</main>
-        </SidebarInset>
-      </SidebarProvider>
+      <div className="flex flex-1 overflow-hidden">
+        <SidebarProvider>
+          <AppSidebar artist={artist} />
+          <SidebarInset>
+            <AppMarqueeBanner />
+            <div className="flex-1 overflow-scroll">{children}</div>
+          </SidebarInset>
+        </SidebarProvider>
+      </div>
     </div>
   );
 }

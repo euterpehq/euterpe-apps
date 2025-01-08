@@ -33,7 +33,7 @@ export default function EmptyState() {
         transition={{ duration: 0.25 }}
         className="flex flex-1 flex-col gap-[30px] p-6 pt-[50px]"
       >
-        <h1 className="text-[24px] font-semibold tracking-[-0.04em]">
+        <h1 className="text-[32px] font-semibold tracking-[-0.04em]">
           My Music
         </h1>
         <div className="flex flex-1 flex-col items-center rounded-[16px] border-[0.5px] bg-[#1E1E1E] py-[3.75rem]">

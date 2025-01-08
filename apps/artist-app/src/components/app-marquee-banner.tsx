@@ -11,7 +11,7 @@ function AppMarqueeBanner() {
           "linear-gradient(90deg, #D6FFA0 0%, #FFC2D5 53%, #5754F6 100%)",
       }}
     >
-      <Marquee pauseOnHover>
+      <Marquee className="z-0" loop={3} pauseOnHover>
         <div className="flex cursor-default items-center gap-24 px-12">
           <div className="flex items-center gap-6">
             <h3 className="font-azeret text-xs leading-[20px] text-black">

@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import UploadMusicModal from "./upload-music-modal";
-import Album from "./album";
-import Singles from "./singles";
+import Single from "./single";
+import Multiple from "./multiple";
 import { getAlbums } from "@/lib/queries/album/get-albums";
 
 export type ReleasesProps = NonNullable<
@@ -74,27 +74,24 @@ export default function Releases({ releases }: { releases: ReleasesProps }) {
         </section>
       </header>
 
-      <section className="mt-[30px] flex border-b px-2.5 py-[14px] text-xs font-medium tracking-[-0.02em]">
+      <section className="mt-[30px] flex px-2.5 py-[14px] text-xs font-medium tracking-[-0.02em]">
         <h2 className="flex-1">Releases</h2>
         <div className="flex items-center justify-between">
-          <h2 className="w-[135px] text-[#9C9C9C]">Plays</h2>
-          <h2 className="w-[135px] justify-end text-end text-[#9C9C9C]">
-            Date Released
-          </h2>
+          <h2 className="text-[#9C9C9C]">Plays</h2>
+          <h2 className="w-[185px] text-end text-[#9C9C9C]">Date Released</h2>
         </div>
       </section>
 
-      {releases &&
-        releases.map((release) => {
-          if (
-            release.category_type === "single" &&
-            release.tracks.length === 1
-          ) {
-            return <Singles key={release.id} single={release} />;
-          } else {
-            return <Album key={release.id} album={release} />;
-          }
-        })}
+      <div className="flex flex-col gap-10 pb-10">
+        {releases &&
+          releases.map((release) => {
+            if (release.tracks.length === 1) {
+              return <Single key={release.id} single={release} />;
+            } else {
+              return <Multiple key={release.id} album={release} />;
+            }
+          })}
+      </div>
     </div>
   );
 }
