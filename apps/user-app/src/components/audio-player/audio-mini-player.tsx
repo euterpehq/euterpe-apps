@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { getBackgroundColor, type RGB } from "@/lib/colors";
 //import { artists } from "@/data/songs";
-import PlayerControls from "@/partials/feed/PlayerControls";
+
 import NextSongButton from "@/components/NextSongButton";
-import UserActions from "@/partials/feed/UserActions";
+
 import HiddenCoverArt from "@/components/HiddenCoverArt";
-import StreamingLinks from "@/partials/feed/StreamingLinks";
+
 import { useEarningsStore } from "@/providers/store/earnings.store";
 import { url } from "inspector";
 import MiniHiddenCoverArt from "@/components/MiniHiddenCoverArt";
@@ -15,6 +15,9 @@ import { useModalStore } from "@/store/modal.store";
 import useAlbumStore from "@/store/album.store";
 import Image from "next/image";
 import useArtistStore from "@/store/artist.store";
+import PlayerControls from "./PlayerControls";
+import StreamingLinks from "./StreamingLinks";
+import UserActions from "./UserActions";
 
 const MiniPlayer: React.FC = () => {
   const updateEarnings = useEarningsStore((state) => state.updateEarnings);

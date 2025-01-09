@@ -1,29 +1,28 @@
 "use client";
-import MiniPlayer from "@/components/audio-mini-player";
-import { AudioInitializer } from "@/partials/AudioInitializer";
-import Header from "@/partials/Header";
-import { UserInteractionTracker } from "@/partials/UserInteractionTracker";
+
 import { useMiniPlayerStore } from "@/store/miniplayer.store";
 import { useModalStore } from "@/store/modal.store";
 import {AnimatePresence, motion} from "framer-motion"
-import Player from "@/components/audio-player";
+
 import { useQuery } from "@tanstack/react-query";
 import { getAlbumById } from "@/lib/queries/album/get-album-by-id";
 import AlbumHead, { AlbumHeadSkeleton } from "./album-header";
 import AlbumSongs from "./album-track-list";
+import { AudioInitializer } from "@/components/audio-player/AudioInitializer";
+import { UserInteractionTracker } from "@/components/audio-player/UserInteractionTracker";
+import Header from "@/components/Header";
+import MiniPlayer from "@/components/audio-player/audio-mini-player";
+import Player from "@/components/audio-player/audio-player";
 
+export type AlbumPageProps = NonNullable<
+  Awaited<ReturnType<typeof getAlbumById>>
+>;
 
-export default function AlbumPage({albumId}:{albumId: string}){
+export default function AlbumPage({album}:{album: AlbumPageProps}){
     const {isOpen, closeModal} = useModalStore();
     const {isVisible} = useMiniPlayerStore()
    
-    const {data: album, isLoading: albumLoading} = useQuery({
-        queryKey: ["album", albumId],
-        queryFn: () => getAlbumById(albumId),
-        enabled: !!albumId
-    })
-  
-    if(albumLoading) return <div><AlbumHeadSkeleton /></div>
+    
    
     if(!album) return <div>Album not Found</div>
   

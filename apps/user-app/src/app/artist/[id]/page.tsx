@@ -1,32 +1,31 @@
-"server only";
-import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import "server-only";
 import { getArtistById } from "@/lib/queries/artist/get-artist-by-id";
 import { getAlbums } from "@/lib/queries/album/get-albums";
 import ArtistPage from "../_components/artist-page";
+import { getArtists } from "@/lib/queries/artist/get-artists";
 
+export type ArtistPageRouteProps = {
+  params: Promise<{ id: string }>;
+};
 
+export default async function ArtistPageRoute({ params }: ArtistPageRouteProps){
+  const { id: artistId } = await params;
 
-export default async function ArtistPageRoute({ params: incomingParam }: { params: Promise<{ id: string }> }){
-    const queryClient = new QueryClient();
-  
-    const {id: artistId} =  await incomingParam;
+  const artist = await getArtistById(artistId);
+  if (!artist) {
+    return <div>Artist not found</div>;
+  }
 
-  // Prefetch the artist by ID
-    await queryClient.prefetchQuery({
-      queryKey: ['artist', artistId],
-      queryFn: () => getArtistById(artistId)
-    })
+  const albums = await getAlbums();
 
-    // Prefetch albums
-    await queryClient.prefetchQuery({
-      queryKey: ["albums"],
-      queryFn: getAlbums,
-    })
+  const artists = await getArtists();
+ 
 
     return (
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <ArtistPage artistId={artistId}/>
-      </HydrationBoundary>
+      <>
+       <ArtistPage artist={artist} albums={albums} artists={artists}/>
+      </>
+      
     )
 }
 

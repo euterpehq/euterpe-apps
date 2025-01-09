@@ -7,20 +7,14 @@ import { FreeMode, Pagination } from "swiper/modules";
 import Image from "next/image";
 import Link from "next/link";
 import img from "@/assets/images/artFrame.jpg";
-import { getArtists } from "@/lib/queries/artist/get-artists";
-import { useQuery } from "@tanstack/react-query";
-import { LoadingSkeleton } from "@/app/explore/_components/artists/featured-artists";
+import { ArtistProfile } from "@/lib/queries/artist/get-artists";
 
-const HorizontalSlider: React.FC = () => {
 
-  const {data: artists, isLoading: artistLoading} = useQuery({
-    queryKey: ["artists"],
-    queryFn: getArtists,
-  })
+interface MyComponentProps {
+  artists: ArtistProfile[];
+}
 
-  const slidesPerView = 6;
-
-  if (artistLoading) return <LoadingSkeleton slidesPerView={slidesPerView} />
+const ArtistSlider: React.FC<MyComponentProps> = ({artists}) => {
 
   if (!artists) return <div>Artist not found</div>;
 
@@ -75,4 +69,4 @@ const HorizontalSlider: React.FC = () => {
   );
 };
 
-export default HorizontalSlider;
+export default ArtistSlider;

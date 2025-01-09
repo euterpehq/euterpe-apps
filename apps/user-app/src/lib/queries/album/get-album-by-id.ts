@@ -1,11 +1,13 @@
+import "server-only";
 import { Database } from "@/types/database.types";
-import { createClient } from "../../supabase/client";
+import { createClient } from "../../supabase/server";
 import { Album } from "./get-albums";
 
-const supabase = createClient();
+
 
 // Fetch a single album by ID
 export const getAlbumById = async (albumId: string): Promise<Album | null> => {
+    const supabase = await createClient();
     const { data, error } = await supabase
         .from("albums")
         .select("*")

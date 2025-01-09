@@ -1,13 +1,8 @@
 "use client";
-import { UserInteractionTracker } from "@/partials/UserInteractionTracker";
-import { AudioInitializer } from "@/partials/AudioInitializer";
-import Header from "@/partials/Header";
-import MiniPlayer from "@/components/audio-mini-player";
-import Player from "@/components/audio-player";
 import { AnimatePresence, motion } from "framer-motion";
 import { useModalStore } from "@/store/modal.store";
 import { useMiniPlayerStore } from "@/store/miniplayer.store";
-import HorizontalSlider from "@/app/explore/_components/artists/artists-horizontal-slider";
+import HorizontalSlider from "@/components/Homepage/artists-horizontal-slider";
 import { getArtistById } from "@/lib/queries/artist/get-artist-by-id";
 import { getAlbums } from "@/lib/queries/album/get-albums";
 import { Skeleton } from '@/components/ui/skeleton';
@@ -16,34 +11,23 @@ import Banner from "./artist-header";
 import Description from "./artist-description";
 import TopSongs from "./artist-songs";
 import ArtistDiscography from "./artist-discography";
+import { UserInteractionTracker } from "@/components/audio-player/UserInteractionTracker";
+import { AudioInitializer } from "@/components/audio-player/AudioInitializer";
+import Header from "@/components/Header";
+import Player from "@/components/audio-player/audio-player";
+import MiniPlayer from "@/components/audio-player/audio-mini-player";
+import { getArtists } from "@/lib/queries/artist/get-artists";
 
-export const  BannerSkeleton = () => {
-  return (
-    <Skeleton className="relative h-[250px] w-full">
-      <Skeleton className="absolute right-10 top-[75%] h-[140px] w-[140px] rounded-[24px]" />
-    </Skeleton>
-  );
-}
+export type ArtistPageProps = {
+  artist: NonNullable<Awaited<ReturnType<typeof getArtistById>>>;
+  albums: NonNullable<Awaited<ReturnType<typeof getAlbums>>>;
+  artists: NonNullable<Awaited<ReturnType<typeof getArtists>>>;
+  
+};
 
-export default function ArtistPage({artistId}: {artistId: string}) {
+export default function ArtistPage({ artist, albums, artists }: ArtistPageProps) {
     const { isOpen, closeModal } = useModalStore();
     const { isVisible } = useMiniPlayerStore();
-  
-  
-    const {data: artist, isLoading: artistLoading} = useQuery({
-      queryKey: ["artist", artistId],
-      queryFn: () => getArtistById(artistId),
-    })
-  
-    const {data: albums, isLoading: albumLoading} = useQuery({
-      queryKey: ["albums"],
-      queryFn: getAlbums,
-    })
-    
-  
-    if(artistLoading || albumLoading) return <div><BannerSkeleton /></div>;
-  
-    if(!artist) return <div>Artist not found</div>
     
     if (!albums) {
         return <div>No albums found</div>;
@@ -88,7 +72,7 @@ export default function ArtistPage({artistId}: {artistId: string}) {
           <h1 className="pb-10 font-figtree text-[20px] font-semibold tracking-[-0.4px]">
             Similar Artists
           </h1>
-          <HorizontalSlider />
+          <HorizontalSlider artists={artists} />
         </div>
         {isVisible && <MiniPlayer />}
       </div>

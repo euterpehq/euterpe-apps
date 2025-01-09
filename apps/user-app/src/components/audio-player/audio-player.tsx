@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from "react";
 import { getBackgroundColor, type RGB } from "@/lib/colors";
 //import { Song, songs } from "@/data/songs";
-import PlayerControls from "@/partials/feed/PlayerControls";
+
 import NextSongButton from "@/components/NextSongButton";
-import UserActions from "@/partials/feed/UserActions";
+
 import HiddenCoverArt from "@/components/HiddenCoverArt";
-import StreamingLinks from "@/partials/feed/StreamingLinks";
+
 import { useEarningsStore } from "@/providers/store/earnings.store";
 import { url } from "inspector";
 import {AnimatePresence,motion} from "framer-motion"
@@ -16,6 +16,9 @@ import useAlbumStore from "@/store/album.store";
 import Image from "next/image";
 import useArtistStore from "@/store/artist.store";
 import { useQuery } from "@tanstack/react-query";
+import PlayerControls from "./PlayerControls";
+import StreamingLinks from "./StreamingLinks";
+import UserActions from "./UserActions";
 
 
 export type PlayerProps = {

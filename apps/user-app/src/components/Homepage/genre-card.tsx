@@ -1,4 +1,4 @@
-import HorizontalSlider from '@/app/explore/_components/genre/genre-card-slider'
+import HorizontalSlider from '@/components/Homepage/genre-card-slider'
 import React from 'react'
 
 

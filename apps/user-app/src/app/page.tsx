@@ -1,28 +1,18 @@
-"server only";
+import "server-only";
 import React from 'react'
-import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import {getArtists } from '@/lib/queries/artist/get-artists'
-import ExplorePage from './explore/page';
 import { getAlbums } from '@/lib/queries/album/get-albums';
+import HomePage from '../components/Homepage/page';
 
 
 
 export default async function Home(){
-    const queryClient = new QueryClient();
-
-    await queryClient.prefetchQuery({
-      queryKey: ['artists'],
-      queryFn: getArtists
-    })
-
-    await queryClient.prefetchQuery({
-      queryKey: ['albums'],
-      queryFn: getAlbums
-    })
+   const artists = await getArtists();
+   const albums = await getAlbums();
 
     return(
-      <HydrationBoundary state={dehydrate(queryClient)}>
-          <ExplorePage />
-      </HydrationBoundary>
+    <>
+    <HomePage artists={artists} albums={albums} />
+    </>
     )
 }

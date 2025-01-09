@@ -1,21 +1,36 @@
 "use client";
 import React from 'react'
-import FeaturedAlbum from './_components/top-picks/featured-album'
-import Mystery from './_components/mystery/mystery'
-import Genre from './_components/genre/genre-card'
-import FeaturedArtists from './_components/artists/featured-artists'
-import { UserInteractionTracker } from '@/partials/UserInteractionTracker';
-import { AudioInitializer } from '@/partials/AudioInitializer';
-import Header from '@/partials/Header';
+import FeaturedAlbum from './featured-album'
+import Mystery from './mystery'
+import Genre from './genre-card'
+import FeaturedArtists from './featured-artists'
 import {motion, AnimatePresence } from 'framer-motion';
-import Player from '@/components/audio-player';
-import MiniPlayer from '@/components/audio-mini-player';
+
 import { useModalStore } from '@/store/modal.store';
 import { useMiniPlayerStore } from '@/store/miniplayer.store';
+import { UserInteractionTracker } from '../audio-player/UserInteractionTracker';
+import { AudioInitializer } from '../audio-player/AudioInitializer';
+import Header from '../Header';
+import Player from '../audio-player/audio-player';
+import MiniPlayer from '../audio-player/audio-mini-player';
+import { getAlbums } from '@/lib/queries/album/get-albums';
+import { getArtists } from '@/lib/queries/artist/get-artists';
+
+export type ArtistsProps = NonNullable<
+  Awaited<ReturnType<typeof getArtists>>
+>;
+
+export type AlbumsProps = NonNullable<
+  Awaited<ReturnType<typeof getAlbums>>
+>;
+
+export type HomePageProps = {
+  artists: ArtistsProps;
+  albums: AlbumsProps;
+};
 
 
-
-export default function ExplorePage(){
+export default function HomePage({artists, albums}: HomePageProps) {
     const {isOpen, closeModal} = useModalStore();
     const { isVisible } = useMiniPlayerStore();
   return (
@@ -41,10 +56,10 @@ export default function ExplorePage(){
           }
           </AnimatePresence>
         }
-      <FeaturedAlbum />
+      <FeaturedAlbum albums={albums} artists={artists} />
       <Mystery />
       <Genre />
-      <FeaturedArtists />
+      <FeaturedArtists artists={artists}/>
       <div className="w-full h-[20vh]"></div>
       <MiniPlayer />
     </div>

@@ -1,12 +1,14 @@
+import "server-only";
 import { Database } from "@/types/database.types";
-import { createClient } from "../../supabase/client";
+import { createClient } from "../../supabase/server";
 
-const supabase = createClient();
+
 
 export type Album = Database["public"]["Tables"]["albums"]["Row"];
 
 // Fetch all albums
 export const getAlbums = async (): Promise<Album[]> => {
+    const supabase = await createClient();
     const { data, error } = await supabase.from("albums").select("*");
     if (error) {
         throw new Error(error.message);

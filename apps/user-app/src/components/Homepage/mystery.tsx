@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useModalStore } from "@/store/modal.store";
-import HorizontalSlider from "@/app/explore/_components/mystery/mystery-card-slider";
+import HorizontalSlider from "@/components/Homepage/mystery-card-slider";
 
 
 const Mystery: React.FC = () => {
