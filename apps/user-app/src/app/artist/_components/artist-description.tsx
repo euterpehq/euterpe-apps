@@ -6,7 +6,7 @@ type Prop = {
   artist: any;
 };
 
-export default function Description({ artist }: Prop) {
+export default function ArtistDescription({ artist }: Prop) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   //const spotifyLink = songs.filter((song) => song.spotify);

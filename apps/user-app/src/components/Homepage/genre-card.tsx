@@ -1,3 +1,4 @@
+import GenreCardSlider from '@/components/Homepage/genre-card-slider'
 import HorizontalSlider from '@/components/Homepage/genre-card-slider'
 import React from 'react'
 
@@ -8,7 +9,7 @@ const Genre: React.FC = () => {
       <div className=''>
         <h1 className='font-semibold text-[25px]'>Explore genres</h1>
       </div>
-      <HorizontalSlider />
+      <GenreCardSlider />
     </div>
   )
 }

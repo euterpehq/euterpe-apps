@@ -5,7 +5,7 @@ import { Database } from "@/types/database.types";
 type Prop = {
   artist: Database["public"]["Tables"]["artist_profiles"]["Row"];
 };
-export default function Banner({ artist }: Prop) {
+export default function ArtistHeader({ artist }: Prop) {
   return (
     <div className="relative h-[250px] w-full bg-[#B8FF5B]">
       <div className="absolute right-10 top-[75%] h-[140px] w-[140px]">

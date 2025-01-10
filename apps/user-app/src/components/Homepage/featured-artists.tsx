@@ -1,19 +1,19 @@
 "use client"
 import React from 'react'
-import { ArtistsProps } from './page';
-import ArtistSlider from '@/components/Homepage/artists-horizontal-slider';
+import ArtistHorizontalSlider from '@/components/Homepage/artists-horizontal-slider';
+import { getArtists } from '@/lib/queries/artist/get-artists';
 
 
+type FeaturedArtistsProps = NonNullable<Awaited<ReturnType<typeof getArtists>>>
 
-
-const FeaturedArtists = ({artists}: { artists : ArtistsProps}) => {
+const FeaturedArtists = ({artists}: { artists : FeaturedArtistsProps}) => {
 
   return (
     <div className='  w-full h-full mx-auto flex flex-col gap-5 pl-6 my-10 overflow-hidden'>
       <div className=''>
         <h1 className='font-semibold text-[25px]'>Featured Artists</h1>
       </div>
-      <ArtistSlider  artists={artists}/>
+      <ArtistHorizontalSlider  artists={artists}/>
     </div>
   )
 }

@@ -14,7 +14,7 @@ interface MyComponentProps {
   artists: ArtistProfile[];
 }
 
-const AlbumSlider: React.FC<MyComponentProps> = ({ albums, artists }) => {
+const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) => {
  
 
   // Filter albums to only include one album per artist (e.g., the first one)
@@ -138,4 +138,4 @@ const AlbumSlider: React.FC<MyComponentProps> = ({ albums, artists }) => {
   );
 };
 
-export default AlbumSlider;
+export default AlbumHorizontalSlider;

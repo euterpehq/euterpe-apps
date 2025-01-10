@@ -3,10 +3,6 @@ import React, { useEffect, useState } from "react";
 import { getBackgroundColor, type RGB } from "@/lib/colors";
 //import { artists } from "@/data/songs";
 
-import NextSongButton from "@/components/NextSongButton";
-
-import HiddenCoverArt from "@/components/HiddenCoverArt";
-
 import { useEarningsStore } from "@/providers/store/earnings.store";
 import { url } from "inspector";
 import MiniHiddenCoverArt from "@/components/MiniHiddenCoverArt";
@@ -18,8 +14,10 @@ import useArtistStore from "@/store/artist.store";
 import PlayerControls from "./PlayerControls";
 import StreamingLinks from "./StreamingLinks";
 import UserActions from "./UserActions";
+import { useMiniPlayerStore } from "@/store/miniplayer.store";
+import { usePathname } from "next/navigation";
 
-const MiniPlayer: React.FC = () => {
+const AudioMiniPlayer: React.FC = () => {
   const updateEarnings = useEarningsStore((state) => state.updateEarnings);
 
   const { openModal } = useModalStore();
@@ -56,6 +54,9 @@ const MiniPlayer: React.FC = () => {
   const album = song ? albums.find((a) => a.id === song.album_id) : null;
   const artist = album ? artists.find((f) => f.id === album?.artist_id) : null;
 
+  const pathname = usePathname();
+  const { isVisible } = useMiniPlayerStore();
+
   function handleClaim() {
     if (!isClaimed && canClaimReward) {
       updateEarnings(0.2);
@@ -66,6 +67,7 @@ const MiniPlayer: React.FC = () => {
 
   if (!song || !album || !artist) return null;
 
+  if(pathname === "/" || isVisible) {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-30 w-full bg-[#181818] px-6 py-4">
       <div className="flex w-full items-center justify-between">
@@ -154,6 +156,9 @@ const MiniPlayer: React.FC = () => {
       </div>
     </div>
   );
+}else {
+  return null;
+}
 };
 
-export default MiniPlayer;
+export default AudioMiniPlayer;

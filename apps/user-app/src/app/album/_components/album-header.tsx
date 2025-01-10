@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import { useAudioPlayerStore } from "@/store/audioplayer.store";
 import { useMiniPlayerStore } from "@/store/miniplayer.store";
@@ -7,31 +8,14 @@ import { useEffect } from "react";
 import { Database } from "@/types/database.types";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export function AlbumHeadSkeleton() {
-  return (
-    <div className="flex w-full gap-10 border-b-[0.5px] border-[#303033]">
-      <Skeleton className="h-[240px] w-[240px]" />
-      <div className="flex flex-col gap-y-6 py-6 w-full">
-        <div className="inline-flex flex-col gap-4">
-          <Skeleton className="h-6 w-[120px] rounded-[4px]" />
-          <Skeleton className="h-8 w-[200px] rounded" />
-          <div className="flex items-center gap-3">
-            <Skeleton className="h-[16px] w-[16px] rounded-full" />
-            <Skeleton className="h-5 w-[150px]" />
-          </div>    
-        </div>
-        <Skeleton className="h-[40px] w-[100px] rounded-[120px]" />
-      </div>
-    </div>
-  );
-}
+
 
 
 type Prop = {
   album: Database["public"]["Tables"]["albums"]["Row"];
 };
 
-export default function AlbumHead({ album }: Prop) {
+export default function AlbumHeader({ album }: Prop) {
   const {
     setCurrentSongIndex,
     playSong,

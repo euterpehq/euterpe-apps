@@ -42,7 +42,7 @@ export type PlayerProps = {
 
 
 
-const Player: React.FC = () => {
+const AudioPlayer: React.FC = () => {
   const updateEarnings = useEarningsStore((state) => state.updateEarnings);
   const {
     currentSongIndex,
@@ -196,6 +196,6 @@ const Player: React.FC = () => {
   );
 };
 
-export default Player;
+export default AudioPlayer;
 
 

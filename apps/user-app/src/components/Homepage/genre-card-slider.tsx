@@ -90,7 +90,7 @@ export const genres = [
 ];
 
 
-const HorizontalSlider: React.FC = () => {
+const GenreCardSlider: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const slidesPerView = 6;
 
@@ -153,4 +153,4 @@ const HorizontalSlider: React.FC = () => {
   );
 };
 
-export default HorizontalSlider;
+export default GenreCardSlider;

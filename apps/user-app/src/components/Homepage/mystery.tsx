@@ -2,6 +2,7 @@
 import React from "react";
 import { useModalStore } from "@/store/modal.store";
 import HorizontalSlider from "@/components/Homepage/mystery-card-slider";
+import MysteryCardSlider from "@/components/Homepage/mystery-card-slider";
 
 
 const Mystery: React.FC = () => {
@@ -37,7 +38,7 @@ const Mystery: React.FC = () => {
           </p>
         </div>
       </div>
-      <HorizontalSlider />
+      <MysteryCardSlider />
     </div>
   );
 };

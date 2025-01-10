@@ -1,8 +1,15 @@
 "use client"
 import React from 'react'
-import { HomePageProps } from './page'
-import AlbumSlider from '@/components/Homepage/album-horizontal-slider'
+import AlbumHorizontalSlider from '@/components/Homepage/album-horizontal-slider'
+import { getAlbums } from '@/lib/queries/album/get-albums'
+import { getArtists } from '@/lib/queries/artist/get-artists'
 
+ 
+
+export type HomePageProps = {
+  albums: NonNullable<Awaited<ReturnType<typeof getAlbums>>>
+  artists: NonNullable<Awaited<ReturnType<typeof getArtists>>>
+}
 
 const FeaturedAlbum = ({albums, artists}: HomePageProps) => {
  
@@ -17,7 +24,7 @@ const FeaturedAlbum = ({albums, artists}: HomePageProps) => {
       <div className=''>
         <h1 className='font-semibold text-[25px]'>Top Picks</h1>
       </div>
-      <AlbumSlider albums={albums} artists={artists}/>
+      <AlbumHorizontalSlider albums={albums} artists={artists}/>
     </div>
   )
 }

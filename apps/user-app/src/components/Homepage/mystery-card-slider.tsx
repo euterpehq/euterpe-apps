@@ -7,7 +7,7 @@ import "swiper/css/free-mode";
 import { useAudioPlayerStore } from "@/store/audioplayer.store";
 import { useMiniPlayerStore } from "@/store/miniplayer.store";
 
-const HorizontalSlider: React.FC = () => {
+const MysteryCardSlider: React.FC = () => {
   const {
     albumSongs,
     currentSongIndex,
@@ -184,4 +184,4 @@ const HorizontalSlider: React.FC = () => {
   );
 };
 
-export default HorizontalSlider;
+export default MysteryCardSlider;

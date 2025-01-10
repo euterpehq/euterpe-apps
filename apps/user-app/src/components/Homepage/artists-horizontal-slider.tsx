@@ -14,7 +14,7 @@ interface MyComponentProps {
   artists: ArtistProfile[];
 }
 
-const ArtistSlider: React.FC<MyComponentProps> = ({artists}) => {
+const ArtistHorizontalSlider: React.FC<MyComponentProps> = ({artists}) => {
 
   if (!artists) return <div>Artist not found</div>;
 
@@ -69,4 +69,4 @@ const ArtistSlider: React.FC<MyComponentProps> = ({artists}) => {
   );
 };
 
-export default ArtistSlider;
+export default ArtistHorizontalSlider;

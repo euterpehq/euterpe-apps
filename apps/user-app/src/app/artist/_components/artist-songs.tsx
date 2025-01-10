@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-
+"use client";
 import { Album} from "@/lib/queries/supabaseQueries";
 import { useAudioPlayerStore } from "@/store/audioplayer.store";
 import { useMiniPlayerStore } from "@/store/miniplayer.store";
@@ -10,7 +10,7 @@ type Prop = {
   albums: Album[];
 };
 
-export default function TopSongs({ artist, albums }: Prop) {
+export default function ArtistSongs({ artist, albums }: Prop) {
   const { setCurrentSongIndex, playNext, playSong, setDiscovered, albumSongs } =
     useAudioPlayerStore();
 

@@ -1,3 +1,4 @@
+"use client";
 import useArtistStore from "@/store/artist.store";
 import { useAudioPlayerStore } from "@/store/audioplayer.store";
 import { useEffect } from "react";
@@ -8,7 +9,7 @@ type Prop = {
   album: Database["public"]["Tables"]["albums"]["Row"];
 };
 
-export default function AlbumSongs({ album }: Prop) {
+export default function AlbumTrackList({ album }: Prop) {
   const { setCurrentSongIndex, playNext, playSong, setDiscovered, albumSongs } =
     useAudioPlayerStore();
   const { artists, fetchArtist } = useArtistStore();
