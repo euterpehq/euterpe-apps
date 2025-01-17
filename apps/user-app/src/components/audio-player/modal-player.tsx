@@ -23,14 +23,14 @@ const ModalPlayer = () => {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="w-screen h-screen fixed top-0 left-0 right-0 bottom-0 bg-black z-40"
         >
-          <div className="flex justify-between items-center px-[1rem] py-2 relative z-50">
+          <div className="flex justify-between items-center px-[1rem] py-2 relative z-50 md:absolute md:top-[4rem] md:left-0 md:right-0  md:z-50">
           <button
             onClick={closeModal}
             className=" text-white py-[4px] px-[6px] md:py-[8px] md:px-[12px] bg-[#ffffff14]  cursor-pointer rounded-[8px]"
           >
             X close
           </button>
-          <div className="flex items-center gap-4">
+          <div className="md:hidden flex items-center gap-4">
         {isConnected && <Earnings />}
         <Separator orientation="vertical" className="h-4" />
         <ConnectButton align="right" />
