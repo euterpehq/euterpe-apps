@@ -43,13 +43,13 @@ export default async function ArtistPageRoute({ params }: ArtistPageRouteProps){
       <ArtistHeader artist={artist} />
       <ArtistDescription artist={artist} />
       <ArtistSongs artist={artist} albums={albums} />
-      <div className="my-20 h-[400px] w-full pl-[24px]">
+      <div className="md:my-20 mt-10 h-[400px] w-full pl-[24px]">
         <h1 className="pb-10 font-figtree text-[20px] font-semibold tracking-[-0.4px]">
           Discograpy
         </h1>
         <ArtistDiscography />
       </div>
-      <div className="my-[20px] pl-[24px]">
+      <div className="md:my-[20px] pl-[24px]">
         <h1 className="pb-10 font-figtree text-[20px] font-semibold tracking-[-0.4px]">
           Similar Artists
         </h1>

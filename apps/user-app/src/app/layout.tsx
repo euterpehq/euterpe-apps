@@ -61,10 +61,8 @@ export default function RootLayout({
         )}
       >
         <AppProvider>
-          <div className="md:hidden">
-            <DesktopOnlyNotice />
-          </div>
-          <div className="hidden md:block">{children}</div>
+         
+          <div className="">{children}</div>
         </AppProvider>
       </body>
     </html>

@@ -93,7 +93,7 @@ const AudioPlayer: React.FC = () => {
   return (
 
       <div
-      className="fixed left-0 top-0 bottom-0 z-40 flex h-screen w-screen flex-col overflow-x-hidden overflow-y-scroll pt-[3.25rem] text-white transition-all duration-300 ease-in-out">
+      className="fixed left-0 top-0 bottom-0 z-40 flex h-screen w-screen flex-col overflow-x-hidden md:overflow-y-scroll overflow-y-hidden md:pt-[3.25rem] text-white transition-all duration-300 ease-in-out">
 
         <div
           className={`absolute inset-0 transition-transform duration-300 ${
@@ -118,12 +118,15 @@ const AudioPlayer: React.FC = () => {
                 }
           }
         ></div>
+
       <div className="relative z-10">
+
       <div className="mr-6 mt-6 flex justify-end">
         <div className="invisible md:visible">
           <NextSongButton playNext={playNext} />
         </div>
       </div>
+
       <div className="flex flex-col items-center gap-6 px-6">
         <div className="flex flex-col items-center gap-6">
           {discovered ? (
@@ -131,7 +134,7 @@ const AudioPlayer: React.FC = () => {
               <Image
                 src={album.cover_image_url}
                 alt="Album Art"
-                className="h-[360px] w-[360px] rounded-[16px]"
+                className="h-[360px] w-[360px] object-cover rounded-[16px]"
                 crossOrigin="anonymous"
                 width={360}
                 height={360}
@@ -159,6 +162,10 @@ const AudioPlayer: React.FC = () => {
           duration={duration}
           handleSeek={handleSeek}
         />
+         <div className="hidden">
+          <NextSongButton playNext={playNext} />
+        </div>
+        <div className="pt-[3rem] md:pt-0">
         {showStreamingLinks ? (
           <div className="flex items-center gap-3">
             <svg
@@ -186,10 +193,11 @@ const AudioPlayer: React.FC = () => {
             canClaimReward={canClaimReward && !isClaimed}
           />
         )}
-        <div className="md:hidden">
-          <NextSongButton playNext={playNext} />
         </div>
+       
+       
       </div>
+      
       </div>
       </div>
   

@@ -7,8 +7,8 @@ type Prop = {
 };
 export default function ArtistHeader({ artist }: Prop) {
   return (
-    <div className="relative h-[250px] w-full bg-[#B8FF5B]">
-      <div className="absolute right-10 top-[75%] h-[140px] w-[140px]">
+    <div className="relative h-[250px] w-full bg-[#B8FF5B] flex items-center justify-center">
+      <div className="md:absolute md:right-10 md:top-[75%] h-[140px] w-[140px]">
         <Image
           src={artist?.artist_image_url || img}
           alt=""

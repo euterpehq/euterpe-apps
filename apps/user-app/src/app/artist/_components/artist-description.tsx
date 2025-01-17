@@ -14,10 +14,10 @@ export default function ArtistDescription({ artist }: Prop) {
 
   return (
     <div className="h-full w-full px-[24px]">
-      <div className="flex w-full flex-col gap-[24px] py-[24px] pr-[100px]">
+      <div className="flex w-full flex-col md:gap-[24px] gap-[15px] py-[24px] md:pr-[100px]">
         <div>
           <Link href="/">
-            <h1 className="font-figtree text-[80px] font-bold tracking-[-4.8px]">
+            <h1 className="font-figtree md:text-[80px] text-[50px] font-bold tracking-[-4.8px]">
               {artist?.artist_name}
             </h1>
           </Link>
@@ -36,7 +36,7 @@ export default function ArtistDescription({ artist }: Prop) {
             </p>
           )}
         </div>
-        <div className="flex w-full items-center gap-[10px]">
+        <div className="flex flex-wrap w-full items-center gap-[10px] ">
           <Link
             href={`${artist?.spotify_url}`}
             className="flex cursor-pointer items-center justify-center gap-[10px] rounded-[120px] bg-[#1B1B1B] px-[12px] py-[6px]"

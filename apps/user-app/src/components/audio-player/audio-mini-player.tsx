@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { getBackgroundColor, type RGB } from "@/lib/colors";
 //import { artists } from "@/data/songs";
-
+import { useMediaQuery } from "react-responsive";
 import { useEarningsStore } from "@/providers/store/earnings.store";
 import { url } from "inspector";
 import MiniHiddenCoverArt from "@/components/MiniHiddenCoverArt";
@@ -11,16 +11,17 @@ import { useModalStore } from "@/store/modal.store";
 import useAlbumStore from "@/store/album.store";
 import Image from "next/image";
 import useArtistStore from "@/store/artist.store";
-import PlayerControls from "./PlayerControls";
 import StreamingLinks from "./StreamingLinks";
 import UserActions from "./UserActions";
 import { useMiniPlayerStore } from "@/store/miniplayer.store";
 import { usePathname } from "next/navigation";
+import MiniPlayerControls from "./MiniPlayerControl";
 
 const AudioMiniPlayer: React.FC = () => {
   const updateEarnings = useEarningsStore((state) => state.updateEarnings);
 
   const { openModal } = useModalStore();
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   const {
     currentSongIndex,
     albumSongs,
@@ -69,15 +70,15 @@ const AudioMiniPlayer: React.FC = () => {
 
   if(pathname === "/" || isVisible) {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-30 w-full bg-[#181818] px-6 py-4">
-      <div className="flex w-full items-center justify-between">
+    <div className="fixed bottom-0 left-0 right-0 z-30 md:w-full w-[98%] rounded-[14px] md:rounded-none mx-auto bg-[#181818] px-4 md:px-6 md:py-4 pt-3 mb-1 md:mb-0"  onClick={isMobile ? openModal : undefined}>
+      <div className="flex md:flex-row flex-col w-full items-start md:items-center justify-between md:gap-0 gap-5">
         <div className="flex items-center gap-3">
           {discovered ? (
             album?.cover_image_url && (
               <Image
                 src={album.cover_image_url}
                 alt="Album Art"
-                className="h-[60px] w-[60px] rounded-[4px]"
+                className="w-[40px] h-[40px] md:h-[60px] md:w-[60px] object-cover rounded-[4px]"
                 crossOrigin="anonymous"
                 width={60}
                 height={60}
@@ -87,17 +88,17 @@ const AudioMiniPlayer: React.FC = () => {
             <MiniHiddenCoverArt />
           )}
           <div className="flex flex-col items-start font-inter">
-            <h2 className="text-[18px] font-semibold tracking-[0.04em]">
+            <h2 className="text-[14px] md:text-[18px] font-semibold tracking-[0.04em]">
               {discovered ? song.track_title : "*************"}
             </h2>
 
-            <p className="text-[16px] font-medium tracking-[0.04em] text-[#BDBDBD]">
+            <p className="text-[12px] md:text-[16px] font-medium tracking-[0.04em] text-[#BDBDBD]">
               {discovered ? artist?.artist_name : "********"}
             </p>
           </div>
         </div>
-        <div>
-          <PlayerControls
+        <div className="w-full   md:w-auto">
+          <MiniPlayerControls
             isPlaying={isPlaying}
             togglePlayPause={togglePlayPause}
             playPrevious={playPrevious}
@@ -107,7 +108,7 @@ const AudioMiniPlayer: React.FC = () => {
             handleSeek={handleSeek}
           />
         </div>
-        <div className="flex items-center gap-5">
+        <div className=" items-center gap-5 hidden md:flex">
           {showStreamingLinks ? (
             <div className="flex items-center gap-3">
               <svg

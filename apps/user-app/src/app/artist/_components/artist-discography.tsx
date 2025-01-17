@@ -139,6 +139,20 @@ const ArtistDiscography = () => {
         slidesPerView={6.8}
         freeMode={true}
         modules={[FreeMode, Pagination]}
+        breakpoints={{
+          // Mobile devices
+          0: {
+            slidesPerView: 2.5,
+          },
+          // Tablets
+          640: {
+            slidesPerView: 3.5,
+          },
+          // Desktops
+          1024: {
+            slidesPerView: 6.8,
+          },
+        }}
         style={{}}
         className="h-full w-full cursor-pointer"
       >

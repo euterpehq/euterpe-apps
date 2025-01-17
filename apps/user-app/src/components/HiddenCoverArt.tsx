@@ -2,7 +2,7 @@ import React from "react";
 
 function HiddenCoverArt() {
   return (
-    <div className="flex h-[360px] w-[360px] items-center justify-center rounded-[16px] bg-[#242424]">
+    <div className="flex h-[360px] w-[360px]  items-center justify-center rounded-[16px] bg-[#242424]">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="200"

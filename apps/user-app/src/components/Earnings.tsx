@@ -17,7 +17,7 @@ function Earnings() {
   const [opendialog, setOpendialog] = useState(false);
 
   return (
-    <Dialog open={opendialog} onOpenChange={setOpendialog}>
+    <Dialog open={opendialog} onOpenChange={setOpendialog} >
       <DialogTrigger>
         <div className="flex cursor-pointer items-center gap-2 font-figtree text-xs font-semibold tracking-[-0.02em]">
           <EUTIcon className="h-5 w-5" />

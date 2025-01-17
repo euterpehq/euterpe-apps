@@ -11,7 +11,7 @@ interface PlayerControlsProps {
   handleSeek: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-function PlayerControls({
+function MiniPlayerControls({
   isPlaying,
   togglePlayPause,
   playNext,
@@ -22,10 +22,10 @@ function PlayerControls({
 }: PlayerControlsProps) {
   return (
     <div
-      className="w-full flex flex-col   items-center gap-6"
+      className="w-full md:w-auto flex md:flex-col   items-center gap-6"
       onClick={(e) => e.stopPropagation()}
     >
-      <button onClick={togglePlayPause}>
+      <button onClick={togglePlayPause} className="md:relative absolute md:right-0 md:bottom-0 right-4 bottom-6">
         {isPlaying ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -61,17 +61,17 @@ function PlayerControls({
         )}
       </button>
 
-      <div className="flex items-center gap-2.5 font-inter text-xs text-[#BDBDBD]">
-        <span className="w-[20px] ">{formatTime(currentTime)}</span>
-        <div className="cursor-pointer py-1.5" onClick={handleSeek}>
-          <div className="relative h-[2px] w-[339px] max-w-xs rounded-[24px] bg-primary/10 md:max-w-[339px]">
+      <div className="flex items-center gap-2.5 font-inter text-xs text-[#BDBDBD]   w-full md:w-auto">
+        <span className="w-[20px] hidden md:block">{formatTime(currentTime)}</span>
+        <div className="cursor-pointer md:py-1.5 w-full md:w-auto" onClick={handleSeek}>
+          <div className="relative h-[2px] md:w-[339px] w-[100%]  rounded-[24px] bg-primary/10 md:max-w-[339px] ">
             <div
               className="h-full  rounded-[24px] bg-primary"
               style={{ width: `${(currentTime / duration) * 100}%` }}
             ></div>
           </div>
         </div>
-        <span className="w-[20px]">{formatTime(duration)}</span>
+        <span className="w-[20px] hidden md:block">{formatTime(duration)}</span>
       </div>
     </div>
   );
@@ -83,4 +83,4 @@ function formatTime(seconds: number) {
   return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
 }
 
-export default PlayerControls;
+export default MiniPlayerControls;

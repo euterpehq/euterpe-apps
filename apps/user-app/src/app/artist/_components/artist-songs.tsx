@@ -42,8 +42,8 @@ export default function ArtistSongs({ artist, albums }: Prop) {
           <h1 className="font-figtree text-[20px] font-semibold tracking-[-0.4px]">
             Top Songs
           </h1>
-          <div className="grid w-full grid-cols-2 gap-20 px-[30px]">
-            <div className="flex flex-col gap-[24px]">
+          <div className="grid w-full md:grid-cols-2 grid-cols-1 md:gap-20 gap-10 px-[30px]">
+            <div className="flex flex-col md:gap-[24px] gap-10">
               {albumSong.slice(0, 3).map((song, index) => {
                 const findAlbum = artistAlbums.find(
                   (album) => album.id === song.album_id,
@@ -81,7 +81,7 @@ export default function ArtistSongs({ artist, albums }: Prop) {
                 );
               })}
             </div>
-            <div className="flex flex-col gap-[24px]">
+            <div className="flex flex-col md:gap-[24px] gap-10">
               {albumSong.slice(3, 6).map((song, index) => {
                 const findAlbum = artistAlbums.find(
                   (album) => album.id === song.album_id,

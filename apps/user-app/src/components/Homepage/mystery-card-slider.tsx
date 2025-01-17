@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import { useAudioPlayerStore } from "@/store/audioplayer.store";
 import { useMiniPlayerStore } from "@/store/miniplayer.store";
+import { useMediaQuery } from "react-responsive";
 
 const MysteryCardSlider: React.FC = () => {
   const {
@@ -19,7 +20,8 @@ const MysteryCardSlider: React.FC = () => {
 
   const { showMiniPlayer } = useMiniPlayerStore();
 
-  const items = Array.from({ length: 100 }, (_, i) => i + 1);
+  const items = Array.from({ length: 20 }, (_, i) => i + 1);
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const [loading, setLoading] = useState(true);
   const slidesPerView = 6;
@@ -55,10 +57,10 @@ const MysteryCardSlider: React.FC = () => {
   if (loading) {
     return (
       <div className="flex h-[500px] w-full justify-between gap-5">
-        {Array.from({ length: slidesPerView }).map((_, index) => (
+        {Array.from({ length: isMobile ? slidesPerView : 3 }).map((_, index) => (
           <div
             key={index}
-            className="tp2 flex h-[400px] w-[300px] animate-pulse flex-col gap-4 rounded-[8px] p-4 transition-opacity ease-in-out"
+            className="tp2 flex md:h-[400px] md:w-[300px] w-[250px] h-[300px] animate-pulse flex-col gap-4 rounded-[8px] p-4 transition-opacity ease-in-out"
             style={{ opacity: 0.5 }}
           />
         ))}
@@ -69,10 +71,24 @@ const MysteryCardSlider: React.FC = () => {
   return (
     <div className="relative mx-auto h-full w-full overflow-hidden">
       <Swiper
-        spaceBetween={20}
-        slidesPerView={slidesPerView}
+        spaceBetween={10}
+        slidesPerView={6.8}
         freeMode={true}
         modules={[FreeMode, Pagination]}
+        breakpoints={{
+          // Mobile devices
+          0: {
+            slidesPerView: 2.2,
+          },
+          // Tablets
+          640: {
+            slidesPerView: 3,
+          },
+          // Desktops
+          1024: {
+            slidesPerView: 6.8,
+          },
+        }}
         className="h-full w-full cursor-grab"
       >
         {items.map((item) => (
@@ -84,13 +100,15 @@ const MysteryCardSlider: React.FC = () => {
               alignItems: "center",
               padding: "12px 12px 93.838px 12px",
               gap: "4rem",
-              width: "200px",
+              width: "230px",
+              height: "310px",
               background: "#121310",
               borderRadius: "8px",
+              
             }}
             onClick={playRandomSong}
           >
-            <div className="flex w-full items-center justify-between">
+            <div className="flex  w-full  items-start justify-between">
               <div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

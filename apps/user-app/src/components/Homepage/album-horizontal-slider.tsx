@@ -30,12 +30,27 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
   return (
     <div className="relative h-full w-full">
       <Swiper
-        spaceBetween={15}
+        spaceBetween={10}
         slidesPerView={6.8}
         freeMode={true}
         modules={[FreeMode, Pagination]}
+        breakpoints={{
+          // Mobile devices
+          0: {
+            slidesPerView: 2.5,
+          },
+          // Tablets
+          640: {
+            slidesPerView: 3.5,
+          },
+          // Desktops
+          1024: {
+            slidesPerView: 6.8,
+          },
+        }}
         style={{}}
         className="h-full w-full cursor-grab"
+       
       >
         {album?.map((item) => {
           if (!item) return null;
@@ -58,7 +73,7 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
                   <Image
                     src={item?.cover_image_url ?? null}
                     alt=""
-                    className="h-[188px] w-[188px] rounded-[8px] object-cover"
+                    className="w-[156px] h-[156px] md:h-[188px] md:w-[188px] rounded-[8px] object-cover"
                     height={188}
                     width={188}
                     quality={100}

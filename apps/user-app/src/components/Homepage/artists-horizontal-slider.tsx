@@ -22,9 +22,23 @@ const ArtistHorizontalSlider: React.FC<MyComponentProps> = ({artists}) => {
     <div className="relative mx-auto h-full w-full overflow-hidden">
       <Swiper
         spaceBetween={8}
-        slidesPerView={"auto"}
+        slidesPerView={6.8}
         freeMode={true}
         modules={[FreeMode, Pagination]}
+        breakpoints={{
+          // Mobile devices
+          0: {
+            slidesPerView: 2.5,
+          },
+          // Tablets
+          640: {
+            slidesPerView: 3.5,
+          },
+          // Desktops
+          1024: {
+            slidesPerView: 6.8,
+          },
+        }}
         style={{}}
         className="h-full w-full cursor-pointer"
       >
@@ -44,7 +58,7 @@ const ArtistHorizontalSlider: React.FC<MyComponentProps> = ({artists}) => {
             }}
           >
             <Link href={`/artist/${item.id}`}>
-              <div className="flex h-full w-[200px] flex-col items-center gap-[20px]">
+              <div className="flex h-full w-[180px] md:w-[200px] flex-col items-center gap-[20px]">
                 <div className="h-[120px] w-[120px]">
                   <Image
                     src={item.artist_image_url || img}

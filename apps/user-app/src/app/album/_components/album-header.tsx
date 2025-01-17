@@ -53,17 +53,18 @@ export default function AlbumHeader({ album }: Prop) {
   };
 
   return (
-    <div className="flex w-full gap-10 border-b-[0.5px] border-[#303033]">
-      <div className="h-[240px] w-[240px]">
+    <div className="flex md:flex-row flex-col w-full gap-10 border-b-[0.5px] border-[#303033]">
+      <div className="md:h-[240px] md:w-[240px] w-full h-full">
         <Image
           src={album?.cover_image_url ?? null}
           alt=""
           className="h-full w-full object-cover"
           width="240"
           height="240"
+          quality={100}
         />
       </div>
-      <div className="flex flex-col gap-y-6 py-6">
+      <div className="flex flex-col gap-y-6 py-6 pl-[1rem]">
         <div className="inline-flex flex-col gap-2">
           <div className="flex w-fit items-center justify-center rounded-[4px] bg-[#c1ff701a] px-[8px] py-[4px] text-xs font-medium capitalize text-[#C1FF70]">
             <p>{album?.category_type}</p>

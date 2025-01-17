@@ -2,7 +2,7 @@ import React from "react";
 
 function MiniHiddenCoverArt() {
   return (
-    <div className="flex h-[60px] w-[60px] items-center justify-center rounded-[16px] bg-[#242424]">
+    <div className="flex w-[40px] h-[40px] md:h-[60px] md:w-[60px] items-center justify-center md:rounded-[16px] rounded-[4px] bg-[#242424]">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="200"
