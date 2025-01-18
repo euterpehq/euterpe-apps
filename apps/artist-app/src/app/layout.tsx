@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 import { AppProvider } from "@/providers/app";
 import "./globals.css";
 import DesktopOnlyNotice from "@/components/desktop-only-notice";
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 
 const urbanist = Urbanist({ subsets: ["latin"], variable: "--font-urbanist" });
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
@@ -65,7 +67,11 @@ export default function RootLayout({
           <div className="md:hidden">
             <DesktopOnlyNotice />
           </div>
-          <div className="hidden md:block">{children}</div>
+          <div className="hidden md:block">
+            {children}
+            <Toaster />
+            <SonnerToaster />
+          </div>
         </AppProvider>
       </body>
     </html>

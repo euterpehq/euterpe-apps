@@ -37,7 +37,7 @@ function AppHeader() {
   }
 
   return (
-    <header className="flex h-[3.25rem] items-center justify-between border-b-[0.2px] border-[#303033]/80 bg-background px-6 py-3">
+    <header className="flex h-[3.25rem] w-full items-center justify-between border-b-[0.2px] border-[#303033]/80 bg-background px-6 py-3">
       <div className="flex">
         <div className="flex items-center gap-10">
           <Link href="/">
@@ -57,7 +57,7 @@ function AppHeader() {
               src="https://api.dicebear.com/9.x/glass/svg?seed=Avery"
             />
           </DropdownButton>
-          <DropdownMenu className="min-w-64" anchor="bottom end">
+          <DropdownMenu className="z-[500] min-w-64" anchor="bottom end">
             <DropdownItem className="hover:bg-transparent hover:text-black">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -97,4 +97,7 @@ function AppHeader() {
   );
 }
 
+export function AppHeaderInset({ children }: { children?: React.ReactNode }) {
+  return <div className="mt-[3.25rem] flex flex-col">{children}</div>;
+}
 export default AppHeader;

@@ -68,13 +68,7 @@ export function AppSidebar({ artist }: { artist: ArtistProps }) {
   return (
     <Sidebar>
       <SidebarHeader className="flex items-center border-b-[0.5px] border-[#303033] p-4">
-        <UserProfileCard
-          artistName={artist.artist_name || artist.email || "Unknown Artist"}
-          imageUrl={
-            artist.artist_image_url ||
-            "https://api.dicebear.com/9.x/notionists/svg?seed=Felix"
-          }
-        />
+        <UserProfileCard artist={artist} />
       </SidebarHeader>
 
       <SidebarContent>

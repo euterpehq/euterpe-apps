@@ -44,7 +44,7 @@ export default function Releases({ releases }: { releases: ReleasesProps }) {
           </Breadcrumb>
         </div>
         <section className="flex items-center justify-start gap-x-[14px]">
-          <Button className="rounded-[8px] border-[0.5px] border-[#303033] px-3 py-2.5 text-xs font-medium tracking-[-0.02em] text-[#181818]">
+          {/* <Button className="rounded-[8px] border-[0.5px] border-[#303033] px-3 py-2.5 text-xs font-medium tracking-[-0.02em] text-[#181818]">
             Week
           </Button>
           <Button
@@ -58,7 +58,7 @@ export default function Releases({ releases }: { releases: ReleasesProps }) {
             className="rounded-[8px] border-[0.5px] border-[#303033] bg-transparent px-3 py-2.5 text-xs font-normal tracking-[-0.02em] text-[#181818] text-white"
           >
             Year
-          </Button>
+          </Button> */}
           <Button
             className="rounded-[8px] border-[0.5px] border-[#313131] px-3 py-2.5 text-xs font-medium font-semibold tracking-[-0.04em] text-[#020403]"
             onClick={openModal}

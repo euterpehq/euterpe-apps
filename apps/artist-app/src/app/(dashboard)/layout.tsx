@@ -20,7 +20,7 @@ export default async function Layout({
         <SidebarProvider>
           <AppSidebar artist={artist} />
           <SidebarInset>
-            <AppMarqueeBanner />
+            <AppMarqueeBanner artist={artist} />
             <div className="flex-1 overflow-scroll">{children}</div>
           </SidebarInset>
         </SidebarProvider>
