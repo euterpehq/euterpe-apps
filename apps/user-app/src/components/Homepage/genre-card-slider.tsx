@@ -105,11 +105,10 @@ const GenreCardSlider: React.FC = () => {
         {Array.from({ length: slidesPerView }).map((_, index) => (
           <div
             key={index}
-            className="tp2 flex h-[48px] min-w-[120px] flex-1 animate-pulse items-center gap-4 rounded-[120px] bg-gray-800 p-4 transition-opacity ease-in-out"
+            className=" flex h-[48px] min-w-[120px] flex-1  items-center gap-4 rounded-[120px]  p-4 transition-opacity ease-in-out"
             style={{ opacity: 0.5 }}
           >
-            <div className="tp2 h-8 w-8 rounded-full"></div>
-            <div className="tp2 h-6 w-2/3 rounded"></div>
+            
           </div>
         ))}
       </div>

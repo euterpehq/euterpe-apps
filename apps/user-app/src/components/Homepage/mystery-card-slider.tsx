@@ -60,7 +60,7 @@ const MysteryCardSlider: React.FC = () => {
         {Array.from({ length: isMobile ? slidesPerView : 3 }).map((_, index) => (
           <div
             key={index}
-            className="tp2 flex md:h-[400px] md:w-[300px] w-[250px] h-[300px] animate-pulse flex-col gap-4 rounded-[8px] p-4 transition-opacity ease-in-out"
+            className=" flex md:h-[400px] md:w-[300px] w-[250px] h-[300px]  flex-col gap-4 rounded-[8px] p-4 transition-opacity ease-in-out"
             style={{ opacity: 0.5 }}
           />
         ))}

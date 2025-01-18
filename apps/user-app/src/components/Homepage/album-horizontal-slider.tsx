@@ -1,5 +1,5 @@
  "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -7,6 +7,7 @@ import { FreeMode, Pagination } from "swiper/modules";
 import Image from "next/image";
 import Link from "next/link";
 import { Album, ArtistProfile } from "@/lib/queries/supabaseQueries";
+import { useMediaQuery } from "react-responsive";
 
 
 interface MyComponentProps {
@@ -15,6 +16,15 @@ interface MyComponentProps {
 }
 
 const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) => {
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
+  const [loading, setLoading] = useState(true);
+  const slidesPerView = 6;
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 0);
+    return () => clearTimeout(timer);
+  }, []);
  
 
   // Filter albums to only include one album per artist (e.g., the first one)
@@ -25,10 +35,24 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
     return artistAlbums[0]; // Select the first album for each artist
   });
 
-
+  
+  if (loading) {
+    return (
+      <div className="flex h-[500px] w-full justify-between gap-5">
+        {Array.from({ length: isMobile ? 3 : slidesPerView  }).map((_, index) => (
+          <div
+            key={index}
+            className=" flex md:h-[400px] md:w-[300px] w-[250px] h-[300px]  flex-col gap-4 rounded-[8px] p-4 transition-opacity ease-in-out"
+            style={{ opacity: 0.5 }}
+          />
+        ))}
+      </div>
+    );
+  }
+  
 
   return (
-    <div className="relative h-full w-full">
+    <div className="relative mx-auto  w-full overflow-hidden">
       <Swiper
         spaceBetween={10}
         slidesPerView={6.8}
@@ -61,14 +85,17 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
               key={item.id}
               style={{
                 display: "flex",
-                flexDirection: "column",
                 alignItems: "center",
+                justifyContent: "center",
                 gap: "24px",
-                width: "20%",
+                //minWidth: "200px",
+                width: "200px",
                 borderRadius: "8px",
+                
               }}
             >
-              <Link href={`/album/${item.id}`} className="w-full gap-[12px]">
+              <Link href={`/album/${item.id}`} className="">
+                <div className="">
                 <div className="h-[70%] w-full">
                   <Image
                     src={item?.cover_image_url ?? null}
@@ -143,6 +170,7 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
                   <p className="text-nowrap text-[11px] tracking-[-0.44px] text-[#C1FF70]">
                     0.2 EUT
                   </p>
+                </div>
                 </div>
               </Link>
             </SwiperSlide>
