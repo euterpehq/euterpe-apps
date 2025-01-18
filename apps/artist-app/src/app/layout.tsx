@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Urbanist, Figtree, Inter, Azeret_Mono } from "next/font/google";
 import localFont from "next/font/local";
-import "./globals.css";
 import { cn } from "@/lib/utils";
 import { AppProvider } from "@/providers/app";
+import "./globals.css";
+import DesktopOnlyNotice from "@/components/desktop-only-notice";
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 
 const urbanist = Urbanist({ subsets: ["latin"], variable: "--font-urbanist" });
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
@@ -39,7 +42,7 @@ const aeonik = localFont({
 
 export const metadata: Metadata = {
   title: "Euterpe",
-  description: "Making space for the artists of tomorrow.",
+  description: "making space for a million overlooked artists.",
 };
 
 export default function RootLayout({
@@ -51,15 +54,25 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          urbanist.className,
+          figtree.className,
           urbanist.variable,
           aeonik.variable,
           figtree.variable,
           inter.variable,
-          azeret.variable
+          azeret.variable,
+          "bg-black",
         )}
       >
-        <AppProvider>{children}</AppProvider>
+        <AppProvider>
+          <div className="md:hidden">
+            <DesktopOnlyNotice />
+          </div>
+          <div className="hidden md:block">
+            {children}
+            <Toaster />
+            <SonnerToaster />
+          </div>
+        </AppProvider>
       </body>
     </html>
   );
