@@ -2,21 +2,16 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import AppHeader from "@/components/app-header";
-import UpdateProfileForm from "./update-profile-form";
+// import UpdateProfileForm from "./update-profile-form";
+import UploadMusicForm from "./upload-music-form";
 import { getArtist } from "@/lib/queries/artist/get-artist";
 
-export type ArtistProps = NonNullable<
-  Awaited<ReturnType<typeof getArtist>>["data"]
->;
-
-export default function UpdateProfile({
+export default function UploadMusic({
   open,
   onOpenChange,
-  artist,
 }: {
   open?: boolean;
   onOpenChange: (open: boolean) => void;
-  artist: ArtistProps;
 }) {
   return (
     <AnimatePresence mode="wait">
@@ -62,9 +57,9 @@ export default function UpdateProfile({
             <div className="overflow-scroll pt-6">
               <div className="mx-auto flex h-full w-[723px] flex-1 flex-col gap-5 pt-6">
                 <h1 className="text-[24px] font-semibold tracking-[-0.04em]">
-                  Update Artist Info
+                  Upload Music
                 </h1>
-                <UpdateProfileForm artist={artist} />
+                <UploadMusicForm />
               </div>
             </div>
           </div>

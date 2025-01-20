@@ -1,4 +1,6 @@
 "use client";
+import { useState, useEffect } from "react";
+import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
@@ -16,20 +18,37 @@ import {
   FileImagePreview,
 } from "@/components/ui/file-upload";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { TagsInput } from "@/components/ui/extension/tags-input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { Calendar as CalendarIcon } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { updateArtist } from "@/lib/actions/artist/update-artist";
+import { createAlbum } from "@/lib/actions/album/create-album";
 import { useHookFormAction } from "@next-safe-action/adapter-react-hook-form/hooks";
 import ServerActionResponseToast from "@/components/server-action-response-toast";
 import { LuLoader } from "react-icons/lu";
-import { getArtist } from "@/lib/queries/artist/get-artist";
-
-export type ArtistProps = NonNullable<
-  Awaited<ReturnType<typeof getArtist>>["data"]
->;
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 
 export const formSchema = z.object({
-  artist_image: z
+  category: z.string().optional(),
+  album_title: z.string().optional(),
+  genre: z.string().optional(),
+  sub_genres: z.string().array().optional(),
+  release_date: z.coerce.date().optional(),
+  cover_image: z
     .array(
       z.instanceof(File).refine((file) => file.size < 4 * 1024 * 1024, {
         message: "File size must be less than 4MB",
@@ -62,7 +81,7 @@ export const formSchema = z.object({
   terms: z.boolean().refine((val) => val, "Please check this box"),
 });
 
-export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
+export default function UpdateMusicForm() {
   const dropZoneConfig = {
     accept: {
       "image/*": [".jpg", ".jpeg", ".png", ".gif"],
@@ -72,24 +91,25 @@ export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
     multiple: false,
   };
   const { form, action, handleSubmitWithAction } = useHookFormAction(
-    updateArtist,
+    createAlbum,
     zodResolver(formSchema),
     {
       actionProps: {},
       formProps: {
         defaultValues: {
-          artist_image: null,
-          artist_image_url: artist.artist_image_url ?? undefined,
-          artist_name: artist.artist_name ?? undefined,
-          banner_image: null,
-          banner_image_url: artist.banner_image_url ?? undefined,
-          bio: artist.bio ?? undefined,
-          spotify: artist.spotify_url ?? undefined,
-          deezer: artist.deezer_url ?? undefined,
-          youtube: artist.youtube_music_url ?? undefined,
-          audiomack: artist.audiomack_url ?? undefined,
-          soundcloud: artist.soundcloud_url ?? undefined,
-          apple: artist.apple_music_url ?? undefined,
+          // artist_image: null,
+          // artist_image_url: artist.artist_image_url ?? undefined,
+          // artist_name: artist.artist_name ?? undefined,
+          // banner_image: null,
+          // banner_image_url: artist.banner_image_url ?? undefined,
+          // bio: artist.bio ?? undefined,
+          // spotify: artist.spotify_url ?? undefined,
+          // deezer: artist.deezer_url ?? undefined,
+          // youtube: artist.youtube_music_url ?? undefined,
+          // audiomack: artist.audiomack_url ?? undefined,
+          // soundcloud: artist.soundcloud_url ?? undefined,
+          // apple: artist.apple_music_url ?? undefined,
+          sub_genres: [],
           terms: true,
         },
       },
@@ -111,59 +131,25 @@ export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
         >
           <FormField
             control={form.control}
-            name="artist_image"
+            name="category"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Artist Image</FormLabel>
-                <FormControl>
-                  <FileUploader
-                    value={field.value}
-                    onValueChange={field.onChange}
-                    dropzoneOptions={dropZoneConfig}
-                    className="relative h-[200px] w-[200px]"
-                    reSelect
-                  >
-                    <FileInput
-                      id="fileInput"
-                      className="relative h-full w-full rounded-[6px] border border-dashed border-[#B8FF5B]/10 bg-[#1E1E1E]"
-                    >
-                      <div className="flex h-full w-full flex-col items-center justify-center gap-2.5 px-[20px] py-[14px]">
-                        <svg
-                          width="20"
-                          height="20"
-                          viewBox="0 0 20 20"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <g id="Upload">
-                            <path
-                              id="Icon"
-                              d="M17.5 12.5V15.8333C17.5 16.2754 17.3244 16.6993 17.0118 17.0118C16.6993 17.3244 16.2754 17.5 15.8333 17.5H4.16667C3.72464 17.5 3.30072 17.3244 2.98816 17.0118C2.67559 16.6993 2.5 16.2754 2.5 15.8333V12.5M14.1667 6.66667L10 2.5M10 2.5L5.83333 6.66667M10 2.5V12.5"
-                              stroke="#868B9F"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </g>
-                        </svg>
-
-                        <p className="text-xs font-medium text-primary">
-                          Select an image
-                        </p>
-                        <p className="text-nowrap text-xs font-medium text-[#868B9F]">
-                          Or drag image here to upload
-                        </p>
-                      </div>
-                    </FileInput>
-                    <FileImagePreview
-                      file={field.value?.[0]}
-                      fallbackUrl={artist.artist_image_url}
-                      index={0}
-                      className="overflow-hidden rounded-[6px]"
-                    />
-                  </FileUploader>
-                </FormControl>
-
+                <FormLabel>Category Type</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="m@example.com">Single</SelectItem>
+                    <SelectItem value="m@google.com">EP</SelectItem>
+                    <SelectItem value="m@support.com">Album</SelectItem>
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
@@ -171,13 +157,237 @@ export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
 
           <FormField
             control={form.control}
-            name="artist_name"
+            name="album_title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Artist Name</FormLabel>
+                <FormLabel>Album Title</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter name" type="" {...field} />
                 </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="genre"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Genre</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="Pop">Pop</SelectItem>
+                    <SelectItem value="Rock">Rock</SelectItem>
+                    <SelectItem value="Hip-Hop">Hip-Hop</SelectItem>
+                    <SelectItem value="Afrobeats">Afrobeats</SelectItem>
+                    <SelectItem value="Country">Country</SelectItem>
+                    <SelectItem value="Electronic">Electronic</SelectItem>
+                    <SelectItem value="Jazz">Jazz</SelectItem>
+                    <SelectItem value="Reggae">Reggae</SelectItem>
+                    <SelectItem value="R&B">R&B</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="sub_genres"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Sub-Genre</FormLabel>
+                <FormControl>
+                  <TagsInput
+                    value={field.value ?? []}
+                    onValueChange={field.onChange}
+                    placeholder="Enter sub-genres"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="release_date"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Release Date</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "h-10 w-full rounded-[6px] border-[0.8px] border-[#303033] bg-[#1E1E1E] p-[14px] text-xs font-medium font-normal transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-xs placeholder:text-[#797979] hover:bg-[#1E1E1E] focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm md:placeholder:text-sm",
+                          !field.value && "text-[#797979] hover:text-[#797979]",
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>MM - DD - YYYY</span>
+                        )}
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="ml-auto"
+                        >
+                          <path
+                            d="M13.3333 1.6665V4.99984M6.66667 1.6665V4.99984M2.5 8.33317H17.5M4.16667 3.33317H15.8333C16.7538 3.33317 17.5 4.07936 17.5 4.99984V16.6665C17.5 17.587 16.7538 18.3332 15.8333 18.3332H4.16667C3.24619 18.3332 2.5 17.587 2.5 16.6665V4.99984C2.5 4.07936 3.24619 3.33317 4.16667 3.33317Z"
+                            stroke="#868B9F"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="cover_image"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Cover Image</FormLabel>
+                <div className="flex gap-6">
+                  <FormControl>
+                    <FileUploader
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      dropzoneOptions={dropZoneConfig}
+                      className="relative h-[200px] w-[200px]"
+                      reSelect
+                    >
+                      <FileInput
+                        id="fileInput"
+                        className="relative h-full w-full rounded-[6px] border border-dashed border-[#B8FF5B]/10 bg-[#1E1E1E]"
+                      >
+                        <div className="flex h-full w-full flex-col items-center justify-center gap-2.5 px-[20px] py-[14px]">
+                          <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <g id="Upload">
+                              <path
+                                id="Icon"
+                                d="M17.5 12.5V15.8333C17.5 16.2754 17.3244 16.6993 17.0118 17.0118C16.6993 17.3244 16.2754 17.5 15.8333 17.5H4.16667C3.72464 17.5 3.30072 17.3244 2.98816 17.0118C2.67559 16.6993 2.5 16.2754 2.5 15.8333V12.5M14.1667 6.66667L10 2.5M10 2.5L5.83333 6.66667M10 2.5V12.5"
+                                stroke="#868B9F"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </g>
+                          </svg>
+
+                          <p className="text-xs font-medium text-primary">
+                            Select an image
+                          </p>
+                          <p className="text-nowrap text-xs font-medium text-[#868B9F]">
+                            Or drag image here to upload
+                          </p>
+                        </div>
+                      </FileInput>
+                      <FileImagePreview
+                        file={field.value?.[0]}
+                        fallbackUrl={null}
+                        index={0}
+                        className="overflow-hidden rounded-[6px]"
+                      />
+                    </FileUploader>
+                  </FormControl>
+                  <div className="flex flex-col gap-[13px]">
+                    <h3 className="text-xs font-semibold tracking-[-0.04em]">
+                      Optimal Characteristics
+                    </h3>
+                    <ul className="flex flex-col gap-2.5 text-xs font-medium tracking-[-0.04em] text-[#868B9F]">
+                      <li>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="4"
+                          height="4"
+                          viewBox="0 0 4 4"
+                          fill="none"
+                          className="mr-2 inline-block"
+                        >
+                          <circle cx="2" cy="2" r="2" fill="#D9D9D9" />
+                        </svg>
+                        .jpg, .jpeg or .png file extensions
+                      </li>
+                      <li>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="4"
+                          height="4"
+                          viewBox="0 0 4 4"
+                          fill="none"
+                          className="mr-2 inline-block"
+                        >
+                          <circle cx="2" cy="2" r="2" fill="#D9D9D9" />
+                        </svg>
+                        Perfect square
+                      </li>
+                      <li>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="4"
+                          height="4"
+                          viewBox="0 0 4 4"
+                          fill="none"
+                          className="mr-2 inline-block"
+                        >
+                          <circle cx="2" cy="2" r="2" fill="#D9D9D9" />
+                        </svg>
+                        3000 x 3000 pixels resolution
+                      </li>
+                      <li>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="4"
+                          height="4"
+                          viewBox="0 0 4 4"
+                          fill="none"
+                          className="mr-2 inline-block"
+                        >
+                          <circle cx="2" cy="2" r="2" fill="#D9D9D9" />
+                        </svg>
+                        Maximum file size: 4MB
+                      </li>
+                    </ul>
+                  </div>
+                </div>
 
                 <FormMessage />
               </FormItem>
@@ -229,15 +439,14 @@ export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
                         </p>
                       </div>
                     </FileInput>
-                    <FileImagePreview
+                    {/* <FileImagePreview
                       file={field.value?.[0]}
                       fallbackUrl={artist.banner_image_url}
                       index={0}
                       className="overflow-hidden rounded-[6px]"
-                    />
+                    /> */}
                   </FileUploader>
                 </FormControl>
-
                 <FormMessage />
               </FormItem>
             )}
@@ -256,7 +465,6 @@ export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
                     {...field}
                   />
                 </FormControl>
-
                 <FormMessage />
               </FormItem>
             )}
@@ -302,7 +510,6 @@ export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
                         </div>
                       </div>
                     </FormControl>
-
                     <FormMessage />
                   </FormItem>
                 )}
@@ -376,7 +583,6 @@ export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
                         </div>
                       </div>
                     </FormControl>
-
                     <FormMessage />
                   </FormItem>
                 )}
@@ -416,7 +622,6 @@ export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
                         </div>
                       </div>
                     </FormControl>
-
                     <FormMessage />
                   </FormItem>
                 )}
@@ -466,7 +671,6 @@ export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
                         </div>
                       </div>
                     </FormControl>
-
                     <FormMessage />
                   </FormItem>
                 )}
@@ -507,7 +711,6 @@ export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
                         </div>
                       </div>
                     </FormControl>
-
                     <FormMessage />
                   </FormItem>
                 )}
@@ -594,7 +797,6 @@ export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
                         </div>
                       </div>
                     </FormControl>
-
                     <FormMessage />
                   </FormItem>
                 )}
