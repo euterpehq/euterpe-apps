@@ -22,7 +22,7 @@ function PlayerControls({
 }: PlayerControlsProps) {
   return (
     <div
-      className="w-full flex flex-col   items-center gap-6"
+      className="w-full  flex flex-col   items-center gap-6 "
       onClick={(e) => e.stopPropagation()}
     >
       <button onClick={togglePlayPause}>
@@ -61,10 +61,10 @@ function PlayerControls({
         )}
       </button>
 
-      <div className="flex items-center gap-2.5 font-inter text-xs text-[#BDBDBD]">
-        <span className="w-[20px] ">{formatTime(currentTime)}</span>
+      <div className="w-full flex items-center gap-2.5 font-inter text-xs text-[#BDBDBD]">
+        <span className="w-[20px] mr-1">{formatTime(currentTime)}</span>
         <div className="cursor-pointer py-1.5" onClick={handleSeek}>
-          <div className="relative h-[2px] w-[339px] max-w-xs rounded-[24px] bg-primary/10 md:max-w-[339px]">
+          <div className="relative h-[2px] md:w-[339px] w-[270px]  max-w-xs rounded-[24px] bg-primary/10 md:max-w-[339px]">
             <div
               className="h-full  rounded-[24px] bg-primary"
               style={{ width: `${(currentTime / duration) * 100}%` }}

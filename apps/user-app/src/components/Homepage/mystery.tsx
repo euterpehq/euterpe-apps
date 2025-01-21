@@ -9,9 +9,9 @@ const Mystery: React.FC = () => {
   const { openModal } = useModalStore();
 
   return (
-    <div className="mx-auto my-10 flex h-[400px] w-full flex-col gap-5 overflow-hidden pl-6">
-      <div className="flex w-full items-center justify-between">
-        <div>
+    <div className="mx-auto my-10 flex md:h-[400px] h-[330px] w-full flex-col gap-5 overflow-hidden">
+      <div className="flex w-full items-center justify-between px-6">
+        <div >
           <h1 className="md:text-[25px] text-[20px] font-semibold">Feeling Lucky?</h1>
           <p className="text-[14px]">
             Listen to mystery songs and earn top rewards
@@ -19,7 +19,7 @@ const Mystery: React.FC = () => {
         </div>
         <div
           onClick={openModal}
-          className="mr-6 hidden md:flex cursor-pointer items-center justify-center gap-[4px] rounded-[120px] bg-[#C1FF70] px-[20px] py-[10px]"
+          className=" hidden md:flex cursor-pointer items-center justify-center gap-[4px] rounded-[120px] bg-[#C1FF70] px-[20px] py-[10px]"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,9 @@ const Mystery: React.FC = () => {
           </p>
         </div>
       </div>
+     
       <MysteryCardSlider />
+      
     </div>
   );
 };

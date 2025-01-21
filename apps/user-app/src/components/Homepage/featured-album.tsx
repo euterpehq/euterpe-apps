@@ -20,8 +20,8 @@ const FeaturedAlbum = ({albums, artists}: HomePageProps) => {
   if (!artists) return <div>Artist not found</div>;
 
   return (
-    <div className='w-full md:h-[400px] h-[310px]   mx-auto flex flex-col gap-5 pl-6 mt-5  overflow-hidden'>
-      <div className=''>
+    <div className='w-full md:h-[400px] h-[350px]   mx-auto flex flex-col gap-5  mt-5 overflow-hidden'>
+      <div className='ml-6'>
         <h1 className='font-semibold md:text-[25px] text-[20px]'>Top Picks</h1>
       </div>
       <AlbumHorizontalSlider albums={albums} artists={artists}/>

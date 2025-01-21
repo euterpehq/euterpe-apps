@@ -54,7 +54,7 @@ export default function AlbumHeader({ album }: Prop) {
 
   return (
     <div className="flex md:flex-row flex-col w-full gap-10 border-b-[0.5px] border-[#303033]">
-      <div className="md:h-[240px] md:w-[240px] w-full h-full">
+      <div className="md:h-[240px] md:w-[240px] w-full h-[414px]">
         <Image
           src={album?.cover_image_url ?? null}
           alt=""

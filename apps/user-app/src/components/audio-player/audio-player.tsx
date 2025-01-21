@@ -74,6 +74,8 @@ const AudioPlayer: React.FC = () => {
   },[fetchAlbum, fetchArtist])
 
   
+
+  
   const song = albumSongs[currentSongIndex]
 
   const album = albums.find((a) => a.id === song.album_id);
@@ -91,9 +93,14 @@ const AudioPlayer: React.FC = () => {
  
 
   return (
-
+      <div className="fixed top-0 bottom-0 w-screen h-screen overflow-hidden  text-white transition-all duration-300 ease-in-out ">
+        <div className="invisible md:visible absolute top-[4rem] right-[3rem] z-50">
+          <NextSongButton playNext={playNext} />
+        </div>
+        
+      
       <div
-      className="fixed left-0 top-0 bottom-0 z-40 flex h-screen w-screen flex-col overflow-x-hidden md:overflow-y-scroll overflow-y-hidden md:pt-[3.25rem] text-white transition-all duration-300 ease-in-out">
+      className=" flex h-full w-full flex-col justify-center md:pt-[3.25rem] pt-5">
 
         <div
           className={`absolute inset-0 transition-transform duration-300 ${
@@ -119,25 +126,19 @@ const AudioPlayer: React.FC = () => {
           }
         ></div>
 
-      <div className="relative z-10">
-
-      <div className="mr-6 mt-6 flex justify-end">
-        <div className="invisible md:visible">
-          <NextSongButton playNext={playNext} />
-        </div>
-      </div>
-
-      <div className="flex flex-col items-center gap-6 px-6">
-        <div className="flex flex-col items-center gap-6">
+      <div className="relative z-10 h-full w-full  flex flex-col items-center justify-around md:justify-center">
+      
+      <div className="flex flex-col items-center md:gap-6 gap-3 px-6">
+        <div className="flex flex-col items-center gap-6 ">
           {discovered ? (
             album?.cover_image_url && (
               <Image
                 src={album.cover_image_url}
                 alt="Album Art"
-                className="h-[360px] w-[360px] object-cover rounded-[16px]"
+                className="h-[300px] w-[300px] object-cover rounded-[16px]"
                 crossOrigin="anonymous"
-                width={360}
-                height={360}
+                width={300}
+                height={300}
               />
             )
           ) : (
@@ -165,7 +166,11 @@ const AudioPlayer: React.FC = () => {
          <div className="hidden">
           <NextSongButton playNext={playNext} />
         </div>
-        <div className="pt-[3rem] md:pt-0">
+        
+       
+       
+      </div>
+      <div className="  md:pt-0 relative bottom-5  md:bottom-0 md:top-5">
         {showStreamingLinks ? (
           <div className="flex items-center gap-3">
             <svg
@@ -194,13 +199,9 @@ const AudioPlayer: React.FC = () => {
           />
         )}
         </div>
-       
-       
-      </div>
-      
       </div>
       </div>
-  
+      </div>
   );
 };
 

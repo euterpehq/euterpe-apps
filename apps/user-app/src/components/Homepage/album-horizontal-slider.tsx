@@ -16,7 +16,8 @@ interface MyComponentProps {
 }
 
 const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) => {
-  const isMobile = useMediaQuery({ maxWidth: 767 });
+   const isMobile = useMediaQuery({ maxWidth: 767 });
+    const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
 
   const [loading, setLoading] = useState(true);
   const slidesPerView = 6;
@@ -35,6 +36,25 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
     return artistAlbums[0]; // Select the first album for each artist
   });
 
+  const getSlideStyles = () => {
+    if (isMobile) {
+      return {
+        
+        width: "156px",
+       
+      };
+    }
+    if (isTablet) {
+      return {
+        width: "180px",
+       
+      };
+    }
+    return {
+      width: "188px",
+      
+    };
+  };
   
   if (loading) {
     return (
@@ -52,9 +72,9 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
   
 
   return (
-    <div className="relative mx-auto  w-full overflow-hidden">
+    <div className="relative mx-auto  w-full">
       <Swiper
-        spaceBetween={10}
+        spaceBetween={8}
         slidesPerView={6.8}
         freeMode={true}
         modules={[FreeMode, Pagination]}
@@ -73,7 +93,7 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
           },
         }}
         style={{}}
-        className="h-full w-full cursor-grab"
+        className="h-full w-full cursor-grab "
        
       >
         {album?.map((item) => {
@@ -84,29 +104,32 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
             <SwiperSlide
               key={item.id}
               style={{
+                ...getSlideStyles(),
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: "24px",
-                //minWidth: "200px",
-                width: "200px",
+                //marginLeft: "10px",
+                //minWidth: "188px",
+                //width: "188px",
                 borderRadius: "8px",
-                
+                //border: "1px solid white"
               }}
             >
-              <Link href={`/album/${item.id}`} className="">
-                <div className="">
-                <div className="h-[70%] w-full">
+              <Link href={`/album/${item.id}`} className=" w-full md:w-[188px] h-full ">
+                <div className="flex flex-col gap-[20px] w-full md:w-[188px] h-full ml-6 ">
+                <div className="w-full md:h-[188px] h-[156px]">
                   <Image
                     src={item?.cover_image_url ?? null}
                     alt=""
-                    className="w-[156px] h-[156px] md:h-[188px] md:w-[188px] rounded-[8px] object-cover"
+                    className="w-full h-full rounded-[8px] object-cover"
                     height={188}
                     width={188}
                     quality={100}
+                   
                   />
                 </div>
-                <div className="my-3 flex flex-col gap-1">
+                <div className="flex flex-col gap-3">
+                <div className="h-[40px]">
                   <h1 className="text-[14px] tracking-[-0.28px]">
                     {item.title}
                   </h1>
@@ -114,7 +137,7 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
                     {artist?.artist_name}
                   </p>
                 </div>
-                <div className="tp inline-flex items-center justify-center gap-[4px] rounded-full px-[8px] py-[5px]">
+                <div className="tp flex items-center justify-center gap-[4px] rounded-full px-[8px] py-[5px] w-[68px] ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="13"
@@ -170,6 +193,7 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
                   <p className="text-nowrap text-[11px] tracking-[-0.44px] text-[#C1FF70]">
                     0.2 EUT
                   </p>
+                </div>
                 </div>
                 </div>
               </Link>

@@ -42,7 +42,7 @@ export default function ArtistSongs({ artist, albums }: Prop) {
           <h1 className="font-figtree text-[20px] font-semibold tracking-[-0.4px]">
             Top Songs
           </h1>
-          <div className="grid w-full md:grid-cols-2 grid-cols-1 md:gap-20 gap-10 px-[30px]">
+          <div className="grid w-full md:grid-cols-2 grid-cols-1 md:gap-20">
             <div className="flex flex-col md:gap-[24px] gap-10">
               {albumSong.slice(0, 3).map((song, index) => {
                 const findAlbum = artistAlbums.find(
@@ -82,22 +82,23 @@ export default function ArtistSongs({ artist, albums }: Prop) {
               })}
             </div>
             <div className="flex flex-col md:gap-[24px] gap-10">
-              {albumSong.slice(3, 6).map((song, index) => {
+              {albumSong.slice(3,6).map((song, index) => {
                 const findAlbum = artistAlbums.find(
                   (album) => album.id === song.album_id,
                 );
                 return (
                   <div
                     key={song.id}
-                    className="flex items-center justify-between"
+                    className="flex h-[67px] items-center justify-between"
                     onClick={() => handleSongClick(index)}
                   >
-                    <div className="flex items-center gap-[10px]">
-                      <p className="text-[#B1B5C5]">{index + 1}</p>
+                    <div className="flex items-center gap-4">
+                      <p className="text-sm text-[#868B9F]">{index + 1}</p>
                       <div className="h-[50px] w-[50px]">
                         <img
                           src={findAlbum?.cover_image_url ?? ""}
                           alt={findAlbum?.title || "Album Cover"}
+                          className="h-full w-full rounded-[4px] object-cover"
                         />
                       </div>
                       <div>

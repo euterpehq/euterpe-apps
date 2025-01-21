@@ -49,8 +49,8 @@ export default async function ArtistPageRoute({ params }: ArtistPageRouteProps){
         </h1>
         <ArtistDiscography />
       </div>
-      <div className="md:my-[20px] pl-[24px]">
-        <h1 className="pb-10 font-figtree text-[20px] font-semibold tracking-[-0.4px]">
+      <div className="md:my-[20px] ">
+        <h1 className="pb-10 font-figtree text-[20px] font-semibold tracking-[-0.4px] pl-[24px]">
           Similar Artists
         </h1>
         <ArtistHorizontalSlider artists={artists} />

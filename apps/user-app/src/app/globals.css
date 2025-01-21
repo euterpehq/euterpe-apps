@@ -96,6 +96,9 @@
   }
 }
 
+.no-scroll {
+  overflow: hidden;
+}
 
 .tp{
   border-radius: 240px;

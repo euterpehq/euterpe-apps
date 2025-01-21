@@ -25,7 +25,7 @@ function MiniPlayerControls({
       className="w-full md:w-auto flex md:flex-col   items-center gap-6"
       onClick={(e) => e.stopPropagation()}
     >
-      <button onClick={togglePlayPause} className="md:relative absolute md:right-0 md:bottom-0 right-4 bottom-6">
+      <button onClick={togglePlayPause} className="md:relative absolute md:right-0 md:bottom-0 right-4 bottom-9">
         {isPlaying ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +61,7 @@ function MiniPlayerControls({
         )}
       </button>
 
-      <div className="flex items-center gap-2.5 font-inter text-xs text-[#BDBDBD]   w-full md:w-auto">
+      <div className="flex items-center gap-2.5 font-inter text-xs text-[#BDBDBD] pb-2  w-full md:w-auto">
         <span className="w-[20px] hidden md:block">{formatTime(currentTime)}</span>
         <div className="cursor-pointer md:py-1.5 w-full md:w-auto" onClick={handleSeek}>
           <div className="relative h-[2px] md:w-[339px] w-[100%]  rounded-[24px] bg-primary/10 md:max-w-[339px] ">
