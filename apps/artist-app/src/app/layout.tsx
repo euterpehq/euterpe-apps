@@ -64,10 +64,10 @@ export default function RootLayout({
         )}
       >
         <AppProvider>
-          <div className="md:hidden">
+          {/* <div className="md:hidden">
             <DesktopOnlyNotice />
-          </div>
-          <div className="hidden md:block">
+          </div> */}
+          <div className="block w-auto overflow-hidden">
             {children}
             <Toaster />
             <SonnerToaster />

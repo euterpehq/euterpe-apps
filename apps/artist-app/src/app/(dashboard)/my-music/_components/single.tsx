@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { getAlbums } from "@/lib/queries/album/get-albums";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 
 export type SingleProps = NonNullable<
   Awaited<ReturnType<typeof getAlbums>>["data"]
@@ -41,12 +43,18 @@ export default function Single({ single }: { single: SingleProps }) {
         </div>
       </div>
       <div className="flex items-center justify-between text-xs">
-        <h2 className="tracking-[-0.02em] text-[#868B9F]">
+        <h2 className="hidden tracking-[-0.02em] text-[#868B9F] md:block">
           {single.plays ?? 0}
         </h2>
-        <h2 className="w-[185px] text-end tracking-[-0.02em] text-[#868B9F]">
+        <h2 className="hidden w-[185px] text-end tracking-[-0.02em] text-[#868B9F] md:block">
           {single.release_date ?? "N/A"}
         </h2>
+        {/* <Link
+          href="#"
+          className="block w-[185px] text-end tracking-[-0.02em] text-[#868B9F] md:hidden"
+        >
+          <ChevronRight />
+        </Link> */}
       </div>
     </section>
   );

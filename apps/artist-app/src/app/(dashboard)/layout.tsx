@@ -5,6 +5,7 @@ import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import AppMarqueeBanner from "@/components/app-marquee-banner";
 import { getArtist } from "@/lib/queries/artist/get-artist";
 import DataFetchErrorDisplay from "@/components/data-fetch-error-display";
+import MobileNav from "./my-music/_components/MobileNav";
 
 export default async function Layout({
   children,
@@ -14,14 +15,19 @@ export default async function Layout({
   const { data: artist } = await getArtist();
   if (!artist) return <DataFetchErrorDisplay />;
   return (
-    <div className="flex h-screen min-h-screen flex-col bg-background">
+    <div className="flex h-screen min-h-screen w-full flex-col overflow-hidden bg-background">
       <AppHeader />
       <div className="flex flex-1 overflow-hidden">
         <SidebarProvider>
           <AppSidebar artist={artist} />
           <SidebarInset>
             <AppMarqueeBanner artist={artist} />
-            <div className="flex-1 overflow-scroll">{children}</div>
+            <div className="w-screen md:w-[88.5%] md:flex-1 xl:w-auto">
+              {children}
+            </div>
+            <div className="visible mt-auto w-screen overflow-hidden md:hidden">
+              <MobileNav />
+            </div>
           </SidebarInset>
         </SidebarProvider>
       </div>

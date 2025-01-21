@@ -30,8 +30,9 @@ export default function Releases({ releases }: { releases: ReleasesProps }) {
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <div className="flex flex-col px-6 pt-[50px]">
-      <header className="flex shrink-0 items-center justify-between gap-2">
+    <div className="flex flex-col overflow-hidden px-6 pt-[50px]">
+      <header className="flex shrink-0 flex-wrap items-center justify-between gap-2">
+        {/* <header className="flex w-auto items-center justify-between border border-primary md:gap-0"> */}
         <div className="flex items-center justify-start">
           <Breadcrumb>
             <BreadcrumbList>
@@ -43,7 +44,7 @@ export default function Releases({ releases }: { releases: ReleasesProps }) {
             </BreadcrumbList>
           </Breadcrumb>
         </div>
-        <section className="flex items-center justify-start gap-x-[14px]">
+        <section className="flex items-center justify-start md:gap-x-[14px]">
           {/* <Button className="rounded-[8px] border-[0.5px] border-[#303033] px-3 py-2.5 text-xs font-medium tracking-[-0.02em] text-[#181818]">
             Week
           </Button>
@@ -77,8 +78,10 @@ export default function Releases({ releases }: { releases: ReleasesProps }) {
       <section className="mt-[30px] flex px-2.5 py-[14px] text-xs font-medium tracking-[-0.02em]">
         <h2 className="flex-1">Releases</h2>
         <div className="flex items-center justify-between">
-          <h2 className="text-[#9C9C9C]">Plays</h2>
-          <h2 className="w-[185px] text-end text-[#9C9C9C]">Date Released</h2>
+          <h2 className="hidden text-[#9C9C9C] md:block">Plays</h2>
+          <h2 className="hidden w-[185px] text-end text-[#9C9C9C] md:block">
+            Date Released
+          </h2>
         </div>
       </section>
 
@@ -93,5 +96,12 @@ export default function Releases({ releases }: { releases: ReleasesProps }) {
           })}
       </div>
     </div>
+    // previous code above
+    // <div className="h-full w-screen border-2 border-primary">
+    //   <section className="flex w-full items-center justify-between gap-10 md:gap-0">
+    //     {/* <div className="h-[30px] w-[30%] border-2 border-blue-900"></div>
+    //     <div className="h-[30px] w-[30%] border-2 border-pink-900"></div> */}
+    //   </section>
+    // </div>
   );
 }

@@ -15,7 +15,7 @@ export default function Page() {
       />
       <div className="z-5 absolute left-0 top-0 h-full w-full bg-black opacity-75" />
       <div className="relative z-10 space-y-8">
-        <h1 className="m-auto text-center text-[100px] font-semibold leading-[80px] tracking-[-0.06em]">
+        <h1 className="m-auto text-center text-[50px] font-semibold leading-[50px] tracking-[-0.06em] md:text-[100px] md:leading-[80px]">
           Get your music <br />
           discovered on Euterpe.
         </h1>

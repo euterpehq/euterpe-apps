@@ -60,8 +60,8 @@ export const UpdateProfile = ({
             </button>
 
             <div className="overflow-scroll pt-6">
-              <div className="mx-auto flex h-full w-[723px] flex-1 flex-col gap-5 pt-6">
-                <h1 className="text-[24px] font-semibold tracking-[-0.04em]">
+              <div className="mx-auto flex h-auto w-auto flex-1 flex-col gap-5 pt-6 md:w-[723px]">
+                <h1 className="mt-8 text-[24px] font-semibold tracking-[-0.04em] md:mt-0">
                   Update Artist Info
                 </h1>
                 <UpdateProfileForm artist={artist} />
