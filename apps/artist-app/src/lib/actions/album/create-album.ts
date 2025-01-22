@@ -22,26 +22,23 @@ const validationSchema = z.object({
       message: "Maximum 1 files are allowed",
     })
     .nullable(),
-  artist_image_url: z.string().optional(),
-  artist_name: z.string().optional(),
-  banner_image: z
-    .array(
-      z.instanceof(File).refine((file) => file.size < 4 * 1024 * 1024, {
-        message: "File size must be less than 4MB",
-      }),
-    )
-    .max(1, {
-      message: "Maximum 1 files are allowed",
-    })
-    .nullable(),
-  banner_image_url: z.string().optional(),
-  bio: z.string().optional(),
-  spotify: z.string().optional(),
-  deezer: z.string().optional(),
-  youtube: z.string().optional(),
-  audiomack: z.string().optional(),
-  soundcloud: z.string().optional(),
-  apple: z.string().optional(),
+  tracks: z.array(
+    z.object({
+      track_image: z
+        .array(
+          z.instanceof(File).refine((file) => file.size < 4 * 1024 * 1024, {
+            message: "File size must be less than 4MB",
+          }),
+        )
+        .max(1, {
+          message: "Maximum 1 files are allowed",
+        })
+        .nullable(),
+      track_number: z.number().optional(),
+      track_title: z.string().optional(),
+      featured_artists: z.string().array().optional(),
+    }),
+  ),
   terms: z.boolean().refine((val) => val, "Please check this box"),
 });
 
@@ -78,34 +75,7 @@ export const createAlbum = actionClient
       coverImageUrl = data?.publicUrl ?? undefined;
     }
 
-    let bannerImageUrl: string | undefined = undefined;
-    if (parsedInput.banner_image) {
-      const file = parsedInput.banner_image[0];
-      const filePath = `${user.id}-${Date.now()}-${file.name}`;
-      const { error: uploadError } = await supabase.storage
-        .from("banners")
-        .upload(filePath, file, { upsert: false });
-
-      if (uploadError) {
-        throw uploadError;
-      }
-
-      const { data } = supabase.storage.from("banners").getPublicUrl(filePath);
-      bannerImageUrl = data?.publicUrl ?? undefined;
-    }
-
-    const payload = {
-      artist_name: parsedInput.artist_name,
-      artist_image_url: coverImageUrl,
-      banner_image_url: bannerImageUrl,
-      bio: parsedInput.bio,
-      spotify_url: parsedInput.spotify,
-      deezer_url: parsedInput.deezer,
-      youtube_music_url: parsedInput.youtube,
-      audiomack_url: parsedInput.audiomack,
-      soundcloud_url: parsedInput.soundcloud,
-      apple_music_url: parsedInput.apple,
-    };
+    const payload = {};
 
     const { error: updateError } = await supabase
       .from("artist_profiles")
