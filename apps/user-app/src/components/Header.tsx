@@ -6,11 +6,13 @@ import Link from "next/link";
 import Earnings from "@/components/Earnings";
 import { Separator } from "@/components/ui/separator";
 import { useAccount } from "wagmi";
+import { usePathname } from "next/navigation";
 
 function Header() {
   const { isConnected } = useAccount();
+  const pathname = usePathname()
   return (
-    <header className="sticky top-0 z-30 md:z-50 flex h-[3.25rem] items-center justify-between border-b-[0.2px] border-[#303033]/80 bg-[#0E0E0E] px-6 py-3">
+    <header className={`sticky top-0 z-30 md:z-50 flex h-[3.25rem] items-center justify-between  ${pathname === "/reward" ? "bg-transparent" : "bg-[#0E0E0E] border-b-[0.2px] border-[#303033]/80"}  px-6 py-3 `}>
       <div className="flex">
         <div className="flex items-center gap-2 lg:flex">
           <Link href="/">

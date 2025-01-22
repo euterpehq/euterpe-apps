@@ -74,7 +74,7 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
   return (
     <div className="relative mx-auto  w-full">
       <Swiper
-        spaceBetween={8}
+        spaceBetween={15}
         slidesPerView={6.8}
         freeMode={true}
         modules={[FreeMode, Pagination]}
@@ -108,11 +108,7 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                //marginLeft: "10px",
-                //minWidth: "188px",
-                //width: "188px",
                 borderRadius: "8px",
-                //border: "1px solid white"
               }}
             >
               <Link href={`/album/${item.id}`} className=" w-full md:w-[188px] h-full ">

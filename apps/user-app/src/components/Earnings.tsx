@@ -11,6 +11,7 @@ import {
   DialogContent,
 } from "@/components/ui/dialog";
 import WithdrawButton from "@/components/WithdrawButton";
+import Link from "next/link";
 
 function Earnings() {
   const earnings = useEarningsStore((state) => state.earnings);
@@ -19,10 +20,12 @@ function Earnings() {
   return (
     <Dialog open={opendialog} onOpenChange={setOpendialog} >
       <DialogTrigger>
+        <Link href="/reward">
         <div className="flex cursor-pointer items-center gap-2 font-figtree text-xs font-semibold tracking-[-0.02em]">
           <EUTIcon className="h-5 w-5" />
           <span>{earnings.toFixed(2)}</span> EUT
         </div>
+        </Link>   
       </DialogTrigger>
       <DialogContent className="flex flex-col items-center gap-5 bg-[#1A1A1A] p-6">
         <DialogHeader className="">

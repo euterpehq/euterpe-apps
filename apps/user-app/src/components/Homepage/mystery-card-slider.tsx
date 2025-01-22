@@ -60,8 +60,8 @@ const MysteryCardSlider: React.FC = () => {
     if (isMobile) {
       return {
         
-        width: "175px",
-        height: "240.6px",
+        width: "180px",
+        height: "237.6px",
       };
     }
     if (isTablet) {
@@ -72,7 +72,7 @@ const MysteryCardSlider: React.FC = () => {
     }
     return {
       width: "230px",
-      height: "320px",
+      height: "270px",
     };
   };
 
@@ -96,14 +96,14 @@ const MysteryCardSlider: React.FC = () => {
     
         
       <Swiper
-        spaceBetween={8}
+        spaceBetween={15}
         slidesPerView={6.8}
         freeMode={true}
         modules={[FreeMode, Pagination]}
         breakpoints={{
           // Mobile devices
           0: {
-            slidesPerView: 2.2,
+            slidesPerView: 2.5,
           },
           // Tablets
           640: {
@@ -130,8 +130,8 @@ const MysteryCardSlider: React.FC = () => {
             <div className="h-full w-full">
 
            
-            <div className="w-full h-full flex flex-col items-center px-[12px] pt-[12px] pb-[93.838px] gap-[40px] bg-[#121310] rounded-[8px] ml-6">
-            <div className="flex  w-full  items-start justify-between ">
+            <div className="w-full h-full flex flex-col items-center px-[12px] pt-[12px] pb-[93.838px] gap-[60px] bg-[#121310] rounded-[8px] ml-6">
+            <div className="flex  w-full  items-center justify-between ">
               <div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +146,7 @@ const MysteryCardSlider: React.FC = () => {
                   />
                 </svg>
               </div>
-              <div className="inline-flex items-center gap-1 rounded-full bg-[#1b1f15] px-[10px] py-[6px]">
+              <div className="inline-flex items-center gap-1 rounded-full bg-[#1b1f15] px-[10px] md:py-[6px] py-[4px]">
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

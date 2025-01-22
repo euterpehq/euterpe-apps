@@ -115,7 +115,8 @@ const GenreCardSlider: React.FC = () => {
     );
   }
   return (
-    <div className="relative mx-auto h-[48px] w-full overflow-hidden">
+    <div>
+    <div className="relative mx-auto h-[48px] hidden md:block w-full overflow-hidden">
       <Swiper
         spaceBetween={20}
         slidesPerView={"auto"}
@@ -126,6 +127,30 @@ const GenreCardSlider: React.FC = () => {
       >
         {genres.map((item) => (
           <SwiperSlide
+            key={item.id}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+             width: "auto",
+             height: "48px",
+            
+            }}
+          >
+            <div className="flex items-center justify-center py-[16px] px-[20px] gap-[10px] w-auto flex-shrink-0 h-[48px] bg-[#181818] shadow shadow-[rgba(0, 0, 0, 0.1)] rounded-[120px] ml-5">
+            <span>{item.emoji}</span>
+            <p className="text-[13px] font-semibold text-[#fff]">
+              {item.label}
+            </p>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+     
+    </div>
+    <div className="w-full h-full md:hidden grid grid-cols-2 gap-5">
+      {genres.map((item) => (
+          <div
             key={item.id}
             style={{
               display: "flex",
@@ -145,9 +170,9 @@ const GenreCardSlider: React.FC = () => {
             <p className="text-[13px] font-semibold text-[#fff]">
               {item.label}
             </p>
-          </SwiperSlide>
+          </div>
         ))}
-      </Swiper>
+      </div>
     </div>
   );
 };

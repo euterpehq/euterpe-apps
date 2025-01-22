@@ -28,7 +28,7 @@ const ArtistHorizontalSlider: React.FC<MyComponentProps> = ({artists}) => {
       return {
         
         width: "180px",
-        height: "228px",
+        height: "225px",
       };
     }
     if (isTablet) {
@@ -46,7 +46,7 @@ const ArtistHorizontalSlider: React.FC<MyComponentProps> = ({artists}) => {
   return (
     <div className="relative mx-auto h-full w-full ">
       <Swiper
-        spaceBetween={8}
+        spaceBetween={15}
         slidesPerView={6.8}
         freeMode={true}
         modules={[FreeMode, Pagination]}
@@ -54,7 +54,6 @@ const ArtistHorizontalSlider: React.FC<MyComponentProps> = ({artists}) => {
           // Mobile devices
           0: {
             slidesPerView: 2.5,
-            spaceBetween : 5,
           },
           // Tablets
           640: {
@@ -76,10 +75,7 @@ const ArtistHorizontalSlider: React.FC<MyComponentProps> = ({artists}) => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              //padding: "24px",
               marginLeft: "5px",
-            
-              //background: "#181818",
               borderRadius: "12px",
               
             }}

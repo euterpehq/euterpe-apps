@@ -35,6 +35,7 @@ export default function ArtistSongs({ artist, albums }: Prop) {
     setDiscovered(true);
   };
 
+
   return (
     <div className="mt-0 w-full px-[24px]">
       <div className="border-b-[0.5px] border-t-[0.5px] border-[#303033] pb-4 pt-8">
@@ -42,9 +43,8 @@ export default function ArtistSongs({ artist, albums }: Prop) {
           <h1 className="font-figtree text-[20px] font-semibold tracking-[-0.4px]">
             Top Songs
           </h1>
-          <div className="grid w-full md:grid-cols-2 grid-cols-1 md:gap-20">
-            <div className="flex flex-col md:gap-[24px] gap-10">
-              {albumSong.slice(0, 3).map((song, index) => {
+          <div className="grid w-full md:grid-cols-2 grid-cols-1 md:gap-20 gap-2">
+              {albumSong.map((song, index) => {
                 const findAlbum = artistAlbums.find(
                   (album) => album.id === song.album_id,
                 );
@@ -79,46 +79,7 @@ export default function ArtistSongs({ artist, albums }: Prop) {
                     </div>
                   </div>
                 );
-              })}
-            </div>
-            <div className="flex flex-col md:gap-[24px] gap-10">
-              {albumSong.slice(3,6).map((song, index) => {
-                const findAlbum = artistAlbums.find(
-                  (album) => album.id === song.album_id,
-                );
-                return (
-                  <div
-                    key={song.id}
-                    className="flex h-[67px] items-center justify-between"
-                    onClick={() => handleSongClick(index)}
-                  >
-                    <div className="flex items-center gap-4">
-                      <p className="text-sm text-[#868B9F]">{index + 1}</p>
-                      <div className="h-[50px] w-[50px]">
-                        <img
-                          src={findAlbum?.cover_image_url ?? ""}
-                          alt={findAlbum?.title || "Album Cover"}
-                          className="h-full w-full rounded-[4px] object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h1 className="font-figtree text-[14px] tracking-[-0.28px]">
-                          {song.track_title}
-                        </h1>
-                        <p className="font-figtree text-[12px] tracking-[-0.24px] text-[#B1B5C5]">
-                          {artist.artist_name}
-                        </p>
-                      </div>
-                    </div>
-                    <div>
-                      <p className="font-figtree text-[12px] tracking-[-0.24px] text-[#B1B5C5]">
-                        2:44
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+              })}      
           </div>
         </div>
       </div>
