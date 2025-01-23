@@ -5,7 +5,7 @@ import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import AppMarqueeBanner from "@/components/app-marquee-banner";
 import { getArtist } from "@/lib/queries/artist/get-artist";
 import DataFetchErrorDisplay from "@/components/data-fetch-error-display";
-import MobileNav from "./my-music/_components/MobileNav";
+import MobileNav from "./my-music/_components/mobile-nav";
 
 export default async function Layout({
   children,

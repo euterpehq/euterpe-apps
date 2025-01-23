@@ -20,7 +20,7 @@ export default function SuccessPage() {
   const tracks: Track[] = JSON.parse(searchParams.get("tracks") || "[]");
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#00000066] bg-opacity-70 backdrop-blur-sm">
-      <section className="w-[60%] p-6">
+      <section className="p-6 md:w-[60%]">
         <div className="relative mt-4 rounded-[16px] bg-[#181818] pb-10 shadow-md">
           <div
             style={{ backgroundImage: `url(/images/confetti.png)` }}

@@ -1,15 +1,39 @@
+"use client";
 import Image from "next/image";
 import { getAlbums } from "@/lib/queries/album/get-albums";
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { ListReleaseSingle } from "./list-release-single";
 
 export type SingleProps = NonNullable<
   Awaited<ReturnType<typeof getAlbums>>["data"]
 >[number];
 
 export default function Single({ single }: { single: SingleProps }) {
+  const [open, setOpen] = useState(false);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  useEffect(() => {
+    const shouldOpen = searchParams.get("view-release-single") === "true";
+    setOpen(shouldOpen);
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (!open) {
+      const params = new URLSearchParams(window.location.search);
+      params.delete("view-release-single");
+      router.replace(`?${params.toString()}`);
+    }
+  }, [open]);
+  const handleOpen = () => {
+    setOpen(true);
+    const params = new URLSearchParams(window.location.search);
+    params.set("view-release-single", "true");
+    router.push(`?${params.toString()}`);
+  };
   return (
-    <section className="flex items-center justify-between border-y-[0.8px] border-[#303033] p-2.5">
+    <section className="flex items-center justify-between border-[#303033] p-2.5 md:border-y-[0.8px]">
       <div className="flex items-center gap-x-[9px]">
         <Image
           className="h-[64px] w-[64px] rounded-[4px] object-cover"
@@ -49,13 +73,23 @@ export default function Single({ single }: { single: SingleProps }) {
         <h2 className="hidden w-[185px] text-end tracking-[-0.02em] text-[#868B9F] md:block">
           {single.release_date ?? "N/A"}
         </h2>
-        {/* <Link
-          href="#"
-          className="block w-[185px] text-end tracking-[-0.02em] text-[#868B9F] md:hidden"
-        >
-          <ChevronRight />
-        </Link> */}
       </div>
+      {/* mobile view link */}
+      <div className="flex items-center justify-between text-xs md:hidden">
+        <h2 className="tracking-[-0.02em] text-[#868B9F]">
+          <button className="bg-transperent border-none" onClick={handleOpen}>
+            <Image
+              src="/images/right-arrow.png"
+              alt="right-arrow"
+              className="h-[18px] w-[18px]"
+              width={100}
+              height={100}
+            />
+          </button>
+        </h2>
+      </div>
+      {/*  */}
+      <ListReleaseSingle isopen={open} onOpenChange={setOpen} single={single} />
     </section>
   );
 }
