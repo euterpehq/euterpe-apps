@@ -9,7 +9,7 @@ type FeaturedArtistsProps = NonNullable<Awaited<ReturnType<typeof getArtists>>>
 const FeaturedArtists = ({artists}: { artists : FeaturedArtistsProps}) => {
 
   return (
-    <div className='  w-full h-full mx-auto flex flex-col gap-5  my-10 overflow-hidden'>
+    <div className='  w-full h-full  mx-auto flex flex-col gap-5  my-10 overflow-hidden'>
       <div className='ml-6'>
         <h1 className='font-semibold text-[25px]'>Featured Artists</h1>
       </div>

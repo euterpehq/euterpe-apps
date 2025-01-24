@@ -51,25 +51,25 @@ export default function AlbumHeader({ album }: Prop) {
     showMiniPlayer();
     setDiscovered(true);
   };
-
+ 
   return (
-    <div className="flex md:flex-row flex-col w-full gap-10 border-b-[0.5px] border-[#303033]">
+    <div className="flex md:flex-row flex-col w-full md:gap-10 border-b-[0.5px] border-[#303033]">
       <div className="md:h-[240px] md:w-[240px] w-full h-[414px]">
         <Image
           src={album?.cover_image_url ?? null}
           alt=""
           className="h-full w-full object-cover"
-          width="240"
-          height="240"
+          width={240}
+          height={240}
           quality={100}
         />
       </div>
-      <div className="flex flex-col gap-y-6 py-6 pl-[1rem]">
+      <div className="flex flex-col md:gap-y-6 md:py-6 md:pl-[1rem] py-[24px] px-[16px] gap-[24px]">
         <div className="inline-flex flex-col gap-2">
           <div className="flex w-fit items-center justify-center rounded-[4px] bg-[#c1ff701a] px-[8px] py-[4px] text-xs font-medium capitalize text-[#C1FF70]">
             <p>{album?.category_type}</p>
           </div>
-          <Link href="/">
+          <Link href={`/artist/${artist?.id}`}>
             <h1 className="text-[32px] font-semibold leading-[38px] tracking-[-0.64px]">
               {artist?.artist_name}
             </h1>

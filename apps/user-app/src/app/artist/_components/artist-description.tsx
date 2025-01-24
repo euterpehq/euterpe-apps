@@ -17,7 +17,7 @@ export default function ArtistDescription({ artist }: Prop) {
       <div className="flex w-full flex-col md:gap-[24px] gap-[15px] py-[24px] md:pr-[100px]">
         <div>
           <Link href="/">
-            <h1 className="font-figtree md:text-[80px] text-[50px] font-bold tracking-[-4.8px]">
+            <h1 className="font-figtree md:text-[80px] text-[56px] font-bold md:tracking-[-4.8px] tracking-[-3.36px]">
               {artist?.artist_name}
             </h1>
           </Link>

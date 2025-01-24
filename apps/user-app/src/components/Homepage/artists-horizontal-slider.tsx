@@ -25,49 +25,35 @@ const ArtistHorizontalSlider: React.FC<MyComponentProps> = ({artists}) => {
 
   const getSlideStyles = () => {
     if (isMobile) {
-      return {
-        
+      return {    
         width: "180px",
-        height: "225px",
+          height: "222px"
       };
     }
     if (isTablet) {
       return {
         width: "180px",
-        height: "237px",
+          height: "222px"
       };
     }
     return {
-      width: "230px",
-      height: "260px",
+      width: "188px",
+      height: "222px"
     };
   };
 
   return (
     <div className="relative mx-auto h-full w-full ">
       <Swiper
-        spaceBetween={15}
-        slidesPerView={6.8}
+        spaceBetween={12}
+        slidesPerView={"auto"}
         freeMode={true}
         modules={[FreeMode, Pagination]}
-        breakpoints={{
-          // Mobile devices
-          0: {
-            slidesPerView: 2.5,
-          },
-          // Tablets
-          640: {
-            slidesPerView: 3.5,
-          },
-          // Desktops
-          1024: {
-            slidesPerView: 6.8,
-          },
-        }}
+     
         style={{}}
         className="h-full w-full cursor-pointer "
       >
-        {artists?.map((item) => (
+        {artists?.map((item, index) => (
           <SwiperSlide
             key={item.id}
             style={{
@@ -75,13 +61,11 @@ const ArtistHorizontalSlider: React.FC<MyComponentProps> = ({artists}) => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              marginLeft: "5px",
-              borderRadius: "12px",
-              
+              marginLeft: `${index === 0 ? "24px" : "0"}`
             }}
           >
-            <Link href={`/artist/${item.id}`} className="w-full h-full">
-              <div className="flex h-full w-full flex-col items-center justify-around ml-6  bg-[#181818] p-[10px] rounded-[12px] ">
+            <Link href={`/artist/${item.id}`} className="w-full h-full md:w-[188px]">
+              <div className="flex flex-col items-center gap-[20px] w-full md:w-[188px] h-full  bg-[#181818] p-[24px] rounded-[12px]">
                 <div className="h-[120px] w-[120px]">
                   <Image
                     src={item.artist_image_url || img}
@@ -93,9 +77,9 @@ const ArtistHorizontalSlider: React.FC<MyComponentProps> = ({artists}) => {
                 </div>
                 <div className="flex flex-col items-center">
                   <p className="text-[15px] font-semibold">
-                    {item.artist_name}
+                    {item?.artist_name}
                   </p>
-                  <p className="text-[12px] text-[#868B9F]">Artist</p>
+                  <p className="text-[0.75rem] text-[#868B9F]">Artist</p>
                 </div>
               </div>
             </Link>

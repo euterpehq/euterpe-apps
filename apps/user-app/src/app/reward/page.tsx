@@ -4,6 +4,8 @@ import { AudioInitializer } from "@/components/audio-player/AudioInitializer"
 import Header from "@/components/Header"
 import ModalPlayer from "@/components/audio-player/modal-player"
 import AudioMiniPlayer from "@/components/audio-player/audio-mini-player"
+import { Dialog } from "@/components/ui/dialog"
+import Modal from "./_component/modal"
 
 
 function Page() {
@@ -15,7 +17,10 @@ function Page() {
       <Header />
       </div>
      <ModalPlayer />
+     <Dialog>
       <RewardClaim />
+      <Modal />
+      </Dialog>
       <AudioMiniPlayer />
     </div>
   )

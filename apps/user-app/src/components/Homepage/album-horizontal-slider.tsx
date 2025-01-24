@@ -51,8 +51,8 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
       };
     }
     return {
-      width: "188px",
-      
+      width: "180px",
+     
     };
   };
   
@@ -72,26 +72,13 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
   
 
   return (
-    <div className="relative mx-auto  w-full">
+    <div className="relative mx-auto  w-full h-full">
       <Swiper
-        spaceBetween={15}
-        slidesPerView={6.8}
+        spaceBetween={20}
+        slidesPerView={"auto"}
         freeMode={true}
         modules={[FreeMode, Pagination]}
-        breakpoints={{
-          // Mobile devices
-          0: {
-            slidesPerView: 2.5,
-          },
-          // Tablets
-          640: {
-            slidesPerView: 3.5,
-          },
-          // Desktops
-          1024: {
-            slidesPerView: 6.8,
-          },
-        }}
+       
         style={{}}
         className="h-full w-full cursor-grab "
        
@@ -105,21 +92,19 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
               key={item.id}
               style={{
                 ...getSlideStyles(),
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "8px",
+               
+                
               }}
             >
               <Link href={`/album/${item.id}`} className=" w-full md:w-[188px] h-full ">
-                <div className="flex flex-col gap-[20px] w-full md:w-[188px] h-full ml-6 ">
+                <div className="flex flex-col items-start gap-[20px] w-full md:w-[188px] h-full ml-6">
                 <div className="w-full md:h-[188px] h-[156px]">
                   <Image
                     src={item?.cover_image_url ?? null}
                     alt=""
                     className="w-full h-full rounded-[8px] object-cover"
-                    height={188}
-                    width={188}
+                    height={100}
+                    width={100}
                     quality={100}
                    
                   />

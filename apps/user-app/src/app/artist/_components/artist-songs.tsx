@@ -51,7 +51,7 @@ export default function ArtistSongs({ artist, albums }: Prop) {
                 return (
                   <div
                     key={song.id}
-                    className="flex h-[67px] items-center justify-between cursor-pointer"
+                    className="flex md:h-[67px] h-[76px]  items-center justify-between cursor-pointer"
                     onClick={() => handleSongClick(index)}
                   >
                     <div className="flex items-center gap-4">

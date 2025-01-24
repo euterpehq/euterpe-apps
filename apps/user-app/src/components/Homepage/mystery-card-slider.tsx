@@ -67,12 +67,12 @@ const MysteryCardSlider: React.FC = () => {
     if (isTablet) {
       return {
         width: "180px",
-        height: "237px",
+        height: "237.6px",
       };
     }
     return {
-      width: "230px",
-      height: "270px",
+      width: "200px",
+      height: "264px",
     };
   };
 
@@ -96,24 +96,11 @@ const MysteryCardSlider: React.FC = () => {
     
         
       <Swiper
-        spaceBetween={15}
-        slidesPerView={6.8}
+        spaceBetween={12}
+        slidesPerView={"auto"}
         freeMode={true}
         modules={[FreeMode, Pagination]}
-        breakpoints={{
-          // Mobile devices
-          0: {
-            slidesPerView: 2.5,
-          },
-          // Tablets
-          640: {
-            slidesPerView: 3,
-          },
-          // Desktops
-          1024: {
-            slidesPerView: 6.8,
-          },
-        }}
+       
       className="h-full w-full cursor-grab "
       >
        
@@ -127,10 +114,10 @@ const MysteryCardSlider: React.FC = () => {
             }}
             onClick={playRandomSong}
           >
-            <div className="h-full w-full">
+        
 
            
-            <div className="w-full h-full flex flex-col items-center px-[12px] pt-[12px] pb-[93.838px] gap-[60px] bg-[#121310] rounded-[8px] ml-6">
+            <div className="w-full md:w-[200px] h-full flex flex-col items-center px-[12px] pt-[12px] pb-[80.438px] gap-[40px] bg-[#121310] rounded-[8px] ml-6">
             <div className="flex  w-full  items-center justify-between ">
               <div>
                 <svg
@@ -219,7 +206,7 @@ const MysteryCardSlider: React.FC = () => {
               </svg>
             </div>
             </div>
-            </div>
+            
           </SwiperSlide>
         ))}
         

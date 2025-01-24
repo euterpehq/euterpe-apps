@@ -13,6 +13,7 @@ import disco5 from "@/assets/images/disco5.png";
 import disco6 from "@/assets/images/disco6.png";
 import disco7 from "@/assets/images/disco7.png";
 import Image, { StaticImageData } from "next/image";
+import { useMediaQuery } from "react-responsive";
 
 export type Disco = {
   id: number;
@@ -100,13 +101,34 @@ export const Discography: Disco[] = [
 
 const ArtistDiscography = () => {
   const [loading, setLoading] = useState(true);
-
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
   const slidesPerView = 7; // Number of visible items
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 200); // Simulate loading time
     return () => clearTimeout(timer);
   }, []);
+
+  const getSlideStyles = () => {
+    if (isMobile) {
+      return {
+        
+        width: "156px",
+       
+      };
+    }
+    if (isTablet) {
+      return {
+        width: "180px",
+       
+      };
+    }
+    return {
+      width: "180px",
+     
+    };
+  };
 
   // Filter albums to only include one album per artist (e.g., the first one)
   /* const album = artists.map(artist => {
@@ -135,7 +157,7 @@ const ArtistDiscography = () => {
   return (
     <div className="relative h-full w-full">
       <Swiper
-        spaceBetween={15}
+        spaceBetween={12}
         slidesPerView={6.8}
         freeMode={true}
         modules={[FreeMode, Pagination]}
@@ -162,11 +184,11 @@ const ArtistDiscography = () => {
             <SwiperSlide
               key={id}
               style={{
+                ...getSlideStyles(),
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 gap: "24px",
-                width: "20%",
                 borderRadius: "8px",
               }}
             >
@@ -175,7 +197,7 @@ const ArtistDiscography = () => {
                   <Image
                     src={item.image ?? ""}
                     alt=""
-                    className="h-full w-full rounded-[8px] object-cover"
+                    className="md:h-full md:w-full w-[156px] h-[156px] rounded-[8px] object-cover"
                     width={188}
                     height={188}
                     quality={100}

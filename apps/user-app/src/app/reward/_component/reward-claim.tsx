@@ -1,23 +1,34 @@
 "use client";
 import { Button } from "@/components/ui/button"
+import { DialogTrigger } from "@/components/ui/dialog";
 import { useEarningsStore } from "@/providers/store/earnings.store";
 
 
 const RewardClaim = () => {
    const earnings = useEarningsStore((state) => state.earnings);
+   
   const rewards = [
     {
-      id: 1
+      id: 1,
+      amount: "1000",
+      point: "100",
     },
     {
-      id: 2
+      id: 2,
+      amount: "4000",
+      point: "400",
     },
     {
-      id: 3
+      id: 3,
+      amount: "10000",
+      point: "1000",
     },
   ]
+
+ 
+
   return (
-    <div className="h-screen w-screen reward-gradient flex flex-col items-center justify-center gap-[16px]   overflow-y-auto pb-[8rem] pt-[15rem]">
+    <div className="h-screen w-screen bg-[#0E0E0E] flex flex-col items-center justify-center gap-[16px]   overflow-y-auto pb-[8rem] pt-[15rem]">
       
       <h1 className="text-center font-figtree text-[24px] font-medium tracking-[-0.48px]">Claim rewards with your points</h1>
       <div className="md:w-[639px] md:h-[574px] w-[95%] bg-[#ffffff05] px-[16px] pt-[16px] pb-[40px] gap-[16px] rounded-t-[48px] rounded-b-[32px] flex flex-col ">
@@ -50,6 +61,7 @@ const RewardClaim = () => {
               </defs>
             </svg>
           </div>
+
           </div>
           <div className="flex flex-col items-center">
               <p className="text-[#8B9574] font-figtree text-[13px] font-medium">Your points balance</p>
@@ -58,28 +70,52 @@ const RewardClaim = () => {
               </h1>
           </div>
         </div>
+
             <div className="flex flex-col items-center gap-2">
               {
-                rewards.map((rew, index) => (
+                rewards.map((rew, index) =>{ 
+                  const requiredPoints = Number(rew.point)
+                  return(
                   <div key={index} className="w-full h-[104px] flex items-center justify-between px-[24px] rounded-[16px] bg-[#ffffff05]">
                     <div className="flex items-center gap-3">
-                      <div>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                          <path d="M12 7V20M12 7H8.46429C7.94332 7 7.4437 6.78929 7.07533 6.41421C6.70695 6.03914 6.5 5.53043 6.5 5C6.5 4.46957 6.70695 3.96086 7.07533 3.58579C7.4437 3.21071 7.94332 3 8.46429 3C11.2143 3 12 7 12 7ZM12 7H15.5357C16.0567 7 16.5563 6.78929 16.9247 6.41421C17.293 6.03914 17.5 5.53043 17.5 5C17.5 4.46957 17.293 3.96086 16.9247 3.58579C16.5563 3.21071 16.0567 3 15.5357 3C12.7857 3 12 7 12 7ZM5 12H19V17.8C19 18.9201 19 19.4802 18.782 19.908C18.5903 20.2843 18.2843 20.5903 17.908 20.782C17.4802 21 16.9201 21 15.8 21H8.2C7.07989 21 6.51984 21 6.09202 20.782C5.71569 20.5903 5.40973 20.2843 5.21799 19.908C5 19.4802 5 18.9201 5 17.8V12ZM4.6 12H19.4C19.9601 12 20.2401 12 20.454 11.891C20.6422 11.7951 20.7951 11.6422 20.891 11.454C21 11.2401 21 10.9601 21 10.4V8.6C21 8.03995 21 7.75992 20.891 7.54601C20.7951 7.35785 20.6422 7.20487 20.454 7.10899C20.2401 7 19.9601 7 19.4 7H4.6C4.03995 7 3.75992 7 3.54601 7.10899C3.35785 7.20487 3.20487 7.35785 3.10899 7.54601C3 7.75992 3 8.03995 3 8.6V10.4C3 10.9601 3 11.2401 3.10899 11.454C3.20487 11.6422 3.35785 11.7951 3.54601 11.891C3.75992 12 4.03995 12 4.6 12Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
+                    <div className={`${earnings < requiredPoints ? "block" : "hidden"}`}>
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">       
+                        <path 
+                        d="M16 9V6C16 4.34315 14.6569 3 13 3H11C9.34315 3 8 4.34315 8 6V9M16 9H8M16 9C17.6569 9 19 10.3431 19 12V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V12C5 10.3431 6.34315 9 8 9M12 14V17M13 14C13 14.5523 12.5523 15 12 15C11.4477 15 11 14.5523 11 14C11 13.4477 11.4477 13 12 13C12.5523 13 13 13.4477 13 14Z" stroke="#868B9F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+                        />
+                      </svg>
                       </div>
+                      <div className={`${earnings >= requiredPoints ? "block" : "hidden"}`}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <path 
+                                d="M12 7V20M12 7H8.46429C7.94332 7 7.4437 6.78929 7.07533 6.41421C6.70695 6.03914 6.5 5.53043 6.5 5C6.5 4.46957 6.70695 3.96086 7.07533 3.58579C7.4437 3.21071 7.94332 3 8.46429 3C11.2143 3 12 7 12 7ZM12 7H15.5357C16.0567 7 16.5563 6.78929 16.9247 6.41421C17.293 6.03914 17.5 5.53043 17.5 5C17.5 4.46957 17.293 3.96086 16.9247 3.58579C16.5563 3.21071 16.0567 3 15.5357 3C12.7857 3 12 7 12 7ZM5 12H19V17.8C19 18.9201 19 19.4802 18.782 19.908C18.5903 20.2843 18.2843 20.5903 17.908 20.782C17.4802 21 16.9201 21 15.8 21H8.2C7.07989 21 6.51984 21 6.09202 20.782C5.71569 20.5903 5.40973 20.2843 5.21799 19.908C5 19.4802 5 18.9201 5 17.8V12ZM4.6 12H19.4C19.9601 12 20.2401 12 20.454 11.891C20.6422 11.7951 20.7951 11.6422 20.891 11.454C21 11.2401 21 10.9601 21 10.4V8.6C21 8.03995 21 7.75992 20.891 7.54601C20.7951 7.35785 20.6422 7.20487 20.454 7.10899C20.2401 7 19.9601 7 19.4 7H4.6C4.03995 7 3.75992 7 3.54601 7.10899C3.35785 7.20487 3.20487 7.35785 3.10899 7.54601C3 7.75992 3 8.03995 3 8.6V10.4C3 10.9601 3 11.2401 3.10899 11.454C3.20487 11.6422 3.35785 11.7951 3.54601 11.891C3.75992 12 4.03995 12 4.6 12Z" stroke="url(#paint0_linear_3956_3077)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+                              />
+                              <defs>
+                                <linearGradient id="paint0_linear_3956_3077" x1="3" y1="5.48709" x2="21.7237" y2="6.62721" gradientUnits="userSpaceOnUse">
+                                  <stop stopColor="#F4FFE5"/>
+                                  <stop offset="1" stopColor="#BDFF00"/>
+                                </linearGradient>
+                              </defs>
+                            </svg>
+                      </div>
+                      
                       <div className="flex flex-col gap-1">
-                        <h1 className="text-[14px] font-medium font-figtree tracking-[-0.28px] text-white">₦1,000 Airtime</h1>
-                        <p className="text-[#B1B5C6] text-[12px] font-medium tracking-[-0.24px] font-figtree">100 Points</p>
+                        <h1 className="text-[14px] font-medium font-figtree tracking-[-0.28px] text-white">₦{Number(rew.amount)} Airtime</h1>
+                        <p className="text-[#B1B5C6] text-[12px] font-medium tracking-[-0.24px] font-figtree">{Number(rew.point)} Points</p>
                       </div>
                     </div>
-                    <div>
-                      <Button className="px-[16px] py-[8px] flex items-center gap-[4px] rounded-[120px] bg-[#C1FF70] text-[13px] font-figtree font-semibold tracking-[-0.26px] text-[#0E0E0E]">
+                    <DialogTrigger asChild>
+                      <Button
+
+                      disabled={earnings < requiredPoints}
+                      
+                      className={`px-[16px] py-[8px] flex items-center gap-[4px] rounded-[8px] ${earnings >= requiredPoints ? "bg-[#C1FF70]  text-[#0E0E0E]"  : "bg-[#1B1B1B] text-[#4A4A4F]"}  text-[13px] font-figtree font-semibold tracking-[-0.26px] `}>
                         claim
                       </Button>
-                    </div>
+                    </DialogTrigger>
                   </div>
-                ))
+                )})
               }
             </div>
       </div>
