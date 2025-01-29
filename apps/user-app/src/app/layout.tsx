@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { AppProvider } from "@/providers/app";
 import { cn } from "@/lib/utils";
+import DesktopOnlyNotice from "@/components/DesktopOnlyNotice";
 
 const urbanist = Urbanist({ subsets: ["latin"], variable: "--font-urbanist" });
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
@@ -51,7 +52,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          urbanist.className,
+          figtree.className,
           urbanist.variable,
           aeonik.variable,
           figtree.variable,
@@ -59,7 +60,10 @@ export default function RootLayout({
           azeret.variable,
         )}
       >
-        <AppProvider>{children}</AppProvider>
+        <AppProvider>
+         
+          <div className="">{children}</div>
+        </AppProvider>
       </body>
     </html>
   );

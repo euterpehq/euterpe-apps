@@ -10,7 +10,7 @@ export async function addEUTToken() {
       options: {
         address: process.env
           .NEXT_PUBLIC_PLATFORM_TOKEN_CONTRACT_ADDRESS as `0x${string}`,
-        symbol: "ETP",
+        symbol: "EUT",
         decimals: 18,
       },
     });

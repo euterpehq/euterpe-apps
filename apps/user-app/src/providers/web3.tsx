@@ -9,7 +9,7 @@ import {
 } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
 import { createConfig, http } from "@wagmi/core";
-import { arbitrumSepolia } from "wagmi/chains";
+import { liskSepolia } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { connectorsForWallets } from "@rainbow-me/rainbowkit";
 import {
@@ -48,11 +48,11 @@ const connectors = connectorsForWallets(
 );
 
 export const config = createConfig({
-  chains: [arbitrumSepolia],
+  chains: [liskSepolia],
   connectors: connectors,
   ssr: true,
   transports: {
-    [arbitrumSepolia.id]: http("https://sepolia-rollup.arbitrum.io/rpc"),
+    [liskSepolia.id]: http("https://rpc.sepolia-api.lisk.com"),
   },
 });
 

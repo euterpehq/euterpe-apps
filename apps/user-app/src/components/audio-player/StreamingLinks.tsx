@@ -1,13 +1,21 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { type Song } from "@/data/songs";
+import { ArtistProfile, Song } from "@/lib/queries/supabaseQueries";
+import useArtistStore from "@/store/artist.store";
+//import { type Song } from "@/data/songs";
 
-function StreamingLinks({ song }: { song: Song }) {
+type Linked = {
+    song: Song;
+    artist: any;
+}
+
+function StreamingLinks({ song, artist }: Linked) {
+
   const platforms = [
-    { name: "Apple Music", url: song.apple },
-    { name: "Spotify", url: song.spotify },
-    { name: "YouTube Music", url: song.youtube },
+    { name: "Apple Music", url: artist?.apple_music_url || "" },
+    { name: "Spotify", url:  artist?.spotify_url || "" },
+    { name: "YouTube Music", url: artist?.youtube_music_url || "" },
   ];
   return (
     <div className="flex gap-3">
