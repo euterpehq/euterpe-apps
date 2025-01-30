@@ -32,7 +32,7 @@ function Header() {
         </div>
       </div>
       <div className="m-auto -mt-3.5 hidden w-[740px] p-2.5 md:block">
-        <form className="mx-auto ms-20">
+        <form className="mx-auto">
           <label
             htmlFor="default-search"
             className="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"

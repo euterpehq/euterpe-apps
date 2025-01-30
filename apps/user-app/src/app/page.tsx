@@ -6,10 +6,11 @@ import { AudioInitializer } from "@/components/audio-player/AudioInitializer";
 import Header from "@/components/Header";
 import FeaturedAlbum from "@/components/Homepage/featured-album";
 import Mystery from "@/components/Homepage/mystery";
-import Genre from "@/components/Homepage/genre-card";
+// import Genre from "@/components/Homepage/genre-card";
 import FeaturedArtists from "@/components/Homepage/featured-artists";
 import ModalPlayer from "@/components/audio-player/modal-player";
 import AudioMiniPlayer from "@/components/audio-player/audio-mini-player";
+import FirstRewardHeader from "@/components/FirstRewardHeader";
 
 export default async function Home() {
   const artists = await getArtists();
@@ -20,6 +21,7 @@ export default async function Home() {
       <UserInteractionTracker />
       <AudioInitializer />
       <Header />
+      <FirstRewardHeader />
       <ModalPlayer />
       <FeaturedAlbum albums={albums} artists={artists} />
       <Mystery />

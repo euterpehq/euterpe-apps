@@ -38,8 +38,8 @@ function ClaimButton({ onClick, disabled = true }: ClaimButtonProps) {
     if (isConnected) {
       onClick();
       toast({
-        title: "You just earned 0.2 EUT 🎉"
-      })
+        title: "You just earned 0.2 EUT 🎉",
+      });
     } else {
       toast({
         title: "You need to connect your wallet",
@@ -50,7 +50,7 @@ function ClaimButton({ onClick, disabled = true }: ClaimButtonProps) {
   return (
     <Button
       className={cn(
-        "gap-1.5 w-[170px] md:w-auto h-[48px] md:h-auto rounded-[120px] px-2.5 py-2 font-figtree text-xs font-semibold tracking-[-0.04em] transition-none disabled:opacity-100",
+        "h-[48px] w-[170px] gap-1.5 rounded-[120px] px-2.5 py-2 font-figtree text-xs font-semibold tracking-[-0.04em] transition-none disabled:opacity-100 md:h-auto md:w-auto",
         disabled
           ? "bg-white/20 text-[#757575]"
           : "bg-primary text-[#0F0F0F] transition-colors",
@@ -74,7 +74,7 @@ function ClaimButton({ onClick, disabled = true }: ClaimButtonProps) {
 function DiscoverArtistButton({ onClick }: { onClick: () => void }) {
   return (
     <Button
-      className="rounded-[120px] w-[170px] md:w-auto h-[48px] md:h-auto bg-white px-4 py-2 font-figtree text-xs font-semibold tracking-[-0.02em] text-[#0F0F0F] hover:bg-white/90"
+      className="h-[48px] w-[170px] rounded-[120px] bg-white px-4 py-2 font-figtree text-xs font-semibold tracking-[-0.02em] text-[#0F0F0F] hover:bg-white/90 md:h-auto md:w-auto"
       onClick={onClick}
     >
       Discover this artist

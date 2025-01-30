@@ -133,7 +133,7 @@ function ConnectButton({ align }: { align?: "left" | "right" }) {
                     />
                     <span>0.00</span>
                   </div>
-                  <Avatar
+                  {/* <Avatar
                     onClick={openAccountModal}
                     className="h-6 w-6 rounded-full bg-[#FFAE65]"
                   >
@@ -155,7 +155,7 @@ function ConnectButton({ align }: { align?: "left" | "right" }) {
                         ></path>
                       </svg>
                     </AvatarFallback>
-                  </Avatar>
+                  </Avatar> */}
                 </div>
               );
             })()}
