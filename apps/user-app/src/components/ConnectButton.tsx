@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ConnectButton as OriginalConnectButton } from "@rainbow-me/rainbowkit";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Transition from "@/components/Transition";
+import Transition from "@/components/transition";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useDisconnect } from "wagmi";
 import Image from "next/image";
