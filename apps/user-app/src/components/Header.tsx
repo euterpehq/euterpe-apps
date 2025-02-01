@@ -3,7 +3,7 @@ import React from "react";
 import ConnectButton from "@/components/connect-button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import Earnings from "@/components/earnings";
+import Earnings from "@/components/Earnings";
 import { Separator } from "@/components/ui/separator";
 import { useAccount } from "wagmi";
 import { usePathname } from "next/navigation";
