@@ -5,7 +5,7 @@ import { getBackgroundColor, type RGB } from "@/lib/colors";
 import { useMediaQuery } from "react-responsive";
 import { useEarningsStore } from "@/providers/store/earnings.store";
 import { url } from "inspector";
-import MiniHiddenCoverArt from "@/components/MiniHiddenCoverArt";
+import MiniHiddenCoverArt from "@/components/mini-hidden-cover-art";
 import { useAudioPlayerStore } from "@/store/audioplayer.store";
 import { useModalStore } from "@/store/modal.store";
 import useAlbumStore from "@/store/album.store";

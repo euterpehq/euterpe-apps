@@ -117,7 +117,7 @@ const MysteryCardSlider: React.FC = () => {
         
 
            
-            <div className="w-full md:w-[200px] h-full flex flex-col items-center px-[12px] pt-[12px] pb-[80.438px] gap-[40px] bg-[#121310] rounded-[8px] ml-6">
+            <div className="w-full md:w-[200px] h-full flex flex-col items-center px-[12px] pt-[12px] pb-[93.838px] gap-[53px] bg-[#121310] rounded-[12px] ml-6">
             <div className="flex  w-full  items-center justify-between ">
               <div>
                 <svg
@@ -195,7 +195,7 @@ const MysteryCardSlider: React.FC = () => {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="48"
-                height="50"
+                height="78"
                 viewBox="0 0 48 78"
                 fill="none"
               >

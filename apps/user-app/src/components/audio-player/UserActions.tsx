@@ -50,7 +50,7 @@ function ClaimButton({ onClick, disabled = true }: ClaimButtonProps) {
   return (
     <Button
       className={cn(
-        "gap-1.5 w-[170px] md:w-auto h-[48px] md:h-auto rounded-[120px] px-2.5 py-2 font-figtree text-xs font-semibold tracking-[-0.04em] transition-none disabled:opacity-100",
+        "gap-1.5 w-[170px] md:w-auto h-[48px] md:h-auto rounded-[120px] px-2.5 py-2 font-figtree text-xs font-semibold tracking-[-0.04em] transition-none disabled:opacity-100 border-none",
         disabled
           ? "bg-white/20 text-[#757575]"
           : "bg-primary text-[#0F0F0F] transition-colors",
@@ -74,7 +74,7 @@ function ClaimButton({ onClick, disabled = true }: ClaimButtonProps) {
 function DiscoverArtistButton({ onClick }: { onClick: () => void }) {
   return (
     <Button
-      className="rounded-[120px] w-[170px] md:w-auto h-[48px] md:h-auto bg-white px-4 py-2 font-figtree text-xs font-semibold tracking-[-0.02em] text-[#0F0F0F] hover:bg-white/90"
+      className="rounded-[120px] w-[170px] md:w-auto h-[48px] md:h-auto bg-white px-4 py-2 font-figtree text-xs font-semibold tracking-[-0.02em] text-[#0F0F0F] hover:bg-white/90 border-none"
       onClick={onClick}
     >
       Discover this artist

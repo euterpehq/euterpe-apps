@@ -4,7 +4,7 @@ import { getAlbums } from "@/lib/queries/album/get-albums";
 import { getArtists } from "@/lib/queries/artist/get-artists";
 import { UserInteractionTracker } from "@/components/audio-player/UserInteractionTracker";
 import { AudioInitializer } from "@/components/audio-player/AudioInitializer";
-import Header from "@/components/Header";
+import Header from "@/components/header";
 import ArtistDiscography from "../_components/artist-discography";
 import ModalPlayer from "@/components/audio-player/modal-player";
 import ArtistHeader from "../_components/artist-header";
@@ -43,8 +43,8 @@ export default async function ArtistPageRoute({ params }: ArtistPageRouteProps){
       <ArtistHeader artist={artist} />
       <ArtistDescription artist={artist} />
       <ArtistSongs artist={artist} albums={albums} />
-      <div className="md:my-20 mt-10 h-[400px] w-full pl-[24px]">
-        <h1 className="pb-10 font-figtree text-[20px] font-semibold tracking-[-0.4px]">
+      <div className="md:my-20 my-10 h-[400px] w-full ">
+        <h1 className="pb-10 font-figtree text-[20px] font-semibold tracking-[-0.4px] pl-[24px]">
           Discograpy
         </h1>
         <ArtistDiscography />

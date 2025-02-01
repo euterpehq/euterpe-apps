@@ -2,16 +2,20 @@
 import { Button } from "@/components/ui/button"
 import { DialogTrigger } from "@/components/ui/dialog";
 import { useEarningsStore } from "@/providers/store/earnings.store";
+import Modal from "./modal";
+import { useState } from "react";
 
 
 const RewardClaim = () => {
    const earnings = useEarningsStore((state) => state.earnings);
+
+  const [selectedReward, setSelectedReward] = useState<{ id: number; amount: string; point: string } | null>(null);
    
   const rewards = [
     {
       id: 1,
       amount: "1000",
-      point: "100",
+      point: "0",
     },
     {
       id: 2,
@@ -23,16 +27,20 @@ const RewardClaim = () => {
       amount: "10000",
       point: "1000",
     },
+    
   ]
 
- 
+  const handleClaim = (reward: { id: number; amount: string; point: string }) => {
+    setSelectedReward(reward); // Store the selected reward
+  };
 
   return (
-    <div className="h-screen w-screen bg-[#0E0E0E] flex flex-col items-center justify-center gap-[16px]   overflow-y-auto pb-[8rem] pt-[15rem]">
+    <>
+    <div className="h-full w-screen bg-[#0E0E0E] flex flex-col items-center justify-center gap-[16px]">
       
       <h1 className="text-center font-figtree text-[24px] font-medium tracking-[-0.48px]">Claim rewards with your points</h1>
-      <div className="md:w-[639px] md:h-[574px] w-[95%] bg-[#ffffff05] px-[16px] pt-[16px] pb-[40px] gap-[16px] rounded-t-[48px] rounded-b-[32px] flex flex-col ">
-        <div className=" w-full flex flex-col items-center justify-center h-full gap-5 py-[32px]">
+      <div className="md:w-[639px]  w-[95%] bg-[#ffffff05] px-[16px] pt-[16px] pb-[40px] gap-[16px] rounded-t-[48px] rounded-b-[32px] flex flex-col ">
+        <div className=" w-full flex flex-col items-center justify-center h-[178px] gap-5 ">
           <div className="relative">
           <div>
             <svg 
@@ -66,7 +74,7 @@ const RewardClaim = () => {
           <div className="flex flex-col items-center">
               <p className="text-[#8B9574] font-figtree text-[13px] font-medium">Your points balance</p>
               <h1 className="rewardH text-[32px] font-figtree text-center font-bold tracking-[-1.28px]">
-                {earnings.toFixed(2)} EUT
+                {earnings.toFixed(0)}
               </h1>
           </div>
         </div>
@@ -76,7 +84,7 @@ const RewardClaim = () => {
                 rewards.map((rew, index) =>{ 
                   const requiredPoints = Number(rew.point)
                   return(
-                  <div key={index} className="w-full h-[104px] flex items-center justify-between px-[24px] rounded-[16px] bg-[#ffffff05]">
+                  <div key={index} className="w-full h-[88px] flex items-center justify-between px-[24px] rounded-[16px] bg-[#ffffff05]">
                     <div className="flex items-center gap-3">
                     <div className={`${earnings < requiredPoints ? "block" : "hidden"}`}>
                       <svg 
@@ -107,7 +115,7 @@ const RewardClaim = () => {
                     </div>
                     <DialogTrigger asChild>
                       <Button
-
+                      onClick={() => handleClaim(rew)}
                       disabled={earnings < requiredPoints}
                       
                       className={`px-[16px] py-[8px] flex items-center gap-[4px] rounded-[8px] ${earnings >= requiredPoints ? "bg-[#C1FF70]  text-[#0E0E0E]"  : "bg-[#1B1B1B] text-[#4A4A4F]"}  text-[13px] font-figtree font-semibold tracking-[-0.26px] `}>
@@ -120,6 +128,10 @@ const RewardClaim = () => {
             </div>
       </div>
     </div>
+    {selectedReward && (
+    <Modal selectedReward={selectedReward}/>
+    )}
+    </>
   )
 }
 

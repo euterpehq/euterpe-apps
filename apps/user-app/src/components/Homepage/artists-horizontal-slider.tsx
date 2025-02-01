@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -20,6 +20,14 @@ const ArtistHorizontalSlider: React.FC<MyComponentProps> = ({artists}) => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
 
+   const [loading, setLoading] = useState(true);
+    const slidesPerView = 6;
+  
+    useEffect(() => {
+      const timer = setTimeout(() => setLoading(false), 0);
+      return () => clearTimeout(timer);
+    }, []);
+
 
   if (!artists) return <div>Artist not found</div>;
 
@@ -38,14 +46,28 @@ const ArtistHorizontalSlider: React.FC<MyComponentProps> = ({artists}) => {
     }
     return {
       width: "188px",
-      height: "222px"
+      height: "224px"
     };
   };
+
+  if (loading) {
+    return (
+      <div className="flex h-[500px] w-full justify-between gap-5">
+        {Array.from({ length: isMobile ? 3 : slidesPerView  }).map((_, index) => (
+          <div
+            key={index}
+            className=" flex md:h-[400px] md:w-[300px] w-[250px] h-[300px]  flex-col gap-4 rounded-[8px] p-4 transition-opacity ease-in-out"
+            style={{ opacity: 0.5 }}
+          />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="relative mx-auto h-full w-full ">
       <Swiper
-        spaceBetween={12}
+        spaceBetween={8}
         slidesPerView={"auto"}
         freeMode={true}
         modules={[FreeMode, Pagination]}
@@ -60,12 +82,13 @@ const ArtistHorizontalSlider: React.FC<MyComponentProps> = ({artists}) => {
               ...getSlideStyles(),
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              marginLeft: `${index === 0 ? "24px" : "0"}`
+              justifyContent: "start",
+              marginLeft: `${index === 0 ? "24px" : "0"}`,
+              //border: "1px solid white"
             }}
           >
             <Link href={`/artist/${item.id}`} className="w-full h-full md:w-[188px]">
-              <div className="flex flex-col items-center gap-[20px] w-full md:w-[188px] h-full  bg-[#181818] p-[24px] rounded-[12px]">
+              <div className="flex flex-col items-center gap-[10px] w-full  h-full  bg-[#181818] p-[24px] rounded-[12px] md:w-[188px]">
                 <div className="h-[120px] w-[120px]">
                   <Image
                     src={item.artist_image_url || img}

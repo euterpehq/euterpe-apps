@@ -14,6 +14,7 @@ import disco6 from "@/assets/images/disco6.png";
 import disco7 from "@/assets/images/disco7.png";
 import Image, { StaticImageData } from "next/image";
 import { useMediaQuery } from "react-responsive";
+import Link from "next/link";
 
 export type Disco = {
   id: number;
@@ -142,7 +143,7 @@ const ArtistDiscography = () => {
         {Array.from({ length: slidesPerView }).map((_, index) => (
           <div
             key={index}
-            className="tp2 flex h-[300px] w-[300px] animate-pulse flex-col items-center gap-5 rounded-lg p-6 transition-opacity ease-in-out"
+            className=" flex h-[300px] w-[300px]  flex-col items-center gap-5 rounded-lg p-6 transition-opacity ease-in-out"
             style={{ opacity: 0.5 }}
           >
             {/*<div className="bg-gray-700 h-[120px] w-[120px] rounded-full"></div>
@@ -157,24 +158,10 @@ const ArtistDiscography = () => {
   return (
     <div className="relative h-full w-full">
       <Swiper
-        spaceBetween={12}
-        slidesPerView={6.8}
+        spaceBetween={20}
+        slidesPerView={"auto"}
         freeMode={true}
         modules={[FreeMode, Pagination]}
-        breakpoints={{
-          // Mobile devices
-          0: {
-            slidesPerView: 2.5,
-          },
-          // Tablets
-          640: {
-            slidesPerView: 3.5,
-          },
-          // Desktops
-          1024: {
-            slidesPerView: 6.8,
-          },
-        }}
         style={{}}
         className="h-full w-full cursor-pointer"
       >
@@ -185,15 +172,11 @@ const ArtistDiscography = () => {
               key={id}
               style={{
                 ...getSlideStyles(),
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "24px",
-                borderRadius: "8px",
               }}
             >
-              <div className="w-full gap-[12px]">
-                <div className="h-[70%] w-full">
+              <Link href={``} className="w-full md:w-[188px]">
+              <div className="flex flex-col items-start md:gap-[20px] gap-[8px] w-full md:w-[188px] ml-6">
+                <div className="h-[188px] w-full">
                   <Image
                     src={item.image ?? ""}
                     alt=""
@@ -269,6 +252,7 @@ const ArtistDiscography = () => {
                   </p>
                 </div>
               </div>
+              </Link>
             </SwiperSlide>
           );
         })}

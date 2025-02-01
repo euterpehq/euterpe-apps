@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import { getBackgroundColor, type RGB } from "@/lib/colors";
 //import { Song, songs } from "@/data/songs";
 
-import NextSongButton from "@/components/NextSongButton";
+import NextSongButton from "@/components/next-song-button";
 
-import HiddenCoverArt from "@/components/HiddenCoverArt";
+import HiddenCoverArt from "@/components/hidden-cover-art";
 
 import { useEarningsStore } from "@/providers/store/earnings.store";
 import { url } from "inspector";
@@ -93,15 +93,13 @@ const AudioPlayer: React.FC = () => {
  
 
   return (
-      <div className="fixed top-0 bottom-0 w-screen h-screen overflow-hidden  text-white transition-all duration-300 ease-in-out ">
-        <div className="invisible md:visible absolute top-[4rem] right-[3rem] z-50">
-          <NextSongButton playNext={playNext} />
-        </div>
+      
+        
         
       
       <div
-      className=" flex h-full w-full flex-col justify-center md:pt-[3.25rem] pt-5">
-
+      className=" fixed left-0 top-0 z-30 flex h-full w-full flex-col overflow-hidden pt-[3.25rem] text-white transition-all duration-300 ease-in-out  justify-center ">
+        
         <div
           className={`absolute inset-0 transition-transform duration-300 ${
             discovered ? 'bg-gradient-to-b' : ''
@@ -127,7 +125,11 @@ const AudioPlayer: React.FC = () => {
         ></div>
 
       <div className="relative z-10 h-full w-full  flex flex-col items-center justify-around md:justify-center">
-      
+     
+          <div className="absolute right-5 top-10 z-[999] hidden md:block">
+          <NextSongButton playNext={playNext} />
+          </div>
+        
       <div className="flex flex-col items-center md:gap-6 gap-3 px-6">
         <div className="flex flex-col items-center gap-6 ">
           {discovered ? (
@@ -135,7 +137,7 @@ const AudioPlayer: React.FC = () => {
               <Image
                 src={album.cover_image_url}
                 alt="Album Art"
-                className="h-[300px] w-[300px] object-cover rounded-[16px]"
+                className="md:h-[300px] md:w-[300px] w-[374px] h-[374px] object-cover rounded-[16px]"
                 crossOrigin="anonymous"
                 width={300}
                 height={300}
@@ -201,7 +203,7 @@ const AudioPlayer: React.FC = () => {
         </div>
       </div>
       </div>
-      </div>
+    
   );
 };
 

@@ -2,9 +2,9 @@
 import { useModalStore } from "@/store/modal.store";
 import { AnimatePresence, motion } from "framer-motion";
 import AudioPlayer from "./audio-player";
-import Earnings from "@/components/Earnings";
+import Earnings from "@/components/earnings";
 import { Separator } from "@/components/ui/separator";
-import ConnectButton from "@/components/ConnectButton";
+import ConnectButton from "@/components/connect-button";
 import { useAccount } from "wagmi";
 import { useEffect } from "react";
 

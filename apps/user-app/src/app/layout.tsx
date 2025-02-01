@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { AppProvider } from "@/providers/app";
 import { cn } from "@/lib/utils";
-import DesktopOnlyNotice from "@/components/DesktopOnlyNotice";
+import DesktopOnlyNotice from "@/components/desktop-only-notice";
 
 const urbanist = Urbanist({ subsets: ["latin"], variable: "--font-urbanist" });
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });

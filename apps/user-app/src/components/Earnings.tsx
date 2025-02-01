@@ -10,7 +10,7 @@ import {
   DialogHeader,
   DialogContent,
 } from "@/components/ui/dialog";
-import WithdrawButton from "@/components/WithdrawButton";
+import WithdrawButton from "@/components/withdraw-button";
 import Link from "next/link";
 
 function Earnings() {

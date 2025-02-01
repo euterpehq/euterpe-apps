@@ -4,7 +4,7 @@ import {getArtists } from '@/lib/queries/artist/get-artists'
 import { getAlbums } from '@/lib/queries/album/get-albums';
 import { UserInteractionTracker } from '@/components/audio-player/UserInteractionTracker';
 import { AudioInitializer } from '@/components/audio-player/AudioInitializer';
-import Header from '@/components/Header';
+import Header from "@/components/header";
 import FeaturedAlbum from '@/components/Homepage/featured-album';
 import Mystery from '@/components/Homepage/mystery';
 import Genre from '@/components/Homepage/genre-card';
