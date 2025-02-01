@@ -12,20 +12,30 @@ import {
 } from "@/components/ui/dialog";
 import WithdrawButton from "@/components/withdraw-button";
 import Link from "next/link";
+import { Gift } from "lucide-react";
 
 function Earnings() {
   const earnings = useEarningsStore((state) => state.earnings);
   const [opendialog, setOpendialog] = useState(false);
 
   return (
-    <Dialog open={opendialog} onOpenChange={setOpendialog} >
+    <Dialog open={opendialog} onOpenChange={setOpendialog}>
       <DialogTrigger>
         <Link href="/reward">
-        <div className="flex cursor-pointer items-center gap-2 font-figtree text-xs font-semibold tracking-[-0.02em]">
-          <EUTIcon className="h-5 w-5" />
-          <span>{earnings.toFixed(2)}</span> EUT
-        </div>
-        </Link>   
+          {/* <div className="flex cursor-pointer items-center gap-2 font-figtree text-xs font-semibold tracking-[-0.02em]">
+            <EUTIcon className="h-5 w-5" />
+
+            <span>{earnings.toFixed(2)}</span> EUT
+
+          </div> */}
+          <div
+            style={{ backgroundColor: "rgba(255, 255, 255, 0.08)" }}
+            className="flex cursor-pointer items-center gap-2 rounded-[8px] p-1.5 px-4 font-figtree text-xs font-semibold tracking-[-0.02em]"
+          >
+            <Gift className="text-primary" />
+            <span>Rewards</span>
+          </div>
+        </Link>
       </DialogTrigger>
       <DialogContent className="flex flex-col items-center gap-5 bg-[#1A1A1A] p-6">
         <DialogHeader className="">

@@ -10,7 +10,7 @@ import { useDisconnect } from "wagmi";
 import Image from "next/image";
 import WhiteWalletIcon from "@/assets/icons/wallet-white.png";
 import WalletIcon from "@/assets/icons/wallet.png";
-
+import { Trophy } from "lucide-react";
 function ConnectButton({ align }: { align?: "left" | "right" }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -105,7 +105,7 @@ function ConnectButton({ align }: { align?: "left" | "right" }) {
 
               return (
                 <div className="inline-flex items-center gap-4">
-                  <button
+                  {/* <button
                     ref={trigger}
                     aria-haspopup="true"
                     onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -122,9 +122,18 @@ function ConnectButton({ align }: { align?: "left" | "right" }) {
                         <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
                       </svg>
                     </div>
-                  </button>
-
-                  <Avatar
+                  </button> */}
+                  <div className="flex cursor-pointer items-center gap-2 rounded-[8px] border border-[#303033] p-2.5 px-4 py-2.5 font-figtree text-xs font-semibold tracking-[-0.02em]">
+                    <Image
+                      className="h-[16px] w-[16px]"
+                      src="/images/trophy.png"
+                      alt="rewards"
+                      width={100}
+                      height={100}
+                    />
+                    <span>0.00</span>
+                  </div>
+                  {/* <Avatar
                     onClick={openAccountModal}
                     className="h-6 w-6 rounded-full bg-[#FFAE65]"
                   >
@@ -146,7 +155,7 @@ function ConnectButton({ align }: { align?: "left" | "right" }) {
                         ></path>
                       </svg>
                     </AvatarFallback>
-                  </Avatar>
+                  </Avatar> */}
                 </div>
               );
             })()}

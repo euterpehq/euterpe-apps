@@ -38,8 +38,8 @@ function ClaimButton({ onClick, disabled = true }: ClaimButtonProps) {
     if (isConnected) {
       onClick();
       toast({
-        title: "You just earned 0.2 EUT 🎉"
-      })
+        title: "You just earned 0.2 EUT 🎉",
+      });
     } else {
       toast({
         title: "You need to connect your wallet",
