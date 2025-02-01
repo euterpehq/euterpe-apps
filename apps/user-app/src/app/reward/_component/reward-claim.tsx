@@ -74,7 +74,7 @@ const RewardClaim = () => {
           <div className="flex flex-col items-center">
               <p className="text-[#8B9574] font-figtree text-[13px] font-medium">Your points balance</p>
               <h1 className="rewardH text-[32px] font-figtree text-center font-bold tracking-[-1.28px]">
-                {earnings.toFixed(0)}
+                {earnings.toFixed(2)}
               </h1>
           </div>
         </div>

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useAccount } from "wagmi";
-import FirstReward from "./FirstReward";
+import FirstReward from "./first-reward";
 
 function FirstRewardHeader() {
   const { isConnected } = useAccount();

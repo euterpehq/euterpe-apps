@@ -10,7 +10,7 @@ import Mystery from "@/components/Homepage/mystery";
 import FeaturedArtists from "@/components/Homepage/featured-artists";
 import ModalPlayer from "@/components/audio-player/modal-player";
 import AudioMiniPlayer from "@/components/audio-player/audio-mini-player";
-import FirstRewardHeader from "@/components/FirstRewardHeader";
+import FirstRewardHeader from "@/components/first-reward-header";
 
 
 export default async function Home() {

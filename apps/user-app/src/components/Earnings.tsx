@@ -21,7 +21,7 @@ function Earnings() {
   return (
     <Dialog open={opendialog} onOpenChange={setOpendialog}>
       <DialogTrigger>
-        <Link href="/reward">
+        <div>
           {/* <div className="flex cursor-pointer items-center gap-2 font-figtree text-xs font-semibold tracking-[-0.02em]">
             <EUTIcon className="h-5 w-5" />
 
@@ -35,7 +35,7 @@ function Earnings() {
             <Gift className="text-primary" />
             <span>Rewards</span>
           </div>
-        </Link>
+        </div>
       </DialogTrigger>
       <DialogContent className="flex flex-col items-center gap-5 bg-[#1A1A1A] p-6">
         <DialogHeader className="">

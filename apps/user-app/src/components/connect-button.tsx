@@ -11,8 +11,10 @@ import Image from "next/image";
 import WhiteWalletIcon from "@/assets/icons/wallet-white.png";
 import WalletIcon from "@/assets/icons/wallet.png";
 import { Trophy } from "lucide-react";
+import { useEarningsStore } from "@/providers/store/earnings.store";
 function ConnectButton({ align }: { align?: "left" | "right" }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const earnings = useEarningsStore((state) => state.earnings);
 
   const trigger = useRef<HTMLButtonElement>(null);
   const dropdown = useRef<HTMLDivElement>(null);
@@ -131,7 +133,9 @@ function ConnectButton({ align }: { align?: "left" | "right" }) {
                       width={100}
                       height={100}
                     />
-                    <span>0.00</span>
+                    <span>
+                      {earnings.toFixed(2)}  
+                    </span>
                   </div>
                   {/* <Avatar
                     onClick={openAccountModal}

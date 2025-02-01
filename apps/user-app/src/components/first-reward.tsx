@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Progress from "./Progress";
+import Progress from "./progress";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
