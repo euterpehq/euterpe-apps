@@ -4,14 +4,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import { FreeMode, Pagination } from "swiper/modules";
-import trophy from "@/assets/icons/trophy.png";
-import disco1 from "@/assets/images/disco1.png";
-import disco2 from "@/assets/images/disco2.png";
-import disco3 from "@/assets/images/disco3.png";
-import disco4 from "@/assets/images/disco4.png";
-import disco5 from "@/assets/images/disco5.png";
-import disco6 from "@/assets/images/disco6.png";
-import disco7 from "@/assets/images/disco7.png";
+
+
 import Image, { StaticImageData } from "next/image";
 import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
@@ -30,72 +24,72 @@ export const Discography: Disco[] = [
     id: 1,
     title: "Endorphins",
     artist: "tobi lou",
-    image: disco1,
-    icon: trophy,
+    image: "/images/disco1.png",
+    icon: "/icons/trophy.png",
     eut: 1.3,
   },
   {
     id: 2,
     title: "Hesitate",
     artist: "Golden Vessel",
-    image: disco2,
-    icon: trophy,
+    image: "/images/disco2.png",
+    icon: "/icons/trophy.png",
     eut: 1.3,
   },
   {
     id: 3,
     title: "Do You Really Need Me",
     artist: "Charlie",
-    image: disco3,
-    icon: trophy,
+    image: "/images/disco3.png",
+    icon: "/icons/trophy.png",
     eut: 1.3,
   },
   {
     id: 4,
     title: "Small",
     artist: "Siv Jakobsen",
-    image: disco4,
-    icon: trophy,
+    image: "/images/disco4.png",
+    icon: "/icons/trophy.png",
     eut: 1.3,
   },
   {
     id: 5,
     title: "In Love with a Ghost",
     artist: "Bash the Piper",
-    image: disco5,
-    icon: trophy,
+    image: "/images/disco5.png",
+    icon: "/icons/trophy.png",
     eut: 1.3,
   },
   {
     id: 6,
     title: "Eleyele",
     artist: "taves",
-    image: disco6,
-    icon: trophy,
+    image: "/images/disco6.png",
+    icon: "/icons/trophy.png",
     eut: 1.3,
   },
   {
     id: 7,
     title: "Clicquot Shower",
     artist: "Caleborate",
-    image: disco7,
-    icon: trophy,
+    image: "/images/disco7.png",
+    icon: "/icons/trophy.png",
     eut: 1.3,
   },
   {
     id: 3,
     title: "Do You Really Need Me",
     artist: "Charlie",
-    image: disco3,
-    icon: trophy,
+    image: "/images/disco3.png",
+    icon: "/icons/trophy.png",
     eut: 1.3,
   },
   {
     id: 5,
     title: "In Love with a Ghost",
     artist: "Bash the Piper",
-    image: disco5,
-    icon: trophy,
+    image: "/images/disco5.png",
+    icon: "/icons/trophy.png",
     eut: 1.3,
   },
 ];

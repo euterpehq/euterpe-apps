@@ -8,8 +8,7 @@ import Transition from "@/components/transition";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useDisconnect } from "wagmi";
 import Image from "next/image";
-import WhiteWalletIcon from "@/assets/icons/wallet-white.png";
-import WalletIcon from "@/assets/icons/wallet.png";
+
 import { Trophy } from "lucide-react";
 import { useEarningsStore } from "@/providers/store/earnings.store";
 function ConnectButton({ align }: { align?: "left" | "right" }) {
@@ -79,7 +78,7 @@ function ConnectButton({ align }: { align?: "left" | "right" }) {
                     size="sm"
                   >
                     <Image
-                      src={WalletIcon}
+                      src="/icons/wallet.png"
                       alt="Wallet Icon"
                       className="h-4 w-4"
                     />
@@ -96,7 +95,7 @@ function ConnectButton({ align }: { align?: "left" | "right" }) {
                     size="sm"
                   >
                     <Image
-                      src={WhiteWalletIcon}
+                      src="/icons/wallet-white.png"
                       alt="Wallet Icon"
                       className="h-4 w-4"
                     />
