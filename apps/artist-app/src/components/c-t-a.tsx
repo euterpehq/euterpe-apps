@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Spacer from "@/components/ui/spacer";
 import Link from "next/link";
-import ArrowRightIcon from "@/assets/icons/arrow-right.png";
+
 import Balancer from "react-wrap-balancer";
 import LineArtLeftImage from "@/assets/images/line-art-left.svg";
 import LineArtRightImage from "@/assets/images/line-art-right.svg";
@@ -27,7 +27,7 @@ export default function CTA() {
             <Link href="/sign-up">
               Get started
               <Image
-                src={ArrowRightIcon}
+                src="/images/arrow-right.png"
                 alt="Right Arrow Icon"
                 width={20}
                 height={20}

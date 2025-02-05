@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import ArrowRightIcon from "@/assets/icons/arrow-right.png";
+
 import AnnouncementBanner from "./announcement-banner";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react";
 import { HiOutlineXMark, HiOutlineBars3 } from "react-icons/hi2";
@@ -61,7 +61,7 @@ export default function Navbar() {
             <Link href="/sign-up">
               Get started
               <Image
-                src={ArrowRightIcon}
+                src="/images/arrow-right.png"
                 alt="Right Arrow Icon"
                 width={20}
                 height={20}
