@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import { useAudioPlayerStore } from "@/store/audioplayer.store";
 import { useMiniPlayerStore } from "@/store/miniplayer.store";
@@ -7,9 +7,6 @@ import useArtistStore from "@/store/artist.store";
 import { useEffect } from "react";
 import { Database } from "@/types/database.types";
 import { Skeleton } from "@/components/ui/skeleton";
-
-
-
 
 type Prop = {
   album: Database["public"]["Tables"]["albums"]["Row"];
@@ -51,12 +48,12 @@ export default function AlbumHeader({ album }: Prop) {
     showMiniPlayer();
     setDiscovered(true);
   };
- 
+
   return (
-    <div className="flex md:flex-row flex-col w-full md:gap-10 border-b-[0.5px] border-[#303033]">
-      <div className="md:h-[240px] md:w-[240px] w-full h-[414px]">
+    <div className="flex w-full flex-col border-b-[0.5px] border-[#303033] md:flex-row md:gap-10">
+      <div className="h-[414px] w-full md:h-[240px] md:w-[240px]">
         <Image
-          src={album?.cover_image_url ?? null}
+          src={album?.cover_image_url ?? ""}
           alt=""
           className="h-full w-full object-cover"
           width={240}
@@ -64,7 +61,7 @@ export default function AlbumHeader({ album }: Prop) {
           quality={100}
         />
       </div>
-      <div className="flex flex-col md:gap-y-6 md:py-6 md:pl-[1rem] py-[24px] px-[16px] gap-[24px]">
+      <div className="flex flex-col gap-[24px] px-[16px] py-[24px] md:gap-y-6 md:py-6 md:pl-[1rem]">
         <div className="inline-flex flex-col gap-2">
           <div className="flex w-fit items-center justify-center rounded-[4px] bg-[#c1ff701a] px-[8px] py-[4px] text-xs font-medium capitalize text-[#C1FF70]">
             <p>{album?.category_type}</p>
@@ -77,7 +74,7 @@ export default function AlbumHeader({ album }: Prop) {
           <div className="flex items-center gap-3">
             <div className="h-[16px] w-[16px]">
               <Image
-                src={artist?.artist_image_url ?? null}
+                src={artist?.artist_image_url ?? ""}
                 alt=""
                 className="h-full w-full rounded-[120px] object-cover"
                 width="16"
