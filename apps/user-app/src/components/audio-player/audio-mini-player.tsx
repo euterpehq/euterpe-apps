@@ -70,7 +70,11 @@ const AudioMiniPlayer: React.FC = () => {
 
   if(pathname === "/" || isVisible) {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-30 md:w-full w-[90%] rounded-[14px] md:rounded-none mx-auto bg-[#181818] px-4 md:px-6 md:py-4 pt-3 mb-1 md:mb-0"  onClick={isMobile ? openModal : undefined}>
+    <>
+     {/* Spacer Div - Adds Space Above the Fixed Player */}
+     <div className="h-20 md:h-32 "></div>
+     
+    <div className="fixed bottom-0 left-0 right-0 z-30 md:w-full w-[90%] rounded-[14px] md:rounded-none mx-auto bg-[#181818] px-4 md:px-6 md:py-4 pt-3  md:mb-0"  onClick={isMobile ? openModal : undefined}>
       <div className="flex md:flex-row flex-col w-full items-start md:items-center justify-between md:gap-0 gap-5">
         <div className="flex items-center gap-3">
           {discovered ? (
@@ -156,6 +160,7 @@ const AudioMiniPlayer: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 }else {
   return null;

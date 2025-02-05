@@ -6,7 +6,7 @@ import FirstReward from "./first-reward";
 function FirstRewardHeader() {
   const { isConnected } = useAccount();
   // this should only be displayed the first time the user signs up and is connected
-  return <>{isConnected && <FirstReward />}</>;
+  return <> <FirstReward /></>;
 }
 
 export default FirstRewardHeader;

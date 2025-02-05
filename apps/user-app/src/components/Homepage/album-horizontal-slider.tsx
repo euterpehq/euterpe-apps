@@ -83,7 +83,7 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
         className="h-full w-full cursor-grab "
        
       >
-        {album?.map((item) => {
+        {album?.slice(0,7).map((item) => {
           if (!item) return null;
 
           const artist = artists.find((a) => a.id === item?.artist_id);
@@ -100,7 +100,7 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({ albums, artists }) 
                 <div className="flex flex-col items-start gap-[20px] w-full md:w-[188px] h-full ml-6">
                 <div className="w-full md:h-[188px] h-[156px]">
                   <Image
-                    src={item?.cover_image_url ?? null}
+                    src={item?.cover_image_url || ""}
                     alt=""
                     className="w-full h-full rounded-[8px] object-cover"
                     height={100}

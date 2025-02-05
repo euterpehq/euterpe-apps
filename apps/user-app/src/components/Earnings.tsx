@@ -13,15 +13,16 @@ import {
 import WithdrawButton from "@/components/withdraw-button";
 import Link from "next/link";
 import { Gift } from "lucide-react";
+import Image from "next/image";
 
 function Earnings() {
   const earnings = useEarningsStore((state) => state.earnings);
   const [opendialog, setOpendialog] = useState(false);
 
   return (
-    <Dialog open={opendialog} onOpenChange={setOpendialog}>
-      <DialogTrigger>
-        <div>
+    <div className="w-full flex items-center gap-2 justify-end">
+      
+        <Link href="/reward">
           {/* <div className="flex cursor-pointer items-center gap-2 font-figtree text-xs font-semibold tracking-[-0.02em]">
             <EUTIcon className="h-5 w-5" />
 
@@ -35,9 +36,22 @@ function Earnings() {
             <Gift className="text-primary" />
             <span>Rewards</span>
           </div>
+        </Link>
+
+        <div className="flex cursor-pointer items-center gap-2 rounded-[8px] border border-[#303033] p-2.5 px-4 py-2.5 font-figtree text-xs font-semibold tracking-[-0.02em]">
+          <Image
+              className="h-[16px] w-[16px]"
+              src="/images/trophy.png"
+              alt="rewards"
+              width={100}
+              height={100}
+            />
+            <span>
+              {earnings.toFixed(2)}  
+            </span>
         </div>
-      </DialogTrigger>
-      <DialogContent className="flex flex-col items-center gap-5 bg-[#1A1A1A] p-6">
+      
+      {/*<DialogContent className="flex flex-col items-center gap-5 bg-[#1A1A1A] p-6">
         <DialogHeader className="">
           <DialogTitle className="mb-2 text-xl font-semibold tracking-tight">
             Withdraw Rewards
@@ -61,8 +75,8 @@ function Earnings() {
         <p className="mt-3 text-[0.688rem] font-semibold tracking-[-0.04em] text-muted-foreground">
           *Please ensure you have linked a valid wallet before withdrawing.
         </p>
-      </DialogContent>
-    </Dialog>
+      </DialogContent>*/}
+    </div>
   );
 }
 
