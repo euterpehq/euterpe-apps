@@ -67,7 +67,7 @@ export default function RootLayout({
           {/* <div className="md:hidden">
             <DesktopOnlyNotice />
           </div> */}
-          <div className="block w-auto overflow-hidden">
+          <div className="block w-auto overflow-x-hidden">
             {children}
             <Toaster />
             <SonnerToaster />
