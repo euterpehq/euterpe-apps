@@ -45,7 +45,7 @@ function AppMarqueeBanner({ artist }: { artist: ArtistProps }) {
         }}
       >
         <Marquee className="z-0" loop={3} pauseOnHover>
-          <div className="flex cursor-default items-center gap-24 px-12">
+          <div className="flex cursor-default items-center gap-16 px-8 md:gap-24 md:px-12">
             <div className="flex items-center gap-6">
               <h3 className="font-azeret text-xs leading-[20px] text-black">
                 <span className="hidden md:inline">
