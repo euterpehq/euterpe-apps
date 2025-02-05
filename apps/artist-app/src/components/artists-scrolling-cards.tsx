@@ -52,12 +52,15 @@ const ArtistsScrollingCards = () => {
             artists.map((item, index) => (
                 <figure key={index} 
                      className={cn(
-                    "relative rounded-[8px] flex w-[188px] h-[188px] cursor-pointer flex-col items-center  overflow-hidden ",
+                    "relative rounded-[8px] flex w-[156px] md:w-[188px] md:h-[188px] h-[156px] cursor-pointer flex-col items-center  overflow-hidden ",
                     )}             >
                     <Image 
                     src={item.image} 
                     alt='' className='w-full h-full object-cover rounded-[8px]' 
-                    width={188} height={188}/>
+                    width={188} 
+                    height={188}
+                    quality={100}
+                    />
                 </figure>
             ))
         }

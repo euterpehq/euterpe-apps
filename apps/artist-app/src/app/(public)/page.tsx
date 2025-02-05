@@ -6,7 +6,7 @@ import ArtistsScrollingCards from "@/components/artists-scrolling-cards";
 
 export default function Page() {
   return (
-    <div className="relative flex h-full flex-col items-center justify-center bg-black py-32 gap-5">
+    <div className="relative flex h-full flex-col items-center justify-center bg-black py-[4rem] md:py-[6rem] gap-5">
       {/*<Image
         src="/images/hero.png"
         alt="hero"
@@ -53,7 +53,7 @@ export default function Page() {
         
        
       </div>
-      <div className="relative top-8">
+      <div className="relative md:top-[5rem] top-[3rem]">
         <ArtistsScrollingCards />
         </div>
     </div>

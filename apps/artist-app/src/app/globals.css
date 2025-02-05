@@ -113,3 +113,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.announcement{
+  background-image: linear-gradient(to right, #BDFF001A, #E11DE71A);
+}
