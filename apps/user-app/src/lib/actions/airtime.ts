@@ -11,7 +11,7 @@ export async function handlePurchase(phoneNumber: string, amount: number) {
 
   // Initialize Africa's Talking SDK
   const AT = africastalking({ apiKey: API_KEY, username: USERNAME });
-  const airtime = AT.AIRTIME;
+  const airtime = {} as any;
 
   // Ensure correct data format
   const recipients = [
