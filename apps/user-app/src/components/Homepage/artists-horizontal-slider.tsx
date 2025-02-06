@@ -6,7 +6,6 @@ import "swiper/css/free-mode";
 import { FreeMode, Pagination } from "swiper/modules";
 import Image from "next/image";
 import Link from "next/link";
-import img from "@/assets/images/artFrame.jpg";
 import { ArtistProfile } from "@/lib/queries/artist/get-artists";
 import { useMediaQuery } from "react-responsive";
 
@@ -91,7 +90,7 @@ const ArtistHorizontalSlider: React.FC<MyComponentProps> = ({artists}) => {
               <div className="flex flex-col items-center gap-[10px] w-full  h-full  bg-[#181818] p-[24px] rounded-[12px] md:w-[188px]">
                 <div className="h-[120px] w-[120px]">
                   <Image
-                    src={item.artist_image_url || img}
+                    src={item.artist_image_url || "/images/artFrame.jpg"}
                     alt=""
                     className="h-full w-full rounded-full object-cover"
                     width={120}
