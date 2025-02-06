@@ -13,8 +13,8 @@ export default function ArtistDescription({ artist }: Prop) {
   //const youtubeLink = songs.filter((song) => song.youtube);
 
   return (
-    <div className="h-full w-full px-[24px]">
-      <div className="flex w-full flex-col md:gap-[24px] gap-[15px] py-[24px] md:pr-[100px]">
+    <div className="h-full w-full px-[24px] pb-5">
+      <div className="flex w-full flex-col md:gap-[24px] gap-[15px] py-[24px] md:pr-[100px] border-b-[0.5px] border-[#303033]">
         <div>
           <Link href="/">
             <h1 className="font-figtree md:text-[80px] text-[56px] font-bold md:tracking-[-4.8px] tracking-[-3.36px]">
