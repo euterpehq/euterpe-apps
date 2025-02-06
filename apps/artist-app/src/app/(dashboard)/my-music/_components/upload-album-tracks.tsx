@@ -1,6 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { TagsInput } from "@/components/ui/extension/tags-input";
-import { FileImagePreview, FileInput, FileUploader } from "@/components/ui/file-upload";
+import {
+  FileImagePreview,
+  FileInput,
+  FileUploader,
+} from "@/components/ui/file-upload";
 import {
   FormControl,
   FormField,
@@ -124,7 +128,13 @@ const TrackForm: React.FC<{ index: number; remove: (pos: number) => void }> = ({
         render={({ field }) => (
           <FormItem>
             <FormControl>
-              <Input placeholder="Track number" type="number" {...field} />
+              <Input
+                placeholder="Track number"
+                type="number"
+                {...field}
+                onChange={(e) => field.onChange(Number(e.target.value))
+                }
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -211,7 +221,7 @@ export const UploadAlbumTracks = () => {
       if (activeTrack !== 0) {
         setActiveTrack(activeTrack - 1);
       }
-      
+
       remove(pos);
     },
     [activeTrack, remove],

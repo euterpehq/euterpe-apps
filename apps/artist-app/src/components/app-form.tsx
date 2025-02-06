@@ -12,7 +12,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
 import { Calendar } from "./ui/calendar";
 import { format } from "date-fns";
-import { cn } from "@/lib/utils";
+import { cn, isString } from "@/lib/utils";
 
 export enum FormTypeEnum {
   INPUT = "input",
@@ -27,7 +27,7 @@ export interface AppFormControlProps {
   placeholder?: string;
   label: string;
   field?: any;
-  options?: string[];
+  options?: string[] | { [key in "key" | "value"]: string }[];
 }
 
 export const AppFormControl: React.FC<
@@ -57,8 +57,11 @@ export const AppFormControl: React.FC<
             </FormControl>
             <SelectContent>
               {options?.map((option) => (
-                <SelectItem value={option} key={option.toLowerCase()}>
-                  {option}
+                <SelectItem
+                  value={isString(option) ? option : option.key}
+                  key={isString(option) ? option : option.key}
+                >
+                  {isString(option) ? option : option.value}
                 </SelectItem>
               ))}
             </SelectContent>

@@ -23,6 +23,8 @@ const uploadFile = async ({
     .upload(filePath, file, { upsert: false });
 
   if (uploadError) {
+    console.log(`authError ========= ${bucketName}`, uploadError);
+
     throw uploadError;
   }
 
@@ -49,6 +51,7 @@ export const createAlbum = actionClient
     }
 
     if (authError) {
+      console.log("authError =========");
       throw authError;
     }
 
@@ -81,7 +84,13 @@ export const createAlbum = actionClient
       .select();
 
     if (insertAlbumError) {
-      await supabase.storage.from("album_covers").remove([coverImageFilePath]); // delete cover image from storage if album insertion operation fails to prevent redundant files in bucket
+      console.log("insert Album Error =========", insertAlbumError);
+
+      const { error } = await supabase.storage
+        .from("album_covers")
+        .remove([coverImageFilePath]); // delete cover image from storage if album insertion operation fails to prevent redundant files in bucket
+
+      console.log(error);
       throw insertAlbumError;
     }
 
@@ -92,7 +101,7 @@ export const createAlbum = actionClient
         const { publicUrl: trackPublicUrl } = await uploadFile({
           supabase,
           file: trackFile,
-          bucketName: "tracks",
+          bucketName: "track_audio",
           identifier: newAlbum[0].id,
         });
 

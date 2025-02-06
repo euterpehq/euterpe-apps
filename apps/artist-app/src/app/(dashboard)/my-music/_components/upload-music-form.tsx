@@ -27,10 +27,8 @@ enum AlbumFormFields {
   ALBUM_TITLE = "title",
   GENRE = "genre",
   SUB_GENRES = "sub_genres",
-  // STREAMING_LINKS = "streaming_links",
   RELEASE_DATE = "release_date",
   COVER_IMAGE = "cover_image",
-  // TRACKS = "tracks",
 }
 
 interface FormInputControlObj extends AppFormControlProps {
@@ -46,7 +44,11 @@ const formInputControl: {
 } = {
   [AlbumFormFields.CATEGORY]: {
     formType: "select",
-    options: ["Single", "Album", "Ep"], // TODO: extract this into a constant file or update in a db table if required
+    options: [
+      { key: "single", value: "Single" },
+      { key: "album", value: "Album" },
+      { key: "ep", value: "Ep" },
+    ], // TODO: extract this into a constant file or update in a db table if required
     placeholder: "Select",
     label: "Category Type",
   },
@@ -141,7 +143,7 @@ export default function UpdateMusicForm() {
             control={form.control}
             name="terms"
             render={({ field }) => (
-              <FormItem className="items-center gap-2 flex space-y-0">
+              <FormItem className="flex items-center gap-2 space-y-0">
                 <FormControl>
                   <Checkbox
                     checked={field.value}
