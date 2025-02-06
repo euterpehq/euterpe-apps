@@ -45,10 +45,13 @@ function AppMarqueeBanner({ artist }: { artist: ArtistProps }) {
         }}
       >
         <Marquee className="z-0" loop={3} pauseOnHover>
-          <div className="flex cursor-default items-center gap-24 px-12">
+          <div className="flex cursor-default items-center gap-16 px-8 md:gap-24 md:px-12">
             <div className="flex items-center gap-6">
               <h3 className="font-azeret text-xs leading-[20px] text-black">
-                Claim Your Spotlight - Update Your Artist Info Now
+                <span className="hidden md:inline">
+                  Claim Your Spotlight -{" "}
+                </span>
+                Update Your Artist Info Now
               </h3>
               <Button
                 className="h-[24px] rounded-[6px] border-[0.5px] border-[#313131] px-2.5 py-[6px] font-azeret text-[10px] font-semibold tracking-[-0.04em] text-[#020403]"
@@ -59,7 +62,10 @@ function AppMarqueeBanner({ artist }: { artist: ArtistProps }) {
             </div>
             <div className="flex items-center gap-6">
               <h3 className="font-azeret text-xs leading-[20px] text-black">
-                Claim Your Spotlight - Update Your Artist Info Now
+                <span className="hidden md:inline">
+                  Claim Your Spotlight -{" "}
+                </span>
+                Update Your Artist Info Now
               </h3>
               <Button
                 className="h-[24px] rounded-[6px] border-[0.5px] border-[#313131] px-2.5 py-[6px] font-azeret text-[10px] font-semibold tracking-[-0.04em] text-[#020403]"

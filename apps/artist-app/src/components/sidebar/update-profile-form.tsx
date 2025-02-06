@@ -271,7 +271,7 @@ export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
                 Paste your streaming profile links to get discovered.
               </p>
             </div>
-            <div className="flex flex-col gap-[14px]">
+            <div className="mt-4 flex flex-col gap-[14px] md:mt-0">
               <FormField
                 control={form.control}
                 name="spotify"

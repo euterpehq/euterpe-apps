@@ -48,7 +48,6 @@ function AppHeader() {
           <Separator orientation="vertical" className="mr-2 h-6 bg-[#303033]" />
         </div>
       </div>
-
       <div className="flex items-center gap-4">
         <Dropdown>
           <DropdownButton as="button">

@@ -17,12 +17,12 @@ export default function EmptyState() {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.25 }}
-        className="flex flex-1 flex-col gap-[30px] p-6 pt-[50px]"
+        className="flex flex-1 flex-col gap-[30px] p-6 md:pt-[50px]"
       >
-        <h1 className="text-[32px] font-semibold tracking-[-0.04em]">
+        <h1 className="text-[24px] font-semibold tracking-[-0.04em] md:text-[32px]">
           My Music
         </h1>
-        <div className="flex flex-1 flex-col items-center rounded-[16px] border-[0.5px] bg-[#1E1E1E] py-[3.75rem]">
+        <div className="mt-24 flex flex-1 flex-col items-center rounded-[16px] py-[3.75rem]">
           <Image
             src="/images/music-note.png"
             alt="music-note"

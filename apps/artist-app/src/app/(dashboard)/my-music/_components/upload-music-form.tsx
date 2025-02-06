@@ -17,10 +17,10 @@ import ServerActionResponseToast from "@/components/server-action-response-toast
 import { LuLoader } from "react-icons/lu";
 import { AppFormControl, AppFormControlProps } from "@/components/app-form";
 import CoverImage from "./cover-image";
-import { Tracks } from "./tracks";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 import { createAlbumvalidationSchema } from "@/lib/validation";
+import { UploadAlbumTracks } from "./upload-album-tracks";
 
 enum AlbumFormFields {
   CATEGORY = "category_type",
@@ -135,7 +135,7 @@ export default function UpdateMusicForm() {
             />
           ))}
 
-          <Tracks />
+          <UploadAlbumTracks />
 
           <FormField
             control={form.control}

@@ -11,6 +11,7 @@ import UploadMusicModal from "./upload-music-modal";
 import Single from "./single";
 import Multiple from "./multiple";
 import { getAlbums } from "@/lib/queries/album/get-albums";
+import Image from "next/image";
 
 export type ReleasesProps = NonNullable<
   Awaited<ReturnType<typeof getAlbums>>["data"]
@@ -30,20 +31,21 @@ export default function Releases({ releases }: { releases: ReleasesProps }) {
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <div className="flex flex-col px-6 pt-[50px]">
-      <header className="flex shrink-0 items-center justify-between gap-2">
+    <div className="flex flex-col overflow-hidden px-6 pt-[50px]">
+      <header className="flex shrink-0 flex-wrap items-center justify-between gap-2">
+        {/* <header className="flex w-auto items-center justify-between border border-primary md:gap-0"> */}
         <div className="flex items-center justify-start">
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbPage className="text-[32px] font-semibold tracking-[-0.04em]">
+                <BreadcrumbPage className="text-[24px] font-semibold tracking-[-0.04em] md:text-[32px]">
                   My Music
                 </BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </div>
-        <section className="flex items-center justify-start gap-x-[14px]">
+        <section className="flex items-center justify-start md:gap-x-[14px]">
           {/* <Button className="rounded-[8px] border-[0.5px] border-[#303033] px-3 py-2.5 text-xs font-medium tracking-[-0.02em] text-[#181818]">
             Week
           </Button>
@@ -60,10 +62,22 @@ export default function Releases({ releases }: { releases: ReleasesProps }) {
             Year
           </Button> */}
           <Button
-            className="rounded-[8px] border-[0.5px] border-[#313131] px-3 py-2.5 text-xs font-medium font-semibold tracking-[-0.04em] text-[#020403]"
+            className="hidden rounded-[8px] border-[0.5px] border-[#313131] px-3 py-2.5 text-xs font-semibold tracking-[-0.04em] text-[#020403] md:block"
             onClick={openModal}
           >
             Upload Music
+          </Button>
+          <Button
+            className="flex h-[32px] w-[40px] items-center justify-center rounded-[8px] border-[0.5px] border-[#313131] px-[8px] py-[4px] text-xs font-semibold tracking-[-0.04em] text-[#020403] md:hidden"
+            onClick={openModal}
+          >
+            <Image
+              className="h-[24px] w-[24px]"
+              src="/images/add.png"
+              alt="add"
+              width={100}
+              height={100}
+            />
           </Button>
           {isModalOpen && (
             <UploadMusicModal
@@ -74,15 +88,17 @@ export default function Releases({ releases }: { releases: ReleasesProps }) {
         </section>
       </header>
 
-      <section className="mt-[30px] flex px-2.5 py-[14px] text-xs font-medium tracking-[-0.02em]">
+      <section className="mt-[30px] hidden px-2.5 py-[14px] text-xs font-medium tracking-[-0.02em] md:flex">
         <h2 className="flex-1">Releases</h2>
         <div className="flex items-center justify-between">
-          <h2 className="text-[#9C9C9C]">Plays</h2>
-          <h2 className="w-[185px] text-end text-[#9C9C9C]">Date Released</h2>
+          <h2 className="hidden text-[#9C9C9C] md:block">Plays</h2>
+          <h2 className="hidden w-[185px] text-end text-[#9C9C9C] md:block">
+            Date Released
+          </h2>
         </div>
       </section>
 
-      <div className="flex flex-col gap-10 pb-10">
+      <div className="mt-[30px] flex flex-col md:mt-0 md:gap-10 md:pb-10">
         {releases &&
           releases.map((release) => {
             if (release.tracks.length === 1) {

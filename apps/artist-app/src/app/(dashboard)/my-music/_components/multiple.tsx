@@ -1,12 +1,37 @@
-import { Dot } from "lucide-react";
+"use client";
 import Image from "next/image";
 import { getUserReleases } from "@/lib/queries/albums";
+import { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { ListReleases } from "./list-releases";
 
 type AlbumProps = Awaited<ReturnType<typeof getUserReleases>>[number];
 export default function Multiple({ album }: { album: AlbumProps }) {
+  const [open, setOpen] = useState(false);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  useEffect(() => {
+    const shouldOpen = searchParams.get("view-release") === "true";
+    setOpen(shouldOpen);
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (!open) {
+      const params = new URLSearchParams(window.location.search);
+      params.delete("view-release");
+      router.replace(`?${params.toString()}`);
+    }
+  }, [open]);
+  const handleOpen = () => {
+    setOpen(true);
+    const params = new URLSearchParams(window.location.search);
+    params.set("view-release", "true");
+    router.push(`?${params.toString()}`);
+  };
   return (
     <div className="flex flex-col gap-[14px]">
-      <div className="flex items-center justify-between border-y-[0.8px] border-[#303033] p-2.5">
+      <div className="flex items-center justify-between border-[#303033] p-2.5 md:border-y-[0.8px]">
         <div className="flex items-center gap-x-[9px]">
           <Image
             className="h-[64px] w-[64px] rounded-[4px] object-cover"
@@ -43,17 +68,32 @@ export default function Multiple({ album }: { album: AlbumProps }) {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-between text-xs">
+        <div className="hidden items-center justify-between text-xs md:flex">
           <h2 className="tracking-[-0.02em] text-[#868B9F]">
             {album.plays ?? 0}
           </h2>
-          <h2 className="w-[185px] text-end tracking-[-0.02em] text-[#868B9F]">
+          <h2 className="hidden w-[185px] text-end tracking-[-0.02em] text-[#868B9F] md:block">
             {album.release_date ?? "N/A"}
           </h2>
         </div>
+        {/* mobile view navigation */}
+        <div className="flex items-center justify-between text-xs md:hidden">
+          <h2 className="tracking-[-0.02em] text-[#868B9F]">
+            <button className="bg-transperent border-none" onClick={handleOpen}>
+              <Image
+                src="/images/right-arrow.png"
+                alt="right-arrow"
+                className="h-[18px] w-[18px]"
+                width={100}
+                height={100}
+              />
+            </button>
+          </h2>
+        </div>
+        {/*  */}
       </div>
-
-      <div className="flex flex-col gap-[10px]">
+      <ListReleases isopen={open} onOpenChange={setOpen} album={album} />
+      <div className="hidden flex-col gap-[10px] md:flex">
         {album.tracks?.map((track) => (
           <div
             key={track.id}
