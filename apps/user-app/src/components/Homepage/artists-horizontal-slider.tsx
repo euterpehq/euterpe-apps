@@ -74,7 +74,7 @@ const ArtistHorizontalSlider: React.FC<MyComponentProps> = ({artists}) => {
         style={{}}
         className="h-full w-full cursor-pointer "
       >
-        {artists?.map((item, index) => (
+        {artists?.slice(0,7).map((item, index) => (
           <SwiperSlide
             key={item.id}
             style={{

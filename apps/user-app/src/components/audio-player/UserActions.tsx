@@ -34,17 +34,11 @@ type ClaimButtonProps = {
 function ClaimButton({ onClick, disabled = true }: ClaimButtonProps) {
   const { isConnected } = useAccount();
   const { toast } = useToast();
-  const handleClick = () => {
-    if (isConnected) {
+  const handleClick = () => { 
       onClick();
       toast({
         title: "You just earned 0.2 EUT 🎉",
       });
-    } else {
-      toast({
-        title: "You need to connect your wallet",
-      });
-    }
   };
 
   return (

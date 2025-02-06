@@ -9,7 +9,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useForm } from 'react-hook-form';
-
+import { useToast } from '@/components/ui/use-toast';
+import { FaSpinner } from "react-icons/fa";
 
 // Define Zod schema
 const claimFormSchema = z.object({
@@ -22,18 +23,20 @@ const claimFormSchema = z.object({
   type ClaimFormInputs = z.infer<typeof claimFormSchema>;
 
 function Modal({selectedReward}: {selectedReward: any}) {
+  const { toast } = useToast();
 
     const {
         register,
         handleSubmit,
         setValue,
-        formState: { errors },
+       
+        formState: { errors, isSubmitting },
       } = useForm<ClaimFormInputs>({
         resolver: zodResolver(claimFormSchema),
       });
     
       const onSubmit = async (data: ClaimFormInputs) => {
-        //setLoading(true);
+   
         try {
           const response = await fetch('/api/airtime', {
             method: 'POST',
@@ -48,14 +51,17 @@ function Modal({selectedReward}: {selectedReward: any}) {
             throw new Error('Failed to process purchase');
           }
     
-          console.log('Purchase successful!');
-          alert('Claim submitted successfully!');
+          //console.log('Purchase successful!');
+          toast({
+            title: "Claim submitted successfully! 🎉",
+          });
         } catch (error) {
-          console.error('Error:', error);
-          alert('Failed to process purchase');
-        } finally {
-          //setLoading(false);
-        }
+          //console.error('Error:', error);
+          toast({
+            title: "Failed to process purchase",
+          });
+         
+        } 
       };
     
       
@@ -107,9 +113,17 @@ function Modal({selectedReward}: {selectedReward: any}) {
       </div>
 
       {/* Submit Button */}
-      <Button type="submit"
+      <Button 
+      disabled={isSubmitting}
+      type="submit"
        className="w-full h-[48px] bg-[#C1FF70] text-black font-figtree font-bold tracking-[-0.26px] text-[13px]">
-        Claim
+       {isSubmitting ? (
+            <>
+              <FaSpinner className="animate-spin" /> 
+            </>
+          ) : (
+            "Claim"
+          )}
       </Button>
           </form>
     </DialogContent>

@@ -9,14 +9,16 @@ import { useAccount } from "wagmi";
 import { usePathname } from "next/navigation";
 import { EUTIcon } from "./Icons";
 
+
+
 function Header() {
   const { isConnected } = useAccount();
   const pathname = usePathname();
   return (
     <header
-      className={`sticky top-0 z-30 flex h-[3.75rem] items-center justify-between md:z-50 ${pathname === "/reward" ? "bg-transparent" : "border-b-[0.2px] border-[#303033]/80 bg-[#0E0E0E]"} px-6 py-3`}
+      className={`sticky w-full  top-0 z-30 flex h-[3.75rem] items-center justify-between md:z-50 ${pathname === "/reward" ? "bg-[#0E0E0E]" : "border-b-[0.2px] border-[#303033]/80 bg-[#0E0E0E]"} px-6 py-3`}
     >
-      <div className="flex">
+      <div className="flex w-full">
         <div className="flex items-center gap-2 lg:flex">
           <EUTIcon className="h-5 w-5" />
 
@@ -31,7 +33,8 @@ function Header() {
           </Badge> */}
         </div>
       </div>
-      <div className="m-auto -mt-3.5 hidden w-[740px] p-2.5 md:block">
+
+      <div className="m-auto -mt-3.5 hidden w-full p-2.5 md:block">
         <form className="mx-auto">
           <label
             htmlFor="default-search"
@@ -60,18 +63,19 @@ function Header() {
             <input
               type="search"
               id="default-search"
-              className="block w-full rounded-lg border border-[#303033] p-2.5 ps-10 text-sm text-gray-900 dark:text-white"
+              className="block w-full rounded-lg border border-[#303033] p-2.5 ps-10 text-sm text-gray-900 dark:text-white outline-none"
               placeholder="Search songs and artist"
               required
             />
           </div>
         </form>
       </div>
-      <div className="flex items-center gap-4">
-        {isConnected && <Earnings />}
+     
+        <Earnings />
         {/* <Separator orientation="vertical" className="h-4" /> */}
-        <ConnectButton align="right" />
-      </div>
+        
+        {/*<ConnectButton align="right" />*/}
+    
     </header>
   );
 }

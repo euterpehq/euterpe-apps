@@ -79,7 +79,7 @@ const AlbumHorizontalSlider: React.FC<MyComponentProps> = ({
         style={{}}
         className="h-full w-full cursor-grab"
       >
-        {album?.map((item) => {
+        {album?.slice(0,7).map((item) => {
           if (!item) return null;
 
           const artist = artists.find((a) => a.id === item?.artist_id);

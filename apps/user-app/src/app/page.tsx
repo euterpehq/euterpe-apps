@@ -28,7 +28,7 @@ export default async function Home() {
       <Mystery />
       {/*<Genre />*/}
       <FeaturedArtists artists={artists} />
-      <div className="h-[10vh] w-full md:h-[20vh]"></div>
+      {/*<div className="h-[10vh] w-full md:h-[20vh]"></div>*/}
       <AudioMiniPlayer />
     </div>
   );

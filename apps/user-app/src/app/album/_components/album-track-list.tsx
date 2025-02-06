@@ -44,7 +44,7 @@ export default function AlbumTrackList({ album }: Prop) {
   };
 
   return (
-    <div className="mt-4 mb-[5rem]">
+    <div className="mt-4">
       {albumSong.map((song, index) => (
         <div
           key={song.id}

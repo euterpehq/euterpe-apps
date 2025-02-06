@@ -36,9 +36,9 @@ const RewardClaim = () => {
 
   return (
     <>
-    <div className="h-full w-screen bg-[#0E0E0E] flex flex-col items-center justify-center gap-[16px]">
+    <div className="h-full w-screen bg-[#0E0E0E] flex flex-col items-center justify-center gap-[16px] pt-5">
       
-      <h1 className="text-center font-figtree text-[24px] font-medium tracking-[-0.48px]">Claim rewards with your points</h1>
+      <h1 className="text-center font-figtree text-[24px] font-medium tracking-[-0.48px] ">Claim rewards with your points</h1>
       <div className="md:w-[639px]  w-[95%] bg-[#ffffff05] px-[16px] pt-[16px] pb-[40px] gap-[16px] rounded-t-[48px] rounded-b-[32px] flex flex-col ">
         <div className=" w-full flex flex-col items-center justify-center h-[178px] gap-5 ">
           <div className="relative">
