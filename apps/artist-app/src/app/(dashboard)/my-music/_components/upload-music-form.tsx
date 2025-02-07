@@ -122,7 +122,7 @@ export default function UpdateMusicForm() {
       <Form {...form}>
         <form
           onSubmit={handleSubmitWithAction}
-          className="space-y-6 rounded-[16px] bg-[#181818] p-6"
+          className="space-y-4 md:space-y-6 rounded-[16px] md:bg-[#181818] pt-5 md:p-6"
         >
           {Object.entries(formInputControl).map(([key, value]) => (
             <FormField
@@ -171,7 +171,7 @@ export default function UpdateMusicForm() {
             {isPending ? (
               <LuLoader className="h-3.5 w-3.5 animate-spin" />
             ) : (
-              "Update"
+              "Upload Music"
             )}
           </Button>
         </form>

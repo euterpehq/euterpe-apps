@@ -6,6 +6,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { ListReleases } from "./list-releases";
 
 type AlbumProps = Awaited<ReturnType<typeof getUserReleases>>[number];
+
 export default function Multiple({ album }: { album: AlbumProps }) {
   const [open, setOpen] = useState(false);
   const searchParams = useSearchParams();
@@ -23,6 +24,7 @@ export default function Multiple({ album }: { album: AlbumProps }) {
       router.replace(`?${params.toString()}`);
     }
   }, [open]);
+
   const handleOpen = () => {
     setOpen(true);
     const params = new URLSearchParams(window.location.search);
