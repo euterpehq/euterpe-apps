@@ -26,6 +26,7 @@ export interface AppFormControlProps {
   formType: `${FormTypeEnum}`;
   placeholder?: string;
   label: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   field?: any;
   options?: string[] | { [key in "key" | "value"]: string }[];
 }
