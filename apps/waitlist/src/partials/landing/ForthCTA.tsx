@@ -23,10 +23,10 @@ function ForthCTA() {
       <div className="flex h-full w-full flex-col items-center">
         <div className="relative top-[5rem] z-20 flex h-[233px] w-[480px] flex-1 flex-col items-center justify-center gap-[20px] md:top-[20rem] md:gap-[32px]">
           <div className="flex flex-col items-center gap-2">
-            <h1 className="text-center font-figtree text-[40px] font-bold leading-normal tracking-[-3.36px] md:text-[56px]">
+            <h1 className="text-[48px] font-semibold leading-tight">
               Are you an artist?
             </h1>
-            <p className="w-[332px] text-center font-figtree text-[18px] tracking-[-0.8px] md:text-[24px] md:tracking-[-0.96px]">
+            <p className="max-w-[277px] text-center font-figtree text-[#B1B5C6]">
               Get your music heard by real fans who love discovering new sounds.
             </p>
           </div>
