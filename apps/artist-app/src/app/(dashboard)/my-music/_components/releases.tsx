@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
-import UploadMusicModal from "./upload-music-modal";
 import { getAlbums } from "@/lib/queries/album/get-albums";
 import Image from "next/image";
 import { getUserReleases } from "@/lib/queries/albums";

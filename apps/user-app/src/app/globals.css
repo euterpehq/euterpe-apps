@@ -124,3 +124,7 @@ background-clip: text;
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 }
+
+.announcement{
+  background-image: linear-gradient(to right, #BDFF001A, #E11DE71A);
+}
