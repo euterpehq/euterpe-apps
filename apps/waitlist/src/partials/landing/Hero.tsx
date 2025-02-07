@@ -34,8 +34,8 @@ function Hero() {
             </p>
           </div>
           <Button size="sm" asChild className="p-[12px]">
-            <Link href="#waitlist" onClick={handleClick}>
-              Join the waitlist
+            <Link href="/app.euterpe.fm" onClick={handleClick}>
+            Start listening
             </Link>
           </Button>
         </div>
