@@ -5,8 +5,21 @@ import { Button } from "@/components/ui/button";
 import { scrollToHref } from "@/lib/utils";
 import SingerImage from "@/assets/images/singers.png";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { sendGAEvent } from "@next/third-parties/google";
 
 function SecondCTA() {
+  const pathname = usePathname();
+  function handleClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    sendGAEvent(
+      "click",
+      "Waitlist Button",
+      "Second CTA",
+      pathname,
+      e.currentTarget.href,
+    );
+    scrollToHref(e);
+  }
   return (
     <div className="flex flex-col-reverse justify-items-stretch bg-[#0C0C0C] px-[20px] py-[24px] pb-[64px] md:grid md:grid-cols-2 md:px-[60px] md:py-[120px] md:pb-[120px]">
       <div className="mt-[72px] flex flex-col gap-6">
@@ -15,13 +28,12 @@ function SecondCTA() {
             Discover new artists
           </h1>
           <p className="max-w-[277px] text-[18px] text-[#B1B5C6]">
-            Share your music, get discovered and expand your fanbase
+            Be the first to find and support hidden talent from all over the
+            world.
           </p>
         </div>
         <Button size="sm" className="w-fit" asChild>
-          <Link href="#waitlist" onClick={scrollToHref}>
-            Join the waitlist
-          </Link>
+          <Link href="https://app.euterpe.fm">Start listening</Link>
         </Button>
       </div>
       <div className="relative flex h-[372px] w-[372px] justify-end md:h-[560px] md:w-[560px]">

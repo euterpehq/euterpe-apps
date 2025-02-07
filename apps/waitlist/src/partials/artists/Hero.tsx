@@ -1,9 +1,23 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
 import { scrollToHref } from "@/lib/utils";
+import { sendGAEvent } from "@next/third-parties/google";
 
 function Hero() {
+  const pathname = usePathname();
+  function handleClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    sendGAEvent(
+      "click",
+      "Waitlist Button",
+      "Hero",
+      pathname,
+      e.currentTarget.href,
+    );
+    scrollToHref(e);
+  }
   return (
     <div className="relative h-full w-full">
       <div className="flex h-full w-full flex-col md:flex-row">
@@ -17,7 +31,7 @@ function Hero() {
             </p>
           </div>
           <Button size="sm" asChild className="p-[12px]">
-            <Link href="#waitlist" onClick={scrollToHref}>
+            <Link href="#waitlist" onClick={handleClick}>
               Join the waitlist
             </Link>
           </Button>

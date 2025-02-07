@@ -2,9 +2,22 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
 import { scrollToHref } from "@/lib/utils";
+import { sendGAEvent } from "@next/third-parties/google";
 
 function FirstCTA() {
+  const pathname = usePathname();
+  function handleClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    sendGAEvent(
+      "click",
+      "Waitlist Button",
+      "First CTA",
+      pathname,
+      e.currentTarget.href,
+    );
+    scrollToHref(e);
+  }
   return (
     <div className="grid justify-items-stretch px-[20px] py-[64px] sm:grid-cols-1 md:grid-cols-2 md:px-[60px] md:py-[180px]">
       <div className="h-[400px] overflow-hidden rounded-[16px] bg-white sm:w-[90%] md:w-[400px]">
@@ -17,17 +30,15 @@ function FirstCTA() {
       <div className="mt-[72px] flex flex-col gap-6">
         <div className="flex flex-col gap-5">
           <h1 className="text-[48px] font-semibold leading-tight">
-            Listen and Earn
+            Endless Variety
           </h1>
           <p className="max-w-[277px] text-[#B1B5C6]">
-            Earn rewards just by enjoying your favorite songs and exploring new
-            ones.
+            Dive into a world of music, from indie gems to unique sounds across
+            every genre.
           </p>
         </div>
         <Button size="sm" className="w-fit" asChild>
-          <Link href="#waitlist" onClick={scrollToHref}>
-            Join the waitlist
-          </Link>
+          <Link href="https://app.euterpe.fm">Start listening</Link>
         </Button>
       </div>
     </div>

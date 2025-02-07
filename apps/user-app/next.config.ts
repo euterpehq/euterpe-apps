@@ -13,7 +13,9 @@ const nextConfig: NextConfig = {
         port: "",
       },
     ],
+    domains: ['oadvzywtkbyqvpwyrkud.supabase.co'],
   },
 };
 
 export default nextConfig;
+

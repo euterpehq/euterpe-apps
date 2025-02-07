@@ -1,10 +1,7 @@
-import Image from "next/image";
-import logo from "@/assets/icons/Euterpe..png";
-import instagram from "@/assets/icons/instagram.png";
-import linkedin from "@/assets/icons/linkedin.png";
-import X from "@/assets/icons/X.png";
+"use client";
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
+import { sendGAEvent } from "@next/third-parties/google";
 
 export default function Footer() {
   return (
@@ -21,6 +18,15 @@ export default function Footer() {
                 href="https://www.instagram.com/euterpehq/"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => {
+                  sendGAEvent(
+                    "click",
+                    "Social Link",
+                    "Instagram",
+                    window.location.pathname,
+                    e.currentTarget.href,
+                  );
+                }}
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-full border-[0.5px] border-[#C1FF70]">
                   <svg
@@ -50,6 +56,15 @@ export default function Footer() {
                 href="https://www.linkedin.com/company/euterpehq"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => {
+                  sendGAEvent(
+                    "click",
+                    "Social Link",
+                    "LinkedIn",
+                    window.location.pathname,
+                    e.currentTarget.href,
+                  );
+                }}
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-full border-[0.5px] border-[#C1FF70]">
                   <svg
@@ -79,6 +94,15 @@ export default function Footer() {
                 href="https://x.com/euterpehq"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => {
+                  sendGAEvent(
+                    "click",
+                    "Social Link",
+                    "X",
+                    window.location.pathname,
+                    e.currentTarget.href,
+                  );
+                }}
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-full border-[0.5px] border-[#C1FF70]">
                   <svg
@@ -106,6 +130,15 @@ export default function Footer() {
                 href="https://t.me/+UneJBTdFKO42MTU0"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => {
+                  sendGAEvent(
+                    "click",
+                    "Social Link",
+                    "Telegram",
+                    window.location.pathname,
+                    e.currentTarget.href,
+                  );
+                }}
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-full border-[0.5px] border-[#C1FF70]">
                   <svg
@@ -148,6 +181,15 @@ export default function Footer() {
               href="https://www.instagram.com/euterpehq/"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => {
+                sendGAEvent(
+                  "click",
+                  "Social Link",
+                  "Instagram",
+                  window.location.pathname,
+                  e.currentTarget.href,
+                );
+              }}
             >
               <div className="flex h-8 w-8 items-center justify-center rounded-full border-[0.5px] border-[#C1FF70]">
                 <svg
@@ -177,6 +219,15 @@ export default function Footer() {
               href="https://www.linkedin.com/company/euterpehq"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => {
+                sendGAEvent(
+                  "click",
+                  "Social Link",
+                  "LinkedIn",
+                  window.location.pathname,
+                  e.currentTarget.href,
+                );
+              }}
             >
               <div className="flex h-8 w-8 items-center justify-center rounded-full border-[0.5px] border-[#C1FF70]">
                 <svg
@@ -206,6 +257,15 @@ export default function Footer() {
               href="https://x.com/euterpehq"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => {
+                sendGAEvent(
+                  "click",
+                  "Social Link",
+                  "X",
+                  window.location.pathname,
+                  e.currentTarget.href,
+                );
+              }}
             >
               <div className="flex h-8 w-8 items-center justify-center rounded-full border-[0.5px] border-[#C1FF70]">
                 <svg
@@ -233,6 +293,15 @@ export default function Footer() {
               href="https://t.me/+UneJBTdFKO42MTU0"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => {
+                sendGAEvent(
+                  "click",
+                  "Social Link",
+                  "Telegram",
+                  window.location.pathname,
+                  e.currentTarget.href,
+                );
+              }}
             >
               <div className="flex h-8 w-8 items-center justify-center rounded-full border-[0.5px] border-[#C1FF70]">
                 <svg
