@@ -28,12 +28,12 @@ function SecondCTA() {
             Discover new artists
           </h1>
           <p className="max-w-[277px] text-[18px] text-[#B1B5C6]">
-            Share your music, get discovered and expand your fanbase
+          Be the first to find and support hidden talent from all over the world.
           </p>
         </div>
         <Button size="sm" className="w-fit" asChild>
-          <Link href="#waitlist" onClick={handleClick}>
-            Join the waitlist
+          <Link href="/app.euterpe.fm" onClick={handleClick}>
+          Start listening
           </Link>
         </Button>
       </div>

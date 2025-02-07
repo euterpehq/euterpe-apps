@@ -8,6 +8,8 @@ import { motion } from "motion/react";
 import Waitlist from "@/partials/Waitlist";
 import SuccessfulWaitlist from "@/partials/SuccessfulWaitlist";
 import { usePathname } from "next/navigation";
+import ThirdCTA from "@/partials/landing/ThirdCTA";
+import ForthCTA from "@/partials/landing/ForthCTA";
 
 export default function Home() {
   const pathname = usePathname();
@@ -34,7 +36,9 @@ export default function Home() {
       <Hero />
       <FirstCTA />
       <SecondCTA />
-      {!isSubmitted ? (
+      <ThirdCTA />
+      <ForthCTA />
+      {/*!isSubmitted ? (
         <Waitlist onSubmit={handleSubmit} />
       ) : (
         <motion.div
@@ -45,7 +49,7 @@ export default function Home() {
         >
           <SuccessfulWaitlist />
         </motion.div>
-      )}
+      )*/}
     </div>
   );
 }

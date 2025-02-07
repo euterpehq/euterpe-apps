@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import { scrollToHref } from "@/lib/utils";
 import { sendGAEvent } from "@next/third-parties/google";
+import Image from "next/image";
 
-function FirstCTA() {
+function ThirdCTA() {
   const pathname = usePathname();
   function handleClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     sendGAEvent(
@@ -21,19 +22,22 @@ function FirstCTA() {
   return (
     <div className="grid justify-items-stretch px-[20px] py-[64px] sm:grid-cols-1 md:grid-cols-2 md:px-[60px] md:py-[180px]">
       <div className="h-[400px] overflow-hidden rounded-[16px] bg-white sm:w-[90%] md:w-[400px]">
-        <img
-          src="https://plus.unsplash.com/premium_photo-1705351823526-0e05b9ab5096?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        <Image
+          src="/images/third-cta-img.jpg"
           alt="Vinyl records"
           className="h-full w-full object-cover object-center"
+          width={400}
+          height={400}
+          quality={100}
         />
       </div>
       <div className="mt-[72px] flex flex-col gap-6">
         <div className="flex flex-col gap-5">
           <h1 className="text-[48px] font-semibold leading-tight">
-          Endless Variety
+          Music that gives back
           </h1>
           <p className="max-w-[277px] text-[#B1B5C6]">
-          Dive into a world of music, from indie gems to unique sounds across every genre.
+          Turn your streaming time into rewards, all powered by Web3.
           </p>
         </div>
         <Button size="sm" className="w-fit" asChild>
@@ -578,4 +582,4 @@ function SVGImage() {
   );
 }
 
-export default FirstCTA;
+export default ThirdCTA;
