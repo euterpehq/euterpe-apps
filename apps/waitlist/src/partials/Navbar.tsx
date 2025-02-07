@@ -26,9 +26,7 @@ export default function Navbar() {
           <h1 className="font-aeonik font-medium">Euterpe.</h1>
         </Link>
         <Button size="sm" asChild>
-          <Link href="#waitlist" onClick={handleClick}>
-            Join the waitlist
-          </Link>
+          <Link href="https://app.euterpe.fm">Start listening</Link>
         </Button>
       </div>
     </nav>

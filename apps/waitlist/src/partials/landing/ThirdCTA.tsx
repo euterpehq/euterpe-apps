@@ -34,16 +34,14 @@ function ThirdCTA() {
       <div className="mt-[72px] flex flex-col gap-6">
         <div className="flex flex-col gap-5">
           <h1 className="text-[48px] font-semibold leading-tight">
-          Music that gives back
+            Music that gives back
           </h1>
           <p className="max-w-[277px] text-[#B1B5C6]">
-          Turn your streaming time into rewards, all powered by Web3.
+            Turn your streaming time into rewards, all powered by Web3.
           </p>
         </div>
         <Button size="sm" className="w-fit" asChild>
-          <Link href="/app.euterpe.fm" onClick={handleClick}>
-            Start listening
-          </Link>
+          <Link href="https://app.euterpe.fm">Start listening</Link>
         </Button>
       </div>
     </div>
