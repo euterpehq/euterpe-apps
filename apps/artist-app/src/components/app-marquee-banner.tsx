@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from "react";
 import Marquee from "react-fast-marquee";
 import { Button } from "@/components/ui/button";
-import { UpdateProfile } from "@/components/sidebar/update-profile";
+import UpdateProfile from "@/components/sidebar/update-profile";
 import { getArtist } from "@/lib/queries/artist/get-artist";
-import { useSearchParams, useRouter } from "next/navigation";
+// import { useSearchParams, useRouter } from "next/navigation";
 
 export type ArtistProps = NonNullable<
   Awaited<ReturnType<typeof getArtist>>["data"]
@@ -12,28 +12,28 @@ export type ArtistProps = NonNullable<
 
 function AppMarqueeBanner({ artist }: { artist: ArtistProps }) {
   const [open, setOpen] = useState(false);
-  const searchParams = useSearchParams();
-  const router = useRouter();
+  // const searchParams = useSearchParams();
+  // const router = useRouter();
 
-  useEffect(() => {
-    const shouldOpen = searchParams.get("update-profile") === "true";
-    setOpen(shouldOpen);
-  }, [searchParams]);
+  // useEffect(() => {
+  //   const shouldOpen = searchParams.get("update-profile") === "true";
+  //   setOpen(shouldOpen);
+  // }, [searchParams]);
 
-  useEffect(() => {
-    if (!open) {
-      const params = new URLSearchParams(window.location.search);
-      params.delete("update-profile");
-      router.replace(`?${params.toString()}`);
-    }
-  }, [open]);
+  // useEffect(() => {
+  //   if (!open) {
+  //     const params = new URLSearchParams(window.location.search);
+  //     params.delete("update-profile");
+  //     router.replace(`?${params.toString()}`);
+  //   }
+  // }, [open]);
 
-  const handleOpen = () => {
-    setOpen(true);
-    const params = new URLSearchParams(window.location.search);
-    params.set("update-profile", "true");
-    router.push(`?${params.toString()}`);
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  //   const params = new URLSearchParams(window.location.search);
+  //   params.set("update-profile", "true");
+  //   router.push(`?${params.toString()}`);
+  // };
 
   return (
     <>
@@ -55,7 +55,7 @@ function AppMarqueeBanner({ artist }: { artist: ArtistProps }) {
               </h3>
               <Button
                 className="h-[24px] rounded-[6px] border-[0.5px] border-[#313131] px-2.5 py-[6px] font-azeret text-[10px] font-semibold tracking-[-0.04em] text-[#020403]"
-                onClick={handleOpen}
+                onClick={() => setOpen(true)}
               >
                 Fill out Form
               </Button>
@@ -69,7 +69,7 @@ function AppMarqueeBanner({ artist }: { artist: ArtistProps }) {
               </h3>
               <Button
                 className="h-[24px] rounded-[6px] border-[0.5px] border-[#313131] px-2.5 py-[6px] font-azeret text-[10px] font-semibold tracking-[-0.04em] text-[#020403]"
-                onClick={handleOpen}
+                onClick={() => setOpen(true)}
               >
                 Fill out Form
               </Button>

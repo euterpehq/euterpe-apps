@@ -9,7 +9,7 @@ export type ArtistProps = NonNullable<
   Awaited<ReturnType<typeof getArtist>>["data"]
 >;
 
-export const UpdateProfile = ({
+export default function UpdateProfile({
   open,
   onOpenChange,
   artist,
@@ -17,7 +17,7 @@ export const UpdateProfile = ({
   open?: boolean;
   onOpenChange: (open: boolean) => void;
   artist: ArtistProps;
-}) => {
+}) {
   return (
     <AnimatePresence mode="wait">
       {open && (
@@ -72,4 +72,4 @@ export const UpdateProfile = ({
       )}
     </AnimatePresence>
   );
-};
+}

@@ -1,6 +1,4 @@
 "use client";
-import { useState, useEffect } from "react";
-import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
@@ -22,7 +20,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { updateArtist } from "@/lib/actions/artist/update-artist";
 import { useHookFormAction } from "@next-safe-action/adapter-react-hook-form/hooks";
-import { zfd } from "zod-form-data";
 import ServerActionResponseToast from "@/components/server-action-response-toast";
 import { LuLoader } from "react-icons/lu";
 import { getArtist } from "@/lib/queries/artist/get-artist";
@@ -66,8 +63,6 @@ export const formSchema = z.object({
 });
 
 export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
-  const [files, setFiles] = useState<File[] | null>(null);
-
   const dropZoneConfig = {
     accept: {
       "image/*": [".jpg", ".jpeg", ".png", ".gif"],

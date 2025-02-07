@@ -20,11 +20,14 @@ export default async function Layout({
       <div className="flex flex-1 overflow-hidden">
         <SidebarProvider>
           <AppSidebar artist={artist} />
-          <SidebarInset>
-            <AppMarqueeBanner artist={artist} />
-            <div className="w-screen md:w-[88.5%] md:flex-1 xl:w-auto">
-              {children}
+          <SidebarInset className="relative">
+            {/* The Marquee is causing some overflow issue; this could be a permanent fix if we dont figure it out... */}
+            <div className="absolute top-0 left-0">
+              <AppMarqueeBanner artist={artist} />
             </div>
+            {/* placeholder to fill the space of the marquee which is absolute due to responsiveness issue */}
+            <div className="h-[44px] w-full"></div>
+            <div className="xl:w-auto">{children}</div>
             <div className="visible mt-auto w-screen overflow-hidden md:hidden">
               <MobileNav />
             </div>
