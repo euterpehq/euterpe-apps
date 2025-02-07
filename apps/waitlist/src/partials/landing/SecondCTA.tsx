@@ -28,13 +28,12 @@ function SecondCTA() {
             Discover new artists
           </h1>
           <p className="max-w-[277px] text-[18px] text-[#B1B5C6]">
-          Be the first to find and support hidden talent from all over the world.
+            Be the first to find and support hidden talent from all over the
+            world.
           </p>
         </div>
         <Button size="sm" className="w-fit" asChild>
-          <Link href="/app.euterpe.fm" onClick={handleClick}>
-          Start listening
-          </Link>
+          <Link href="https://app.euterpe.fm">Start listening</Link>
         </Button>
       </div>
       <div className="relative flex h-[372px] w-[372px] justify-end md:h-[560px] md:w-[560px]">

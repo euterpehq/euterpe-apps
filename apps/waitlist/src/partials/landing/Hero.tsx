@@ -34,9 +34,7 @@ function Hero() {
             </p>
           </div>
           <Button size="sm" asChild className="p-[12px]">
-            <Link href="/app.euterpe.fm" onClick={handleClick}>
-            Start listening
-            </Link>
+            <Link href="https://app.euterpe.fm">Start listening</Link>
           </Button>
         </div>
         <div className="relative flex w-full justify-center md:flex-1">

@@ -30,16 +30,15 @@ function FirstCTA() {
       <div className="mt-[72px] flex flex-col gap-6">
         <div className="flex flex-col gap-5">
           <h1 className="text-[48px] font-semibold leading-tight">
-          Endless Variety
+            Endless Variety
           </h1>
           <p className="max-w-[277px] text-[#B1B5C6]">
-          Dive into a world of music, from indie gems to unique sounds across every genre.
+            Dive into a world of music, from indie gems to unique sounds across
+            every genre.
           </p>
         </div>
         <Button size="sm" className="w-fit" asChild>
-          <Link href="/app.euterpe.fm" onClick={handleClick}>
-            Start listening
-          </Link>
+          <Link href="https://app.euterpe.fm">Start listening</Link>
         </Button>
       </div>
     </div>
