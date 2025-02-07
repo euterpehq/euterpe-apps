@@ -37,10 +37,10 @@ export default function ArtistRelease({ artist, albums }: Prop) {
   return (
     <div className='w-full px-[24px]'>
     <div className='w-full mt-5  py-[24px] px-[0px] flex flex-col items-start self-stretch  gap-[24px]  border-t-[0.5px] border-b-[0.5px] border-[#303033] bg-[#0E0E0E] '>
-        <div className='flex items-start gap-[12px] self-stretch'>
-            <div className='bg-[#181818] h-[478px] rounded-[12px] w-[370px] py-[20px] px-[16px] flex items-start flex-col gap-[20px] '>
+        <div className='flex md:flex-row flex-col items-start gap-[12px] self-stretch'>
+            <div className='bg-[#181818] h-[478px] rounded-[12px] w-full md:w-[370px] py-[20px] px-[16px] flex items-start flex-col gap-[20px] '>
                 <p className='text-[#fff] font-figtree text-[16px] font-extrabold tracking-[-0.64px] leading-normal self-stretch'>Latest Release</p>
-                <div className='w-[340px] h-[340px]'>
+                <div className='md:w-[340px] w-full md:h-[340px]'>
                 <Image src={albumIDD?.cover_image_url || "/images/artFrame.jpg"} alt="" width={100} height={100} quality={100} className='w-full h-full object-contain rounded-[12px]' />
                 </div>
                 <div className='flex flex-col justify-center items-start gap-[8px]'>

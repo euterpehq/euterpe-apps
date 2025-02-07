@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { useAccount } from "wagmi";
 import { usePathname } from "next/navigation";
 import { EUTIcon } from "./Icons";
+import AnnouncementBanner from "./announcement-banner";
 
 
 
@@ -15,6 +16,8 @@ function Header() {
   const { isConnected } = useAccount();
   const pathname = usePathname();
   return (
+    <>
+    <AnnouncementBanner />
     <header
       className={`sticky w-full  top-0 z-30 flex h-[3.75rem] items-center justify-between md:z-50 ${pathname === "/reward" ? "bg-[#0E0E0E]" : "border-b-[0.2px] border-[#303033]/80 bg-[#0E0E0E]"} px-6 py-3`}
     >
@@ -77,6 +80,7 @@ function Header() {
         {/*<ConnectButton align="right" />*/}
     
     </header>
+    </>
   );
 }
 

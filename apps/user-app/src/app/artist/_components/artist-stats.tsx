@@ -13,7 +13,7 @@ export default function ArtistStats({ artist }: Prop) {
   return (
     <div className='w-full flex flex-col gap-5 px-[24px]'>
       <div className='w-full flex flex-col items-start gap-[12px] self-stretch pt-[20px] rounded-[12px] bg-[#181818]'>
-            <div className='w-full flex py-0 px-[16px] justify-between items-center self-stretch'>
+            <div className='w-full flex md:flex-row flex-col py-0 gap-5 md:gap-0 px-[16px] justify-between md:items-center self-stretch'>
                 <div className='flex items-center gap-[24px]'>
                     <div className='w-[64px] h-[64px] '>
                         <Image src={artist?.artist_image_url || "/images/artFrame.jpg"} alt="" width={64} height={64} className='w-full h-full object-cover  rounded-[8px]' />
@@ -32,31 +32,31 @@ export default function ArtistStats({ artist }: Prop) {
                         </div>
                     </div>
                 </div>
-                <div className='flex items-center gap-[40px]'>
-                    <div className='flex flex-col justify-center items-end gap-[8px] '>
+                <div className='flex flex-wrap items-center gap-[20px] md:gap-[40px]'>
+                    <div className='flex flex-col justify-center  md:items-end gap-[8px] '>
                         <h1 className='text-[#868B9F] font-figtree text-[12px] font-normal leading-normal tracking-[-0.24px]'>Price (USD)</h1>
                         <p className='text-[#fff] font-figtree text-[16px] font-medium leading-normal tracking-[-0.32px]'>$0.0001709</p>
                     </div>
-                    <div className='flex flex-col justify-center items-end gap-[8px] '>
+                    <div className='flex flex-col justify-center  md:items-end gap-[8px] '>
                         <h1 className='text-[#868B9F] font-figtree text-[12px] font-normal leading-normal tracking-[-0.24px]'>Market cap</h1>
                         <p className='text-[#fff] font-figtree text-[16px] font-medium leading-normal tracking-[-0.32px]'>$72.1k</p>
                     </div>
-                    <div className='flex flex-col justify-center items-end gap-[8px] '>
+                    <div className='flex flex-col justify-center  md:items-end gap-[8px] '>
                         <h1 className='text-[#868B9F] font-figtree text-[12px] font-normal leading-normal tracking-[-0.24px]'>Total Volume</h1>
                         <p className='text-[#fff] font-figtree text-[16px] font-medium leading-normal tracking-[-0.32px]'>$72.1k</p>
                     </div>
-                    <div className='flex flex-col justify-center items-end gap-[8px] '>
+                    <div className='flex flex-col justify-center  md:items-end gap-[8px] '>
                         <h1 className='text-[#868B9F] font-figtree text-[12px] font-normal leading-normal tracking-[-0.24px]'>Liquidity</h1>
                         <p className='text-[#fff] font-figtree text-[16px] font-medium leading-normal tracking-[-0.32px]'>$72.1k</p>
                     </div>
-                    <div className='flex flex-col justify-center items-end gap-[8px] '>
+                    <div className='flex flex-col justify-center  md:items-end gap-[8px] '>
                         <h1 className='text-[#868B9F] font-figtree text-[12px] font-normal leading-normal tracking-[-0.24px]'>FDV</h1>
                         <p className='text-[#fff] font-figtree text-[16px] font-medium leading-normal tracking-[-0.32px]'>$72.1k</p>
                     </div>
                     
                 </div>
             </div>
-            <div className='w-full flex justify-between items-center self-stretch py-[12px] px-[16px] bg-[#ffffff05] rounded-b-[12px]'>
+            <div className='w-full flex md:flex-row flex-col justify-between md:items-center self-stretch py-[12px] px-[16px] bg-[#ffffff05] rounded-b-[12px]'>
                 <div className='flex items-center gap-[12px]'>
                     {/*<div className='flex py-[10px] px-[12px] justify-center items-center gap-[4px] rounded-[8px] cursor-pointer bg-[#292929]'>
                     <div className='w-[12px] h-[12px]'>
@@ -93,7 +93,7 @@ export default function ArtistStats({ artist }: Prop) {
                     <p className='font-figtree text-[12px] font-bold tracking-[-0.24px] text-center text-[#fff]'>0xC69D...DD6C</p>
                     </div>
                 </div>
-                <div className='flex items-center gap-[8px]'>
+                <div className='flex md:flex-row flex-col md:items-center gap-[5px] md:gap-[8px]'>
                     <div className=' flex py-[10px] px-[24px] justify-center items-center gap-[10px] rounded-[8px] bg-[#C1FF70] cursor-pointer'>
                         <p className='font-figtree text-[12px] font-bold leading-normal tracking-[-0.24px] text-center text-[#0E0E0E]'>Trade</p>
                     </div>
@@ -119,22 +119,22 @@ export default function ArtistStats({ artist }: Prop) {
                 </div>
             </div>
       </div>
-      <div className='w-full flex items-start self-center  gap-[12px] '>
+      <div className='w-full flex items-start self-center  flex-wrap md:flex-nowrap gap-[12px] '>
             <div className='w-full flex py-[24px] px-[165px] flex-col items-start gap-[10px] bg-[#181818] rounded-[12px]'>
                 <div className='flex items-center justify-center flex-col self-stretch gap-[4px]'>
-                    <h1 className='font-figtree text-[32px] font-medium leading-normal text-[#C1FF70] tracking-[-1.92px]'>538k</h1>
+                    <h1 className='font-figtree text-[25px] md:text-[32px] font-medium leading-normal text-[#C1FF70] tracking-[-1.92px]'>538k</h1>
                     <p className='text-[#C1FF70] font-figtree font-medium leading-normal tracking-[-0.48px] text-[12px]'>Monthly listeners</p>
                 </div>
             </div>
             <div className='w-full flex py-[24px] px-[165px] flex-col items-start gap-[10px] bg-[#181818] rounded-[12px]'>
                 <div className='flex items-center justify-center flex-col self-stretch gap-[4px]'>
-                    <h1 className='font-figtree text-[32px] font-medium leading-normal text-[#C1FF70] tracking-[-1.92px]'>2,348</h1>
+                    <h1 className='font-figtree text-[25px] md:text-[32px] font-medium leading-normal text-[#C1FF70] tracking-[-1.92px]'>2,348</h1>
                     <p className='text-[#C1FF70] font-figtree font-medium leading-normal tracking-[-0.48px] text-[12px]'>Followers</p>
                 </div>
             </div>
             <div className='w-full flex py-[24px] px-[165px] flex-col items-start gap-[10px] bg-[#181818] rounded-[12px]'>
                 <div className='flex items-center justify-center flex-col self-stretch gap-[4px]'>
-                    <h1 className='font-figtree text-[32px] font-medium leading-normal text-[#C1FF70]'>81</h1>
+                    <h1 className='font-figtree text-[25px] md:text-[32px] font-medium leading-normal text-[#C1FF70]'>81</h1>
                     <p className='text-[#C1FF70] font-figtree font-medium leading-normal tracking-[-0.48px] text-[12px]'>Releases</p>
                 </div>
             </div>

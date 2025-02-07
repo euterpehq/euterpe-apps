@@ -21,7 +21,7 @@ export default function Navbar() {
 
   return (
     <>
-      {pathname === "/" && <AnnouncementBanner />}
+      <AnnouncementBanner />
       <Disclosure
       as="nav"
       className="sticky top-0 z-50"
