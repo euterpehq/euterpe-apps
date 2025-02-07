@@ -1,17 +1,20 @@
 
 import { getArtistById } from "@/lib/queries/artist/get-artist-by-id";
 import { getAlbums } from "@/lib/queries/album/get-albums";
-import { getArtists } from "@/lib/queries/artist/get-artists";
+//import { getArtists } from "@/lib/queries/artist/get-artists";
 import { UserInteractionTracker } from "@/components/audio-player/UserInteractionTracker";
 import { AudioInitializer } from "@/components/audio-player/AudioInitializer";
 import Header from "@/components/header";
-import ArtistDiscography from "../_components/artist-discography";
+//import ArtistDiscography from "../_components/artist-discography";
 import ModalPlayer from "@/components/audio-player/modal-player";
 import ArtistHeader from "../_components/artist-header";
 import ArtistDescription from "../_components/artist-description";
-import ArtistSongs from "../_components/artist-songs";
-import ArtistHorizontalSlider from "@/components/Homepage/artists-horizontal-slider";
+//import ArtistSongs from "../_components/artist-songs";
+//import ArtistHorizontalSlider from "@/components/Homepage/artists-horizontal-slider";
 import AudioMiniPlayer from "@/components/audio-player/audio-mini-player";
+import ArtistStats from "../_components/artist-stats";
+import ArtistRelease from "../_components/artist-release";
+
 
 export type ArtistPageRouteProps = {
   params: Promise<{ id: string }>;
@@ -27,7 +30,7 @@ export default async function ArtistPageRoute({ params }: ArtistPageRouteProps){
 
   const albums = await getAlbums();
 
-  const artists = await getArtists();
+  //const artists = await getArtists();
 
   
   if (!albums) {
@@ -42,8 +45,10 @@ export default async function ArtistPageRoute({ params }: ArtistPageRouteProps){
      <ModalPlayer />
       <ArtistHeader artist={artist} />
       <ArtistDescription artist={artist} />
-      <ArtistSongs artist={artist} albums={albums} />
-      <div className="md:my-20 my-10 h-[400px] w-full ">
+      {/*<ArtistSongs artist={artist} albums={albums} />*/}
+      <ArtistStats artist={artist} />
+      <ArtistRelease artist={artist} albums={albums}/>
+      {/*<div className="md:my-20 my-10 h-[400px] w-full ">
         <h1 className="pb-10 font-figtree text-[20px] font-semibold tracking-[-0.4px] pl-[24px]">
           Discograpy
         </h1>
@@ -54,7 +59,7 @@ export default async function ArtistPageRoute({ params }: ArtistPageRouteProps){
           Similar Artists
         </h1>
         <ArtistHorizontalSlider artists={artists} />
-      </div>
+      </div>*/}
        <AudioMiniPlayer />
     </div>
   );
