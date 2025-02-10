@@ -15,18 +15,22 @@ import { signOut } from "@/lib/actions/auth";
 import { getCurrentUser } from "@/lib/queries/users";
 import { usePathname } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
+import { ArtistProps } from "./sidebar/user-profile-card";
+import UpdateProfile from "./sidebar/update-profile";
+import { User } from "@supabase/supabase-js";
 
 function AppHeader() {
-  const [email, setEmail] = useState("");
+  const [open, setOpen] = useState(false);
+  const [artist, setAritst] = useState<User | null>();
   const pathname = usePathname();
 
   useEffect(() => {
     const fetchUserAsync = async () => {
       const user = await getCurrentUser();
-      setEmail(user?.email ?? "");
+      setAritst(user);
     };
     fetchUserAsync();
-  });
+  }, []);
   async function handleSignOut() {
     await signOut();
     // router.push("/login");
@@ -57,7 +61,10 @@ function AppHeader() {
             />
           </DropdownButton>
           <DropdownMenu className="z-[500] min-w-64" anchor="bottom end">
-            <DropdownItem className="hover:bg-transparent hover:text-black">
+            <DropdownItem
+              className="hover:bg-transparent hover:text-black"
+              onClick={() => setOpen(true)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -70,7 +77,7 @@ function AppHeader() {
                   clipRule="evenodd"
                 />
               </svg>
-              <DropdownLabel> {email} </DropdownLabel>
+              <DropdownLabel> {artist?.email} </DropdownLabel>
             </DropdownItem>
             <DropdownDivider />
             <DropdownItem onClick={signOut}>
@@ -91,6 +98,12 @@ function AppHeader() {
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
+        <UpdateProfile
+          open={open}
+          onOpenChange={setOpen}
+          // Temporary ts fix: larger problem is prop drilling (complicates definition of artists in every file)
+          artist={artist as unknown as ArtistProps}
+        />
       </div>
     </header>
   );

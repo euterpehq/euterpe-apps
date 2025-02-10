@@ -18,11 +18,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { updateArtist } from "@/lib/actions/artist/update-artist";
+import {
+  deleteArtistProfile,
+  updateArtist,
+} from "@/lib/actions/artist/update-artist";
 import { useHookFormAction } from "@next-safe-action/adapter-react-hook-form/hooks";
 import ServerActionResponseToast from "@/components/server-action-response-toast";
 import { LuLoader } from "react-icons/lu";
 import { getArtist } from "@/lib/queries/artist/get-artist";
+import { useCallback, useState } from "react";
 
 export type ArtistProps = NonNullable<
   Awaited<ReturnType<typeof getArtist>>["data"]
@@ -98,6 +102,17 @@ export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
   );
   const { isPending, result, hasSucceeded, hasErrored } = action;
 
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleDeleteAction = useCallback(async () => {
+    try {
+      setIsDeleting(true);
+      await deleteArtistProfile({ id: artist.id });
+    } catch (e) {}
+
+    setIsDeleting(false);
+  }, [artist]);
+
   return (
     <>
       <ServerActionResponseToast
@@ -107,7 +122,7 @@ export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
       <Form {...form}>
         <form
           onSubmit={handleSubmitWithAction}
-          className="space-y-6 rounded-[16px] bg-[#181818] p-6"
+          className="space-y-6 rounded-[16px] md:bg-[#181818] md:p-6"
         >
           <FormField
             control={form.control}
@@ -624,18 +639,35 @@ export default function UpdateProfileForm({ artist }: { artist: ArtistProps }) {
               </div>
             )}
           />
-          <Button
-            size="lg"
-            className="mt-[46px] w-full disabled:opacity-100"
-            type="submit"
-            disabled={isPending}
-          >
-            {isPending ? (
-              <LuLoader className="h-3.5 w-3.5 animate-spin" />
-            ) : (
-              "Update"
-            )}
-          </Button>
+
+          <div className="flex gap-4">
+            {/* <Button
+              size="lg"
+              className="w-full bg-[#212121] text-white disabled:opacity-100"
+              type="button"
+              disabled={isPending || isDeleting}
+              onClick={handleDeleteAction}
+            >
+              {isPending || isDeleting ? (
+                <LuLoader className="h-3.5 w-3.5 animate-spin" />
+              ) : (
+                "Delete Profile"
+              )}
+            </Button> */}
+
+            <Button
+              size="lg"
+              className="w-full disabled:opacity-100"
+              type="submit"
+              disabled={isPending || isDeleting}
+            >
+              {isPending || isDeleting ? (
+                <LuLoader className="h-3.5 w-3.5 animate-spin" />
+              ) : (
+                "Update"
+              )}
+            </Button>
+          </div>
         </form>
       </Form>
     </>
