@@ -1,13 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-function Spacer({
-  horizontal = false,
-  size,
-}: {
+interface SpacerProps {
   horizontal?: boolean;
-  size: number;
-}) {
+  size: number | string;
+}
+
+function Spacer({ horizontal = false, size }: SpacerProps) {
   const defaultValue = "auto";
   const style = {
     width: horizontal ? size : defaultValue,
@@ -16,10 +14,5 @@ function Spacer({
 
   return <div style={style} />;
 }
-
-Spacer.propTypes = {
-  size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-  horizontal: PropTypes.bool,
-};
 
 export default Spacer;

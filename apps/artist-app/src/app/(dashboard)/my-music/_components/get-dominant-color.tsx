@@ -1,9 +1,10 @@
-export const getDominantColor = (
+export const getDominantColor = async (
   imageSrc: string,
   callback: (gradient: string) => void,
 ) => {
   const img = new Image();
   img.crossOrigin = "Anonymous"; // Handle cross-origin images
+  img.src = imageSrc;
 
   img.onload = () => {
     const canvas = document.createElement("canvas");
@@ -15,8 +16,7 @@ export const getDominantColor = (
     canvas.height = img.height;
     context.drawImage(img, 0, 0);
 
-    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-    const { data } = imageData;
+    const { data } = context.getImageData(0, 0, canvas.width, canvas.height);
 
     let r = 0,
       g = 0,
@@ -30,14 +30,14 @@ export const getDominantColor = (
       count++;
     }
 
+
+
     r = Math.floor(r / count);
     g = Math.floor(g / count);
     b = Math.floor(b / count);
 
     // This generates a gradient with the dominant color
-    const gradient = `linear-gradient(180deg, rgba(${r}, ${g}, ${b}, 1) 0%, #111 76.61%)`;
+    const gradient = `linear-gradient(180deg, rgba(${r}, ${g}, ${b}, 1) 0%, #111 96.61%)`;
     callback(gradient);
   };
-
-  img.src = imageSrc;
 };

@@ -5,6 +5,7 @@ import { zfd } from "zod-form-data";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { signOut } from "../auth";
 
 const validationSchema = z.object({
   artist_image: z
@@ -66,6 +67,7 @@ export const updateArtist = actionClient
         .upload(filePath, file, { upsert: false });
 
       if (uploadError) {
+        console.log(uploadError, "upload error - image");
         throw uploadError;
       }
 
@@ -76,12 +78,13 @@ export const updateArtist = actionClient
     let bannerImageUrl: string | undefined = undefined;
     if (parsedInput.banner_image) {
       const file = parsedInput.banner_image[0];
-      const filePath = `${user.id}-${Date.now()}-${file.name}`;
+      const filePath = `${user.id}-${Date.now()}-${file.name.replace(" ", "")}`;
       const { error: uploadError } = await supabase.storage
         .from("banners")
         .upload(filePath, file, { upsert: false });
 
       if (uploadError) {
+        console.log(uploadError, "upload error - banner");
         throw uploadError;
       }
 
@@ -116,3 +119,19 @@ export const updateArtist = actionClient
       message: "Profile updated successfully",
     };
   });
+
+export const deleteArtistProfile = async ({ id }: { id: string }) => {
+  const supabase = await createClient();
+
+  // const { error: deleteError } = await supabase.auth.admin.deleteUser(id, true);
+
+  // if (deleteError) {
+  //   throw deleteError;
+  // }
+
+ await signOut()
+
+  // return {
+  //   message: "Deleted profile successfully",
+  // };
+};

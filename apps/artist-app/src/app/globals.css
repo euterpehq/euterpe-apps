@@ -114,6 +114,16 @@
   }
 }
 
-.announcement{
-  background-image: linear-gradient(to right, #BDFF001A, #E11DE71A);
+.hide-scrollbar {
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.announcement {
+  background-image: linear-gradient(to right, #bdff001a, #e11de71a);
 }
