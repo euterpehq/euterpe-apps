@@ -11,12 +11,12 @@ function formatTime(seconds: number) {
   return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
 }
 
-//type SongWithDuration = Song ;
+
 
 interface SongItemProps {
-  artists: ArtistProfile[]; // Replace 'any' with the appropriate type
-  albums: Album[]; // Replace 'any' with the appropriate type
-  songs: Song[];   // Replace 'any' with the appropriate type
+  artists: ArtistProfile[]; 
+  albums: Album[]; 
+  songs: Song[];   
 }
 
 export default function SongItem({ songs, artists, albums }: SongItemProps) {
@@ -71,7 +71,7 @@ const handleSongClick = (index: number) => {
                      <div className="flex items-center gap-[10px]">
                       <p className="font-figtree font-normal text-[14px] leading-[16.8px] tracking-[-0.02em] text-[#868B9F]">{index + 1}</p>
                       <div className="w-[32px] h-[32px]">
-                      <Image src={songArtist?.artist_image_url ?? '/images/artFrame.jpg'} alt="" width={100} height={100} quality={100} className='w-full h-full rounded-[8px] object-cover'/>
+                      <Image src={songAlbum?.cover_image_url ?? '/images/artFrame.jpg'} alt="" width={100} height={100} quality={100} className='w-full h-full rounded-[8px] object-cover'/>
                       </div>
                        
                       <div className="flex flex-col items-start justify-start">

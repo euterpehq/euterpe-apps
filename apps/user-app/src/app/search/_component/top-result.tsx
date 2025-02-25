@@ -6,9 +6,9 @@ import { useEffect } from "react";
 
 
 interface TopResultProps {
-  artists: ArtistProfile[]; // Replace 'any' with the appropriate type
-  albums: Album[]; // Replace 'any' with the appropriate type
-  songs: Song[];   // Replace 'any' with the appropriate type
+  artists: ArtistProfile[];
+  albums: Album[]; 
+  songs: Song[];   
 }
 
 export default function TopResult({artists, songs, albums}: TopResultProps) {
@@ -59,7 +59,7 @@ const { showMiniPlayer } = useMiniPlayerStore();
         <div className="w-[392px] h-[335px] rounded-[16px] bg-[#181818] p-[24px] gap-[10px] hidden  md:flex flex-col items-center justify-center">
           <div className="w-[344px] h-[220px] gap-[20px] flex flex-col items-center justify-center"> 
               <div className="w-[160px] h-[160px]">
-                {/*<div className="bg-[#868B9F] rounded-full w-full h-full"></div>*/}
+              
                   <Image src={topArtist.artist_image_url ?? '/images/artFrame.jpg'} alt="" width={100} height={100} quality={100} className='w-full h-full rounded-full object-cover'/>
               </div>
               <div className="flex flex-col items-center gap-2">
@@ -78,7 +78,7 @@ const { showMiniPlayer } = useMiniPlayerStore();
                <div className="flex items-center gap-[10px]">
                 <p className="font-figtree font-normal text-[14px] leading-[16.8px] tracking-[-0.02em] text-[#868B9F]">{index + 1}</p>
                 <div className="w-[32px] h-[32px]">
-                <Image src={songArtist?.artist_image_url ?? '/images/artFrame.jpg'} alt="" width={100} height={100} quality={100} className='w-full h-full rounded-[8px] object-cover'/>
+                <Image src={songAlbum?.cover_image_url ?? '/images/artFrame.jpg'} alt="" width={100} height={100} quality={100} className='w-full h-full rounded-[8px] object-cover'/>
                 </div>
                  
                 <div className="flex flex-col items-start justify-start">

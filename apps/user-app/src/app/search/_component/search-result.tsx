@@ -3,15 +3,11 @@ import { Album } from '@/lib/queries/album/get-albums';
 import { ArtistProfile } from '@/lib/queries/artist/get-artists';
 import { Song } from '@/lib/queries/supabaseQueries';
 import React, { useState } from 'react';
-import SearchSection from './search-section';
 import ArtistCard from './artist-card';
 import SongItem from './song-item';
 import AlbumCard from './album-card';
-import ArtistSongs from '@/app/artist/_components/artist-songs';
 import TopResult from './top-result';
 import Image from 'next/image';
-import AudioMiniPlayer from '@/components/audio-player/audio-mini-player';
-import { useAudioPlayerStore } from '@/store/audioplayer.store';
 
 type SearchResultItem =
   | (ArtistProfile & { type: 'Artist' })

@@ -11,7 +11,7 @@ import ModalPlayer from "@/components/audio-player/modal-player";
 import SearchResultsWrapper from "../_component/search-result-wrapper";
 
 interface SearchPageProps {
-  params: Promise<{ query: string }>; // Search query parameter
+  params: Promise<{ query: string }>; 
 }
 
 export default async function SearchPage({ params }: SearchPageProps) {
@@ -22,20 +22,6 @@ export default async function SearchPage({ params }: SearchPageProps) {
   if (!decodedQuery.trim()) {
     return notFound(); // Show 404 if there's no query
   }
-
-  /*let { artists, tracks, albums } = await searchMusic(decodedQuery);
-
-  artists = artists || [];
-  tracks = tracks || [];
-  albums = albums || [];
-
-  console.log({artists, tracks, albums})
-
-  const combinedResults = [
-    ...artists.map((item) => ({ ...item, type: "Artist" as const })),
-    ...tracks.map((item) => ({ ...item, type: "Song" as const })),
-    ...albums.map((item) => ({ ...item, type: "Album" as const })),
-  ];*/
         
  
   return (
@@ -54,7 +40,6 @@ export default async function SearchPage({ params }: SearchPageProps) {
     </div>
   );
 }
-{/*<SearchResults results={combinedResults} />*/}
 
 
 
@@ -66,25 +51,4 @@ export default async function SearchPage({ params }: SearchPageProps) {
 
 
 
- // Fetch all data from the server-side
- /* const { artists, songs, albums } = await fetchAllData();
 
-  // Client-side filtering based on the search term
-  const filteredArtists = artists.filter((artist) =>
-    artist.artist_name?.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
-
-  const filteredAlbums = albums.filter((album) =>
-    album.title?.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
-
-  const filteredSongs = songs.filter((song) =>
-    song.track_title?.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
-
-  // Combine all filtered results
-  const combinedResults = [
-    ...filteredArtists.map((item) => ({ ...item, type: "Artist" as const })),
-    ...filteredSongs.map((item) => ({ ...item, type: "Song" as const })),
-    ...filteredAlbums.map((item) => ({ ...item, type: "Album" as const })),
-  ];*/

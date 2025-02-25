@@ -23,7 +23,7 @@ export default function AlbumCard({albums, artists}: AlbumCardProps) {
           <Link key={index} href={`/album/${item.id}`}>
             <div  className='md:w-[180px] h-[266px] gap-[20px] p-2 flex flex-col items-start justify-start'>
                 <div className='w-[156px] h-[156px] md:w-[180px] md:h-[185px] '>
-                  {/*<div className='w-full h-full bg-[#868B9F] rounded-[8px]'></div>*/}
+            
                    <Image src={item.cover_image_url ?? '/images/artFrame.jpg'} alt="" width={100} height={100} quality={100} className='w-full h-full  object-cover rounded-[8px]'/>
                 </div>
                 <div className="flex flex-col gap-2">

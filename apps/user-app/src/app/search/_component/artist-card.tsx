@@ -20,7 +20,6 @@ export default function ArtistCard({ artists }: ArtistCardProps) {
         <div  className='  w-full md:w-[180px] h-[230px] rounded-[16px] md:p-[24px] p-[15px] gap-[10px] bg-[#181818] '>
             <div className='w-[144px] h-[174px] gap-[20px] flex flex-col items-center justify-center'>
                 <div className='w-[100px] h-[100px] '>
-                  {/*<div className='w-full h-full bg-[#868B9F] rounded-full'></div>*/}
                   <Image src={item.artist_image_url ?? '/images/artFrame.jpg'} alt="" width={100} height={100} quality={100} className='w-full h-full rounded-full object-cover'/>
                 </div>
                 <div className="flex flex-col items-center gap-2">

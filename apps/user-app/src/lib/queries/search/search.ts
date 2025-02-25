@@ -18,7 +18,7 @@ export const searchMusic = async (searchTerm: string) => {
     return { artists: allArtists, tracks: allTracks, albums: allAlbums };
   }
 
-  // Step 1: Search for matching Artists
+  //  Search for matching Artists
   const { data: artists } = await supabase
     .from("artist_profiles")
     .select("*")
@@ -30,13 +30,13 @@ export const searchMusic = async (searchTerm: string) => {
     .select("*")
     .ilike("track_title", `%${searchTerm}%`);
 
-  // Step 3: Search for matching Albums
+  // Search for matching Albums
   const { data: albums } = await supabase
     .from("albums")
     .select("*")
     .ilike("title", `%${searchTerm}%`);
 
-  // Step 4: If artists are found, fetch their related tracks and albums
+  //If artists are found, fetch their related tracks and albums
   let extendedTracks = tracks || [];
   let extendedAlbums = albums || [];
   let extendedArtists = artists || [];
@@ -101,16 +101,16 @@ export const searchMusic = async (searchTerm: string) => {
   if (tracks && tracks.length > 0) {
     const trackAlbumIds = tracks.map((track) => track.album_id);
 
-    // Fetch albums related to the tracks
+ 
     const { data: trackAlbums } = await supabase
       .from("albums")
       .select("*")
       .in("id", trackAlbumIds);
 
-    // Fetch the artists related to these albums
+    
     const artistIds = trackAlbums?.map((album) => album.artist_id) || [];
 
-    // Fetch the tracks for these albums
+    
     const { data: trackArtistTracks } = await supabase
       .from("tracks")
       .select("*")
@@ -119,7 +119,7 @@ export const searchMusic = async (searchTerm: string) => {
     extendedTracks = [...extendedTracks, ...(trackArtistTracks || [])];
     extendedAlbums = [...extendedAlbums, ...(trackAlbums || [])];
 
-    // Fetch the artists for the found tracks' albums
+    
     if (artistIds.length > 0) {
       const { data: trackArtistsDetails } = await supabase
         .from("artist_profiles")
@@ -131,7 +131,7 @@ export const searchMusic = async (searchTerm: string) => {
   }
 
 
-  // Step 5: Ensure at least 7 results in total
+
   const totalResults =
     (artists?.length || 0) + (extendedTracks?.length || 0) + (extendedAlbums?.length || 0);
 
@@ -143,7 +143,6 @@ export const searchMusic = async (searchTerm: string) => {
     };
   }
 
-  // Step 6: Return the prioritized search results
   return {
     artists: extendedArtists,
     tracks: extendedTracks,
@@ -154,40 +153,3 @@ export const searchMusic = async (searchTerm: string) => {
 
 
 
-
-/*export async function fetchAllData(): Promise<{
-  artists: ArtistProfile[];
-  songs: Song[];
-  albums: Album[];
-}> {
-  console.log("Fetching all data..."); // Debugging
-  const supabase = await createClient();
-
-  // Fetch all artists
-  const { data: artistResults, error: artistError } = await supabase
-    .from("artist_profiles")
-    .select("*");
-
-  // Fetch all albums with artist information
-  const { data: albumResults, error: albumError } = await supabase
-    .from("albums")
-    .select("*, artist_profiles(*)");
-
-  // Fetch all songs with album and artist information
-  const { data: songResults, error: songError } = await supabase
-    .from("tracks")
-    .select("*, albums(artist_profiles(*))");
-
-  // Handle potential errors
-  if (artistError || songError || albumError) {
-    console.error("Fetching errors:", { artistError, songError, albumError });
-  }
-
-  //console.log({artistResults, songResults, albumResults}); // Debugging
-
-  return {
-    artists: artistResults ?? [],
-    songs: songResults ?? [],
-    albums: albumResults ?? [],
-  };
-}*/
