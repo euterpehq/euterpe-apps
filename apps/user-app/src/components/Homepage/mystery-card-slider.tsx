@@ -16,11 +16,12 @@ const MysteryCardSlider: React.FC = () => {
     setCurrentSongIndex,
     setDiscovered,
     setShowStreamingLinks,
+    setPlaybackMode,
   } = useAudioPlayerStore();
 
   const { showMiniPlayer } = useMiniPlayerStore();
 
-  const items = Array.from({ length: 20 }, (_, i) => i + 1);
+  const items = Array.from({ length: 7 }, (_, i) => i + 1);
 
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
@@ -52,7 +53,7 @@ const MysteryCardSlider: React.FC = () => {
 
     setCurrentSongIndex(randomIndex);
     playSong(randomSong.id);
-
+    setPlaybackMode("mystery");
     showMiniPlayer();
   };
 

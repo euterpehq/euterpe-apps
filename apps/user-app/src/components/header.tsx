@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ConnectButton from "@/components/connect-button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -15,26 +15,35 @@ import AnnouncementBanner from "./announcement-banner";
 function Header() {
   const { isConnected } = useAccount();
   const pathname = usePathname();
-  const router = useRouter();
   const searchParams = useSearchParams();
-  // Initialize the state with any existing query parameter value
-  const initialQuery = searchParams.get('q') || '';
-  const [query, setQuery] = useState(initialQuery);
+  const router = useRouter();
 
-  // Update the URL when the form is submitted
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    router.push(`/search/${encodeURIComponent(query)}`);
-  };
+  // Get the current query from the URL (if any)
+  const [query, setQuery] = useState("");
 
-  // Optionally, update the URL on input change (for live updating)
+  // Handle input change with debounce
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newQuery = e.target.value;
     setQuery(newQuery);
-    // Update the URL parameters without a full reload
-    console.log("Updated search query:", newQuery); // Debugging
-    router.push(`/search/${encodeURIComponent(newQuery)}`);
+
+    // Debounce the URL update
+    setTimeout(() => {
+      if (newQuery.trim()) {
+        router.replace(`/search/${encodeURIComponent(newQuery)}`);
+      }
+    }, 500); // Wait 500ms before updating URL
   };
+
+
+  // Handle form submission
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (query.trim()) {
+      router.push(`/search/${encodeURIComponent(query)}`);
+    }
+  };
+
+  
 
   return (
     <>

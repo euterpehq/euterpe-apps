@@ -4,6 +4,8 @@ import { fetchSongs, Song } from "@/lib/queries/supabaseQueries";
 const DEFAULT_BACKGROUND_FALLBACK_COLOR = "transparent";
 const CLAIM_THRESHOLD = 30;
 
+type PlaybackMode = "normal" | "mystery";
+type SongWithDuration = Song & { duration: number };
 type AudioPlayerState = {
   currentSongIndex: number;
   isPlaying: boolean;
@@ -17,6 +19,8 @@ type AudioPlayerState = {
   backgroundColor: string;
   albumSongs: Song[];
   hasUserInteraction: boolean;
+  playbackMode: PlaybackMode;
+  setPlaybackMode: (mode: PlaybackMode) => void;
 
   fetchAndSetSongs: () => Promise<void>;
 
@@ -38,6 +42,7 @@ type AudioPlayerState = {
   handleDiscover: () => void;
 
   setAudio: (newAudio: HTMLAudioElement | null) => void;
+  setAlbumSongs: (songs: Song[]) => void; 
 };
 
 export const useAudioPlayerStore = create<AudioPlayerState>((set, get) => {
@@ -100,6 +105,7 @@ export const useAudioPlayerStore = create<AudioPlayerState>((set, get) => {
     showStreamingLinks: false,
     backgroundColor: DEFAULT_BACKGROUND_FALLBACK_COLOR,
     hasUserInteraction: false,
+    playbackMode: "normal",
     albumSongs: [],
 
     fetchAndSetSongs: async () => {
@@ -111,6 +117,31 @@ export const useAudioPlayerStore = create<AudioPlayerState>((set, get) => {
       }
     },
 
+    setAlbumSongs: async (songs: Song[]) => {
+      const fetchDurations = async (songs: Song[]): Promise<SongWithDuration[]> => {
+        return Promise.all(
+          songs.map((song) => {
+            return new Promise<SongWithDuration>((resolve) => {
+              if (!song.audio_file_url) {
+                return resolve({ ...song, duration: 0 });
+              }
+      
+              const audio = new Audio(song.audio_file_url);
+              audio.addEventListener("loadedmetadata", () => {
+                resolve({ ...song, duration: audio.duration });
+              });
+              audio.addEventListener("error", () => {
+                resolve({ ...song, duration: 0 });
+              });
+            });
+          })
+        );
+      };
+    
+      const updatedSongs = await fetchDurations(songs);
+      set({ albumSongs: updatedSongs });
+    },
+    setPlaybackMode: (mode) => set({ playbackMode: mode }),
     setHasUserInteraction: (value) => set({ hasUserInteraction: value }),
     setCurrentTime: (time) => set({ currentTime: time }),
     setDuration: (duration) => set({ duration }),
@@ -195,7 +226,7 @@ export const useAudioPlayerStore = create<AudioPlayerState>((set, get) => {
     },
 
     playSong: (songId: string) => {
-      const { albumSongs, setCurrentSongIndex, setAudio, setIsPlaying } = get();
+      const { albumSongs, setCurrentSongIndex, setAudio, setIsPlaying, setPlaybackMode } = get();
       const songIndex = albumSongs.findIndex((song) => song.id === songId);
 
       if (songIndex === -1) {
@@ -222,6 +253,7 @@ export const useAudioPlayerStore = create<AudioPlayerState>((set, get) => {
       const newAudio = createAudioInstance(song.audio_file_url);
       setAudio(newAudio);
       setIsPlaying(true);
+      setPlaybackMode("normal");
     },
 
     playNext: () => {
@@ -231,6 +263,8 @@ export const useAudioPlayerStore = create<AudioPlayerState>((set, get) => {
         setCurrentSongIndex,
         setAudio,
         isPlaying,
+        setDiscovered,
+        playbackMode,
       } = get();
 
       if (!albumSongs.length) {
@@ -252,10 +286,10 @@ export const useAudioPlayerStore = create<AudioPlayerState>((set, get) => {
         duration: 0,
         canClaimReward: false,
         isClaimed: false,
-        discovered: false,
         showStreamingLinks: false,
       });
 
+      setDiscovered(playbackMode === "normal");
       const newAudio = createAudioInstance(nextSong.audio_file_url);
       setAudio(newAudio);
       set({ isPlaying: isPlaying });
@@ -291,5 +325,7 @@ export const useAudioPlayerStore = create<AudioPlayerState>((set, get) => {
     handleDiscover: () => {
       set({ discovered: true, showStreamingLinks: true });
     },
+
+    
   };
 });

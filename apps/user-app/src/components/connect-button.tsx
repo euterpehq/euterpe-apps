@@ -81,6 +81,8 @@ function ConnectButton({ align }: { align?: "left" | "right" }) {
                       src="/icons/wallet.png"
                       alt="Wallet Icon"
                       className="h-4 w-4"
+                      width={4}
+                      height={4}
                     />
                     Connect Wallet
                   </Button>

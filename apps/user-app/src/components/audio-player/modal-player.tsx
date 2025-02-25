@@ -34,7 +34,7 @@ const ModalPlayer = () => {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="fixed bottom-0 left-0 right-0 top-0 z-40 h-full w-screen bg-black"
         >
-          <div className="relative z-50 flex items-center justify-between px-[1rem] py-2 md:absolute md:left-0 md:right-0 md:top-[3.5rem] md:z-50">
+          <div className="relative z-50 flex items-center justify-between px-[1rem] py-2 md:absolute md:left-0 md:right-0 md:top-[5rem] md:z-50">
             <button
               onClick={closeModal}
               className="flex cursor-pointer items-center gap-1 rounded-[8px] bg-[#ffffff14] px-[6px] py-[4px] text-white md:px-[12px] md:py-[8px]"

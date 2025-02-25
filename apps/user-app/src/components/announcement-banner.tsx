@@ -2,10 +2,12 @@
 import React, { useEffect, useState, useRef } from "react";
 
 import { InfoCircledIcon } from "@radix-ui/react-icons";
+import { useModalStore } from "@/store/modal.store";
 
 const AnnouncementBanner = () => {
   const [isHidden, setIsHidden] = useState(false);
   const lastScrollY = useRef(0);
+  const { isOpen } = useModalStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +26,10 @@ const AnnouncementBanner = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  if(isOpen){
+    return <></>
+  }
+
   return (
     <div
       className={`sticky top-0  w-full  flex items-center z-30 justify-center border-b-[0.8px] border-[#313131] bg-black announcement p-2 shadow-[0_1.5px_0_0_rgba(255,255,255,0.24)] backdrop-blur-xl transition-transform duration-300 `}
@@ -33,7 +39,7 @@ const AnnouncementBanner = () => {
         <p className="font-axiforma text-xs">Now in Beta 🎉</p>
       </div>
     </div>
-  );
+  )
 };
 
 export default AnnouncementBanner;
